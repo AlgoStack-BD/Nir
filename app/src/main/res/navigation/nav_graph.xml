@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splash_screen">
+
+    <fragment
+        android:id="@+id/splash_screen"
+        android:name="com.algostack.nir.view.Splash.Splash_screen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splash_screen_to_access_nav"
+            app:destination="@id/access_nav"
+            app:popUpTo="@id/splash_screen"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/access_nav"
+        android:name="com.algostack.nir.view.Auth.access_nav"
+        android:label="fragment_access_nav"
+        tools:layout="@layout/fragment_access_nav" >
+        <action
+            android:id="@+id/action_access_nav_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_access_nav_to_signin"
+            app:destination="@id/signin" />
+    </fragment>
+    <fragment
+        android:id="@+id/signin"
+        android:name="com.algostack.nir.view.Auth.Signin"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin" >
+        <action
+            android:id="@+id/action_signin_to_forgetPassword"
+            app:destination="@id/forgetPassword"
+            app:popUpTo="@id/signin"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signin_to_access_nav"
+            app:destination="@id/access_nav"
+            app:popUpTo="@id/signin"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.algostack.nir.view.Auth.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_access_nav"
+            app:destination="@id/access_nav"
+            app:popUpTo="@id/signUp"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPassword"
+        android:name="com.algostack.nir.view.Auth.ForgetPassword"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/action_forgetPassword_to_signin"
+            app:destination="@id/signin"
+            app:popUpTo="@id/signin"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_forgetPassword_to_newPassword"
+            app:destination="@id/newPassword"
+            app:popUpTo="@id/forgetPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPassword"
+        android:name="com.algostack.nir.view.Auth.NewPassword"
+        android:label="fragment_new_password"
+        tools:layout="@layout/fragment_new_password" >
+        <action
+            android:id="@+id/action_newPassword_to_forgetPassword"
+            app:destination="@id/forgetPassword" />
+        <action
+            android:id="@+id/action_newPassword_to_passVarification"
+            app:destination="@id/passVarification" />
+    </fragment>
+    <fragment
+        android:id="@+id/passVarification"
+        android:name="com.algostack.nir.view.Auth.PassVarification"
+        android:label="fragment_pass_varification"
+        tools:layout="@layout/fragment_pass_varification" />
+</navigation>

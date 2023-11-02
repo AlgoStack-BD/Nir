@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".view.Splash.Splash_screen">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/splashhomelogo"
+            android:layout_width="309dp"
+            android:layout_height="158dp"
+            android:layout_marginTop="200dp"
+            android:src="@drawable/homeicon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/splashlogo"
+            android:layout_width="150dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/nirsplash"
+            app:layout_constraintEnd_toEndOf="@+id/splashhomelogo"
+            app:layout_constraintStart_toStartOf="@+id/splashhomelogo"
+            app:layout_constraintTop_toBottomOf="@+id/splashhomelogo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="283dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="32dp"
+            android:text="Discover your dream home effortlessly with our innovative home rent app"
+            android:textAlignment="center"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/splashlogo"
+            app:layout_constraintStart_toStartOf="@+id/splashlogo"
+            app:layout_constraintTop_toBottomOf="@+id/splashlogo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
