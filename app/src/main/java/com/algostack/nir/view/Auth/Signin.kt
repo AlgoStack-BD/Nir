@@ -1,5 +1,6 @@
 package com.algostack.nir.view.Auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.BoringLayout
 import android.text.InputType
@@ -11,10 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSigninBinding
+import com.algostack.nir.view.frame.Frame
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class Signin : Fragment() {
 
     private var _binding : FragmentSigninBinding ?= null
@@ -62,7 +66,14 @@ class Signin : Fragment() {
 
 
 
+       binding?.Continue?.setOnClickListener {
+           val intent = Intent(getActivity(), Frame::class.java)
+           getActivity()?.startActivity(intent)
+       }
 
+        binding?.forgetPassword?.setOnClickListener {
+            findNavController().navigate(R.id.action_signin_to_forgetPassword)
+        }
 
 
 

@@ -110,6 +110,10 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     // circle
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    //Lottie Animation
+    val lottieVersion = "3.4.0"
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
 }
 
 kapt {

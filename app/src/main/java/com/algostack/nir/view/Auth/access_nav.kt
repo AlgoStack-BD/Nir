@@ -9,8 +9,9 @@ import androidx.navigation.fragment.findNavController
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentAccessNavBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class access_nav : Fragment() {
 
     private  var _binding : FragmentAccessNavBinding ?= null

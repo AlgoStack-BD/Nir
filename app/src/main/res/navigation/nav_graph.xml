@@ -66,25 +66,24 @@
             app:popUpTo="@id/signin"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_forgetPassword_to_newPassword"
-            app:destination="@id/newPassword"
+            android:id="@+id/action_forgetPassword_to_passVarification"
+            app:destination="@id/passVarification"
             app:popUpTo="@id/forgetPassword" />
     </fragment>
     <fragment
         android:id="@+id/newPassword"
         android:name="com.algostack.nir.view.Auth.NewPassword"
         android:label="fragment_new_password"
-        tools:layout="@layout/fragment_new_password" >
-        <action
-            android:id="@+id/action_newPassword_to_forgetPassword"
-            app:destination="@id/forgetPassword" />
-        <action
-            android:id="@+id/action_newPassword_to_passVarification"
-            app:destination="@id/passVarification" />
-    </fragment>
+        tools:layout="@layout/fragment_new_password" />
     <fragment
         android:id="@+id/passVarification"
         android:name="com.algostack.nir.view.Auth.PassVarification"
         android:label="fragment_pass_varification"
-        tools:layout="@layout/fragment_pass_varification" />
+        tools:layout="@layout/fragment_pass_varification" >
+        <action
+            android:id="@+id/action_passVarification_to_newPassword"
+            app:destination="@id/newPassword"
+            app:popUpTo="@id/passVarification"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

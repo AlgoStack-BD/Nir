@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUp : Fragment() {
 
     private var _binding : FragmentSignUpBinding ?= null
@@ -75,6 +76,11 @@ class SignUp : Fragment() {
 
 
         return binding!!.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
