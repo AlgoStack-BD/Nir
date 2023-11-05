@@ -82,7 +82,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/rectedittext"
             android:drawableRight="@drawable/visibility_off"
-            android:hint="Email Address"
+            android:hint="Email Password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -101,7 +101,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/rectedittext"
             android:drawableRight="@drawable/visibility_off"
-            android:hint="Enter Password"
+            android:hint="Enter Confirm Password"
             android:inputType="textPassword"
             android:longClickable="false"
             android:paddingLeft="10dp"
@@ -123,21 +123,37 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/coustomrectengular"
 
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/confirmpas"
             app:layout_constraintStart_toStartOf="@+id/confirmpas"
-            app:layout_constraintTop_toBottomOf="@+id/confirmpas">
+            app:layout_constraintTop_toBottomOf="@+id/confirmpas"
+            >
 
             <TextView
-                android:layout_width="165dp"
+                android:layout_width="125dp"
                 android:layout_height="33dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="110dp"
                 android:fontFamily="@font/ralewaybold"
                 android:text="Continue"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress_bar"
+                android:visibility="gone"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/SpinKitView.Large.Wave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/white"
+                android:layout_marginStart="2dp"
+                />
+
+
+
 
         </LinearLayout>
 

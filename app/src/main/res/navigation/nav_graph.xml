@@ -54,6 +54,9 @@
             app:destination="@id/access_nav"
             app:popUpTo="@id/signUp"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signUp_to_passVarification"
+            app:destination="@id/passVarification" />
     </fragment>
     <fragment
         android:id="@+id/forgetPassword"
@@ -83,6 +86,11 @@
         <action
             android:id="@+id/action_passVarification_to_newPassword"
             app:destination="@id/newPassword"
+            app:popUpTo="@id/passVarification"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_passVarification_to_signUp"
+            app:destination="@id/signUp"
             app:popUpTo="@id/passVarification"
             app:popUpToInclusive="true" />
     </fragment>

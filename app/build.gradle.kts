@@ -114,6 +114,10 @@ dependencies {
     //Lottie Animation
     val lottieVersion = "3.4.0"
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+
+    // Progress animation
+    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
+
 }
 
 kapt {
