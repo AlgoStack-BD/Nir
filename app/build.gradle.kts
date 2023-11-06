@@ -117,6 +117,7 @@ dependencies {
 
     // Progress animation
     implementation ("com.github.ybq:Android-SpinKit:1.4.0")
+    implementation ("com.airbnb.android:lottie:6.0.1")
 
 }
 

@@ -45,8 +45,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
             <TextView
-                android:layout_width="65dp"
-                android:layout_height="23dp"
+                android:layout_width="105dp"
+                android:layout_height="43dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/ralewaybold"
@@ -69,12 +69,12 @@
             app:layout_constraintTop_toBottomOf="@+id/or">
 
             <TextView
-                android:layout_width="65dp"
-                android:layout_height="23dp"
+                android:layout_width="105dp"
+                android:layout_height="43dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="Log In"
+                android:text="Sign Up"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

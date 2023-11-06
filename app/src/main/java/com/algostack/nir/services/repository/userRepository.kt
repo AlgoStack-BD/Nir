@@ -17,10 +17,13 @@ import com.algostack.nir.services.model.VerifyOTPResponse
 import com.algostack.nir.services.model.VerifyRequest
 import com.algostack.nir.utils.Constants
 import com.algostack.nir.utils.NetworkResult
+import com.algostack.nir.utils.PostResult
 import com.algostack.nir.utils.VerifyCodeNetworkResult
 import com.algostack.nir.utils.verifyNetworkResult
+import okio.IOException
 import org.json.JSONObject
 import retrofit2.Response
+import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
 class userRepository @Inject constructor(private val userApi: UserApi,private  val verificationAPI: VerificationAPI) {
@@ -43,9 +46,18 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
     suspend fun registerUser(userRequest: UserRequest){
 
         _userResponseLiveData.postValue(NetworkResult.Loading())
-        val response = userApi.signup(userRequest)
-        Log.d(Constants.TAG, response.body().toString())
-        handlerResponse(response)
+        try {
+            val response = userApi.signup(userRequest)
+            Log.d(Constants.TAG, response.body().toString())
+            handlerResponse(response)
+        }catch (e: Exception){
+            _userResponseLiveData.postValue(NetworkResult.Error(e.message))
+        }catch (e: IOException){
+            _userResponseLiveData.postValue(NetworkResult.Error("Network Error"))
+        }catch (e: TimeoutException){
+            _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+        }
+
 
 
     }
@@ -53,24 +65,51 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
     suspend fun loginUser(userSigninRequest: UserSigninRequest){
         _userResponseLiveData.postValue(NetworkResult.Loading())
 
-        val response = userApi.signin(userSigninRequest)
+        try {
+            val response = userApi.signin(userSigninRequest)
 
-        Log.d(Constants.TAG, response.body().toString())
-        handlerResponse(response)
+            Log.d(Constants.TAG, response.body().toString())
+            handlerResponse(response)
+        }catch (e: Exception){
+            _userResponseLiveData.postValue(NetworkResult.Error(e.message))
+        }catch (e: IOException){
+            _userResponseLiveData.postValue(NetworkResult.Error("Network Error"))
+        }catch (e: TimeoutException){
+            _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+        }
+
     }
 
     suspend fun  verification(verificationRequest: VerificationRequest){
         _verifyResponseLiveData.postValue(verifyNetworkResult.Loading())
-        val response = verificationAPI.verification(verificationRequest)
-        Log.d(Constants.TAG, response.body().toString())
-        handlerResponseV(response)
+        try {
+            val response = verificationAPI.verification(verificationRequest)
+            Log.d(Constants.TAG, response.body().toString())
+            handlerResponseV(response)
+        }catch (e: Exception){
+            _verifyResponseLiveData.postValue(verifyNetworkResult.Error(e.message))
+        }catch (e: IOException){
+            _verifyResponseLiveData.postValue(verifyNetworkResult.Error("Network Error"))
+        }catch (e: TimeoutException){
+            _verifyResponseLiveData.postValue(verifyNetworkResult.Error("Time Out"))
+        }
+
     }
 
     suspend fun  verifycode(verifyOtpRequest: VerifyRequest){
         _VerifyOtpMessageLiveData.postValue(VerifyCodeNetworkResult.Loading())
-        val response = verificationAPI.vedifyOTP(verifyOtpRequest)
-        Log.d(Constants.TAG, response.body().toString())
-        handlerVerifycodeResponse(response)
+        try {
+            val response = verificationAPI.vedifyOTP(verifyOtpRequest)
+            Log.d(Constants.TAG, response.body().toString())
+            handlerVerifycodeResponse(response)
+        }catch (e: Exception){
+            _VerifyOtpMessageLiveData.postValue(VerifyCodeNetworkResult.Error(e.message))
+        }catch (e: IOException){
+            _VerifyOtpMessageLiveData.postValue(VerifyCodeNetworkResult.Error("Network Error"))
+        }catch (e: TimeoutException){
+            _VerifyOtpMessageLiveData.postValue(VerifyCodeNetworkResult.Error("Time Out"))
+        }
+
     }
 
     suspend fun UpdateStatus(id: String, updateStatusRequest: UpdateStatusRequest){
