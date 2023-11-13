@@ -11,11 +11,11 @@ import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.UserResponse
 import com.algostack.nir.services.model.UserSigninRequest
 import com.algostack.nir.services.model.VerificationRequest
+import com.algostack.nir.services.model.VerificationResponse
 import com.algostack.nir.services.model.VerifyOTPResponse
 import com.algostack.nir.services.model.VerifyRequest
 import com.algostack.nir.services.repository.userRepository
 import com.algostack.nir.utils.NetworkResult
-import com.algostack.nir.utils.VerifyCodeNetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,8 +28,11 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
     val userResponeLiveData : LiveData<NetworkResult<UserResponse>>
         get() = userRepository.userResponseLiveData
 
-    val VerifyOtpMessageLiveData : LiveData<VerifyCodeNetworkResult<VerifyOTPResponse>>
+    val VerifyOtpMessageLiveData : LiveData<NetworkResult<VerifyOTPResponse>>
         get() = userRepository.verifyOtpMessageLiveData
+
+    val VerifyResponseLiveData : LiveData<NetworkResult<VerificationResponse>>
+        get() = userRepository.verificationResponse
 
 
     fun registerUser(userRequest: UserRequest){

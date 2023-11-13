@@ -25,6 +25,7 @@ import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSigninBinding
 import com.algostack.nir.services.model.UserLoginRequest
 import com.algostack.nir.services.model.UserSigninRequest
+import com.algostack.nir.utils.AlertDaialog.showCustomAlertDialogBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.frame.Frame
@@ -84,17 +85,16 @@ class Signin : Fragment() {
 
         binding?.Continue?.setOnClickListener{
 
-//            val intent = Intent (getActivity(), frame::class.java)
-//            getActivity()?.startActivity(intent)
+
 
             val validationResul = validateUserInput()
 
             if(validationResul.first){
                 authViewModel.loginUser(getUserRequest())
             }else{
-               //  binding.txtError.text = validationResul.second
 
-                showCustomAlertDialogBox( validationResul.second)
+
+                showCustomAlertDialogBox(requireContext() , validationResul.second)
             }
 
 
@@ -104,11 +104,6 @@ class Signin : Fragment() {
 
 
         bindObservers()
-
-//       binding?.Continue?.setOnClickListener {
-//           val intent = Intent(getActivity(), Frame::class.java)
-//           getActivity()?.startActivity(intent)
-//       }
 
         binding?.forgetPassword?.setOnClickListener {
             findNavController().navigate(R.id.action_signin_to_forgetPassword)
@@ -142,36 +137,35 @@ class Signin : Fragment() {
             binding?.logprogressBar?.isVisible = false
             when(it){
                 is NetworkResult.Success -> {
-//                    println("ChekSuccess call")
-//                    val intent = Intent (getActivity(), frame::class.java)
-//                    getActivity()?.startActivity(intent)
 
-                    if (it.data != null && it.data.status == 200 && it.data.jwt != null) {
-                        // Login success, navigate to home fragment
+
+                    if (it.data != null && it.data.status == 200) {
+
                         tokenManager.saveToken(it.data!!.jwt)
-                        val intent = Intent(getActivity(), Frame::class.java)
-                        getActivity()?.startActivity(intent)
-
+                        println("Check Token: ${tokenManager.getToken()}")
+                        val intent = Intent(activity, Frame::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        activity?.startActivity(intent)
 
 
                     } else if (it.data!!.status == 404){
-//                        binding.txtError.text = it.message ?: "User does not exist with this credentials"
+
                         val errorMsg = it.message ?: "User does not exist with this credentials"
 
-                        showCustomAlertDialogBox(errorMsg)
+                        showCustomAlertDialogBox(requireContext(),errorMsg)
                     }else if(it.data!!.status == 401){
-                      //  binding.txtError.text = it.message ?: "User is not verified"
-                        showCustomAlertDialogBox( it.message ?: "User is not verified")
+
+                        showCustomAlertDialogBox( requireContext(),it.message ?: "User is not verified")
                     }else if(it.data!!.status == 500){
-                        // binding.txtError.text = it.message ?: "Internal Server Error"
-                        it.message?.let { it1 -> showCustomAlertDialogBox(it1) }
+
+                        it.message?.let { it1 -> showCustomAlertDialogBox(requireContext(),it1) }
                     }
 
                 }
                 is NetworkResult.Error -> {
-                   // binding.txtError.text = it.message ?: "Something went wrong"
 
-                    showCustomAlertDialogBox( it.message ?: "Something went wrong")
+
+                    showCustomAlertDialogBox(requireContext() , it.message ?: "Something went wrong")
                 }
                 is NetworkResult.Loading -> {
                     binding?.logprogressBar?.isVisible = true
@@ -182,34 +176,7 @@ class Signin : Fragment() {
     }
 
 
-    fun showCustomAlertDialogBox(msg : String){
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_alert_box, null,false)
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setView(view)
 
-        val alert = builder.create()
-        alert.setCancelable(true)
-
-        val cancelBtn = view.findViewById<TextView>(R.id.cencelbtn)
-        val okBtn = view.findViewById<TextView>(R.id.okBtn)
-        val textView = view.findViewById<TextView>(R.id.alertText)
-
-        textView.text = msg
-
-        cancelBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        okBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        alert.window?.setBackgroundDrawable(ColorDrawable(0))
-        alert.show()
-
-
-
-    }
     override fun onResume() {
         super.onResume()
 

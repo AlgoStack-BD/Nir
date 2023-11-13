@@ -1,14 +1,11 @@
 package com.algostack.nir.view.Auth
 
-import android.app.AlertDialog
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,8 +18,9 @@ import com.algostack.nir.services.api.VerificationAPI
 import com.algostack.nir.services.model.UpStatusData
 import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.VerifyRequest
+import com.algostack.nir.utils.AlertDaialog.showCustomAlertDialogBox
+import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
-import com.algostack.nir.utils.VerifyCodeNetworkResult
 import com.algostack.nir.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -90,6 +88,11 @@ class PassVarification : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//                if (p0 != null && p0.isNotEmpty() && !p0.toString().matches(Regex("\\d"))) {
+//                    // If not a digit, clear the input
+//                    currentEditText.text.clear()
+//                }
 
             }
 
@@ -122,8 +125,6 @@ class PassVarification : Fragment() {
 
 
 
-
-
 //            CoroutineScope(Dispatchers.IO).launch {
 //
 //                        val response = verificationAPI.vedifyOTP(VerifyOtpRequest(email,result))
@@ -147,7 +148,7 @@ class PassVarification : Fragment() {
         authViewModel.VerifyOtpMessageLiveData.observe(viewLifecycleOwner, Observer {
             binding?.progressBar?.isVisible = false
             when(it){
-                is VerifyCodeNetworkResult.Success -> {
+                is NetworkResult.Success -> {
 
                     if (it.data != null && it.data.status == 200 && it.data.message != null) {
 
@@ -175,11 +176,11 @@ class PassVarification : Fragment() {
                     }
 
                 }
-                is VerifyCodeNetworkResult.Error -> {
-                    it.message?.let { it1 -> showCustomAlertDialogBox(it1) }
+                is NetworkResult.Error -> {
+                    it.message?.let { it1 -> showCustomAlertDialogBox(requireContext(),it1) }
 
                 }
-                is VerifyCodeNetworkResult.Loading -> {
+                is NetworkResult.Loading -> {
                     binding?.progressBar?.isVisible = true
                 }
             }
@@ -187,35 +188,7 @@ class PassVarification : Fragment() {
         })
     }
 
-    // optimize kora dorkar ei function k
-    fun showCustomAlertDialogBox(msg : String){
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_alert_box, null)
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setView(view)
 
-        val alert = builder.create()
-        alert.setCancelable(true)
-
-        val cancelBtn = view.findViewById<TextView>(R.id.cencelbtn)
-        val okBtn = view.findViewById<TextView>(R.id.okBtn)
-        val textView = view.findViewById<TextView>(R.id.alertText)
-
-        textView.text = msg
-
-        cancelBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        okBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        alert.window?.setBackgroundDrawable(ColorDrawable(0))
-        alert.show()
-
-
-
-    }
 
 
 }

@@ -25,6 +25,7 @@ import com.algostack.nir.services.api.VerificationAPI
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.VerificationRequest
 import com.algostack.nir.services.model.userData
+import com.algostack.nir.utils.AlertDaialog.showCustomAlertDialogBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.viewmodel.AuthViewModel
@@ -117,7 +118,7 @@ class SignUp : Fragment() {
             if(validationResult.first){
                 authViewModel.registerUser(getUserRequest())
             }else{
-                showCustomAlertDialogBox( validationResult.second)
+                showCustomAlertDialogBox(requireContext(), validationResult.second)
             }
         }
 
@@ -178,16 +179,16 @@ class SignUp : Fragment() {
                     } else if (it.data!!.status == 400) {
                        val errorMsg = it.message ?: "This email is already registered"
 
-                        showCustomAlertDialogBox(errorMsg)
+                        showCustomAlertDialogBox(requireContext(),errorMsg)
                     } else if (it.data!!.status == 500) {
 
 
-                        showCustomAlertDialogBox( it.message ?: "Internal Server Error")
+                        showCustomAlertDialogBox(requireContext(), it.message ?: "Internal Server Error")
                     }
                 }
                 is NetworkResult.Error -> {
                    // binding.txtError.text = it.message
-                    it.message?.let { it1 -> showCustomAlertDialogBox(it1) }
+                    it.message?.let { it1 -> showCustomAlertDialogBox( requireContext(),it1) }
                 }
                 is NetworkResult.Loading -> {
                     binding?.progressBar?.isVisible = true
@@ -198,34 +199,7 @@ class SignUp : Fragment() {
         })
     }
 
-    fun showCustomAlertDialogBox(msg : String){
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_alert_box, null)
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setView(view)
 
-        val alert = builder.create()
-        alert.setCancelable(true)
-
-        val cancelBtn = view.findViewById<TextView>(R.id.cencelbtn)
-        val okBtn = view.findViewById<TextView>(R.id.okBtn)
-        val textView = view.findViewById<TextView>(R.id.alertText)
-
-        textView.text = msg
-
-        cancelBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        okBtn.setOnClickListener {
-            alert.dismiss()
-        }
-
-        alert.window?.setBackgroundDrawable(ColorDrawable(0))
-        alert.show()
-
-
-
-    }
 
 
 }

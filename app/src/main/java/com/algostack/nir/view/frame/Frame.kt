@@ -30,7 +30,8 @@ class Frame : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.nav_home -> replaceFragment(Home())
-                R.id.nav_fav -> replaceFragment(Favorite())
+//                R.id.nav_chat -> replaceFragment(Chat())
+//                R.id.nav_fav -> replaceFragment(Favorite())
                 R.id.nav_profile -> replaceFragment(Profile())
 
                 else -> {
