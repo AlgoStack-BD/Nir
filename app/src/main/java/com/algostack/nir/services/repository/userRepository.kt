@@ -1,5 +1,6 @@
 package com.algostack.nir.services.repository
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,13 +15,16 @@ import com.algostack.nir.services.model.VerificationRequest
 import com.algostack.nir.services.model.VerificationResponse
 import com.algostack.nir.services.model.VerifyOTPResponse
 import com.algostack.nir.services.model.VerifyRequest
+import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.Constants
 import com.algostack.nir.utils.NetworkResult
+import com.algostack.nir.utils.NetworkUtils
 import okio.IOException
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
+
 
 class userRepository @Inject constructor(private val userApi: UserApi,private  val verificationAPI: VerificationAPI) {
 
@@ -38,84 +42,105 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
     val verifyOtpMessageLiveData: LiveData<NetworkResult<VerifyOTPResponse>>
         get() = _VerifyOtpMessageLiveData
 
-    suspend fun registerUser(userRequest: UserRequest) {
+    suspend fun registerUser(userRequest: UserRequest , context: Context) {
 
-        _userResponseLiveData.postValue(NetworkResult.Loading())
-        try {
-            val response = userApi.signup(userRequest)
+        if (NetworkUtils.isInternetConnected(context)) {
+            _userResponseLiveData.postValue(NetworkResult.Loading())
+            try {
+                val response = userApi.signup(userRequest)
+                Log.d(Constants.TAG, response.body().toString())
+                handleNetworkResponseU(response)
+            } catch (e: Exception) {
+                _userResponseLiveData.postValue(NetworkResult.Error(e.message))
+            }  catch (e: TimeoutException) {
+                _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }else{
+
+            noInternetConnectionAlertBox(context)
+
+        }
+
+
+    }
+
+    suspend fun loginUser(userSigninRequest: UserSigninRequest, context: Context) {
+
+
+        if (NetworkUtils.isInternetConnected(context)) {
+            _userResponseLiveData.postValue(NetworkResult.Loading())
+            try {
+                val response = userApi.signin(userSigninRequest)
+
+                Log.d(Constants.TAG, response.body().toString())
+                handleNetworkResponseU(response)
+            } catch (e: Exception) {
+                _userResponseLiveData.postValue(NetworkResult.Error(e.message))
+            } catch (e: TimeoutException) {
+                _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }else{
+            noInternetConnectionAlertBox(context)
+        }
+
+    }
+
+    suspend fun verification(verificationRequest: VerificationRequest, context: Context) {
+
+        if (NetworkUtils.isInternetConnected(context)) {
+            _verifyResponseLiveData.postValue(NetworkResult.Loading())
+            try {
+                val response = verificationAPI.verification(verificationRequest)
+                Log.d(Constants.TAG, response.body().toString())
+                handleNetworkResponseV(response)
+            } catch (e: Exception) {
+                _verifyResponseLiveData.postValue(NetworkResult.Error(e.message))
+            }catch (e: TimeoutException) {
+                _verifyResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }else
+        {
+            noInternetConnectionAlertBox(context)
+
+        }
+
+    }
+
+    suspend fun verifycode(verifyOtpRequest: VerifyRequest, context: Context) {
+
+
+        if (NetworkUtils.isInternetConnected(context)) {
+            _VerifyOtpMessageLiveData.postValue(NetworkResult.Loading())
+
+            try {
+                val response = verificationAPI.vedifyOTP(verifyOtpRequest)
+                Log.d(Constants.TAG, response.body().toString())
+                handleNetworkResponseVC(response)
+            } catch (e: Exception) {
+                _VerifyOtpMessageLiveData.postValue(NetworkResult.Error(e.message))
+            }  catch (e: TimeoutException) {
+                _VerifyOtpMessageLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }else{
+            noInternetConnectionAlertBox(context)
+        }
+
+    }
+
+    suspend fun UpdateStatus(id: String, updateStatusRequest: UpdateStatusRequest, context: Context) {
+        if (NetworkUtils.isInternetConnected(context)) {
+            val response = verificationAPI.upVerifyStatus(id, updateStatusRequest)
             Log.d(Constants.TAG, response.body().toString())
+        }
+
+    }
+
+    suspend fun ResetPassword(forgetPasswordRequest: ForgetPasswordRequest , context: Context) {
+        if (NetworkUtils.isInternetConnected(context)) {
+            val response = verificationAPI.ResetPassword(forgetPasswordRequest)
+            Log.d(Constants.TAG2, response.body().toString())
             handleNetworkResponseU(response)
-        } catch (e: Exception) {
-            _userResponseLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: IOException) {
-            _userResponseLiveData.postValue(NetworkResult.Error("Network Error"))
-        } catch (e: TimeoutException) {
-            _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
         }
-
-
-    }
-
-    suspend fun loginUser(userSigninRequest: UserSigninRequest) {
-        _userResponseLiveData.postValue(NetworkResult.Loading())
-
-        try {
-            val response = userApi.signin(userSigninRequest)
-
-            Log.d(Constants.TAG, response.body().toString())
-            handleNetworkResponseU(response)
-        } catch (e: Exception) {
-            _userResponseLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: IOException) {
-            _userResponseLiveData.postValue(NetworkResult.Error("Network Error"))
-        } catch (e: TimeoutException) {
-            _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
-        }
-
-    }
-
-    suspend fun verification(verificationRequest: VerificationRequest) {
-        _verifyResponseLiveData.postValue(NetworkResult.Loading())
-        try {
-            val response = verificationAPI.verification(verificationRequest)
-            Log.d(Constants.TAG, response.body().toString())
-            handleNetworkResponseV(response)
-        } catch (e: Exception) {
-            _verifyResponseLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: IOException) {
-            _verifyResponseLiveData.postValue(NetworkResult.Error("Network Error"))
-        } catch (e: TimeoutException) {
-            _verifyResponseLiveData.postValue(NetworkResult.Error("Time Out"))
-        }
-
-    }
-
-    suspend fun verifycode(verifyOtpRequest: VerifyRequest) {
-        _VerifyOtpMessageLiveData.postValue(NetworkResult.Loading())
-        try {
-            val response = verificationAPI.vedifyOTP(verifyOtpRequest)
-            Log.d(Constants.TAG, response.body().toString())
-            handleNetworkResponseVC(response)
-        } catch (e: Exception) {
-            _VerifyOtpMessageLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: IOException) {
-            _VerifyOtpMessageLiveData.postValue(NetworkResult.Error("Network Error"))
-        } catch (e: TimeoutException) {
-            _VerifyOtpMessageLiveData.postValue(NetworkResult.Error("Time Out"))
-        }
-
-    }
-
-    suspend fun UpdateStatus(id: String, updateStatusRequest: UpdateStatusRequest) {
-        val response = verificationAPI.upVerifyStatus(id, updateStatusRequest)
-        Log.d(Constants.TAG, response.body().toString())
-
-    }
-
-    suspend fun ResetPassword(forgetPasswordRequest: ForgetPasswordRequest) {
-        val response = verificationAPI.ResetPassword(forgetPasswordRequest)
-        Log.d(Constants.TAG2, response.body().toString())
-        handleNetworkResponseU(response)
     }
 
     private fun handleNetworkResponseU(response: Response<UserResponse>){

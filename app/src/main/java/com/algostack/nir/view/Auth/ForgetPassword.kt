@@ -59,6 +59,7 @@ class ForgetPassword : Fragment() {
                 binding?.forgetemail?.error = "Email can't empty"
                 binding?.forgetemail?.requestFocus()
             } else {
+                authViewModel.applicationContext = requireContext()
                 authViewModel.VerificationRequest(VerificationRequest(email))
 
                 bindObservers()

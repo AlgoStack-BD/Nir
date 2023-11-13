@@ -116,6 +116,7 @@ class SignUp : Fragment() {
             val validationResult = validateUserInput()
 
             if(validationResult.first){
+                authViewModel.applicationContext = requireContext()
                 authViewModel.registerUser(getUserRequest())
             }else{
                 showCustomAlertDialogBox(requireContext(), validationResult.second)

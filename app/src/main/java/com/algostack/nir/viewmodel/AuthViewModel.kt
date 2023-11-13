@@ -1,5 +1,6 @@
 package com.algostack.nir.viewmodel
 
+import android.content.Context
 import android.text.TextUtils
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -34,40 +35,42 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
     val VerifyResponseLiveData : LiveData<NetworkResult<VerificationResponse>>
         get() = userRepository.verificationResponse
 
+    var applicationContext: Context? = null
+
 
     fun registerUser(userRequest: UserRequest){
         viewModelScope.launch {
-            userRepository.registerUser(userRequest)
+            applicationContext?.let { userRepository.registerUser(userRequest, it) }
         }
 
     }
 
     fun loginUser(userSigninRequest: UserSigninRequest){
         viewModelScope.launch {
-            userRepository.loginUser(userSigninRequest)
+            applicationContext?.let { userRepository.loginUser(userSigninRequest, it) }
         }
     }
 
     fun VerificationRequest(verificationRequest: VerificationRequest){
         viewModelScope.launch {
-            userRepository.verification(verificationRequest)
+            applicationContext?.let { userRepository.verification(verificationRequest, it) }
         }
     }
     fun verifyOTP(verifyOtpRequest : VerifyRequest){
         viewModelScope.launch {
-            userRepository.verifycode(verifyOtpRequest)
+            applicationContext?.let { userRepository.verifycode(verifyOtpRequest, it) }
         }
     }
 
     fun updateVerifyStatus(id: String, updateStatusRequest: UpdateStatusRequest){
         viewModelScope.launch {
-            userRepository.UpdateStatus(id, updateStatusRequest)
+            applicationContext?.let { userRepository.UpdateStatus(id, updateStatusRequest, it) }
         }
     }
 
     fun ResetPassword(forgetPasswordRequest: ForgetPasswordRequest){
         viewModelScope.launch {
-            userRepository.ResetPassword(forgetPasswordRequest)
+            applicationContext?.let { userRepository.ResetPassword(forgetPasswordRequest, it) }
         }
     }
 

@@ -57,6 +57,7 @@ class NewPassword : Fragment() {
                 println("checkNew: $newPASS")
                 println("checkCon: $conemail")
             }else{
+                authViewModel.applicationContext = requireContext()
                 val email = arguments?.getString("email")
                 authViewModel.ResetPassword(ForgetPasswordRequest(ForgetPassData(email!!,newPASS)))
 

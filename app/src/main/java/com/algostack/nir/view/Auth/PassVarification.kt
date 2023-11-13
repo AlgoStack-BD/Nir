@@ -115,11 +115,12 @@ class PassVarification : Fragment() {
             val four = binding?.fieldFour?.text.toString()
 
             val result = one+two+three+four
-            println("CheckCode: $result")
+
 
             val email = arguments?.getString("email")
-            println("CheckEmail: $email")
 
+
+            authViewModel.applicationContext = requireContext()
 
             authViewModel.verifyOTP(VerifyRequest(email,result))
 

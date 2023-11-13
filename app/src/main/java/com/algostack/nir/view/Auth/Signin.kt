@@ -90,6 +90,7 @@ class Signin : Fragment() {
             val validationResul = validateUserInput()
 
             if(validationResul.first){
+                authViewModel.applicationContext = requireContext()
                 authViewModel.loginUser(getUserRequest())
             }else{
 
