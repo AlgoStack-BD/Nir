@@ -1,6 +1,7 @@
 package com.algostack.nir.services.network
 
 import com.algostack.nir.services.api.AuthIntercepter
+import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.api.VerificationAPI
 import com.algostack.nir.utils.Constants
@@ -40,11 +41,13 @@ class NetworkModule {
         return retrofitBuilder.build().create(UserApi::class.java)
     }
 
-//    @Singleton
-//    @Provides
-//    fun providePostApi(retrofitBuilder: Retrofit.Builder) : PostAPI {
-//        return retrofitBuilder.build().create(PostAPI::class.java)
-//    }
+    @Singleton
+    @Provides
+    fun providePublicPostApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient) : PublicPostApi {
+        return retrofitBuilder
+            .client(okHttpClient)
+            .build().create(PublicPostApi::class.java)
+    }
 
 
 

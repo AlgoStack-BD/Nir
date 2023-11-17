@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="222dp"
+    android:layout_height="272dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardPreventCornerOverlap="true"
+    app:cardCornerRadius="20dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/home_image">
+
+        <RelativeLayout
+            android:id="@+id/ic_near"
+            android:layout_width="73dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="133dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_card_style"
+            android:backgroundTint="#60FFFFFF"
+
+            >
+
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ic_location"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:clipToOutline="true"
+                android:background="@drawable/location_icon"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/km"
+                android:layout_width="35dp"
+                android:layout_height="19dp"
+                android:gravity="top"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="5dp"
+                android:text="1.8 km"/>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rahim_h_ous"
+                android:layout_width="104dp"
+                android:layout_height="19dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="175dp"
+                android:text="Rahim House"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ralewaysemibold"
+                android:textSize="15dp"
+                android:gravity="top"
+                />
+
+
+            <TextView
+                android:id="@+id/sylhet_jind"
+                android:layout_width="192dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp"
+                android:text="Sylhet, jinda Bazar, Bangladesh"
+                android:textSize="15dp"
+                android:textColor="#D4D4D4"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

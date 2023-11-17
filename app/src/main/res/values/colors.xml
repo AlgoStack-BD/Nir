@@ -8,4 +8,8 @@
     <color name="google">#D12C1F</color>
     <color name="highlight_text_color">#2196F3</color>
     <color name="deepblue">#0D55DF</color>
+    <color name="selected">#9ABDFF</color>
+    <color name="startColout">#9ABDFF</color>
+    <color name="endColout">#0D55DF</color>
+
 </resources>
