@@ -113,11 +113,11 @@ class Home : Fragment() {
 
         }
 
-        binding.beastForYouRecyler.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
-        binding.beastForYouRecyler.adapter = bestForYouAdapter
+        binding.bestForYouRecylerView.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
+        binding.bestForYouRecylerView.adapter = bestForYouAdapter
 
-        binding.nearPostRecylerView.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL)
-         binding.nearPostRecylerView.adapter = nearByPostAdapter
+        binding.nearfromyouRecyler.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL)
+         binding.nearfromyouRecyler.adapter = nearByPostAdapter
 
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val response = publicPostApi.getPublicPost()

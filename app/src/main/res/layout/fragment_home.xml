@@ -73,235 +73,208 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/downLayer"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="525dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        >
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:focusableInTouchMode="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <LinearLayout
+            android:id="@+id/nfromyou"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                >
-
-                <HorizontalScrollView
-                    android:id="@+id/horizontalScrollView"
-                    android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+              >
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:foregroundGravity="center_vertical">
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:foregroundGravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/home"
-                            android:layout_width="80dp"
-                            android:layout_height="38dp"
-                            android:orientation="vertical"
-                            android:background="@drawable/horizontal_button_circle"
-                            android:backgroundTint="@color/selected"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Home"
-                                android:textSize="20dp"
-                                android:fontFamily="@font/ralewayregular"
-                                android:textColor="@color/black"
-                                android:textAlignment="center"
-                                android:layout_gravity="center"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginLeft="20dp"
-                            android:id="@+id/appartment"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/home"
+                        android:layout_width="80dp"
+                        android:layout_height="38dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/horizontal_button_circle"
+                        android:backgroundTint="@color/selected"
+                        >
+                        <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="38dp"
-                            android:background="@drawable/horizontal_button_circle"
-                            android:backgroundTint="@color/white"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="140dp"
-                                android:layout_height="wrap_content"
-                                android:text="Apartment"
-                                android:textSize="20dp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/ralewayregular"
-                                android:textAlignment="center"
-                                android:layout_gravity="center"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginLeft="20dp"
-                            android:id="@+id/hotel"
-                            android:layout_width="80dp"
-                            android:layout_height="38dp"
-                            android:background="@drawable/horizontal_button_circle"
-                            android:backgroundTint="@color/white"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hotel"
-                                android:textSize="20dp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/ralewayregular"
-                                android:textAlignment="center"
-                                android:layout_gravity="center"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginLeft="20dp"
-                            android:id="@+id/Vila"
-                            android:layout_width="80dp"
-                            android:layout_height="38dp"
-                            android:background="@drawable/horizontal_button_circle"
-                            android:backgroundTint="@color/white"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Vila"
-                                android:textSize="20dp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/ralewayregular"
-                                android:textAlignment="center"
-                                android:layout_gravity="center"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginLeft="20dp"
-                            android:id="@+id/cottage"
-                            android:layout_width="90dp"
-                            android:layout_height="38dp"
-                            android:background="@drawable/horizontal_button_circle"
-                            android:backgroundTint="@color/white"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Cottage"
-                                android:textSize="20dp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/ralewayregular"
-                                android:textAlignment="center"
-                                android:layout_gravity="center"
-                                />
-                        </LinearLayout>
-
-
+                            android:layout_height="wrap_content"
+                            android:text="Home"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/ralewayregular"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            />
                     </LinearLayout>
 
-
-
-                </HorizontalScrollView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/NearPost"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-                <TextView
-                    android:id="@+id/nearpostText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ralewaybold"
-                    android:text="Near from you"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.05"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/nearPostRecylerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="280dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nearpostText"
-                    tools:listitem="@layout/nearpost" />
-
-                <LinearLayout
-                    android:id="@+id/BeastForYou"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="parent">
-
-                    <TextView
-                        android:id="@+id/bestfor_you"
+                    <LinearLayout
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/appartment"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaybold"
-                        android:text="Best for you"
-                        android:textColor="@color/black"
-                        android:textSize="24dp" />
+                        android:layout_height="38dp"
+                        android:background="@drawable/horizontal_button_circle"
+                        android:backgroundTint="@color/white"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:text="Apartment"
+                            android:textSize="20dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/ralewayregular"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/hotel"
+                        android:layout_width="80dp"
+                        android:layout_height="38dp"
+                        android:background="@drawable/horizontal_button_circle"
+                        android:backgroundTint="@color/white"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hotel"
+                            android:textSize="20dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/ralewayregular"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/beastForYouRecyler"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:listitem="@layout/public_post" />
+                    <LinearLayout
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/Vila"
+                        android:layout_width="80dp"
+                        android:layout_height="38dp"
+                        android:background="@drawable/horizontal_button_circle"
+                        android:backgroundTint="@color/white"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vila"
+                            android:textSize="20dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/ralewayregular"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/cottage"
+                        android:layout_width="90dp"
+                        android:layout_height="38dp"
+                        android:background="@drawable/horizontal_button_circle"
+                        android:backgroundTint="@color/white"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cottage"
+                            android:textSize="20dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/ralewayregular"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
 
 
                 </LinearLayout>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </HorizontalScrollView>
 
 
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ralewayextrabold"
+                android:text="Near For You"
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="32dp"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nearfromyouRecyler"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                tools:listitem="@layout/nearpost"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ralewayextrabold"
+                android:text="Best For You"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="32dp"
+                android:textColor="@color/black"
+                 />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bestForYouRecylerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/public_post"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                />
 
 
         </LinearLayout>
-
-        </ScrollView>
-
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
