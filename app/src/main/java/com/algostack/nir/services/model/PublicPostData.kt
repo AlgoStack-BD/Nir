@@ -21,7 +21,7 @@ data class PublicPostData(
     val location: String,
     val phone: String?,
     val price: Int,
-    val type: List<String>?,
+    val type: String,
     val updatedAt: String?,
     val userId: String,
     val userImg: String?,

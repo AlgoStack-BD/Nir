@@ -116,11 +116,13 @@ class Home : Fragment() {
         binding.beastForYouRecyler.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
         binding.beastForYouRecyler.adapter = bestForYouAdapter
 
+        binding.nearPostRecylerView.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL)
+         binding.nearPostRecylerView.adapter = nearByPostAdapter
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = publicPostApi.getPublicPost()
-            Log.d("PublicAPIrESPONSE",response.body().toString())
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val response = publicPostApi.getPublicPost()
+//            Log.d("PublicAPIrESPONSE",response.body().toString())
+//        }
 
 
         bindOvservers()
@@ -139,6 +141,7 @@ class Home : Fragment() {
                    val bestForYouResult = result.data.data
 
                    bestForYouAdapter.submitList(bestForYouResult)
+                   nearByPostAdapter.submitList(bestForYouResult)
 
 
                }else if(result.data.status == 500){

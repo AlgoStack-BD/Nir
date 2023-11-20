@@ -232,7 +232,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/NearPost"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="match_parent"
                 >
 
                 <TextView
@@ -249,50 +249,44 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/nearPostRecylerView"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="280dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nearpostText"
                     tools:listitem="@layout/nearpost" />
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/BeastForYou"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                >
-
-                <TextView
-                    android:id="@+id/bestfor_you"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ralewaybold"
-                    android:text="Best for you"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.05"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/beastForYouRecyler"
+                <LinearLayout
+                    android:id="@+id/BeastForYou"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="parent">
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bestfor_you"
-                    tools:listitem="@layout/public_post" />
+                    <TextView
+                        android:id="@+id/bestfor_you"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaybold"
+                        android:text="Best for you"
+                        android:textColor="@color/black"
+                        android:textSize="24dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/beastForYouRecyler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/public_post" />
+
+
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         </LinearLayout>
