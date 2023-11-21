@@ -21,6 +21,7 @@ class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestFo
         return BestForYouViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(holder: BestForYouViewHolder, position: Int) {
 
         val item = getItem(position)

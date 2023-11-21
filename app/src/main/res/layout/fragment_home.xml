@@ -41,7 +41,7 @@
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="1dp"
             android:padding="8dp"
             android:src="@drawable/search_icon" />
 
@@ -68,6 +68,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="0dp"
             android:src="@drawable/baseline_arrow_forward_ios_24"
+            android:layout_marginTop="2dp"
 
             />
 
@@ -110,6 +111,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
+                android:scrollbars="none"
                 android:layout_marginEnd="20dp">
 
                 <LinearLayout
@@ -124,19 +126,20 @@
                         android:layout_width="80dp"
                         android:layout_height="38dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/horizontal_button_circle"
-                        android:backgroundTint="@color/selected"
+                        android:background="@drawable/buttonclickedbackground"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/HomeBtnText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/ralewayregular"
+                           android:layout_marginTop="5dp"
                             android:text="Home"
+                            android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -145,18 +148,19 @@
                         android:layout_height="38dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/horizontal_button_circle"
-                        android:backgroundTint="@color/white"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/appartmentBtnText"
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/ralewayregular"
-                            android:text="Apartment"
+                            android:text="Appartment"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="18dp"  />
                     </LinearLayout>
 
                     <LinearLayout
@@ -165,18 +169,19 @@
                         android:layout_height="38dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/horizontal_button_circle"
-                        android:backgroundTint="@color/white"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/HotelBtnText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/ralewayregular"
                             android:text="Hotel"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="18dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -185,18 +190,19 @@
                         android:layout_height="38dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/horizontal_button_circle"
-                        android:backgroundTint="@color/white"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/VilaBtnText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/ralewayregular"
                             android:text="Vila"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="18dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -205,18 +211,19 @@
                         android:layout_height="38dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/horizontal_button_circle"
-                        android:backgroundTint="@color/white"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/CottageBtnText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/ralewayregular"
                             android:text="Cottage"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="18dp"/>
                     </LinearLayout>
 
 
@@ -244,6 +251,7 @@
                 android:layout_height="275dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+
                 tools:listitem="@layout/nearpost">
 
             </androidx.recyclerview.widget.RecyclerView>
