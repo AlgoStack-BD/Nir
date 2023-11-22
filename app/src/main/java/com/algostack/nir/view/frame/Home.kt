@@ -1,11 +1,13 @@
 package com.algostack.nir.view.frame
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -66,7 +68,8 @@ class Home : Fragment() {
 
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
-
+        // Setup sticky header
+       
         binding.home.setOnClickListener {
 
             ViewCompat.setBackground( binding.home, selected)
@@ -205,5 +208,11 @@ class Home : Fragment() {
 
 
     }
+
+
+
+
+
+
 
 }

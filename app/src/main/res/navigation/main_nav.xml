@@ -35,4 +35,9 @@
         android:name="com.algostack.nir.view.frame.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.algostack.nir.view.frame.Notification"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
