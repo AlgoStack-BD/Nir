@@ -10,6 +10,8 @@ import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.concurrent.TimeoutException
@@ -54,7 +56,17 @@ class PublicPostRepository @Inject constructor(
             }
         }else{
 
-            noInternetConnectionAlertBox(context)
+            withContext(Dispatchers.IO){
+                val publicPostData = nirLocalDB.getPublicPostDao().getPublicPostData()
+
+                if (publicPostData!!.isNotEmpty()){
+                    _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(publicPostData,200)))
+                }else{
+                    noInternetConnectionAlertBox(context)
+                }
+            }
+
+
 
         }
 
