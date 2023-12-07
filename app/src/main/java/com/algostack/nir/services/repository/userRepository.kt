@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.api.VerificationAPI
+import com.algostack.nir.services.db.LoginInfoDao
+import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.ForgetPasswordRequest
 import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.UserRequest
@@ -19,6 +21,8 @@ import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.Constants
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okio.IOException
 import org.json.JSONObject
 import retrofit2.Response
@@ -26,7 +30,12 @@ import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
 
-class userRepository @Inject constructor(private val userApi: UserApi,private  val verificationAPI: VerificationAPI) {
+class userRepository @Inject constructor(
+    private val userApi: UserApi,
+    private  val verificationAPI: VerificationAPI,
+    private val nirLocalDB: NirLocalDB
+
+) {
 
 
     private val _userResponseLiveData = MutableLiveData<NetworkResult<UserResponse>>()
@@ -72,7 +81,12 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
             try {
                 val response = userApi.signin(userSigninRequest)
 
-                Log.d(Constants.TAG, response.body().toString())
+//                Log.d(Constants.TAG, response.body().toString())
+//
+//                if (response.isSuccessful && response.body() != null){
+//                    nirLocalDB.getLoginInfo().upsert(response.body()!!.data)
+//                }
+
                 handleNetworkResponseU(response)
             } catch (e: Exception) {
                 _userResponseLiveData.postValue(NetworkResult.Error(e.message))
@@ -80,6 +94,8 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
                 _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
         }else{
+
+
             noInternetConnectionAlertBox(context)
         }
 
@@ -143,8 +159,12 @@ class userRepository @Inject constructor(private val userApi: UserApi,private  v
         }
     }
 
-    private fun handleNetworkResponseU(response: Response<UserResponse>){
+    private suspend fun handleNetworkResponseU(response: Response<UserResponse>){
         if (response.isSuccessful && response.body() != null){
+
+
+
+
             _userResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
         }else if (response.errorBody() != null){
             val errorObj = JSONObject(response.errorBody()!!.charStream().readText())

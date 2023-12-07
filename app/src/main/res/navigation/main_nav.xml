@@ -16,11 +16,6 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/profile"
-        android:name="com.algostack.nir.view.frame.Profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
         android:id="@+id/add2"
         android:name="com.algostack.nir.view.frame.add"
         android:label="fragment_add"
@@ -40,4 +35,18 @@
         android:name="com.algostack.nir.view.frame.Notification"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/profileMenu"
+        android:name="com.algostack.nir.view.frame.ProfileMenu"
+        android:label="fragment_profile_menu"
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenu_to_profileDetails"
+            app:destination="@id/profileDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDetails"
+        android:name="com.algostack.nir.view.frame.ProfileDetails"
+        android:label="fragment_profile_details"
+        tools:layout="@layout/fragment_profile_details" />
 </navigation>

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.algostack.nir.databinding.FragmentRegistrationSuccessBinding
-import com.algostack.nir.view.frame.Frame
+import com.algostack.nir.view.main.Frame
 
 
 class RegistrationSuccess : Fragment() {

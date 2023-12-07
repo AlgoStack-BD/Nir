@@ -1,20 +1,13 @@
 package com.algostack.nir.view.Auth
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.BoringLayout
 import android.text.InputType
 import android.text.TextUtils
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -23,12 +16,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSigninBinding
-import com.algostack.nir.services.model.UserLoginRequest
 import com.algostack.nir.services.model.UserSigninRequest
 import com.algostack.nir.utils.AlertDaialog.showCustomAlertDialogBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
-import com.algostack.nir.view.frame.Frame
+import com.algostack.nir.view.main.Frame
 import com.algostack.nir.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -142,8 +134,12 @@ class Signin : Fragment() {
 
                     if (it.data != null && it.data.status == 200) {
 
-                        tokenManager.saveToken(it.data!!.jwt)
+                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email)
                         println("Check Token: ${tokenManager.getToken()}")
+                        println("Check Name: ${tokenManager.getUserName()}")
+                        println("Check Image: ${tokenManager.getUserImage()}")
+                        println("Check Email: ${tokenManager.getUserEmail()}")
+
                         val intent = Intent(activity, Frame::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         activity?.startActivity(intent)

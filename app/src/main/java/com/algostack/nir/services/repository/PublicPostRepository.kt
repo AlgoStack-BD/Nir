@@ -5,9 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.PublicPostApi
+import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.PublicPostResponse
-import com.algostack.nir.services.model.VerificationResponse
-import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
@@ -16,7 +15,11 @@ import retrofit2.Response
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
-class PublicPostRepository @Inject constructor(private val publicPostApi: PublicPostApi) {
+class PublicPostRepository @Inject constructor(
+    private val publicPostApi: PublicPostApi,
+    private val nirLocalDB: NirLocalDB
+
+) {
 
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
 
@@ -30,10 +33,18 @@ class PublicPostRepository @Inject constructor(private val publicPostApi: Public
         if(NetworkUtils.isInternetConnected((context))){
             _publicPostResponseLiveData.postValue(NetworkResult.Loading())
 
-
             try {
                 val response = publicPostApi.getPublicPost()
+
+                if (response.isSuccessful && response.body() != null){
+
+                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
+
+
+                }
+
                 Log.d("TAGNoteResponse", response.body().toString())
+
                 handleNetworkResponse(response)
             }catch (e: Exception){
                 _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))

@@ -1,19 +1,14 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.algostack.nir.R
 import com.algostack.nir.databinding.ActivityFrameBinding
-import com.algostack.nir.databinding.BadgeTextBinding
-import com.algostack.nir.databinding.PublicPostBinding
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.algostack.nir.view.frame.Chat
+import com.algostack.nir.view.frame.Home
+import com.algostack.nir.view.frame.Notification
+import com.algostack.nir.view.frame.ProfileMenu
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,8 +20,6 @@ class Frame : AppCompatActivity() {
     // Check if the binding is initialized before accessing it
     private val binding get() = if (::_binding.isInitialized) _binding else null
 
-    private lateinit var notificationBadge: View
-    private var count: Int  = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +43,7 @@ class Frame : AppCompatActivity() {
                 R.id.nav_home -> replaceFragment(Home())
                 R.id.nav_chat -> replaceFragment(Chat())
                 R.id.nav_notification -> replaceFragment(Notification())
-                R.id.nav_profile -> replaceFragment(Profile())
+                R.id.nav_profile -> replaceFragment(ProfileMenu())
 
                 else -> {
 

@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSplashScreenBinding
 import com.algostack.nir.utils.TokenManager
-import com.algostack.nir.view.frame.Frame
+import com.algostack.nir.view.main.Frame
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
