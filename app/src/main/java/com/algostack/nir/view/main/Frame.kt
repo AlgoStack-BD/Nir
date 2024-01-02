@@ -2,6 +2,7 @@ package com.algostack.nir.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.algostack.nir.R
 import com.algostack.nir.databinding.ActivityFrameBinding
@@ -9,6 +10,7 @@ import com.algostack.nir.view.frame.Chat
 import com.algostack.nir.view.frame.Home
 import com.algostack.nir.view.frame.Notification
 import com.algostack.nir.view.frame.ProfileMenu
+import com.algostack.nir.view.frame.add
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,10 +31,10 @@ class Frame : AppCompatActivity() {
         binding?.bottomNavigation?.background = null
         binding?.bottomNavigation?.menu?.getItem(2)?.isEnabled = false
 
-//        binding?.bottomNavigationView?.menu?.getItem(2)?.isEnabled = false
-//        binding?.fab?.setOnClickListener(View.OnClickListener {
-//            replaceFragment(add())
-//        })
+        binding?.bottomNavigation?.menu?.getItem(2)?.isEnabled = false
+        binding?.fab?.setOnClickListener(View.OnClickListener {
+            replaceFragment(add())
+        })
 
 
         replaceFragment(Home())
@@ -44,6 +46,7 @@ class Frame : AppCompatActivity() {
                 R.id.nav_chat -> replaceFragment(Chat())
                 R.id.nav_notification -> replaceFragment(Notification())
                 R.id.nav_profile -> replaceFragment(ProfileMenu())
+
 
                 else -> {
 
@@ -57,39 +60,6 @@ class Frame : AppCompatActivity() {
 
     }
 
-
-//
-//    fun updateBadgeCount(count: Int = 0) {
-//        val itemView: BottomNavigationItemView? = binding?.bottomNavigation?.getChildAt(2) as? BottomNavigationItemView
-//
-//        itemView?.let {
-//            // Check if the badge has already been added
-//            if (!isBadgeAdded(it)) {
-//                // If not added, inflate the badge layout
-//                notificationBadge = LayoutInflater.from(this).inflate(R.layout.badge_text, it, false)
-//                it.addView(notificationBadge)
-//
-//                // Now find the TextView inside the badge layout
-//                val badgeTextView: TextView = notificationBadge.findViewById(R.id.notificationBadge)
-//                badgeTextView.text = count.toString()
-//            } else {
-//                // If the badge is already added, update the count
-//                val badgeTextView: TextView = notificationBadge.findViewById(R.id.notificationBadge)
-//                badgeTextView.text = count.toString()
-//            }
-//        }
-//    }
-//
-//    private fun isBadgeAdded(view: View): Boolean {
-//        // Check if the badge is already added
-//        for (i in 0 until (view as? ViewGroup)?.childCount!! ?: 0) {
-//            val child = (view as? ViewGroup)?.getChildAt(i)
-//            if (child === notificationBadge) {
-//                return true
-//            }
-//        }
-//        return false
-//    }
 
 
 

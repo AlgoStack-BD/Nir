@@ -64,7 +64,7 @@ class Home : Fragment() {
         val selected = ContextCompat.getDrawable(requireContext(), R.drawable.buttonclickedbackground);
         val default = ContextCompat.getDrawable(requireContext(), R.drawable.horizontal_button_circle);
         val selectedColour = ContextCompat.getColor(requireContext(), R.color.white)
-        val defaultColour = ContextCompat.getColor(requireContext(), R.color.black)
+        val defaultColour = ContextCompat.getColor(requireContext(), R.color.colorSecendaryBlack)
 
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
@@ -159,10 +159,7 @@ class Home : Fragment() {
         binding.nearfromyouRecyler.addItemDecoration(nearRecSpace)
          binding.nearfromyouRecyler.adapter = nearByPostAdapter
 
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val response = publicPostApi.getPublicPost()
-//            Log.d("PublicAPIrESPONSE",response.body().toString())
-//        }
+
 
 
         bindOvservers()
@@ -199,8 +196,6 @@ class Home : Fragment() {
 
 
        }
-
-
 
 
 

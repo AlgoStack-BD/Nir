@@ -28,6 +28,14 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
         }
     }
 
+    fun singleUserPost(){
+        viewModelScope.launch {
+            applicationContext?.let {
+                publicPostRepository.singleUserPost(it)
+            }
+        }
+    }
+
 
 
 

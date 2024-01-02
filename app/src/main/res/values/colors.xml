@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="custom_gray">#D8D8D8</color>
     <color name="custom_dark">#161c25</color>
@@ -11,5 +10,9 @@
     <color name="selected">#9ABDFF</color>
     <color name="startColout">#9ABDFF</color>
     <color name="endColout">#0D55DF</color>
+    <color name="colorPrimary">#68acea</color>
+    <color name="colorSecendary">#2d2a2a</color>
+    <color name="colorSecendaryBlack">#FF000000</color>
+    <color name="colorSecendaryWite">#f5f6f8</color>
 
 </resources>

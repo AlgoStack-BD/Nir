@@ -1,14 +1,620 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
     tools:context=".view.frame.add">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/firstsection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            >
+
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/cancel"
+                app:layout_constraintEnd_toStartOf="@+id/textView10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ralewaybold"
+                android:padding="5dp"
+                android:text="@string/requestforrent"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/threedotmenu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="27dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/category"
+                app:layout_constraintBottom_toBottomOf="@+id/type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/type"
+                app:layout_constraintVertical_bias="0.421" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/type"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <Spinner
+                android:id="@+id/renttypespinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:entries="@array/rent_type"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/type"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/type" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/renttypespinner" />
+
+            <ImageView
+                android:id="@+id/iconbeadroom"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/beadroom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
+
+            <TextView
+                android:id="@+id/txtbeadroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/beadroom"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconbeadroom"
+                app:layout_constraintStart_toEndOf="@+id/iconbeadroom"
+                app:layout_constraintTop_toTopOf="@+id/iconbeadroom"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/beadroomspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtbeadroom"
+                app:layout_constraintStart_toStartOf="@+id/txtbeadroom"
+                app:layout_constraintTop_toBottomOf="@+id/txtbeadroom" />
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/seconddiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/beadroomspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/icondrwaingroom"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/drawingroom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seconddiveder" />
+
+            <TextView
+                android:id="@+id/txtdrawingroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/drawingroom"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/icondrwaingroom"
+                app:layout_constraintStart_toEndOf="@+id/icondrwaingroom"
+                app:layout_constraintTop_toTopOf="@+id/icondrwaingroom"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/drawingroomspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtdrawingroom"
+                app:layout_constraintStart_toEndOf="@+id/icondrwaingroom"
+                app:layout_constraintTop_toBottomOf="@+id/txtdrawingroom" />
+
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/thirddiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/drawingroomspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/icondiningroom"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/diningroom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thirddiveder" />
+
+            <TextView
+                android:id="@+id/txtdiningroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/dinigroom"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/icondiningroom"
+                app:layout_constraintStart_toEndOf="@+id/icondiningroom"
+                app:layout_constraintTop_toTopOf="@+id/icondiningroom"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/diningroomspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtdiningroom"
+                app:layout_constraintStart_toStartOf="@+id/txtdiningroom"
+                app:layout_constraintTop_toBottomOf="@+id/txtdiningroom"/>
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/fourthdiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diningroomspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/iconbathroom"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/bathroom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fourthdiveder" />
+
+            <TextView
+                android:id="@+id/txtbathroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/bathroom"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconbathroom"
+                app:layout_constraintStart_toEndOf="@+id/iconbathroom"
+                app:layout_constraintTop_toTopOf="@+id/iconbathroom"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/bathroomspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtbathroom"
+                app:layout_constraintStart_toStartOf="@+id/txtbathroom"
+                app:layout_constraintTop_toBottomOf="@+id/txtbathroom"/>
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/fifthdiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bathroomspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/iconkitchen"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/kitchen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fifthdiveder" />
+
+            <TextView
+                android:id="@+id/txtkitchen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/kitchen"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconkitchen"
+                app:layout_constraintStart_toEndOf="@+id/iconkitchen"
+                app:layout_constraintTop_toTopOf="@+id/iconkitchen"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/kitchenspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtkitchen"
+                app:layout_constraintStart_toStartOf="@+id/txtkitchen"
+                app:layout_constraintTop_toBottomOf="@+id/txtkitchen"/>
+
+
+
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/sixthdiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kitchenspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/iconbalcony"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/balcony"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sixthdiveder" />
+
+            <TextView
+                android:id="@+id/txtbalcony"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/balcony"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconbalcony"
+                app:layout_constraintStart_toEndOf="@+id/iconbalcony"
+                app:layout_constraintTop_toTopOf="@+id/iconbalcony"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/balconyspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/spinerborder"
+                android:fontFamily="@font/ralewaysemibold"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorSecendaryBlack"
+                app:layout_constraintEnd_toEndOf="@+id/txtbalcony"
+                app:layout_constraintStart_toStartOf="@+id/txtbalcony"
+                app:layout_constraintTop_toBottomOf="@+id/txtbalcony"/>
+
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/seventhdiveder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/balconyspinner" />
+
+
+
+            <ImageView
+                android:id="@+id/iconbills"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/bills"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seventhdiveder" />
+
+            <TextView
+                android:id="@+id/txtbills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/bills"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconbills"
+                app:layout_constraintStart_toEndOf="@+id/iconbills"
+                app:layout_constraintTop_toTopOf="@+id/iconbills"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:checkedButton="@+id/radio_button_1"
+                app:layout_constraintEnd_toEndOf="@+id/txtbills"
+                app:layout_constraintStart_toStartOf="@+id/txtbills"
+                app:layout_constraintTop_toBottomOf="@+id/txtbills">
+
+                <RadioButton
+                    android:id="@+id/radio_button_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/gass" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/water" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/electricity" />
+
+            </RadioGroup>
+
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/eightdevider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+            <ImageView
+                android:id="@+id/iconrentprice"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/rentprice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eightdevider" />
+
+            <TextView
+                android:id="@+id/txtrentprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/rentprice"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iconrentprice"
+                app:layout_constraintStart_toEndOf="@+id/iconrentprice"
+                app:layout_constraintTop_toTopOf="@+id/iconrentprice"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rentpriceinputfield"
+                style="?attr/textInputFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/rentprice"
+                app:layout_constraintEnd_toEndOf="@+id/txtrentprice"
+                app:layout_constraintStart_toStartOf="@+id/txtrentprice"
+                app:layout_constraintTop_toBottomOf="@+id/txtrentprice">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:text="Nagotiable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rentpriceinputfield" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+</LinearLayout>
+
+
+</ScrollView>

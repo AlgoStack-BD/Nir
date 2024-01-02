@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ralewaybold"
             android:text="Happy House"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSecendaryBlack"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

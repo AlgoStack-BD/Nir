@@ -14,7 +14,7 @@
         android:layout_marginTop="44dp"
         android:text="Profile"
         android:fontFamily="@font/ralewayextrabold"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSecendaryBlack"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         android:padding="6dp"
         android:text="Saif Uddin"
         android:textSize="18dp"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSecendaryBlack"
         app:layout_constraintEnd_toEndOf="@+id/profileimg"
         app:layout_constraintStart_toStartOf="@+id/profileimg"
         app:layout_constraintTop_toBottomOf="@+id/profileimg" />
@@ -109,7 +109,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/appartmentBtnText"
+                android:id="@+id/fvrtsection"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ralewaysemibold"
@@ -118,7 +118,7 @@
                 android:paddingEnd="25dp"
                 android:paddingBottom="13dp"
                 android:text="Favorite"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="14dp" />
         </LinearLayout>
     </LinearLayout>

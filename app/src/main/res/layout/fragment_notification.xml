@@ -26,7 +26,7 @@
         android:fontFamily="@font/ralewaybold"
         android:padding="5dp"
         android:text="Notification"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSecendaryBlack"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintEnd_toStartOf="@+id/imageView8"

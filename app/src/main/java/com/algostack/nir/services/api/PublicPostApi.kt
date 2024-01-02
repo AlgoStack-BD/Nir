@@ -8,4 +8,7 @@ interface PublicPostApi {
     @GET("/all-posts")
     suspend fun getPublicPost() : Response<PublicPostResponse>
 
+    @GET ("/single-user/:id")
+    suspend fun getSingleUserPost() : Response<PublicPostResponse>
+
 }

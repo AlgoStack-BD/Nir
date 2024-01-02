@@ -13,7 +13,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/ralewayextrabold"
         android:text="My Favorite"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSecendaryBlack"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
             android:layout_marginStart="22dp"
             android:fontFamily="@font/ralewaysemibold"
             android:text="1"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSecendaryBlack"
             android:textSize="30dp" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ralewaysemibold"
             android:text="  Favorite"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSecendaryBlack"
             android:textSize="30dp" />
 
         <LinearLayout

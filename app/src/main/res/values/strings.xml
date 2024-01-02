@@ -1,5 +1,28 @@
 <resources>
     <string name="app_name">Nir</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="requestforrent">Request for rent</string>
+    <string name="type">Rent Type</string>
+    <string name="family">Family</string>
+    <string name="beadroom">Bead Room</string>
+    <string name="drawingroom">Drawing Room</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="bathroom">Bath Room</string>
+    <string name="balcony">Balcony</string>
+    <string name="dinigroom">Dining Room</string>
+    <string name="bills">Bills</string>
+    <string name="gass">Gass</string>
+    <string name="water">Water</string>
+    <string name="electricity">Electricity</string>
+    <string name="rentprice">Rent Price</string>
+
+
+
+    <string-array name="rent_type">
+        <item>Family</item>
+        <item>Bachelor</item>
+        <item>Sublet</item>
+       <item>Family &amp; Bachelor</item>
+    </string-array>
+
 </resources>

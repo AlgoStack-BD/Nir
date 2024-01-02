@@ -60,7 +60,7 @@
             android:layout_marginLeft="35dp"
             android:fontFamily="@font/ralewaysemibold"
             android:text="Sylhet"
-            android:textColor="@color/black" />
+            android:textColor="@color/colorSecendaryBlack" />
 
         <ImageView
             android:layout_width="20dp"
@@ -160,7 +160,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorSecendaryBlack"
                             android:textSize="18dp"  />
                     </LinearLayout>
 
@@ -181,7 +181,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorSecendaryBlack"
                             android:textSize="18dp" />
                     </LinearLayout>
 
@@ -202,7 +202,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorSecendaryBlack"
                             android:textSize="18dp" />
                     </LinearLayout>
 
@@ -223,7 +223,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorSecendaryBlack"
                             android:textSize="18dp"/>
                     </LinearLayout>
 
@@ -243,7 +243,7 @@
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/ralewayextrabold"
                 android:text="Near For You"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -266,7 +266,7 @@
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/ralewayextrabold"
                 android:text="Best For You"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView

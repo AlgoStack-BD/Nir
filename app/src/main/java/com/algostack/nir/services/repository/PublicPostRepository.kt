@@ -10,6 +10,7 @@ import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
+import com.algostack.nir.utils.NetworkUtils.Companion.isInternetConnected
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -45,12 +46,11 @@ class PublicPostRepository @Inject constructor(
 
                 }
 
-                Log.d("TAGNoteResponse", response.body().toString())
 
                 handleNetworkResponse(response)
             }catch (e: Exception){
                 _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
-                println("Exeption201: ${e}")
+
             }catch (e: TimeoutException){
                 _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
@@ -70,6 +70,28 @@ class PublicPostRepository @Inject constructor(
 
         }
 
+    }
+
+
+    suspend fun singleUserPost(context: Context) {
+
+        if (isInternetConnected((context))) {
+            _publicPostResponseLiveData.postValue(NetworkResult.Loading())
+
+            try {
+                val response = publicPostApi.getSingleUserPost()
+
+                if (response.isSuccessful && response.body() != null) {
+
+                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
+                }
+            }catch (e: Exception) {
+                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
+                println("Exeption201: ${e}")
+            }catch (e: TimeoutException) {
+                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }
     }
 
     private fun handleNetworkResponse(response: Response<PublicPostResponse>) {
