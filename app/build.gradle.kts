@@ -122,7 +122,9 @@ dependencies {
     implementation ("com.borjabravo:readmoretextview:2.1.0")
 
 
-
+  //option
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation ("androidx.activity:activity-compose:1.8.2")
 
 
 }

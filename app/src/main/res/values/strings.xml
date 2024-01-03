@@ -15,6 +15,10 @@
     <string name="water">Water</string>
     <string name="electricity">Electricity</string>
     <string name="rentprice">Rent Price</string>
+    <string name="houseaddress">House Address</string>
+    <string name="addphoto" >Add Photo</string>
+    <string name="address">Address</string>
+    <string name="addproperty">Add Property</string>
 
 
 
