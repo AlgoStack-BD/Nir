@@ -1,5 +1,7 @@
 package com.algostack.nir.view.frame
 
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +11,26 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentAddBinding
+import com.algostack.nir.utils.ManagePermission
 import dagger.hilt.android.AndroidEntryPoint
-import hilt_aggregated_deps._com_algostack_nir_viewmodel_AuthViewModel_HiltModules_BindsModule
+
 
 @AndroidEntryPoint
 class add : Fragment() {
 
+
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+
+    private val PermissionRequestCode = 200
+
+    private lateinit var manaagePermission: ManagePermission
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +43,39 @@ class add : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        // Initialize a list of requested permissions to request runtime
+        val list = listOf<String>(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
+
+        // Initialize a new instance of ManagePermissions class
+        manaagePermission = ManagePermission(requireActivity(), list, PermissionRequestCode)
+
+
+        // photo picker
+        binding.addphoto.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                manaagePermission.checkPermission()
+            }
+
+            openGalleryForImage()
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -266,5 +310,70 @@ class add : Fragment() {
 //            // Responds to radio button being checked/unchecked
 //        }
 //
+
+
+
+
+    }
+
+    private fun openGalleryForImage() {
+
+        if(Build.VERSION.SDK_INT >= 19){
+            var intent = Intent()
+            intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PermissionRequestCode)
+        }
+        else{
+            // For latast versions API LEVEL 19+
+            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            startActivityForResult(intent, PermissionRequestCode)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK && requestCode == PermissionRequestCode){
+            // If multiple images are selected
+            if(data?.clipData != null){
+                val count = data.clipData!!.itemCount
+                for(i in 0 until count){
+                    val imageUri: Uri = data.clipData!!.getItemAt(i).uri
+
+                    //do something with the image (save it to some directory or whatever you need to do with it here)
+                    // set image to image view in one by one
+
+
+                    if(i == 1){
+                        binding.imagepicker1.setImageURI(imageUri)
+                    }else if (i == 2) {
+                        binding.imagepicker2.setImageURI(imageUri)
+                    }else if (i == 3) {
+                        binding.imagepicker3.setImageURI(imageUri)
+                    }
+                    else if (i == 4){
+                        binding.imagepicker4.setImageURI(imageUri)
+                    }
+
+                }
+            }
+        }else if(data?.data != null){
+            // if single image is selected
+            val imageUri: Uri = data.data!!
+
+            //do something with the image (save it to some directory or whatever you need to do with it here)
+            // set image to image view
+            binding.imagepicker1.setImageURI(imageUri)
+
+
+        }
+
+
     }
 }

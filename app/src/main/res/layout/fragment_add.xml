@@ -503,37 +503,47 @@
                 app:layout_constraintVertical_bias="0.0" />
 
 
-            <RadioGroup
+            <LinearLayout
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
-                android:checkedButton="@+id/radio_button_1"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/txtbills"
                 app:layout_constraintStart_toStartOf="@+id/txtbills"
                 app:layout_constraintTop_toBottomOf="@+id/txtbills">
 
-                <RadioButton
-                    android:id="@+id/radio_button_1"
+                <CheckBox
+                    android:id="@+id/checkbocgass"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/gass" />
-
-                <RadioButton
-                    android:id="@+id/radio_button_2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/gass"
+                />
+                <CheckBox
+                    android:id="@+id/checkboxelectricity"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/water" />
-
-                <RadioButton
-                    android:id="@+id/radio_button_3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/electricity"
+                    />
+                <CheckBox
+                    android:id="@+id/checkboxwater"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/electricity" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/water"
+                    />
 
-            </RadioGroup>
+            </LinearLayout>
 
 
 
@@ -727,7 +737,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/iconadphoto">
 
                 <ImageView
-                    android:id="@+id/selectedimage1"
+                    android:id="@+id/addphoto"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="8dp"
@@ -751,7 +761,7 @@
                             android:layout_height="100dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/home_image" />
+                             />
 
                         <ImageView
                             android:id="@+id/imagepicker2"
@@ -759,7 +769,7 @@
                             android:layout_height="100dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/home_image" />
+                           />
 
                         <ImageView
                             android:id="@+id/imagepicker3"
@@ -767,7 +777,7 @@
                             android:layout_height="100dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/home_image" />
+                          />
 
                         <ImageView
                             android:id="@+id/imagepicker4"
@@ -775,7 +785,7 @@
                             android:layout_height="100dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/home_image" />
+                             />
 
                         <ImageView
                             android:id="@+id/imagepicker5"
@@ -783,7 +793,7 @@
                             android:layout_height="100dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/home_image" />
+                            />
 
 
 

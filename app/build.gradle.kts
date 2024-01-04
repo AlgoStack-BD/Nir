@@ -125,6 +125,8 @@ dependencies {
   //option
     implementation ("androidx.activity:activity-ktx:1.8.2")
     implementation ("androidx.activity:activity-compose:1.8.2")
+    //for rememberImagePainter and image loading functionality
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
 
 }
