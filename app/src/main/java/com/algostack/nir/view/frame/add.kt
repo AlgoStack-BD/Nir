@@ -13,7 +13,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentAddBinding
@@ -28,9 +33,13 @@ class add : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
-    private val PermissionRequestCode = 200
 
-    private lateinit var manaagePermission: ManagePermission
+
+
+    private val PermissionRequestCode = 200
+    // again try
+    private lateinit var managePermissions: ManagePermission
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,22 +56,32 @@ class add : Fragment() {
 
         // Initialize a list of requested permissions to request runtime
         val list = listOf<String>(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+            Manifest.permission.READ_EXTERNAL_STORAGE
         )
 
+
         // Initialize a new instance of ManagePermissions class
-        manaagePermission = ManagePermission(requireActivity(), list, PermissionRequestCode)
+        managePermissions = ManagePermission(requireActivity(),list,PermissionRequestCode)
 
 
         // photo picker
         binding.addphoto.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                manaagePermission.checkPermission()
-            }
+
+           // requestRuntimePermission()
+
+//             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                 managePermissions.checkPermission()
+//             }
+//             else{
+//                 openGalleryForImage()
+//
+//             }
 
             openGalleryForImage()
+
+
         }
 
 
@@ -316,6 +335,105 @@ class add : Fragment() {
 
     }
 
+
+
+    private fun requestRuntimePermission() {
+        println("11permission")
+        val readPermission = Manifest.permission.READ_EXTERNAL_STORAGE
+        val writePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                readPermission
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                writePermission
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(requireContext(), "Permission already granted", Toast.LENGTH_SHORT).show()
+            openGalleryForImage()
+            println("15permission")
+        } else if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                readPermission
+            ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                writePermission
+            )
+        ) {
+            println("13permission")
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Permission Required")
+            builder.setMessage("This app needs storage permission to use this feature.")
+            builder.setPositiveButton("OK") { dialog, _ ->
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(readPermission, writePermission),
+                    PermissionRequestCode
+                )
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        } else {
+            println("14permission")
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(readPermission, writePermission),
+                PermissionRequestCode
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == PermissionRequestCode) {
+            if (grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[1] == PackageManager.PERMISSION_GRANTED
+            ) {
+                Toast.makeText(requireContext(), "Permission granted.", Toast.LENGTH_LONG).show()
+                openGalleryForImage()
+            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    permissions[0]
+                ) && !ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    permissions[1]
+                )
+            ) {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Permission Required")
+                builder.setMessage("This feature is unavailable because you have previously declined this permission request. Please go to Settings and enable the permission to use this feature.")
+                builder.setCancelable(false)
+                builder.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.setPositiveButton("Settings") { dialog, _ ->
+                    Intent(
+                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.parse("package:" + requireContext().packageName)
+                    ).apply {
+                        startActivity(this)
+                    }
+                    dialog.dismiss()
+                }
+                builder.show()
+            } else {
+                requestRuntimePermission()
+            }
+        }
+    }
+
+
     private fun openGalleryForImage() {
 
         if(Build.VERSION.SDK_INT >= 19){
@@ -339,41 +457,26 @@ class add : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode == Activity.RESULT_OK && requestCode == PermissionRequestCode){
-            // If multiple images are selected
-            if(data?.clipData != null){
+        if (resultCode == Activity.RESULT_OK && requestCode == PermissionRequestCode) {
+            if (data?.clipData != null) {
                 val count = data.clipData!!.itemCount
-                for(i in 0 until count){
+                for (i in 0 until count) {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
-
-                    //do something with the image (save it to some directory or whatever you need to do with it here)
-                    // set image to image view in one by one
-
-
-                    if(i == 1){
-                        binding.imagepicker1.setImageURI(imageUri)
-                    }else if (i == 2) {
-                        binding.imagepicker2.setImageURI(imageUri)
-                    }else if (i == 3) {
-                        binding.imagepicker3.setImageURI(imageUri)
+                    // Do something with the image (save it to some directory or whatever you need to do with it here)
+                    // Set image to ImageView for each item
+                    when (i) {
+                        0 -> binding.imagepicker1.setImageURI(imageUri)
+                        1 -> binding.imagepicker2.setImageURI(imageUri)
+                        2 -> binding.imagepicker3.setImageURI(imageUri)
+                        3 -> binding.imagepicker4.setImageURI(imageUri)
                     }
-                    else if (i == 4){
-                        binding.imagepicker4.setImageURI(imageUri)
-                    }
-
                 }
+            } else if (data?.data != null) {
+                val imageUri: Uri = data.data!!
+                // Do something with the image (save it to some directory or whatever you need to do with it here)
+                // Set image to first ImageView
+                binding.imagepicker1.setImageURI(imageUri)
             }
-        }else if(data?.data != null){
-            // if single image is selected
-            val imageUri: Uri = data.data!!
-
-            //do something with the image (save it to some directory or whatever you need to do with it here)
-            // set image to image view
-            binding.imagepicker1.setImageURI(imageUri)
-
-
         }
-
-
     }
 }
