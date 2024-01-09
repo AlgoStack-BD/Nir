@@ -19,11 +19,19 @@ import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentAddBinding
+import com.algostack.nir.services.model.CreatData
+import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.ManagePermission
+import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.viewmodel.AuthViewModel
+import com.algostack.nir.viewmodel.PublicPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -33,12 +41,37 @@ class add : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var tokenManager: TokenManager
 
+
+    private val publicPostViewModel by viewModels<PublicPostViewModel> ()
+
+
+    var selectedRentType = ""
+    var selectedBeadroom = 0
+    var selectedDrawingroom = 0
+    var selectedDiningroom = 0
+    var selectedBathroom = 0
+    var selectedKitchen = 0
+    var selectedBalcony = 0
+    var selectedRent = 0
+    var selectedAddress = ""
+    var selectedDescription = ""
+    var selectedGass = false
+    var selectedWater = false
+    var selectedElectricity = false
+    var selectedNagotiablity = false
+    var rentPrice = 0
+    var selectedImage = ""
 
 
     private val PermissionRequestCode = 200
     // again try
-    private lateinit var managePermissions: ManagePermission
+  //  private lateinit var managePermissions: ManagePermission
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,34 +96,18 @@ class add : Fragment() {
 
 
         // Initialize a new instance of ManagePermissions class
-        managePermissions = ManagePermission(requireActivity(),list,PermissionRequestCode)
+     //   managePermissions = ManagePermission(requireActivity(),list,PermissionRequestCode)
 
 
         // photo picker
         binding.addphoto.setOnClickListener {
 
-           // requestRuntimePermission()
 
-//             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//                 managePermissions.checkPermission()
-//             }
-//             else{
-//                 openGalleryForImage()
-//
-//             }
 
             openGalleryForImage()
 
 
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -112,11 +129,11 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.renttypespinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+
+                    selectedRentType = adapterView?.getItemAtPosition(position).toString()
+
+
                 }
 
             }
@@ -145,11 +162,9 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.beadroomspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                    selectedBeadroom = adapterView?.getItemAtPosition(position).toString().toInt()
+
                 }
 
             }
@@ -178,11 +193,8 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.drawingroomspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                        selectedDrawingroom = adapterView?.getItemAtPosition(position).toString().toInt()
                 }
 
             }
@@ -212,11 +224,8 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.diningroomspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                        selectedDiningroom = adapterView?.getItemAtPosition(position).toString().toInt()
                 }
 
             }
@@ -244,11 +253,8 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.bathroomspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                    selectedBathroom = adapterView?.getItemAtPosition(position).toString().toInt()
                 }
 
             }
@@ -275,11 +281,8 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.kitchenspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                        selectedKitchen = adapterView?.getItemAtPosition(position).toString().toInt()
                 }
 
             }
@@ -306,29 +309,75 @@ class add : Fragment() {
                     id: Long
                 ) {
                     binding.balconyspinner.setSelection(position)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Selected: ${adapterView?.getItemAtPosition(position).toString()}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+
+                            selectedBalcony = adapterView?.getItemAtPosition(position).toString().toInt()
                 }
 
             }
 
+        // chekbox for gas
+        binding.checkbocgass.setOnCheckedChangeListener { buttonView, isChecked ->
+            selectedGass = isChecked
+        }
 
-//        val checkedRadioButtonId = binding.radioGroup.checkedRadioButtonId // Returns View.NO_ID if nothing is checked.
-//       binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-//            // Responds to child RadioButton checked/unchecked
-//        }
-//
-//// To check a radio button
-//        binding.radioButton.isChecked = true
-//
-//// To listen for a radio button's checked/unchecked state changes
-//        binding.radioButton.setOnCheckedChangeListener { buttonView, isChecked
-//            // Responds to radio button being checked/unchecked
-//        }
-//
+       // chekbox for water
+        binding.checkboxwater.setOnCheckedChangeListener { buttonView, isChecked ->
+            selectedWater = isChecked
+        }
+
+        // chekbox for electricity
+        binding.checkboxelectricity.setOnCheckedChangeListener { buttonView, isChecked ->
+            selectedElectricity = isChecked
+        }
+
+        // chekbox for nagotiable
+        binding.negotiablecheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            selectedNagotiablity = isChecked
+        }
+
+        // rent price
+         selectedRent = binding.rentpriceinputfield.editText?.text.toString().toInt()
+
+        // address
+        selectedAddress = binding.fieldpickaddress.editText?.text.toString()
+
+
+
+binding.regContinue.setOnClickListener {
+
+    publicPostViewModel.applicationContext = requireContext()
+    val userName = tokenManager.getUserName().toString()
+
+    val creatPost = CreatePost(
+        CreatData(
+        "",
+        selectedBalcony,
+        selectedBathroom,
+        selectedBeadroom,
+        com.algostack.nir.services.model.BillsX(selectedElectricity,selectedGass,"",selectedWater),
+        selectedDiningroom,
+        selectedDrawingroom,
+        selectedImage,
+        false,
+        false,
+        selectedNagotiablity,
+        false,
+        false,
+        selectedKitchen,
+        0,
+        selectedAddress,
+        selectedRent,
+        selectedRentType,
+        "",
+            userName,
+
+    ))
+
+
+    publicPostViewModel.createPost(creatPost)
+
+
+}
 
 
 
