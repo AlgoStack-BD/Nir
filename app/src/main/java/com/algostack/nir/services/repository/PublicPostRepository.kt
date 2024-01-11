@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.CreatePostResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
@@ -27,9 +28,13 @@ class PublicPostRepository @Inject constructor(
 ) {
 
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
+    private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
 
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = _publicPostResponseLiveData
+
+    val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
+        get() = _createPostResponseLiveData
 
 
 
@@ -77,21 +82,21 @@ class PublicPostRepository @Inject constructor(
     suspend fun createPost(context: Context,createPost: CreatePost) {
 
         if (isInternetConnected((context))) {
-            _publicPostResponseLiveData.postValue(NetworkResult.Loading())
+            _createPostResponseLiveData.postValue(NetworkResult.Loading())
 
             try {
                 val response = publicPostApi.createPost(createPost)
 
                 if (response.isSuccessful && response.body() != null) {
 
-                    _publicPostResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+                    _createPostResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
 
                 }
             }catch (e: Exception) {
-                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
+                _createPostResponseLiveData.postValue(NetworkResult.Error(e.message))
 
             }catch (e: TimeoutException) {
-                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+                _createPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
         }
     }

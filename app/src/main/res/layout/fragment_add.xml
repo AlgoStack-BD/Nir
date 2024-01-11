@@ -587,24 +587,22 @@
                 app:layout_constraintTop_toTopOf="@+id/iconrentprice"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
                 android:id="@+id/rentpriceinputfield"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:hint="@string/rentprice"
+                android:background="@drawable/spinerborder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/txtrentprice"
                 app:layout_constraintStart_toStartOf="@+id/txtrentprice"
-                app:layout_constraintTop_toBottomOf="@+id/txtrentprice">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@+id/txtrentprice" />
 
 
             <CheckBox
@@ -662,24 +660,22 @@
                 app:layout_constraintVertical_bias="0.0" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
+
+            <EditText
                 android:id="@+id/fieldpickaddress"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/spinerborder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
                 android:hint="@string/houseaddress"
                 app:layout_constraintEnd_toEndOf="@+id/txtaddres"
                 app:layout_constraintStart_toStartOf="@+id/txtaddres"
-                app:layout_constraintTop_toBottomOf="@+id/txtaddres">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@+id/txtaddres" />
 
 
             <com.google.android.material.divider.MaterialDivider
@@ -809,6 +805,37 @@
 
             </LinearLayout>
 
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/eleventhdevider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearlayout" />
+
+            <EditText
+                android:id="@+id/additionalMessage"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/spinerborder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="10"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eleventhdevider" />
+
+
+
             <LinearLayout
                 android:id="@+id/regContinue"
                 android:layout_width="335dp"
@@ -820,7 +847,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearlayout">
+                app:layout_constraintTop_toBottomOf="@+id/additionalMessage">
 
                 <TextView
                     android:layout_width="wrap_content"

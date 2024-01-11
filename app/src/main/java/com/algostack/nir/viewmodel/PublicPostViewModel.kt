@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.CreatePostResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.repository.PublicPostRepository
@@ -18,6 +19,10 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
 
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = publicPostRepository.publicPostResponseLiveData
+
+
+    val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
+        get() = publicPostRepository.createPostResponseLiveData
 
     var applicationContext: Context ?= null
 

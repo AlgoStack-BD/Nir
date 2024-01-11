@@ -19,6 +19,7 @@ import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 
 import com.algostack.nir.R
@@ -27,6 +28,7 @@ import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.ManagePermission
+import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.viewmodel.AuthViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
@@ -64,6 +66,7 @@ class add : Fragment() {
     var selectedNagotiablity = false
     var rentPrice = 0
     var selectedImage = ""
+    var selectAdditonalMessage = ""
 
 
     private val PermissionRequestCode = 200
@@ -163,7 +166,7 @@ class add : Fragment() {
                 ) {
                     binding.beadroomspinner.setSelection(position)
 
-                    selectedBeadroom = adapterView?.getItemAtPosition(position).toString().toInt()
+                    selectedBeadroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
 
                 }
 
@@ -194,7 +197,7 @@ class add : Fragment() {
                 ) {
                     binding.drawingroomspinner.setSelection(position)
 
-                        selectedDrawingroom = adapterView?.getItemAtPosition(position).toString().toInt()
+                        selectedDrawingroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
                 }
 
             }
@@ -225,7 +228,7 @@ class add : Fragment() {
                 ) {
                     binding.diningroomspinner.setSelection(position)
 
-                        selectedDiningroom = adapterView?.getItemAtPosition(position).toString().toInt()
+                        selectedDiningroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
                 }
 
             }
@@ -254,7 +257,7 @@ class add : Fragment() {
                 ) {
                     binding.bathroomspinner.setSelection(position)
 
-                    selectedBathroom = adapterView?.getItemAtPosition(position).toString().toInt()
+                    selectedBathroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
                 }
 
             }
@@ -282,7 +285,7 @@ class add : Fragment() {
                 ) {
                     binding.kitchenspinner.setSelection(position)
 
-                        selectedKitchen = adapterView?.getItemAtPosition(position).toString().toInt()
+                        selectedKitchen = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
                 }
 
             }
@@ -310,7 +313,7 @@ class add : Fragment() {
                 ) {
                     binding.balconyspinner.setSelection(position)
 
-                            selectedBalcony = adapterView?.getItemAtPosition(position).toString().toInt()
+                            selectedBalcony = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
                 }
 
             }
@@ -336,21 +339,23 @@ class add : Fragment() {
         }
 
         // rent price
-         selectedRent = binding.rentpriceinputfield.editText?.text.toString().toInt()
-
-        // address
-        selectedAddress = binding.fieldpickaddress.editText?.text.toString()
+         selectedRent = binding.rentpriceinputfield.text.toString().toIntOrNull() ?: 0
 
 
 
 binding.regContinue.setOnClickListener {
+    // address
+    selectedAddress = binding.fieldpickaddress.text.toString()
+    println("address: $selectedAddress")
+
+    selectAdditonalMessage =  binding.additionalMessage.text.toString()
 
     publicPostViewModel.applicationContext = requireContext()
     val userName = tokenManager.getUserName().toString()
 
     val creatPost = CreatePost(
         CreatData(
-        "",
+            selectAdditonalMessage,
         selectedBalcony,
         selectedBathroom,
         selectedBeadroom,
@@ -377,6 +382,9 @@ binding.regContinue.setOnClickListener {
     publicPostViewModel.createPost(creatPost)
 
 
+    bindObserver()
+
+
 }
 
 
@@ -384,6 +392,28 @@ binding.regContinue.setOnClickListener {
 
     }
 
+    private fun bindObserver() {
+        publicPostViewModel.createPostResponseLiveData.observe(viewLifecycleOwner) {
+
+            binding.progressBar.isVisible = false
+
+            when (it) {
+                is NetworkResult.Success -> {
+                    if (it.data != null && it.data.status == 200) {
+                        Toast.makeText(requireContext(), "Post Created", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
 
     private fun requestRuntimePermission() {
