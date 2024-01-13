@@ -12,13 +12,19 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 
@@ -27,17 +33,31 @@ import com.algostack.nir.databinding.FragmentAddBinding
 import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.utils.FileCompressor
 import com.algostack.nir.utils.ManagePermission
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.viewmodel.AuthViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class add : Fragment() {
+
+
+    companion object {
+
+        private const val PERMISSION_REQUEST_CODE = 100
+        private const val REQUEST_OPEN_GALLERY = 2
+        private const val REQUEST_TAKE_PHOTO = 1
+    }
 
 
     private var _binding: FragmentAddBinding? = null
@@ -48,7 +68,12 @@ class add : Fragment() {
 
 
     private val publicPostViewModel by viewModels<PublicPostViewModel> ()
-
+    private lateinit var fileImage : File
+    private lateinit var  fileCompressor: FileCompressor
+    private lateinit var dialog: AlertDialog
+    private var listImage: MutableList<File> = ArrayList()
+    private var selectedSelectImage: Int = 0
+    private val listSelectImage = arrayOf("Take Photo", "Choose from Gallery")
 
     var selectedRentType = ""
     var selectedBeadroom = 0
@@ -69,9 +94,8 @@ class add : Fragment() {
     var selectAdditonalMessage = ""
 
 
-    private val PermissionRequestCode = 200
-    // again try
-  //  private lateinit var managePermissions: ManagePermission
+
+
 
 
 
@@ -90,24 +114,18 @@ class add : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Initialize a list of requested permissions to request runtime
-        val list = listOf<String>(
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
-
-
-        // Initialize a new instance of ManagePermissions class
-     //   managePermissions = ManagePermission(requireActivity(),list,PermissionRequestCode)
-
-
         // photo picker
         binding.addphoto.setOnClickListener {
 
+            selectedSelectImage = 1
+
+            if(checkPermission()){
+                openGalleryForImage()
+            }else{
+                requestPermission()
+            }
 
 
-            openGalleryForImage()
 
 
         }
@@ -392,6 +410,8 @@ binding.regContinue.setOnClickListener {
 
     }
 
+
+    // bind observer service
     private fun bindObserver() {
         publicPostViewModel.createPostResponseLiveData.observe(viewLifecycleOwner) {
 
@@ -416,103 +436,7 @@ binding.regContinue.setOnClickListener {
     }
 
 
-    private fun requestRuntimePermission() {
-        println("11permission")
-        val readPermission = Manifest.permission.READ_EXTERNAL_STORAGE
-        val writePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                readPermission
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                writePermission
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(requireContext(), "Permission already granted", Toast.LENGTH_SHORT).show()
-            openGalleryForImage()
-            println("15permission")
-        } else if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                readPermission
-            ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                writePermission
-            )
-        ) {
-            println("13permission")
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Permission Required")
-            builder.setMessage("This app needs storage permission to use this feature.")
-            builder.setPositiveButton("OK") { dialog, _ ->
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(readPermission, writePermission),
-                    PermissionRequestCode
-                )
-                dialog.dismiss()
-            }
-            builder.setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            builder.show()
-        } else {
-            println("14permission")
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(readPermission, writePermission),
-                PermissionRequestCode
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == PermissionRequestCode) {
-            if (grantResults.isNotEmpty() &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                grantResults[1] == PackageManager.PERMISSION_GRANTED
-            ) {
-                Toast.makeText(requireContext(), "Permission granted.", Toast.LENGTH_LONG).show()
-                openGalleryForImage()
-            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                    requireActivity(),
-                    permissions[0]
-                ) && !ActivityCompat.shouldShowRequestPermissionRationale(
-                    requireActivity(),
-                    permissions[1]
-                )
-            ) {
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("Permission Required")
-                builder.setMessage("This feature is unavailable because you have previously declined this permission request. Please go to Settings and enable the permission to use this feature.")
-                builder.setCancelable(false)
-                builder.setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                builder.setPositiveButton("Settings") { dialog, _ ->
-                    Intent(
-                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + requireContext().packageName)
-                    ).apply {
-                        startActivity(this)
-                    }
-                    dialog.dismiss()
-                }
-                builder.show()
-            } else {
-                requestRuntimePermission()
-            }
-        }
-    }
-
-
+    // photo picker
     private fun openGalleryForImage() {
 
         if(Build.VERSION.SDK_INT >= 19){
@@ -520,7 +444,7 @@ binding.regContinue.setOnClickListener {
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PermissionRequestCode)
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_OPEN_GALLERY)
         }
         else{
             // For latast versions API LEVEL 19+
@@ -528,21 +452,119 @@ binding.regContinue.setOnClickListener {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
-            startActivityForResult(intent, PermissionRequestCode)
+            startActivityForResult(intent, REQUEST_OPEN_GALLERY)
         }
 
     }
 
+
+    private fun takePhoto() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        fileImage = createFile()
+        val uri = if(Build.VERSION.SDK_INT >= 24){
+            FileProvider.getUriForFile(requireContext(), "com.gunawan.multipleimages.fileprovider",
+                fileImage)
+        } else {
+            Uri.fromFile(fileImage)
+        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Throws(Exception::class)
+    private fun createFile(): File {
+       val timeStemp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir = requireContext().getExternalFilesDir(MediaStore.ACTION_IMAGE_CAPTURE)
+        return File.createTempFile("IMG_${timeStemp}", ".jpg", storageDir)
+    }
+
+
+    // Permission for camera and gallery
+    private fun checkPermission() :  Boolean{
+         return  (
+                 ContextCompat.checkSelfPermission( requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                                            &&
+                 ContextCompat.checkSelfPermission( requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                         &&
+                         ContextCompat.checkSelfPermission( requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+
+                 )
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                if (selectedSelectImage == 0) {
+                   // takePhoto()
+                } else {
+                    openGalleryForImage()
+                }
+
+            } else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+private fun bitmapToFile(bitmap: Bitmap): File {
+    return try {
+        fileImage = createFile()
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+        val bitmapdata = bos.toByteArray()
+
+        val fos = FileOutputStream(fileImage)
+        fos.write(bitmapdata)
+        fos.flush()
+        fos.close()
+        fileImage
+
+    }catch (
+        e: Exception
+    ) {
+
+        e.printStackTrace()
+        fileImage
+    }
+}
+
+
+
+
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == PermissionRequestCode) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_OPEN_GALLERY) {
             if (data?.clipData != null) {
+
+                val BuildVersion = Build.VERSION.SDK_INT
+                val VersionCode = Build.VERSION_CODES.P
                 val count = data.clipData!!.itemCount
                 for (i in 0 until count) {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                     // Do something with the image (save it to some directory or whatever you need to do with it here)
                     // Set image to ImageView for each item
+
+                    val bitmap = if (BuildVersion >= VersionCode) {
+                        val source = ImageDecoder.createSource(requireContext().contentResolver, imageUri)
+                        ImageDecoder.decodeBitmap(source)
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
+                    }
+
+                      val tempFile = fileCompressor.compressToFile(bitmapToFile(bitmap))
+                    listImage.add(bitmapToFile(bitmap!!),)
+
                     when (i) {
                         0 -> binding.imagepicker1.setImageURI(imageUri)
                         1 -> binding.imagepicker2.setImageURI(imageUri)
