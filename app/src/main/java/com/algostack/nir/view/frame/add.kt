@@ -572,7 +572,7 @@ private fun bitmapToFile(bitmap: Bitmap): File {
     return try {
         fileImage = createFile()
         val bos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
         val bitmapdata = bos.toByteArray()
 
         val fos = FileOutputStream(fileImage)
@@ -580,11 +580,7 @@ private fun bitmapToFile(bitmap: Bitmap): File {
         fos.flush()
         fos.close()
         fileImage
-
-    }catch (
-        e: Exception
-    ) {
-
+    } catch (e: Exception) {
         e.printStackTrace()
         fileImage
     }
@@ -603,6 +599,8 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                 val BuildVersion = Build.VERSION.SDK_INT
                 val VersionCode = Build.VERSION_CODES.P
                 val count = data.clipData!!.itemCount
+
+
                 for (i in 0 until count) {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                     // Do something with the image (save it to some directory or whatever you need to do with it here)
@@ -615,8 +613,8 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                         MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
                     }
 
-                      val tempFile = fileCompressor.compressToFile(bitmapToFile(bitmap))
-                    listImage.add(bitmapToFile(bitmap!!))
+                    val tempFile = fileCompressor.compressToFile(bitmapToFile(bitmap))
+                    listImage.add(tempFile!!)
 
                     when (i) {
                         0 -> binding.imagepicker1.setImageURI(imageUri)
