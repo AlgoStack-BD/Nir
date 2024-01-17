@@ -11,12 +11,15 @@ import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.repository.PublicPostRepository
 import com.algostack.nir.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class PublicPostViewModel @Inject constructor(private val publicPostRepository: PublicPostRepository) : ViewModel() {
 
+    private var disposable = CompositeDisposable()
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = publicPostRepository.publicPostResponseLiveData
 
@@ -49,6 +52,12 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
                 publicPostRepository.createPost(it,createPost)
             }
         }
+    }
+
+    fun addMultipleImages(listImage: MutableList<File>){
+       viewModelScope.launch {
+           publicPostRepository.uploadImage(listImage)
+       }
     }
 
 

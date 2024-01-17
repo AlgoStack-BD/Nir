@@ -147,7 +147,7 @@ class PublicPostRepository @Inject constructor(
 
     }
 
-    suspend fun uploadImage(context: Context, listImage : MutableList<File> ) {
+    suspend fun uploadImage( listImage : MutableList<File> ) {
 
         val listMultipartImage :  MutableList<MultipartBody.Part> = ArrayList()
 
@@ -161,7 +161,7 @@ class PublicPostRepository @Inject constructor(
             )
         }
 
-        if (isInternetConnected((context))) {
+
             _createPostResponseLiveData.postValue(NetworkResult.Loading())
 
             try {
@@ -178,7 +178,7 @@ class PublicPostRepository @Inject constructor(
             }catch (e: TimeoutException) {
                 _uploadImageResponseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
-        }
+
     }
 
 
