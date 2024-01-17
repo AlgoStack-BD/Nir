@@ -399,6 +399,8 @@ binding.regContinue.setOnClickListener {
 
 
     publicPostViewModel.createPost(creatPost)
+    publicPostViewModel.addMultipleImages(listImage)
+
 
 
     bindObserver()
@@ -614,7 +616,7 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                     }
 
                     val tempFile = fileCompressor.compressToFile(bitmapToFile(bitmap))
-                    listImage.add(tempFile!!)
+                    listImage.add(bitmap!!.let { bitmapToFile(it) })
 
                     when (i) {
                         0 -> binding.imagepicker1.setImageURI(imageUri)

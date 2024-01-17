@@ -147,39 +147,36 @@ class PublicPostRepository @Inject constructor(
 
     }
 
-    suspend fun uploadImage( listImage : MutableList<File> ) {
+    suspend fun uploadImage(listImage: MutableList<File>) {
+        _createPostResponseLiveData.postValue(NetworkResult.Loading())
 
-        val listMultipartImage :  MutableList<MultipartBody.Part> = ArrayList()
+        try {
+            val listMultipartImage: MutableList<MultipartBody.Part> = ArrayList()
 
-        for (i in 0 until listImage.size) {
-            listMultipartImage.add(
-                MultipartBody.Part.createFormData(
-                    "image["+i+"]",
-                    listImage[i].name,
-                   RequestBody.create("image/*".toMediaTypeOrNull(), listImage[i])
+            for (i in 0 until listImage.size) {
+                val requestBody: RequestBody =
+                    RequestBody.create("image/*".toMediaTypeOrNull(), listImage[i])
+                listMultipartImage.add(
+                    MultipartBody.Part.createFormData(
+                        "ImageChooser",  // Use the field name "files" for multiple images
+                        listImage[i].name,
+                        requestBody
+                    )
                 )
-            )
-        }
-
-
-            _createPostResponseLiveData.postValue(NetworkResult.Loading())
-
-            try {
-                val response = publicPostApi.uploadImage(listMultipartImage)
-
-                if (response.isSuccessful && response.body() != null) {
-
-                    _uploadImageResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
-
-                }
-            }catch (e: Exception) {
-                _uploadImageResponseLiveData.postValue(NetworkResult.Error(e.message))
-
-            }catch (e: TimeoutException) {
-                _uploadImageResponseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
 
+            val response = publicPostApi.uploadImage(listMultipartImage)
+             println("Chekabd: "+ response.body())
+            if (response.isSuccessful && response.body() != null) {
+                _uploadImageResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+            }
+        } catch (e: Exception) {
+            _uploadImageResponseLiveData.postValue(NetworkResult.Error(e.message))
+        } catch (e: TimeoutException) {
+            _uploadImageResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+        }
     }
+
 
 
 }
