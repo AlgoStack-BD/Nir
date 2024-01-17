@@ -67,6 +67,7 @@ class add : Fragment() {
     private lateinit var  fileCompressor: FileCompressor
     private lateinit var dialog: AlertDialog
     private var listImage: MutableList<File> = ArrayList()
+    private val imageUris = ArrayList<Uri>()
     //private var selectedSelectImage: Int = 0
     private val listSelectImage = arrayOf("Take Photo", "Choose from Gallery")
 
@@ -116,9 +117,9 @@ class add : Fragment() {
            // startGalleryIntent()
 
             if(checkPermission()){
-              //  openGalleryForImage()
+                openGalleryForImage()
 
-                startGalleryIntent()
+               // startGalleryIntent()
             }else{
                 requestPermission()
                 println("checkPermission: ${checkPermission()}")
@@ -399,7 +400,7 @@ binding.regContinue.setOnClickListener {
 
 
     publicPostViewModel.createPost(creatPost)
-    publicPostViewModel.addMultipleImages(listImage)
+    publicPostViewModel.addMultipleImages(imageUris)
 
 
 
@@ -551,7 +552,8 @@ binding.regContinue.setOnClickListener {
     ) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                startGalleryIntent()
+                //startGalleryIntent()
+                openGalleryForImage()
             } else {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }
@@ -598,25 +600,13 @@ private fun bitmapToFile(bitmap: Bitmap): File {
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_OPEN_GALLERY) {
             if (data?.clipData != null) {
 
-                val BuildVersion = Build.VERSION.SDK_INT
-                val VersionCode = Build.VERSION_CODES.P
                 val count = data.clipData!!.itemCount
 
 
                 for (i in 0 until count) {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
-                    // Do something with the image (save it to some directory or whatever you need to do with it here)
-                    // Set image to ImageView for each item
-
-                    val bitmap = if (BuildVersion >= VersionCode) {
-                        val source = ImageDecoder.createSource(requireContext().contentResolver, imageUri)
-                        ImageDecoder.decodeBitmap(source)
-                    } else {
-                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
-                    }
-
-                    val tempFile = fileCompressor.compressToFile(bitmapToFile(bitmap))
-                    listImage.add(bitmap!!.let { bitmapToFile(it) })
+                     println("ChekImageuri: $imageUri")
+                    imageUris.add(imageUri)
 
                     when (i) {
                         0 -> binding.imagepicker1.setImageURI(imageUri)
@@ -627,6 +617,7 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                 }
             } else if (data?.data != null) {
                 val imageUri: Uri = data.data!!
+                imageUris.add(imageUri)
                 // Do something with the image (save it to some directory or whatever you need to do with it here)
                 // Set image to first ImageView
                 binding.imagepicker1.setImageURI(imageUri)

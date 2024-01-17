@@ -1,14 +1,13 @@
 package com.algostack.nir.services.repository
 
 import android.content.Context
-import android.util.Log
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
-import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
@@ -21,11 +20,13 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import retrofit2.Response
 import java.io.File
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
+
 
 class PublicPostRepository @Inject constructor(
     private val publicPostApi: PublicPostApi,
@@ -147,25 +148,22 @@ class PublicPostRepository @Inject constructor(
 
     }
 
-    suspend fun uploadImage(listImage: MutableList<File>) {
+    suspend fun uploadImage(listImage: ArrayList<Uri>) {
+        listImage.forEach{
+            println("CheckUri2: = $it")
+        }
         _createPostResponseLiveData.postValue(NetworkResult.Loading())
 
         try {
-            val listMultipartImage: MutableList<MultipartBody.Part> = ArrayList()
 
-            for (i in 0 until listImage.size) {
-                val requestBody: RequestBody =
-                    RequestBody.create("image/*".toMediaTypeOrNull(), listImage[i])
-                listMultipartImage.add(
-                    MultipartBody.Part.createFormData(
-                        "ImageChooser",  // Use the field name "files" for multiple images
-                        listImage[i].name,
-                        requestBody
-                    )
-                )
+            val images = listImage.map { imageUri->
+                val file = imageUri.path?.let { File(it) }
+                val requestBody = file!!.asRequestBody("image/*".toMediaTypeOrNull())
+                MultipartBody.Part.createFormData("files",file.name,requestBody)
+
             }
 
-            val response = publicPostApi.uploadImage(listMultipartImage)
+            val response = publicPostApi.uploadImage(images)
              println("Chekabd: "+ response.body())
             if (response.isSuccessful && response.body() != null) {
                 _uploadImageResponseLiveData.postValue(NetworkResult.Success(response.body()!!))

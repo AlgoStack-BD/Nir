@@ -24,8 +24,8 @@ interface PublicPostApi {
     suspend fun createPost(@Body createPost: CreatePost) : Response<CreatePostResponse>
 
     @Multipart
-    @POST ("/upload-image")
-    suspend fun uploadImage(@Part("files") listofimage: MutableList<MultipartBody.Part>  ) : Response<UploadImageResponse>
+    @POST ("/upload")
+    suspend fun uploadImage(@Part files: List<MultipartBody.Part>  ) : Response<UploadImageResponse>
 
 
 }

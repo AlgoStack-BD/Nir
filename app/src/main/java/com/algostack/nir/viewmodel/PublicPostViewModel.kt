@@ -1,6 +1,7 @@
 package com.algostack.nir.viewmodel
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,7 +55,9 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
         }
     }
 
-    fun addMultipleImages(listImage: MutableList<File>){
+    fun addMultipleImages(listImage: ArrayList<Uri>){
+
+
        viewModelScope.launch {
            publicPostRepository.uploadImage(listImage)
        }
