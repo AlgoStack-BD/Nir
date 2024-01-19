@@ -16,17 +16,16 @@
     <string name="electricity">Electricity</string>
     <string name="rentprice">Rent Price</string>
     <string name="houseaddress">House Address</string>
-    <string name="addphoto" >Add Photo</string>
+    <string name="addphoto">Add Photo</string>
     <string name="address">Address</string>
     <string name="addproperty">Add Property</string>
-
 
 
     <string-array name="rent_type">
         <item>Family</item>
         <item>Bachelor</item>
         <item>Sublet</item>
-       <item>Family &amp; Bachelor</item>
+        <item>Family &amp; Bachelor</item>
     </string-array>
 
 </resources>

@@ -160,7 +160,6 @@ class PublicPostRepository @Inject constructor(
                 val file = imageUri.path?.let { File(it) }
                 val requestBody = file!!.asRequestBody("image/*".toMediaTypeOrNull())
                 MultipartBody.Part.createFormData("files",file.name,requestBody)
-
             }
 
             val response = publicPostApi.uploadImage(images)

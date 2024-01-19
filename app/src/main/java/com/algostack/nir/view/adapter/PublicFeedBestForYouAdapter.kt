@@ -51,7 +51,15 @@ class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestFo
                 .error(R.drawable.demo_home_photo)
                 .into(binding.publicView)
 
+
+            // click item sent to details page
+            binding.publicPostLayout.setOnClickListener {
+
+            }
+
         }
+
+
 
     }
 
