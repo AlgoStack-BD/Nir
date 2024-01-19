@@ -1,5 +1,6 @@
 package com.algostack.nir.view.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -54,6 +55,11 @@ class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestFo
 
             // click item sent to details page
             binding.publicPostLayout.setOnClickListener {
+               val bundle = Bundle()
+
+                bundle.putString("UserName",item.userName)
+
+
 
             }
 

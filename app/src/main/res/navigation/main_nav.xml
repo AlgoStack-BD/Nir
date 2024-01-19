@@ -9,7 +9,11 @@
         android:id="@+id/home2"
         android:name="com.algostack.nir.view.frame.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_postDetails"
+            app:destination="@id/postDetails" />
+    </fragment>
     <fragment
         android:id="@+id/favorite"
         android:name="com.algostack.nir.view.frame.Favorite"
@@ -53,5 +57,11 @@
         android:id="@+id/postDetails"
         android:name="com.algostack.nir.view.frame.PostDetails"
         android:label="fragment_post_details"
-        tools:layout="@layout/fragment_post_details" />
+        tools:layout="@layout/fragment_post_details" >
+        <action
+            android:id="@+id/action_postDetails_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/postDetails"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -28,4 +28,6 @@
         <item>Family &amp; Bachelor</item>
     </string-array>
 
+    <string name="DetailsHeadding">House Name</string>
+
 </resources>

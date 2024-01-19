@@ -16,6 +16,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
+import kotlin.math.sqrt
 
 @HiltViewModel
 class PublicPostViewModel @Inject constructor(private val publicPostRepository: PublicPostRepository) : ViewModel() {
@@ -62,6 +63,8 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
            publicPostRepository.uploadImage(listImage)
        }
     }
+
+
 
 
 
