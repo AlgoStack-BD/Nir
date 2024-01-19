@@ -3,16 +3,20 @@ package com.algostack.nir.view.adapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.algostack.nir.R
 import com.algostack.nir.databinding.PublicPostBinding
 import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.view.frame.PostDetails
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestForYouAdapter.BestForYouViewHolder> (ComparatorDiffUtil()) {
+class PublicFeedBestForYouAdapter (private val onDetailsCliked: (PublicPostData) -> Unit ): ListAdapter<PublicPostData, PublicFeedBestForYouAdapter.BestForYouViewHolder> (ComparatorDiffUtil()) {
 
 
 
@@ -31,6 +35,8 @@ class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestFo
     }
 
     inner class BestForYouViewHolder(private val binding: PublicPostBinding) : ViewHolder(binding.root){
+
+
 
         fun bind(item: PublicPostData){
             binding.publicTitle.text = item.userName
@@ -53,15 +59,14 @@ class PublicFeedBestForYouAdapter : ListAdapter<PublicPostData, PublicFeedBestFo
                 .into(binding.publicView)
 
 
-            // click item sent to details page
-            binding.publicPostLayout.setOnClickListener {
-               val bundle = Bundle()
 
-                bundle.putString("UserName",item.userName)
-
+                binding.root.setOnClickListener{
+                    onDetailsCliked(item)
+                }
 
 
-            }
+
+
 
         }
 
