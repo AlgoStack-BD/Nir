@@ -104,23 +104,23 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <LinearLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDescription"
-           >
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userProfile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/profile_icon"
-                />
+                android:src="@drawable/profile_icon" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -168,9 +168,9 @@
 
                 <ImageView
                     android:id="@+id/actionCall"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="80dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="32dp"
                     android:src="@drawable/call_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/actionMassage"
@@ -180,8 +180,8 @@
 
                 <ImageView
                     android:id="@+id/actionMassage"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/message_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -195,6 +195,339 @@
 
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/section1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+            <RelativeLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+               >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/beadroom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/numOfPublicBadroomText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/beadroom"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfBadroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/numOfPublicBadroomText"
+                        app:layout_constraintStart_toStartOf="@+id/numOfPublicBadroomText"
+                        app:layout_constraintTop_toBottomOf="@+id/numOfPublicBadroomText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+              >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/diningroom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/dinigroomText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/dinigroom"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfDinigroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/dinigroomText"
+                        app:layout_constraintStart_toStartOf="@+id/dinigroomText"
+                        app:layout_constraintTop_toBottomOf="@+id/dinigroomText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/section2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/section1">
+
+            <RelativeLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+
+             >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/drawingroom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/numOfdrowingroomText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/drawingroom"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfDrawing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/numOfdrowingroomText"
+                        app:layout_constraintStart_toStartOf="@+id/numOfdrowingroomText"
+                        app:layout_constraintTop_toBottomOf="@+id/numOfdrowingroomText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearLayout10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bathroom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/bathroomText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/bathroom"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfBbathroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/bathroomText"
+                        app:layout_constraintStart_toStartOf="@+id/bathroomText"
+                        app:layout_constraintTop_toBottomOf="@+id/bathroomText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/section3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/section2">
+
+            <RelativeLayout
+                android:id="@+id/linearLayout11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/balcony" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/belconyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/balcony"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfBelcony"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/belconyText"
+                        app:layout_constraintStart_toStartOf="@+id/belconyText"
+                        app:layout_constraintTop_toBottomOf="@+id/belconyText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearLayout12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bathroom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp">
+
+                    <TextView
+                        android:id="@+id/kitchenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="@string/kitchen"
+                        android:textColor="@color/colorSecendaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/numOfKitchen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ralewaysemibold"
+                        android:text="7"
+                        android:textColor="@color/colorSecendary"
+                        app:layout_constraintEnd_toEndOf="@+id/kitchenText"
+                        app:layout_constraintStart_toStartOf="@+id/kitchenText"
+                        app:layout_constraintTop_toBottomOf="@+id/kitchenText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
 
 
 
