@@ -28,6 +28,9 @@
         <item>Family &amp; Bachelor</item>
     </string-array>
 
+    <string name="Description">Description</string>
+<string name="dummy">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</string>
+
     <string name="DetailsHeadding">House Name</string>
 
 </resources>
