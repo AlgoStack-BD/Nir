@@ -217,27 +217,6 @@ class Home : Fragment() {
         val bundle = Bundle()
         bundle.putString("details", Gson().toJson(publicPostData))
 
-//        bundle.putString("UserName",Gson().toJson(publicPostData.userName))
-//        bundle.putString("UserImg",Gson().toJson(publicPostData.userImg))
-//        bundle.putString("PostImg",Gson().toJson(publicPostData.img))
-//        bundle.putString("additionalmsg",Gson().toJson(publicPostData.additionalMessage))
-//        bundle.putString("price",Gson().toJson(publicPostData.price))
-//        bundle.putString("bedroom",Gson().toJson(publicPostData.bedRoom))
-//        bundle.putString("bathroom",Gson().toJson(publicPostData.bathRoom))
-//        bundle.putString("Phone",Gson().toJson(publicPostData.phone))
-//        bundle.putString("Type",Gson().toJson(publicPostData.type))
-//        bundle.putString("Address", Gson().toJson(publicPostData.location))
-//        bundle.putString("gassBill", Gson().toJson(publicPostData.bills.gasBill))
-//        bundle.putString("WaterBill", Gson().toJson(publicPostData.bills.waterBill))
-//        bundle.putString("ElictrictBill", Gson().toJson(publicPostData.bills.electricBill))
-//        bundle.putString("Belcony", Gson().toJson(publicPostData.balcony))
-//        bundle.putString("DiningRoom", Gson().toJson(publicPostData.diningRoom))
-//        bundle.putString("Kitchen", Gson().toJson(publicPostData.kitchen))
-//        bundle.putString("LikeCouont", Gson().toJson(publicPostData.likeCount))
-//        bundle.putString("RentPrice", Gson().toJson(publicPostData.price))
-//        bundle.putString("isNegotiable", Gson().toJson(publicPostData.isNegotiable))
-
-     //   findNavController().navigate(R.id.action_home2_to_postDetails, bundle)
         replaceFragment(PostDetails(),bundle)
     }
 
@@ -247,6 +226,7 @@ class Home : Fragment() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragment.arguments = bundle
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 

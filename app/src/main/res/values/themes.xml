@@ -8,4 +8,6 @@
     </style>
 
     <style name="Theme.Nir" parent="Base.Theme.Nir" />
+    <style name="Theme.MaterialCarousel.materialComp" parent="Theme.Material3.DayNight.NoActionBar"/>
+    <style name="Theme.Nir.materialCarousel" parent="Base.Theme.Nir"/>
 </resources>

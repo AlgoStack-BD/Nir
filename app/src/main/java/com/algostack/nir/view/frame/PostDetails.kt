@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentPostDetailsBinding
+import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
 import com.google.gson.Gson
+import java.util.UUID
 
 class PostDetails : Fragment() {
 
     private var _binding: FragmentPostDetailsBinding? = null
     private val binding get() = _binding!!
+    val newImageArray = arrayListOf<ImageItem>()
 
 
     private var detailsData: PublicPostData? = null
@@ -33,6 +37,11 @@ class PostDetails : Fragment() {
         setInialData()
 
 
+        val imageAdapter = ImageDetailsSmallViewAdapter()
+         binding.imageRV.adapter = imageAdapter
+        imageAdapter.submitList(newImageArray)
+
+
     }
 
     private fun setInialData() {
@@ -40,7 +49,7 @@ class PostDetails : Fragment() {
         if (jsonDetails != null) {
             detailsData = Gson().fromJson(jsonDetails, PublicPostData::class.java)
 
-            detailsData.let {
+            detailsData.let { it ->
                 binding.txtOwnerName.text = it?.userName
 
                 // println("ChekLink: "+it!!.img)
@@ -48,6 +57,13 @@ class PostDetails : Fragment() {
                 imagArray.forEach {
                     println("ChekLink: " + it)
                 }
+
+
+                imagArray.forEach {
+                    newImageArray.add(ImageItem(UUID.randomUUID().toString(), it))
+                }
+
+
             }
         }
 
