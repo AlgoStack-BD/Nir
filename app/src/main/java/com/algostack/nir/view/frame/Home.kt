@@ -25,6 +25,9 @@ import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
 import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
 import com.algostack.nir.viewmodel.PublicPostViewModel
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -173,6 +176,7 @@ class Home : Fragment() {
         bindOvservers()
 
 
+
     }
 
     private fun bindOvservers() {
@@ -226,8 +230,13 @@ class Home : Fragment() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragment.arguments = bundle
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
+        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
+        navBar?.isVisible = false
+        flotBar?.isVisible = false
     }
 
 

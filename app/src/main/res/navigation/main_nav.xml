@@ -52,7 +52,13 @@
         android:id="@+id/profileDetails"
         android:name="com.algostack.nir.view.frame.ProfileDetails"
         android:label="fragment_profile_details"
-        tools:layout="@layout/fragment_profile_details" />
+        tools:layout="@layout/fragment_profile_details" >
+        <action
+            android:id="@+id/action_profileDetails_to_profileMenu"
+            app:destination="@id/profileMenu"
+            app:popUpTo="@id/profileDetails"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/postDetails"
         android:name="com.algostack.nir.view.frame.PostDetails"

@@ -143,6 +143,8 @@ class Signin : Fragment() {
                         val intent = Intent(activity, Frame::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         activity?.startActivity(intent)
+                        // current activity distroy
+                        activity?.finish()
 
 
                     } else if (it.data!!.status == 404){

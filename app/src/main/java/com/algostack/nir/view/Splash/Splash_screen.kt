@@ -39,6 +39,7 @@ class Splash_screen : Fragment() {
             if (tokenManager.getToken() != null){
                 val intent = Intent(activity, Frame::class.java)
                 activity?.startActivity(intent)
+                activity?.finish()
             }else
             {
                 findNavController().navigate(R.id.action_splash_screen_to_access_nav)

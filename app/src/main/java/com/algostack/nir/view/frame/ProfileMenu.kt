@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 
 import com.algostack.nir.R
@@ -14,6 +15,8 @@ import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.main.Frame
 import com.algostack.nir.view.main.MainActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -76,7 +79,12 @@ class ProfileMenu : Fragment() {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
+        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
+        navBar?.isVisible = false
+        flotBar?.isVisible = false
     }
 
 }

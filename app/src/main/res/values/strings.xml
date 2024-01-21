@@ -11,14 +11,16 @@
     <string name="balcony">Balcony</string>
     <string name="dinigroom">Dining Room</string>
     <string name="bills">Bills</string>
-    <string name="gass">Gass</string>
-    <string name="water">Water</string>
-    <string name="electricity">Electricity</string>
+    <string name="gass">Gass Bill</string>
+    <string name="water">Water Bill</string>
+    <string name="electricity">Electricity Bill</string>
     <string name="rentprice">Rent Price</string>
     <string name="houseaddress">House Address</string>
     <string name="addphoto">Add Photo</string>
     <string name="address">Address</string>
     <string name="addproperty">Add Property</string>
+    <string name="nagotiable">Nagotiabble</string>
+    <string name="fixedPrice">Fixed Price</string>
 
 
     <string-array name="rent_type">
