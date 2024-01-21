@@ -187,7 +187,7 @@ class Home : Fragment() {
            is NetworkResult.Success -> {
                if(result.data!!.status == 200){
 
-                   val bestForYouResult = result.data.data
+                   val bestForYouResult = result.data.data.filter { it.isApproved && !it.isSold }
 
                    bestForYouAdapter.submitList(bestForYouResult)
                    nearByPostAdapter.submitList(bestForYouResult)
