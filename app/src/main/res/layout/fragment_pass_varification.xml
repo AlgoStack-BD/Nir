@@ -82,7 +82,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20sp" />
 
             <EditText
@@ -96,7 +96,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20sp" />
 
             <EditText
@@ -110,7 +110,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20sp" />
 
             <EditText
@@ -124,7 +124,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20sp" />
 
         </LinearLayout>

@@ -8,13 +8,14 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicPostLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="105dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,14 +36,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ralewaybold"
             android:text="Happy House"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSecendaryBlack"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
-            app:layout_constraintVertical_bias="0.17000002" />
+            app:layout_constraintVertical_bias="0.00999999" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier"
@@ -118,7 +119,7 @@
             android:id="@+id/bathroompublic"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/bathroom"
             app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroomText"
             app:layout_constraintStart_toEndOf="@+id/numOfPublicBadroomText"
@@ -128,7 +129,7 @@
             android:id="@+id/numOfPublicBadroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/ralewayregular"
             android:text="7"
             app:layout_constraintBottom_toBottomOf="@+id/badromopublic"
@@ -139,7 +140,7 @@
             android:id="@+id/numOfPublicBadroomText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/ralewayregular"
             android:text="Bedroom"
             app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroom"
@@ -150,7 +151,7 @@
             android:id="@+id/numOfPublicBathroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/ralewayregular"
             android:text="7"
             app:layout_constraintBottom_toBottomOf="@+id/bathroompublic"
@@ -161,7 +162,7 @@
             android:id="@+id/numOfPublicBathroomText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/ralewayregular"
             android:text="Bedroom"
             app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBathroom"

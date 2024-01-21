@@ -1,6 +1,15 @@
 package com.algostack.nir.services.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(
+    tableName = "PublicPostData"
+)
 data class PublicPostData(
+
+    @PrimaryKey(autoGenerate = true)
+    val id : Int,
     val _id: String,
     val additionalMessage: String,
     val balcony: Int?,
@@ -21,7 +30,7 @@ data class PublicPostData(
     val location: String,
     val phone: String?,
     val price: Int,
-    val type: List<String>?,
+    val type: String,
     val updatedAt: String?,
     val userId: String,
     val userImg: String?,

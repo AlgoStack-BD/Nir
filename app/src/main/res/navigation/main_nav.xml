@@ -9,17 +9,16 @@
         android:id="@+id/home2"
         android:name="com.algostack.nir.view.frame.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_postDetails"
+            app:destination="@id/postDetails" />
+    </fragment>
     <fragment
         android:id="@+id/favorite"
         android:name="com.algostack.nir.view.frame.Favorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/profile"
-        android:name="com.algostack.nir.view.frame.Profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/add2"
         android:name="com.algostack.nir.view.frame.add"
@@ -35,4 +34,40 @@
         android:name="com.algostack.nir.view.frame.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.algostack.nir.view.frame.Notification"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/profileMenu"
+        android:name="com.algostack.nir.view.frame.ProfileMenu"
+        android:label="fragment_profile_menu"
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenu_to_profileDetails"
+            app:destination="@id/profileDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDetails"
+        android:name="com.algostack.nir.view.frame.ProfileDetails"
+        android:label="fragment_profile_details"
+        tools:layout="@layout/fragment_profile_details" >
+        <action
+            android:id="@+id/action_profileDetails_to_profileMenu"
+            app:destination="@id/profileMenu"
+            app:popUpTo="@id/profileDetails"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetails"
+        android:name="com.algostack.nir.view.frame.PostDetails"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details" >
+        <action
+            android:id="@+id/action_postDetails_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/postDetails"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

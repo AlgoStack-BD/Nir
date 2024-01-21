@@ -45,6 +45,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -89,7 +90,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:converter-jackson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
+    //RXJava
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.1")
     //room
     val room_version = "2.6.0"
     implementation("androidx.room:room-runtime:$room_version")
@@ -122,9 +126,18 @@ dependencies {
     implementation ("com.borjabravo:readmoretextview:2.1.0")
 
 
+  //option
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation ("androidx.activity:activity-compose:1.8.2")
+    //for rememberImagePainter and image loading functionality
+    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil:2.2.2")
+    implementation ("com.google.android.material:material:1.11.0")
+
 
 }
 
 kapt {
     correctErrorTypes = true
 }
+
