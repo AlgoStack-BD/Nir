@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.algostack.nir.R
+import com.algostack.nir.databinding.NearpostBinding
 import com.algostack.nir.databinding.PublicPostBinding
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
@@ -16,7 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnPostViewHolder {
-        val binding = PublicPostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = NearpostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return UserOwnPostViewHolder(binding)
     }
 
@@ -25,14 +26,11 @@ class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPo
         holder.bind(item)
 
     }
-    inner class UserOwnPostViewHolder(private val binding: PublicPostBinding) : ViewHolder(binding.root) {
+    inner class UserOwnPostViewHolder(private val binding: NearpostBinding) : ViewHolder(binding.root) {
 
         fun bind(item: PublicPostData){
-            binding.publicTitle.text = item.userName
-            binding.publicRentPrice.text = item.price.toString()
-            binding.numOfPublicBadroom.text = item.bedRoom.toString()
-            binding.numOfPublicBathroom.text = item.bathRoom.toString()
-
+            binding.rahimHOus.text = item.userName
+            binding.sylhetJind.text = item.location
             val fistOneImg: String
 
             if(item.img.contains(',')){
@@ -45,9 +43,7 @@ class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPo
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.demo_home_photo)
                 .error(R.drawable.demo_home_photo)
-                .into(binding.publicView)
-
-
+                .into(binding.cardImage)
 
         }
 

@@ -76,12 +76,15 @@ class userRepository @Inject constructor(
     suspend fun loginUser(userSigninRequest: UserSigninRequest, context: Context) {
 
 
+
+
         if (NetworkUtils.isInternetConnected(context)) {
+          //  println("Testapicall: ${userApi.signin(userSigninRequest)}")
             _userResponseLiveData.postValue(NetworkResult.Loading())
             try {
                 val response = userApi.signin(userSigninRequest)
 
-//                Log.d(Constants.TAG, response.body().toString())
+               Log.d(Constants.TAG, response.body().toString())
 //
 //                if (response.isSuccessful && response.body() != null){
 //                    nirLocalDB.getLoginInfo().upsert(response.body()!!.data)

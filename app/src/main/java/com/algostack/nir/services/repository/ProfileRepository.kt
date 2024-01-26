@@ -15,18 +15,22 @@ class ProfileRepository @Inject constructor(
 ) {
 
 
+
     private val _profileInfoResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
 
     val profileInfoResponseLiveData : MutableLiveData<NetworkResult<PublicPostResponse>>
         get() = _profileInfoResponseLiveData
 
-    suspend fun singleUserPost(context: Context) {
+    suspend fun singleUserPost(context: Context,userID: String) {
+        println("functioncalled")
 
         if (NetworkUtils.isInternetConnected((context))) {
+            println("functioncalled2")
             _profileInfoResponseLiveData.postValue(NetworkResult.Loading())
 
             try {
-                val response = profileApi.getSingleUserPost()
+                val response = profileApi.getSingleUserPost(userID)
+                println("testresponse: ${response.body()}")
 
                 if (response.isSuccessful && response.body() != null) {
 

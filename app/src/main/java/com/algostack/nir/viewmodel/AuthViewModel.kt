@@ -76,7 +76,7 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
 
     fun validateCredintials(username: String,emailAdress: String,password: String,confirmPass: String,isLogin: Boolean) :Pair<Boolean,String>{
 
-        println("checkemail: $emailAdress checkname: $username checkpas: $password")
+
 
 
 //        val validEmailRegex = Regex("^(?=.*[@])(?=\\S+$).{6,}\$")

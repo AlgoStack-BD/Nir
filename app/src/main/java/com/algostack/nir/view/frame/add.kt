@@ -393,7 +393,7 @@ binding.regContinue.setOnClickListener {
         selectedAddress,
         selectedRent,
         selectedRentType,
-        "",
+            tokenManager.getUserId()!!,
             userName,
 
     ))

@@ -10,5 +10,6 @@ object Constants {
     const val USER_NAME = "USER_NAME"
     const val USER_IMAGE = "USER_IMAGE"
     const val USER_EMAIL = "USER_EMAIL"
+    const val USER_ID = "USER_ID"
 
 }

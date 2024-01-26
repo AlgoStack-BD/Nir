@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileDetailsBinding
@@ -58,11 +59,12 @@ class ProfileDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        println("testuserID: ${tokenManager.getUserId()}")
+        val userId = tokenManager.getUserId()!!
+        profileViewModel.applicationContext = requireContext()
+        profileViewModel.singleUserPost(userId)
 
-        binding.mylistRV.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.mylistRV.addItemDecoration(bestForYouRecSpace)
-        binding.mylistRV.adapter = userOwnPostAdapte
+
 
         val selected =
             ContextCompat.getDrawable(requireContext(), R.drawable.buttonclickedbackground);
@@ -73,9 +75,11 @@ class ProfileDetails : Fragment() {
 
         binding.profileMyList.setOnClickListener {
 
-            profileViewModel.singleUserPost()
+
             ViewCompat.setBackground(binding.profileMyList, selected)
             ViewCompat.setBackground(binding.profilefvrt, default)
+            binding.mylistRV.isVisible = true
+            binding.favlisRV.isVisible = false
 
             binding.mylist.setTextColor(selectedColour)
             binding.fvrtsection.setTextColor(defaultColour)
@@ -86,6 +90,8 @@ class ProfileDetails : Fragment() {
 
             ViewCompat.setBackground(binding.profileMyList, default)
             ViewCompat.setBackground(binding.profilefvrt, selected)
+            binding.mylistRV.isVisible = false
+            binding.favlisRV.isVisible = true
 
             binding.mylist.setTextColor(defaultColour)
             binding.fvrtsection.setTextColor(selectedColour)
@@ -102,6 +108,11 @@ class ProfileDetails : Fragment() {
 
         binding.userName.text = tokenManager.getUserName()
         binding.userEmail.text = tokenManager.getUserEmail()
+
+        binding.mylistRV.layoutManager =
+            GridLayoutManager(requireContext(),2)
+        binding.mylistRV.addItemDecoration(bestForYouRecSpace)
+        binding.mylistRV.adapter = userOwnPostAdapte
 
         bindOverserver()
 
@@ -134,6 +145,8 @@ class ProfileDetails : Fragment() {
                         requireContext(),
                         result.message ?: "Something went wrong"
                     )
+
+
                 }
 
                 is NetworkResult.Loading -> {

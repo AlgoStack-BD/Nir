@@ -3,6 +3,7 @@ package com.algostack.nir.utils
 import android.content.Context
 import com.algostack.nir.utils.Constants.PREFS_TOKEN_FILE
 import com.algostack.nir.utils.Constants.USER_EMAIL
+import com.algostack.nir.utils.Constants.USER_ID
 import com.algostack.nir.utils.Constants.USER_IMAGE
 import com.algostack.nir.utils.Constants.USER_NAME
 import com.algostack.nir.utils.Constants.USER_TOKEN
@@ -14,15 +15,19 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
     private var prefs = context.getSharedPreferences(PREFS_TOKEN_FILE, Context.MODE_PRIVATE)
 
 
-    fun saveToken(token : String, userName : String, userImage : String, userEmail : String){
+    fun saveToken(token : String, userName : String, userImage : String, userEmail : String, userId: String){
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
         editor.putString(USER_NAME, userName)
         editor.putString(USER_IMAGE, userImage)
         editor.putString(USER_EMAIL, userEmail)
+        editor.putString(USER_ID, userId)
         editor.apply()
     }
 
+    fun  getUserId() : String? {
+        return prefs.getString(USER_ID, null)
+    }
     fun getToken(): String? {
         return prefs.getString(USER_TOKEN, null)
     }

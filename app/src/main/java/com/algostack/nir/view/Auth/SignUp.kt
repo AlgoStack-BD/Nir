@@ -170,7 +170,7 @@ class SignUp : Fragment() {
                 is NetworkResult.Success -> {
                     if (it.data != null && it.data.status == 200 && it.data.jwt != null) {
                         val email = binding?.regemail?.text.toString()
-                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email)
+                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email,it.data.data._id)
                         println("ChekToken: ${tokenManager.getToken()}")
                         authViewModel.VerificationRequest(VerificationRequest(email))
                         val bundle = Bundle()

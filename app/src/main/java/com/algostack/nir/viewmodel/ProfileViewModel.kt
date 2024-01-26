@@ -1,6 +1,7 @@
 package com.algostack.nir.viewmodel
 
 import android.content.Context
+import android.content.LocusId
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,10 +21,13 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
 
 
     var applicationContext: Context?= null
-    fun singleUserPost(){
+    fun singleUserPost(userId: String){
         viewModelScope.launch {
+            println("functioncalled0")
+
             applicationContext?.let {
-                profileRepository.singleUserPost(it)
+                profileRepository.singleUserPost(it,userId)
+
             }
         }
     }
