@@ -1,6 +1,7 @@
 package com.algostack.nir.services.network
 
 import com.algostack.nir.services.api.AuthIntercepter
+import com.algostack.nir.services.api.ProfileApi
 import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.api.VerificationAPI
@@ -62,5 +63,12 @@ class NetworkModule {
             .build().create(VerificationAPI::class.java)
 
 
+    }
+    @Singleton
+    @Provides
+    fun provideProfileApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient) : ProfileApi {
+        return retrofitBuilder
+            .client(okHttpClient)
+            .build().create(ProfileApi::class.java)
     }
 }

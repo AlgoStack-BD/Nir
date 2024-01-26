@@ -21,7 +21,7 @@ import kotlin.math.sqrt
 @HiltViewModel
 class PublicPostViewModel @Inject constructor(private val publicPostRepository: PublicPostRepository) : ViewModel() {
 
-    private var disposable = CompositeDisposable()
+
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = publicPostRepository.publicPostResponseLiveData
 
@@ -40,13 +40,7 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
         }
     }
 
-    fun singleUserPost(){
-        viewModelScope.launch {
-            applicationContext?.let {
-                publicPostRepository.singleUserPost(it)
-            }
-        }
-    }
+
 
     fun createPost(createPost: CreatePost){
         viewModelScope.launch {
