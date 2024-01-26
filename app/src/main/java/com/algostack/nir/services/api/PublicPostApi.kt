@@ -17,9 +17,8 @@ interface PublicPostApi {
     @GET("/all-posts")
     suspend fun getPublicPost() : Response<PublicPostResponse>
 
-    @GET ("/single-user/:id")
-    suspend fun getSingleUserPost() : Response<PublicPostResponse>
-
+//    @GET("/single-user/:id")
+//    suspend fun getSingleUserPost() : Response<PublicPostResponse>
     @POST ("/create-post")
     suspend fun createPost(@Body createPost: CreatePost) : Response<CreatePostResponse>
 

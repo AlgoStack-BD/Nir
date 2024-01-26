@@ -112,26 +112,7 @@ class PublicPostRepository @Inject constructor(
     }
 
 
-    suspend fun singleUserPost(context: Context) {
 
-        if (isInternetConnected((context))) {
-            _publicPostResponseLiveData.postValue(NetworkResult.Loading())
-
-            try {
-                val response = publicPostApi.getSingleUserPost()
-
-                if (response.isSuccessful && response.body() != null) {
-
-                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
-                }
-            }catch (e: Exception) {
-                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
-                println("Exeption201: ${e}")
-            }catch (e: TimeoutException) {
-                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
-            }
-        }
-    }
 
     private fun handleNetworkResponse(response: Response<PublicPostResponse>) {
 
