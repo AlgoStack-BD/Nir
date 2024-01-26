@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -52,7 +53,13 @@ class add : Fragment() {
         private const val REQUEST_OPEN_GALLERY = 2
         private const val STORAGE_PERMISSION_CODE = 23
 
+
     }
+
+    private var PES = false
+    private var RP = false
+    private var wp = false
+
 
 
     private var _binding: FragmentAddBinding? = null
@@ -126,6 +133,7 @@ class add : Fragment() {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
 
             }
+
 
 
 
@@ -514,17 +522,9 @@ binding.regContinue.setOnClickListener {
         }
     }
 
-    private fun requestPermission() {
-//        ActivityCompat.requestPermissions(
-//            requireActivity(),
-//            arrayOf(
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE
-//            ),
-//            PERMISSION_REQUEST_CODE
-//        )
 
-        //Android is 11 (R) or above
+    private fun requestPermission() {
+
         //Android is 11 (R) or above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val manageStorageIntent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
@@ -559,6 +559,8 @@ binding.regContinue.setOnClickListener {
             }
         }
     }
+
+
 
 
     private fun startGalleryIntent() {
@@ -624,4 +626,8 @@ private fun bitmapToFile(bitmap: Bitmap): File {
             }
         }
     }
+
+
+
+
 }
