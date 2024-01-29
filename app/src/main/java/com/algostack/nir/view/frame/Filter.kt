@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentFilterBinding
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -32,6 +33,11 @@ class Filter : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.LocationPicker.setOnClickListener {
+
+            replaceFragment(SelectCity())
+
+        }
 
     }
 
@@ -54,6 +60,20 @@ class Filter : Fragment() {
             }
         }
         )
+    }
+
+
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
+        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
+        navBar?.isVisible = false
+        flotBar?.isVisible = false
     }
 
 
