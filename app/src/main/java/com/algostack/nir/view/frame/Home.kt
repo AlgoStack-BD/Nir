@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -58,6 +60,7 @@ class Home : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
 
+
         bestForYouAdapter = PublicFeedBestForYouAdapter(this::onDetailsCliked)
         nearByPostAdapter = PublicFeedNearByPostAdapter()
 
@@ -69,7 +72,10 @@ class Home : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        binding.linearLayout4.setOnClickListener {
 
+            replaceFragment(Filter())
+        }
 
         val selected = ContextCompat.getDrawable(requireContext(), R.drawable.buttonclickedbackground);
         val default = ContextCompat.getDrawable(requireContext(), R.drawable.horizontal_button_circle);
@@ -79,7 +85,8 @@ class Home : Fragment() {
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
         // Setup sticky header
-       
+
+
         binding.home.setOnClickListener {
 
             ViewCompat.setBackground( binding.home, selected)
@@ -87,6 +94,8 @@ class Home : Fragment() {
             ViewCompat.setBackground(  binding.hotel, default)
             ViewCompat.setBackground(  binding.Vila, default)
             ViewCompat.setBackground(  binding.cottage, default)
+
+
 
 
             binding.HomeBtnText.setTextColor(selectedColour)
@@ -98,6 +107,7 @@ class Home : Fragment() {
 
         }
         binding.appartment.setOnClickListener {
+
 
 
             ViewCompat.setBackground(  binding.appartment, selected)
@@ -238,6 +248,22 @@ class Home : Fragment() {
         navBar?.isVisible = false
         flotBar?.isVisible = false
     }
+
+
+    @Override
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
+        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
+        navBar?.isVisible = false
+        flotBar?.isVisible = false
+    }
+
 
 
 

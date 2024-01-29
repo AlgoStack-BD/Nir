@@ -21,6 +21,16 @@
     <string name="addproperty">Add Property</string>
     <string name="nagotiable">Nagotiabble</string>
     <string name="fixedPrice">Fixed Price</string>
+    <string name="filters">Filters</string>
+    <string name="city">City</string>
+    <string name="cityName">Dhaka</string>
+    <string name="priceRange">Price Range ( BDT )</string>
+    <string name="search_articles_hint">Search Location</string>
+    <string name="sylhet">Sylhet</string>
+    <string name="dhaka">Dhaka</string>
+    <string name="chittagong">Chittagong</string>
+    <string name="naraynganj">Narayana City</string>
+
 
 
     <string-array name="rent_type">
@@ -31,8 +41,10 @@
     </string-array>
 
     <string name="Description">Description</string>
-<string name="dummy">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</string>
+    <string name="dummy">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</string>
 
     <string name="DetailsHeadding">House Name</string>
+    <string name="any">Any</string>
+    <string name="_0">0</string>
 
 </resources>
