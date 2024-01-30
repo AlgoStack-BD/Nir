@@ -1,11 +1,16 @@
 package com.algostack.nir.view.frame
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +21,7 @@ import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.view.adapter.CityAdapter
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Locale
 
 
 class SelectCity : Fragment() {
@@ -26,6 +32,7 @@ class SelectCity : Fragment() {
 
     private lateinit var cityArrayList : ArrayList<Cityes>
     private lateinit var cityAdapter : CityAdapter
+    private lateinit var searchView: SearchView
 
 
 
@@ -39,6 +46,7 @@ class SelectCity : Fragment() {
 
 
         setupBackPress()
+
 
         return binding.root
     }
@@ -61,6 +69,35 @@ class SelectCity : Fragment() {
         binding.recyclerView.adapter = cityAdapter
 
 
+        val searchEditText = binding.searchEditText
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed
+                if (charSequence.isNullOrEmpty()) {
+                    //clear arraylist then reassign
+                    cityArrayList.clear()
+                    cityItemList()
+                    binding.recyclerView.adapter = cityAdapter
+
+                }else{
+                    cityAdapter.setFilter(charSequence.toString())
+                }
+                cityAdapter.setFilter(charSequence.toString())
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+        })
+
+
+
+
 
 
 
@@ -69,6 +106,12 @@ class SelectCity : Fragment() {
 
 
     }
+
+
+
+
+
+
 
     private fun setupBackPress() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
@@ -156,70 +199,6 @@ class SelectCity : Fragment() {
         cityArrayList.add(Cityes(66,"Kurigram"))
         cityArrayList.add(Cityes(67,"Nawabganj"))
 
-       /*
-        cityArrayList.add("Khulna")
-        cityArrayList.add("Rajshahi")
-        cityArrayList.add("Barisal")
-        cityArrayList.add("Rangpur")
-        cityArrayList.add("Comilla")
-        cityArrayList.add("Narayanganj")
-        cityArrayList.add("Gazipur")
-        cityArrayList.add("Mymensingh")
-        cityArrayList.add("Tangail")
-        cityArrayList.add("Bogura")
-        cityArrayList.add("Dinajpur")
-        cityArrayList.add("Jessore")
-        cityArrayList.add("Kustia")
-        cityArrayList.add("Naogaon")
-        cityArrayList.add("Savar")
-        cityArrayList.add("Brahmanbaria")
-        cityArrayList.add("Jamalpur")
-        cityArrayList.add("Saidpur")
-        cityArrayList.add("Sirajganj")
-        cityArrayList.add("Pabna")
-        cityArrayList.add("Natore")
-        cityArrayList.add("Faridpur")
-        cityArrayList.add("Pirojpur")
-        cityArrayList.add("Bhola")
-        cityArrayList.add("Jhalokati")
-        cityArrayList.add("Patuakhali")
-        cityArrayList.add("Barguna")
-        cityArrayList.add("Chandpur")
-        cityArrayList.add("Lakshmipur")
-        cityArrayList.add("Noakhali")
-        cityArrayList.add("Feni")
-        cityArrayList.add("Bagerhat")
-        cityArrayList.add("Chuadanga")
-        cityArrayList.add("Jhenaidah")
-        cityArrayList.add("Magura")
-        cityArrayList.add("Meherpur")
-        cityArrayList.add("Narail")
-        cityArrayList.add("Satkhira")
-        cityArrayList.add("Khagrachari")
-        cityArrayList.add("Rangamati")
-        cityArrayList.add("Bandarban")
-        cityArrayList.add("Cox's Bazar")
-        cityArrayList.add("Thakurgaon")
-        cityArrayList.add("Panchagarh")
-        cityArrayList.add("Tangail")
-        cityArrayList.add("Shariatpur")
-        cityArrayList.add("Madaripur")
-        cityArrayList.add("Rajbari")
-        cityArrayList.add("Gopalganj")
-        cityArrayList.add("Kishoreganj")
-        cityArrayList.add("Netrokona")
-        cityArrayList.add("Sherpur")
-        cityArrayList.add("Munshiganj")
-        cityArrayList.add("Narsingdi")
-        cityArrayList.add("Manikganj")
-        cityArrayList.add("Potuakhali")
-        cityArrayList.add("Nilphamari")
-        cityArrayList.add("Gaibandha")
-        cityArrayList.add("Lalmonirhat")
-        cityArrayList.add("Kurigram")
-        cityArrayList.add("Nawabganj")
-
-        */
     }
 
 

@@ -7,93 +7,84 @@
     android:fitsSystemWindows="true"
     tools:context=".view.frame.SelectCity">
 
-    <include
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_header"
-        layout="@layout/search_header_layout"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
 
+        >
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/ralewaysemibold"
-        android:text="Popular Cities"
-        android:textColor="@color/colorSecendaryBlack"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_header" />
-
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
-
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-            >
-
-            <TextView
-                android:id="@+id/cityDhaka"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginBottom="10dp"
-                android:padding="2dp"
-                android:text="@string/dhaka"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16sp" />
-
-
-            <TextView
-                android:id="@+id/citySylhet"
+            <ImageView
+                android:id="@+id/search_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/sylhet"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16sp" />
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/cityChittagong"
+            <ImageView
+
+                android:id="@+id/clear_search_query"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/chittagong"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16sp" />
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/cityNaraynganj"
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/voice_search_query"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:text="@string/naraynganj"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16sp" />
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_btn_speak_now"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
+            <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_articles_hint"
+                android:inputType="text"
+                android:paddingTop="8dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintBottom_toBottomOf="@id/search_image_view"
+                app:layout_constraintEnd_toStartOf="@id/voice_search_query"
+                app:layout_constraintStart_toEndOf="@id/search_image_view" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 
 
     <TextView
@@ -107,19 +98,20 @@
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+        app:layout_constraintTop_toBottomOf="@+id/search_header" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
         tools:listitem="@layout/city_name_item" />
 
 

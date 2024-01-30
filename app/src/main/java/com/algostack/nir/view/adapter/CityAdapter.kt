@@ -10,37 +10,64 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentSelectCityBinding
 import com.algostack.nir.services.model.Cityes
+import java.util.Locale
+class CityAdapter(private val originalCityList: ArrayList<Cityes>, private val onItemClick: (Cityes) -> Unit) :
+    RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
-class CityAdapter(private val cityList : ArrayList<Cityes>, private val onItemClick: (Cityes) -> Unit) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+    private val cityArrayList = ArrayList(originalCityList)
 
+    // Additional property to store original data in a new variable
+    private val originalDataList: ArrayList<Cityes> = ArrayList(originalCityList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
-        val viewLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.city_name_item, parent, false)
+        val viewLayout = LayoutInflater.from(parent.context)
+            .inflate(R.layout.city_name_item, parent, false)
 
         return CityViewHolder(viewLayout)
     }
 
-    override fun getItemCount() = cityList.size
-
+    override fun getItemCount() = originalCityList.size
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        val currentItem = cityList[position]
+        val currentItem = originalCityList[position]
         holder.foodName.text = currentItem.cityName
 
         holder.itemView.setOnClickListener {
             onItemClick(currentItem)
         }
+    }
+
+
+    fun setFilter(query: String) {
+        println("query: $query")
+        val filteredList = ArrayList<Cityes>()
+
+       if(query.isNotBlank()){ // if query is not empty
+            for (i in originalCityList) {
+                if (i.cityName.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
+                    filteredList.add(i)
+                }
+            }
+
+           updateList(filteredList)
+        }
 
     }
 
 
-
-    inner  class CityViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
-    {
-
-        val foodName : TextView = itemView.findViewById(R.id.cityName)
+    inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val foodName: TextView = itemView.findViewById(R.id.cityName)
     }
+
+    fun updateList(newList: List<Cityes>) {
+
+        println("newList: $newList")
+
+        originalCityList.clear()
+        originalCityList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }
 
 
