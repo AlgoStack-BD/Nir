@@ -111,6 +111,18 @@ class PublicPostRepository @Inject constructor(
         }
     }
 
+    suspend fun searchPost(minPrice: Double, maxPrice: Double, roomNumber: Int, bedNumber: Int, location: String){
+
+
+        withContext(Dispatchers.IO){
+            val publicPostData = nirLocalDB.getPublicPostDao().searchItems(minPrice,maxPrice,roomNumber,bedNumber,location)
+
+                _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(publicPostData,200)))
+
+        }
+
+    }
+
 
 
 
