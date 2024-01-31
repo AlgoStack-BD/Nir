@@ -134,13 +134,8 @@ class SelectCity : Fragment() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragment.arguments = bundle
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-        navBar?.isVisible = false
-        flotBar?.isVisible = false
     }
     private fun cityItemList(){
         cityArrayList.add(Cityes(1,"Habiganj"))

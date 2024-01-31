@@ -399,7 +399,7 @@
                     android:id="@+id/bathroomsImage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/beadroom"
+                    android:src="@drawable/bathroom"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -554,7 +554,7 @@
 
         <LinearLayout
 
-            android:id="@+id/regContinue"
+            android:id="@+id/filterContinue"
             android:layout_width="335dp"
             android:layout_height="55dp"
             android:layout_marginBottom="16dp"

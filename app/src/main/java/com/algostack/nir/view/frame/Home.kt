@@ -74,7 +74,9 @@ class Home : Fragment() {
 
         binding.linearLayout4.setOnClickListener {
 
-            replaceFragment(Filter())
+          //  findNavController().navigate(R.id.action_home2_to_filter)
+
+           replaceFragment(Filter())
         }
 
         val selected = ContextCompat.getDrawable(requireContext(), R.drawable.buttonclickedbackground);
