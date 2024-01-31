@@ -69,7 +69,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/ralewaybold"
-
                     android:text="@string/city"
                     android:textColor="@color/colorSecendaryBlack"
                     android:textSize="18sp"
@@ -150,6 +149,7 @@
                     android:background="@drawable/spinerborder"
                     android:gravity="center"
                     android:hint="@string/_0"
+                    android:text=""
                     app:layout_constraintStart_toStartOf="@+id/RentHedding"
                     app:layout_constraintTop_toBottomOf="@+id/RentHedding" />
 
@@ -175,23 +175,27 @@
                     android:background="@drawable/spinerborder"
                     android:gravity="center"
                     android:hint="@string/any"
+                    android:text=""
                     app:layout_constraintStart_toEndOf="@+id/filetTo"
                     app:layout_constraintTop_toTopOf="@+id/startRange" />
 
 
                 <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/pricerangeSlider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="65dp"
                     app:trackColor="@color/selected"
-                    app:thumbColor="@color/colorSecendaryBlack"
+                    app:thumbColor="@color/deepblue"
                     android:valueFrom="0"
                     android:valueTo="1000000"
+                    android:stepSize="5000"
                     app:layout_constraintEnd_toEndOf="@+id/endRange"
                     app:layout_constraintStart_toStartOf="@+id/startRange"
-                    app:layout_constraintTop_toBottomOf="@+id/startRange" />
+                    app:layout_constraintTop_toBottomOf="@+id/startRange"
+                    />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

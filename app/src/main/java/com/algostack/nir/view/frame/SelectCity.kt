@@ -60,6 +60,9 @@ class SelectCity : Fragment() {
         cityAdapter = CityAdapter(cityArrayList){ selectedCity ->
             // Handle the click event for the selected city
             Toast.makeText(requireContext(), "Selected City: ${selectedCity.cityName}", Toast.LENGTH_SHORT).show()
+            val bundle = Bundle()
+            bundle.putString("cityName", selectedCity.cityName)
+            replaceFragment(Filter(),bundle)
         }
         cityItemList()
 
@@ -70,6 +73,7 @@ class SelectCity : Fragment() {
 
 
         val searchEditText = binding.searchEditText
+
 
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
@@ -99,12 +103,6 @@ class SelectCity : Fragment() {
 
 
 
-
-
-
-
-
-
     }
 
 
@@ -129,6 +127,20 @@ class SelectCity : Fragment() {
             }
         }
         )
+    }
+
+    private fun replaceFragment(fragment: Fragment, bundle: Bundle){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
+        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
+        navBar?.isVisible = false
+        flotBar?.isVisible = false
     }
     private fun cityItemList(){
         cityArrayList.add(Cityes(1,"Habiganj"))
@@ -200,6 +212,7 @@ class SelectCity : Fragment() {
         cityArrayList.add(Cityes(67,"Nawabganj"))
 
     }
+
 
 
 

@@ -34,5 +34,9 @@ data class PublicPostData(
     val updatedAt: String?,
     val userId: String,
     val userImg: String?,
-    val userName: String?
+    val userName: String?,
+//    val phoneNumber: String,
+//    val isAds : Boolean,
+
+
 )
