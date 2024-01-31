@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
@@ -39,6 +40,7 @@ class Filter : Fragment() {
     private var LocationArea = ""
     private var numberOfBedRoom = 0
     private var numberOfBathRoom = 0
+    private var selectedRentType: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -126,6 +128,28 @@ class Filter : Fragment() {
         setCardClickListener(binding.numberOfSixBathroom, 6,202)
 
 
+        // spiner for rent type
+        binding.renttypespinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    binding.renttypespinner.setSelection(0)
+                }
+
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    binding.renttypespinner.setSelection(position)
+
+
+                    selectedRentType = adapterView?.getItemAtPosition(position).toString()
+
+
+                }
+
+            }
 
         // Apply button click listener
         binding.filterContinue.setOnClickListener {
@@ -217,6 +241,7 @@ class Filter : Fragment() {
                     navBar?.isVisible = true
                     flotBar?.isVisible = true
 
+
                     isEnabled = false
                     requireActivity().onBackPressed()
                 }
@@ -232,10 +257,8 @@ class Filter : Fragment() {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-
-        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.addToBackStack("filter")
         fragmentTransaction.commit()
-
     }
 
 

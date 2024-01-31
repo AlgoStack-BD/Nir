@@ -134,7 +134,6 @@ class SelectCity : Fragment() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragment.arguments = bundle
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
     private fun cityItemList(){

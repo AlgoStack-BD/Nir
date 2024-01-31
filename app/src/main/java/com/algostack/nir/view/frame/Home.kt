@@ -1,21 +1,18 @@
 package com.algostack.nir.view.frame
 
-import android.graphics.Rect
+
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentHomeBinding
 import com.algostack.nir.services.api.PublicPostApi
@@ -28,7 +25,6 @@ import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
 import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,9 +70,10 @@ class Home : Fragment() {
 
         binding.linearLayout4.setOnClickListener {
 
-          //  findNavController().navigate(R.id.action_home2_to_filter)
+            //findNavController().navigate(R.id.action_home2_to_filter)
 
            replaceFragment(Filter())
+
         }
 
         val selected = ContextCompat.getDrawable(requireContext(), R.drawable.buttonclickedbackground);
@@ -257,7 +254,6 @@ class Home : Fragment() {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
