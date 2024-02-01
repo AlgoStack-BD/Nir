@@ -41,7 +41,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/filterLocation"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/textView10">
@@ -79,6 +79,7 @@
                     android:id="@+id/locationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:padding="2dp"
                     android:text="@string/cityName"
                     android:textColor="@color/colorSecendaryBlack"

@@ -49,10 +49,10 @@ class Frame : AppCompatActivity() {
         binding?.bottomNavigation?.setOnItemSelectedListener {
 
             when(it.itemId){
-                R.id.nav_home -> replaceFragment(Home())
+                R.id.nav_home2 -> replaceFragment(Home())
                 R.id.nav_chat -> replaceFragment(Chat())
                 R.id.nav_notification -> replaceFragment(Notification())
-                R.id.nav_profile -> replaceFragment(ProfileMenu())
+                R.id.nav_profileMenu -> replaceFragment(ProfileMenu())
 
 
                 else -> {

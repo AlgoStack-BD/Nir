@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/home2">
+    app:startDestination="@id/nav_home2">
 
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/nav_home2"
         android:name="com.algostack.nir.view.frame.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
@@ -18,12 +18,12 @@
             app:destination="@id/filter" />
     </fragment>
     <fragment
-        android:id="@+id/favorite"
+        android:id="@+id/nav_favorite"
         android:name="com.algostack.nir.view.frame.Favorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/add2"
+        android:id="@+id/nav_add2"
         android:name="com.algostack.nir.view.frame.add"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
@@ -33,17 +33,17 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/chat"
+        android:id="@+id/nav_chat"
         android:name="com.algostack.nir.view.frame.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
-        android:id="@+id/notification"
+        android:id="@+id/nav_notification"
         android:name="com.algostack.nir.view.frame.Notification"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
-        android:id="@+id/profileMenu"
+        android:id="@+id/nav_profileMenu"
         android:name="com.algostack.nir.view.frame.ProfileMenu"
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
@@ -58,7 +58,7 @@
         tools:layout="@layout/fragment_profile_details" >
         <action
             android:id="@+id/action_profileDetails_to_profileMenu"
-            app:destination="@id/profileMenu"
+            app:destination="@id/nav_profileMenu"
             app:popUpTo="@id/profileDetails"
             app:popUpToInclusive="true" />
     </fragment>
@@ -69,7 +69,7 @@
         tools:layout="@layout/fragment_post_details" >
         <action
             android:id="@+id/action_postDetails_to_home2"
-            app:destination="@id/home2"
+            app:destination="@id/nav_home2"
             app:popUpTo="@id/postDetails"
             app:popUpToInclusive="true" />
     </fragment>
@@ -80,7 +80,7 @@
         tools:layout="@layout/fragment_filter" >
         <action
             android:id="@+id/action_filter_to_home2"
-            app:destination="@id/home2"
+            app:destination="@id/nav_home2"
             app:launchSingleTop="false"
             app:popUpTo="@id/filter"
             app:popUpToInclusive="true" />

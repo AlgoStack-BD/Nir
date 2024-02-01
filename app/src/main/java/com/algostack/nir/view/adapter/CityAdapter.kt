@@ -8,16 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.algostack.nir.R
-import com.algostack.nir.databinding.FragmentSelectCityBinding
 import com.algostack.nir.services.model.Cityes
 import java.util.Locale
 class CityAdapter(private val originalCityList: ArrayList<Cityes>, private val onItemClick: (Cityes) -> Unit) :
     RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
-    private val cityArrayList = ArrayList(originalCityList)
-
-    // Additional property to store original data in a new variable
-    private val originalDataList: ArrayList<Cityes> = ArrayList(originalCityList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val viewLayout = LayoutInflater.from(parent.context)

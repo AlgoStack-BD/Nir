@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,7 +73,7 @@ class Home : Fragment() {
 
             //findNavController().navigate(R.id.action_home2_to_filter)
 
-           replaceFragment(Filter())
+            replaceFragmentGenaral(Filter(), Filter::class.java.name)
 
         }
 
@@ -249,17 +250,16 @@ class Home : Fragment() {
     }
 
 
-    @Override
-    private fun replaceFragment(fragment: Fragment){
+
+     fun replaceFragmentGenaral(fragment: Fragment, flag: String){
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-        navBar?.isVisible = false
-        flotBar?.isVisible = false
+        if (fragment is Home){
+          fragmentManager.popBackStack(flag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment).addToBackStack(flag).commit()
+
     }
 
 

@@ -10,4 +10,15 @@
     <style name="Theme.Nir" parent="Base.Theme.Nir" />
     <style name="Theme.MaterialCarousel.materialComp" parent="Theme.Material3.DayNight.NoActionBar"/>
     <style name="Theme.Nir.materialCarousel" parent="Base.Theme.Nir"/>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStylle</item>
+    </style>
+
+    <style name="BottomSheetStylle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+
 </resources>
