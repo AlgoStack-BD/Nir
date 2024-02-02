@@ -14,12 +14,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentFilterBinding
 import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.viewmodel.FilterViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
@@ -54,6 +56,8 @@ class Filter : Fragment() {
     private lateinit var cityArrayList : ArrayList<Cityes>
     private lateinit var cityAdapter : CityAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private val filterViewModel by viewModels<FilterViewModel> ()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,49 +85,11 @@ class Filter : Fragment() {
 
 
 
-        if (binding.startRange.text.toString().isEmpty()){
-             minmumPriceRange = 0
-        }else{
-           minmumPriceRange = binding.startRange.text.toString().toInt()
-        }
-        if (binding.endRange.text.toString().isEmpty()){
-            maximumPriceRange = 0
-        }else{
-            maximumPriceRange = binding.endRange.text.toString().toInt()
-        }
 
-        if (binding.locationText.text.toString().isEmpty()){
-            LocationArea = ""
-        }else{
-            LocationArea = binding.locationText.text.toString()
-        }
-        if (selectedBedRoom == null){
-            numberOfBedRoom = 0
-        }else{
-            numberOfBedRoom = selectedBedRoom!!
-        }
-
-        if (selectedBathRoom == null){
-            numberOfBathRoom = 0
-        }else{
-            numberOfBathRoom = selectedBathRoom!!
-        }
-
-        if (arguments?.getString("cityName") == null){
-            binding.locationText.text = "Sylhet"
-        }else{
-            binding.locationText.text = arguments?.getString("cityName")
-        }
 
 
         binding.LocationPicker.setOnClickListener {
-
-        //  replaceFragmentGenaral(SelectCity(),SelectCity::class.java.name)
-          //  findNavController().navigate(R.id.action_filter_to_selectCity)
-
             showBottomSheetDialog()
-
-           // SelectCity().show(childFragmentManager,SelectCity::class.java.name)
 
         }
 
@@ -171,8 +137,53 @@ class Filter : Fragment() {
 
         // Apply button click listener
         binding.filterContinue.setOnClickListener {
+            if (binding.startRange.text.toString().isEmpty()){
+                minmumPriceRange = 0
+            }else{
+                minmumPriceRange = binding.startRange.text.toString().toInt()
+            }
+            if (binding.endRange.text.toString().isEmpty()){
+                maximumPriceRange = 0
+            }else{
+                maximumPriceRange = binding.endRange.text.toString().toInt()
+            }
 
-        }
+            if (binding.locationText.text.toString().isEmpty()){
+                LocationArea = ""
+            }else{
+                LocationArea = binding.locationText.text.toString()
+            }
+            if (selectedBedRoom == null){
+                numberOfBedRoom = 0
+            }else{
+                numberOfBedRoom = selectedBedRoom!!
+            }
+
+            if (selectedBathRoom == null){
+                numberOfBathRoom = 0
+            }else{
+                numberOfBathRoom = selectedBathRoom!!
+            }
+
+
+
+                Log.d(
+                    "Filter",
+                    "onViewCreated: $minmumPriceRange $maximumPriceRange $LocationArea $numberOfBedRoom $numberOfBathRoom $selectedRentType"
+                )
+
+                filterViewModel.filter(
+                    minmumPriceRange,
+                    maximumPriceRange,
+                    minmumPriceRange,
+                    numberOfBedRoom,
+                    numberOfBathRoom,
+                    selectedRentType!!,
+                    LocationArea
+                )
+
+
+            }
 
 
     }
