@@ -34,6 +34,8 @@ class PostDetails : Fragment() {
 
     private var detailsData: PublicPostData? = null
 
+    private var chekDestinationPage = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +68,12 @@ class PostDetails : Fragment() {
     }
 
     private fun setInialData() {
+        val destinationPage = arguments?.getString("DestinationPage")
+        if (destinationPage != null) {
+            chekDestinationPage = destinationPage
+        }
+
+
         val jsonDetails = arguments?.getString("details")
         if (jsonDetails != null) {
             detailsData = Gson().fromJson(jsonDetails, PublicPostData::class.java)
@@ -113,13 +121,24 @@ class PostDetails : Fragment() {
             override fun handleOnBackPressed() {
                 // Handle the back button event
                 if(isEnabled){
-                    val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-                    val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-                    navBar?.isVisible = true
-                    flotBar?.isVisible = true
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
 
-                    isEnabled = false
-                    requireActivity().onBackPressed()
+                    if (chekDestinationPage == "Home"){
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
+                        fragmentTransaction.remove(this@PostDetails)
+                    }
+                    else{
+                        val bundle = Bundle()
+                        bundle.putString("DestinationPage", "PostDetails")
+                        val filter = Filter()
+                        filter.arguments = bundle
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4,filter)
+                        fragmentTransaction.remove(this@PostDetails)
+                    }
+
+
+                    fragmentTransaction.commit()
                 }
 
 

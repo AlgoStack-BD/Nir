@@ -32,12 +32,12 @@ class FiltterRepository @Inject constructor(
        withContext(Dispatchers.IO){
            val list = nirLocalDB.getPublicPostDao().searchItems(minPrice,maximumPrice,fixedPrice,bedRoom,bathRoom,propertyType,location)
            Log.d("SearchResult", "filter: $list")
-
-           val response = nirLocalDB.getPublicPostDao().getPublicPostData()
            //Log.d("SearchResult", "publicPost: $response")
 
-           _FilterLiveData.postValue(NetworkResult.Success((PublicPostResponse(list,200))))
-           _FilterLiveData.postValue(NetworkResult.Error("No Data Found"))
+           if(list.isEmpty()){
+               _FilterLiveData.postValue(NetworkResult.Error("No Data Found"))
+           }else _FilterLiveData.postValue(NetworkResult.Success((PublicPostResponse(list,200))))
+
          }
 
 

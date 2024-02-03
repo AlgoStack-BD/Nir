@@ -15,18 +15,28 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentFilterBinding
 import com.algostack.nir.services.model.Cityes
+import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.utils.AlertDaialog
+import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.view.adapter.HorizontalSpace
+import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
+import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
+import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.viewmodel.FilterViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,6 +68,14 @@ class Filter : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     private val filterViewModel by viewModels<FilterViewModel> ()
+
+
+    val bestForYouRecSpace = VerticalSpace()
+
+
+
+    private lateinit var bestForYouAdapter: PublicFeedBestForYouAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,12 +83,16 @@ class Filter : Fragment() {
 
         _binding = FragmentFilterBinding.inflate(inflater,container,false)
 
+        bestForYouAdapter = PublicFeedBestForYouAdapter(this::onDetailsCliked)
+        setupBackPress()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
 
         cityArrayList = ArrayList()
@@ -184,6 +206,22 @@ class Filter : Fragment() {
 
 
             }
+
+
+        binding.filteredResult.layoutManager = LinearLayoutManager(requireContext(),
+            LinearLayoutManager.VERTICAL,false)
+        binding.filteredResult.addItemDecoration(bestForYouRecSpace)
+        binding.filteredResult.adapter = bestForYouAdapter
+
+        binding.searchAgain.setOnClickListener {
+           // findNavController().popBackStack()
+            binding.searchResultLayout.isVisible = false
+            binding.filterLayout.isVisible = true
+        }
+
+
+
+        bindOvservers()
 
 
     }
@@ -385,6 +423,96 @@ class Filter : Fragment() {
         cityArrayList.add(Cityes(66,"Kurigram"))
         cityArrayList.add(Cityes(67,"Nawabganj"))
 
+    }
+
+
+    private fun bindOvservers() {
+        filterViewModel.FilterLiveData.observe(viewLifecycleOwner, Observer {result ->
+            //   binding?.logprogressBar?.isVisible = false
+            when(result){
+
+                is NetworkResult.Success -> {
+
+
+                    if(result.data!!.status == 200){
+
+                        binding.filterLayout.isVisible = false
+                        binding.searchResultLayout.isVisible = true
+                        val bestForYouResult = result.data.data
+
+                        bestForYouAdapter.submitList(bestForYouResult)
+
+
+
+                    }else if(result.data.status == 500){
+
+                        result.message?.let { it1 ->
+                            AlertDaialog.showCustomAlertDialogBox(
+                                requireContext(),
+                                it1
+                            )
+                        }
+                    }
+                }
+                is NetworkResult.Error -> {
+                    AlertDaialog.showCustomAlertDialogBox(
+                        requireContext(),
+                        result.message ?: "Something went wrong"
+                    )
+                }
+                is NetworkResult.Loading -> {
+                    //   binding?.logprogressBar?.isVisible = true
+                }
+
+
+
+            }
+
+
+
+        })
+
+
+    }
+
+
+    private fun onDetailsCliked(publicPostData: PublicPostData) {
+        val bundle = Bundle()
+        bundle.putString("details", Gson().toJson(publicPostData))
+
+        replaceFragment(PostDetails(),bundle,PostDetails::class.java.simpleName)
+    }
+
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle,flag: String? = null){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.add(R.id.fragmentConthainerView4,fragment,flag)
+
+        fragmentTransaction.addToBackStack(flag)
+        fragmentTransaction.commit()
+
+    }
+
+
+    private fun setupBackPress() {
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Handle the back button event
+                if(isEnabled){
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+
+                    fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
+                    fragmentTransaction.remove(this@Filter)
+
+                    fragmentTransaction.commit()
+                }
+
+
+            }
+        }
+        )
     }
 
 }
