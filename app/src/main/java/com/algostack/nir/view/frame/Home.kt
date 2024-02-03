@@ -230,6 +230,7 @@ class Home : Fragment() {
     private fun onDetailsCliked(publicPostData: PublicPostData) {
         val bundle = Bundle()
         bundle.putString("details", Gson().toJson(publicPostData))
+        bundle.putString("DestinationPage", "Home")
 
         replaceFragment(PostDetails(),bundle)
     }
@@ -251,14 +252,11 @@ class Home : Fragment() {
 
 
 
-     fun replaceFragmentGenaral(fragment: Fragment, flag: String){
+    private fun replaceFragmentGenaral(fragment: Fragment, flag: String){
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        if (fragment is Home){
-          fragmentManager.popBackStack(flag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        }
 
-        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment).addToBackStack(flag).commit()
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment,flag).addToBackStack(flag).commit()
 
     }
 

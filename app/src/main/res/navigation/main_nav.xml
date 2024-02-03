@@ -99,4 +99,9 @@
             app:popUpTo="@id/selectCity"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/search_Result"
+        android:name="com.algostack.nir.view.frame.Search_Result"
+        android:label="fragment_search__result"
+        tools:layout="@layout/fragment_search__result" />
 </navigation>

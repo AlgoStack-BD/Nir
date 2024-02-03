@@ -17,20 +17,33 @@ interface PublicPostDao {
 
     @Query("SELECT * FROM PublicPostData")
     suspend fun getPublicPostData(): List<PublicPostData>?
-
     @Query("SELECT * FROM PublicPostData WHERE " +
-            "price BETWEEN :minPrice AND :maxPrice " +
-            "AND bedRoom = :roomNumber " +
-            "AND bathRoom = :bedNumber " +
-            "AND location LIKE :location")
+            "(price BETWEEN :minPrice AND :maxPrice) OR " +
+            "(price = :fixedPrice) OR " +
+            "(bedRoom = :bedRoom) OR " +
+            "(bathRoom = :bathRoom) OR " +
+            "(type = :propertyType) OR " +
+            "(location = :propertyLocation)")
     fun searchItems(
-        minPrice: Double, maxPrice: Double,
-        roomNumber: Int, bedNumber: Int,
-        location: String
+        minPrice: Int,
+        maxPrice: Int,
+        fixedPrice: Int,
+        bedRoom: Int,
+        bathRoom: Int,
+        propertyType: String,
+        propertyLocation: String
     ): List<PublicPostData>
+
+
+    @Query("SELECT * FROM PublicPostData WHERE bedRoom = :bedRoom")
+    fun searchItemsByBedRoom(bedRoom: Int): List<PublicPostData>
 
     @Delete
     suspend fun deletePublicPostData(publicPostData: PublicPostData)
+
+    // Delete all data
+    @Query("DELETE FROM PublicPostData")
+    suspend fun deleteAllPublicPostData()
 
 
 

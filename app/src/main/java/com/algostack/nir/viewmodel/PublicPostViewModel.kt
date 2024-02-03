@@ -58,11 +58,7 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
        }
     }
 
-    fun searchItemPublicPost(minPrice: Double, maxPrice: Double, roomNumber: Int, bedNumber: Int, location: String){
-        viewModelScope.launch {
-            publicPostRepository.searchPost(minPrice, maxPrice, roomNumber, bedNumber, location)
-        }
-    }
+
 
 
 
