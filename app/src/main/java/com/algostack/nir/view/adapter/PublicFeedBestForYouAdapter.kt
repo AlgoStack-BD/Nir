@@ -53,7 +53,7 @@ class PublicFeedBestForYouAdapter (private val onDetailsCliked: (PublicPostData)
 
 
             Glide.with(itemView)
-                .load("https://nirapi.onrender.com/$fistOneImg")
+                .load("https://nirapi.onrender.com/uploads/$fistOneImg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.demo_home_photo)
                 .error(R.drawable.demo_home_photo)

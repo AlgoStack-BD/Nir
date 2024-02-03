@@ -175,7 +175,7 @@ class add : Fragment() {
             }
 
         // spiner for bead Rooms
-        val customBeadroomList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customBeadroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter = ArrayAdapter<String>(
             requireContext(),
@@ -206,7 +206,7 @@ class add : Fragment() {
             }
 
         // spiner for drawing Rooms
-        val customDrawingroomList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customDrawingroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter2 = ArrayAdapter<String>(
             requireContext(),
@@ -237,7 +237,7 @@ class add : Fragment() {
 
 
         // spinner for dining Rooms
-        val customDiningroomList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customDiningroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter3 = ArrayAdapter<String>(
             requireContext(),
@@ -268,7 +268,7 @@ class add : Fragment() {
 
 
         // spinner for bath Rooms
-        val customBathroomList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customBathroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter4 = ArrayAdapter<String>(
             requireContext(),
@@ -296,7 +296,7 @@ class add : Fragment() {
             }
 
         // spinner for kitchen Rooms
-        val customKitchenList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customKitchenList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter5 = ArrayAdapter<String>(
             requireContext(),
@@ -324,7 +324,7 @@ class add : Fragment() {
             }
 
         // spinner for balcony Rooms
-        val customBalconyList = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
+        val customBalconyList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
         val adapter6 = ArrayAdapter<String>(
             requireContext(),
@@ -445,6 +445,27 @@ binding.regContinue.setOnClickListener {
 
         publicPostViewModel.createPost(creatPost)
 
+
+        // clear all fields
+        binding.fieldpickaddress.text.clear()
+        binding.additionalMessage.text.clear()
+        binding.rentpriceinputfield.text.clear()
+        binding.imagepicker1.setImageResource(0)
+        binding.imagepicker2.setImageResource(0)
+        binding.imagepicker3.setImageResource(0)
+        binding.imagepicker4.setImageResource(0)
+        binding.checkboxelectricity.isChecked = false
+        binding.checkboxwater.isChecked = false
+        binding.checkbocgass.isChecked = false
+        binding.negotiablecheckbox.isChecked = false
+        binding.renttypespinner.setSelection(0)
+        binding.beadroomspinner.setSelection(0)
+        binding.drawingroomspinner.setSelection(0)
+        binding.diningroomspinner.setSelection(0)
+        binding.bathroomspinner.setSelection(0)
+        binding.kitchenspinner.setSelection(0)
+        binding.balconyspinner.setSelection(0)
+        binding.phonoNumberFiled.text.clear()
 
 
 

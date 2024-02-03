@@ -155,6 +155,8 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
                 android:spinnerMode="dropdown"
@@ -594,6 +596,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:hint="@string/rentprice"
+                android:paddingLeft="10dp"
                 android:background="@drawable/spinerborder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -672,6 +675,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="@string/houseaddress"
+                android:paddingLeft="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/txtaddres"
                 app:layout_constraintStart_toStartOf="@+id/txtaddres"
                 app:layout_constraintTop_toBottomOf="@+id/txtaddres" />
@@ -817,6 +821,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearlayout" />
 
+
+            <ImageView
+                android:id="@+id/additonalmsg"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/sms_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eleventhdevider" />
+
+            <TextView
+                android:id="@+id/addtionmstText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/adittional"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/additonalmsg"
+                app:layout_constraintStart_toEndOf="@+id/additonalmsg"
+                app:layout_constraintTop_toTopOf="@+id/additonalmsg"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+
             <EditText
                 android:id="@+id/additionalMessage"
                 android:paddingTop="10dp"
@@ -824,14 +858,83 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
+                android:paddingLeft="10dp"
                 android:background="@drawable/spinerborder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:scrollbars="horizontal"
                 android:maxLines="10"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
+                android:hint="@string/Description"
+                app:layout_constraintEnd_toEndOf="@+id/addtionmstText"
+                app:layout_constraintStart_toStartOf="@+id/addtionmstText"
+                app:layout_constraintTop_toBottomOf="@+id/addtionmstText" />
+
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/twolvethDevider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eleventhdevider" />
+                app:layout_constraintTop_toBottomOf="@+id/additionalMessage" />
+
+
+            <ImageView
+                android:id="@+id/numbertext"
+                android:layout_width="27dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/call_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twolvethDevider" />
+
+            <TextView
+                android:id="@+id/PhoneNumbertext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/ralewaysemibold"
+                android:gravity="top"
+                android:text="@string/phoneNumber"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/numbertext"
+                app:layout_constraintStart_toEndOf="@+id/numbertext"
+                app:layout_constraintTop_toTopOf="@+id/numbertext"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+
+            <EditText
+                android:id="@+id/phonoNumberFiled"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/spinerborder"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:scrollbars="horizontal"
+                android:maxLines="10"
+                android:hint="Phone Number"
+                app:layout_constraintEnd_toEndOf="@+id/PhoneNumbertext"
+                app:layout_constraintStart_toStartOf="@+id/PhoneNumbertext"
+                app:layout_constraintTop_toBottomOf="@+id/PhoneNumbertext" />
+
+
 
 
 
@@ -846,7 +949,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/additionalMessage">
+                app:layout_constraintTop_toBottomOf="@+id/phonoNumberFiled">
 
                 <TextView
                     android:layout_width="wrap_content"

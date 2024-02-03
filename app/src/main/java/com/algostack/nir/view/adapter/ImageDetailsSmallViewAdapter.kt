@@ -47,7 +47,7 @@ class ImageDetailsSmallViewAdapter : ListAdapter<ImageItem, ImageDetailsSmallVie
         fun bind(item: ImageItem){
 
             Glide.with(itemView)
-                .load(item.url)
+                .load("https://nirapi.onrender.com/uploads/${item.url}")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.demo_home_photo)
                 .error(R.drawable.demo_home_photo)

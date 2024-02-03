@@ -31,9 +31,13 @@
     <string name="dhaka">Dhaka</string>
     <string name="chittagong">Chittagong</string>
     <string name="naraynganj">Narayana City</string>
+    <string name="adittional">Description</string>
+    <string name="phoneNumber">Phone Number</string>
+
 
 
     <string-array name="rent_type">
+        <item> </item>
         <item>Family</item>
         <item>Bachelor</item>
         <item>Sublet</item>
