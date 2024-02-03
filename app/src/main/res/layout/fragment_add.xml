@@ -92,6 +92,8 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
+
+
             <Spinner
                 android:id="@+id/renttypespinner"
                 android:layout_width="match_parent"
@@ -148,18 +150,20 @@
                 app:layout_constraintTop_toTopOf="@+id/iconbeadroom"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/beadroomspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="@string/number_of_bead_room"
                 android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:paddingRight="10dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
                 android:textColor="@color/colorSecendaryBlack"
                 app:layout_constraintEnd_toEndOf="@+id/txtbeadroom"
                 app:layout_constraintStart_toStartOf="@+id/txtbeadroom"
@@ -208,16 +212,19 @@
                 app:layout_constraintTop_toTopOf="@+id/icondrwaingroom"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/drawingroomspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="@string/number_of_drawing_room"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
                 android:textColor="@color/colorSecendaryBlack"
                 app:layout_constraintEnd_toEndOf="@+id/txtdrawingroom"
                 app:layout_constraintStart_toEndOf="@+id/icondrwaingroom"
@@ -267,13 +274,17 @@
                 app:layout_constraintTop_toTopOf="@+id/icondiningroom"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/diningroomspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="Number of Dining Room"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
                 android:spinnerMode="dropdown"
@@ -325,13 +336,17 @@
                 app:layout_constraintTop_toTopOf="@+id/iconbathroom"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/bathroomspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="Number of Bath Room"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
                 android:spinnerMode="dropdown"
@@ -383,13 +398,17 @@
                 app:layout_constraintTop_toTopOf="@+id/iconkitchen"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/kitchenspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="@string/number_of_kitchen_room"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
                 android:spinnerMode="dropdown"
@@ -444,13 +463,17 @@
                 app:layout_constraintTop_toTopOf="@+id/iconbalcony"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/balconyspinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:hint="@string/number_of_balcony_room"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:textSize="16dp"
                 android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaysemibold"
                 android:spinnerMode="dropdown"

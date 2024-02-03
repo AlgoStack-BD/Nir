@@ -16,12 +16,15 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -30,14 +33,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentAddBinding
+import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.utils.FileCompressor
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.view.adapter.CityAdapter
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -75,10 +83,12 @@ class add : Fragment() {
     private val publicPostViewModel by viewModels<PublicPostViewModel> ()
     private val imageUploadViewModel by viewModels<ImageUploadViewModel> ()
     private lateinit var fileImage : File
-    private lateinit var  fileCompressor: FileCompressor
-    private lateinit var dialog: AlertDialog
     private var listImage: MutableList<File> = ArrayList()
     private val imageUris = ArrayList<Uri>()
+    private  lateinit var dialog: BottomSheetDialog
+    private lateinit var cityArrayList : ArrayList<Cityes>
+    private lateinit var cityAdapter : CityAdapter
+    private lateinit var recyclerView: RecyclerView
 
 
     var selectedRentType = ""
@@ -121,6 +131,10 @@ class add : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        cityArrayList = ArrayList()
+
+        cityItemList()
 
         // photo picker
         binding.addphoto.setOnClickListener {
@@ -174,182 +188,45 @@ class add : Fragment() {
 
             }
 
-        // spiner for bead Rooms
-        val customBeadroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customBeadroomList
-        )
-
-        binding.beadroomspinner.adapter = adapter
-
-        binding.beadroomspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.beadroomspinner.setSelection(0)
-                }
-
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.beadroomspinner.setSelection(position)
-
-                    selectedBeadroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-
-                }
-
-            }
-
-        // spiner for drawing Rooms
-        val customDrawingroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter2 = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customDrawingroomList
-        )
-
-        binding.drawingroomspinner.adapter = adapter2
-
-        binding.drawingroomspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.drawingroomspinner.setSelection(0)
-                }
-
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.drawingroomspinner.setSelection(position)
-
-                        selectedDrawingroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-                }
-
-            }
 
 
-        // spinner for dining Rooms
-        val customDiningroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter3 = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customDiningroomList
-        )
-
-        binding.diningroomspinner.adapter = adapter3
-
-        binding.diningroomspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.diningroomspinner.setSelection(0)
-                }
-
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.diningroomspinner.setSelection(position)
-
-                        selectedDiningroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-                }
-
-            }
+        binding.beadroomspinner.setOnClickListener {
+            showBottomSheetDialog("Beadroom")
+        }
 
 
-        // spinner for bath Rooms
-        val customBathroomList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter4 = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customBathroomList
-        )
-        binding.bathroomspinner.adapter = adapter4
-        binding.bathroomspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.bathroomspinner.setSelection(0)
-                }
 
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.bathroomspinner.setSelection(position)
 
-                    selectedBathroom = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-                }
 
-            }
+        binding.drawingroomspinner.setOnClickListener {
+            showBottomSheetDialog("Drawingroom")
+        }
 
-        // spinner for kitchen Rooms
-        val customKitchenList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter5 = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customKitchenList
-        )
-        binding.kitchenspinner.adapter = adapter5
-        binding.kitchenspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.kitchenspinner.setSelection(0)
-                }
 
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.kitchenspinner.setSelection(position)
 
-                        selectedKitchen = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-                }
 
-            }
 
-        // spinner for balcony Rooms
-        val customBalconyList = listOf("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15",
-            "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
-        val adapter6 = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            customBalconyList
-        )
-        binding.balconyspinner.adapter = adapter6
-        binding.balconyspinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.balconyspinner.setSelection(0)
-                }
+        binding.diningroomspinner.setOnClickListener {
+            showBottomSheetDialog("Diningroom")
+        }
 
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.balconyspinner.setSelection(position)
 
-                            selectedBalcony = adapterView?.getItemAtPosition(position).toString().toIntOrNull() ?: 0
-                }
 
-            }
+
+
+        binding.bathroomspinner.setOnClickListener {
+            showBottomSheetDialog("Bathroom")
+        }
+
+        binding.kitchenspinner.setOnClickListener {
+            showBottomSheetDialog("Kitchen")
+        }
+
+
+        binding.balconyspinner.setOnClickListener {
+            showBottomSheetDialog("Balcony")
+        }
+
 
         // chekbox for gas
         binding.checkbocgass.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -459,12 +336,12 @@ binding.regContinue.setOnClickListener {
         binding.checkbocgass.isChecked = false
         binding.negotiablecheckbox.isChecked = false
         binding.renttypespinner.setSelection(0)
-        binding.beadroomspinner.setSelection(0)
-        binding.drawingroomspinner.setSelection(0)
-        binding.diningroomspinner.setSelection(0)
-        binding.bathroomspinner.setSelection(0)
-        binding.kitchenspinner.setSelection(0)
-        binding.balconyspinner.setSelection(0)
+        binding.beadroomspinner.setText("0")
+        binding.drawingroomspinner.setText("0")
+        binding.diningroomspinner.setText("0")
+        binding.bathroomspinner.setText("0")
+        binding.kitchenspinner.setText("0")
+        binding.balconyspinner.setText("0")
         binding.phonoNumberFiled.text.clear()
 
 
@@ -556,18 +433,6 @@ binding.regContinue.setOnClickListener {
     }
 
 
-//    private fun takePhoto() {
-//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        fileImage = createFile()
-//        val uri = if(Build.VERSION.SDK_INT >= 24){
-//            FileProvider.getUriForFile(requireContext(), "com.gunawan.multipleimages.fileprovider",
-//                fileImage)
-//        } else {
-//            Uri.fromFile(fileImage)
-//        }
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-//        startActivityForResult(intent, REQUEST_TAKE_PHOTO)
-//    }
 
     @SuppressLint("SimpleDateFormat")
     @Throws(Exception::class)
@@ -751,6 +616,80 @@ private fun bitmapToFile(bitmap: Bitmap): File {
     }
 
 
+
+    private fun showBottomSheetDialog(check: String) {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.select_number_item, null)
+
+        dialog.setContentView(view)
+
+        val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
+
+        val save = view.findViewById<TextView>(R.id.saveText)
+        save.setOnClickListener {
+            binding.beadroomspinner.setText(searchEditText.text.toString())
+            dialog.dismiss()
+        }
+
+
+
+        recyclerView = view.findViewById(R.id.bottomrecyclerView)
+        cityAdapter = CityAdapter(cityArrayList){
+            //binding.locationText.text = it.cityName
+            if(check == "Beadroom"){
+                binding.beadroomspinner.setText(it.cityName)
+                selectedBeadroom = it.cityName.toIntOrNull() ?: 0
+            }else if(check == "Drawingroom"){
+                binding.drawingroomspinner.setText(it.cityName)
+                selectedDrawingroom = it.cityName.toIntOrNull() ?: 0
+            }else if(check == "Diningroom"){
+                binding.diningroomspinner.setText(it.cityName)
+                selectedDiningroom = it.cityName.toIntOrNull() ?: 0
+            }else if(check == "Bathroom"){
+                binding.bathroomspinner.setText(it.cityName)
+                selectedBathroom = it.cityName.toIntOrNull() ?: 0
+            }else if(check == "Kitchen"){
+                binding.kitchenspinner.setText(it.cityName)
+                selectedKitchen = it.cityName.toIntOrNull() ?: 0
+            }else if(check == "Balcony"){
+                binding.balconyspinner.setText(it.cityName)
+                selectedBalcony = it.cityName.toIntOrNull() ?: 0
+            }
+            dialog.dismiss()
+        }
+
+
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = cityAdapter
+
+
+
+        dialog.show()
+    }
+
+    private fun cityItemList(){
+        cityArrayList.add(Cityes(1,"1"))
+        cityArrayList.add(Cityes(2,"2"))
+        cityArrayList.add(Cityes(3,"3"))
+        cityArrayList.add(Cityes(4,"4"))
+        cityArrayList.add(Cityes(5,"5"))
+        cityArrayList.add(Cityes(6,"6"))
+        cityArrayList.add(Cityes(7,"7"))
+        cityArrayList.add(Cityes(8,"8"))
+        cityArrayList.add(Cityes(9,"9"))
+        cityArrayList.add(Cityes(10,"10"))
+        cityArrayList.add(Cityes(11,"11"))
+        cityArrayList.add(Cityes(12,"12"))
+        cityArrayList.add(Cityes(13,"13"))
+        cityArrayList.add(Cityes(14,"14"))
+        cityArrayList.add(Cityes(15,"15"))
+        cityArrayList.add(Cityes(16,"16"))
+        cityArrayList.add(Cityes(17,"17"))
+
+
+
+    }
 
 
 }

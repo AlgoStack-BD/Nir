@@ -41,7 +41,7 @@ class PublicFeedNearByPostAdapter : ListAdapter<PublicPostData, PublicFeedNearBy
 
 
             Glide.with(itemView)
-                .load("https://nirapi.onrender.com/uploads/$fistOneImg")
+                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$fistOneImg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.demo_home_photo)
                 .error(R.drawable.demo_home_photo)
