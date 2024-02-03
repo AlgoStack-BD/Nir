@@ -3,6 +3,7 @@ package com.algostack.nir.view.frame
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -199,6 +200,7 @@ class Home : Fragment() {
 
                    val bestForYouResult = result.data.data.filter { it.isApproved && !it.isSold }
 
+                   Log.d("BestForYou",bestForYouResult.toString())
                    bestForYouAdapter.submitList(bestForYouResult)
                    nearByPostAdapter.submitList(bestForYouResult)
 
@@ -244,10 +246,7 @@ class Home : Fragment() {
 
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-        navBar?.isVisible = false
-        flotBar?.isVisible = false
+
     }
 
 

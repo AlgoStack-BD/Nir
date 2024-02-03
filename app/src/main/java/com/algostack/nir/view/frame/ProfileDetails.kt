@@ -161,13 +161,7 @@ class ProfileDetails : Fragment() {
             override fun handleOnBackPressed() {
                 // Handle the back button event
                 if (isEnabled) {
-                    val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-                    val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-                    navBar?.isVisible = true
-                    flotBar?.isVisible = true
 
-                    isEnabled = false
-                    requireActivity().onBackPressed()
                 }
 
 

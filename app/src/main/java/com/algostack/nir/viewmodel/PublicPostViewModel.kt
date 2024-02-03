@@ -9,6 +9,7 @@ import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
+import com.algostack.nir.services.model.UploadImageResponse
 import com.algostack.nir.services.repository.PublicPostRepository
 import com.algostack.nir.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +29,9 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
 
     val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
         get() = publicPostRepository.createPostResponseLiveData
+
+
+
 
     var applicationContext: Context ?= null
 
@@ -50,13 +54,7 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
         }
     }
 
-    fun addMultipleImages(listImage: ArrayList<Uri>){
 
-
-       viewModelScope.launch {
-           publicPostRepository.uploadImage(listImage)
-       }
-    }
 
 
 

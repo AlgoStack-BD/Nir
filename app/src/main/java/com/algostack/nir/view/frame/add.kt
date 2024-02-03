@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,7 +14,9 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,11 +36,13 @@ import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.utils.FileCompressor
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
@@ -56,9 +61,7 @@ class add : Fragment() {
 
     }
 
-    private var PES = false
-    private var RP = false
-    private var wp = false
+
 
 
 
@@ -70,13 +73,13 @@ class add : Fragment() {
 
 
     private val publicPostViewModel by viewModels<PublicPostViewModel> ()
+    private val imageUploadViewModel by viewModels<ImageUploadViewModel> ()
     private lateinit var fileImage : File
     private lateinit var  fileCompressor: FileCompressor
     private lateinit var dialog: AlertDialog
     private var listImage: MutableList<File> = ArrayList()
     private val imageUris = ArrayList<Uri>()
-    //private var selectedSelectImage: Int = 0
-    private val listSelectImage = arrayOf("Take Photo", "Choose from Gallery")
+
 
     var selectedRentType = ""
     var selectedBeadroom = 0
@@ -95,6 +98,8 @@ class add : Fragment() {
     var rentPrice = 0
     var selectedImage = ""
     var selectAdditonalMessage = ""
+    var phoneNumber = ""
+
 
 
 
@@ -372,47 +377,24 @@ class add : Fragment() {
 
 
 binding.regContinue.setOnClickListener {
-    // address
-    selectedAddress = binding.fieldpickaddress.text.toString()
-    println("address: $selectedAddress")
-
-    selectAdditonalMessage =  binding.additionalMessage.text.toString()
-
-    publicPostViewModel.applicationContext = requireContext()
-    val userName = tokenManager.getUserName().toString()
-
-    val creatPost = CreatePost(
-        CreatData(
-            selectAdditonalMessage,
-        selectedBalcony,
-        selectedBathroom,
-        selectedBeadroom,
-        com.algostack.nir.services.model.BillsX(selectedElectricity,selectedGass,"",selectedWater),
-        selectedDiningroom,
-        selectedDrawingroom,
-        selectedImage,
-        false,
-        false,
-        selectedNagotiablity,
-        false,
-        false,
-        selectedKitchen,
-        0,
-        selectedAddress,
-        selectedRent,
-        selectedRentType,
-            tokenManager.getUserId()!!,
-            userName,
-
-    ))
-
-
-    publicPostViewModel.createPost(creatPost)
-    publicPostViewModel.addMultipleImages(imageUris)
 
 
 
-    bindObserver()
+    if (imageUris.size > 0) {
+        for (i in 0 until imageUris.size) {
+            // val file = File(imageUris[i].path!!)
+            // Log.d("CheckFile", "onViewCreated: ${file.name}")
+            val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
+            Log.d("CheckFile", "onViewCreated: ${file}")
+            listImage.add(file)
+        }
+        imageUploadViewModel.addMultipleImages(listImage)
+
+
+    }
+
+
+    bindObserverforImageUpload()
 
 
 }
@@ -420,6 +402,89 @@ binding.regContinue.setOnClickListener {
 
 
 
+    }
+
+
+    private fun createFinalCallPost() {
+        // address
+        selectedAddress = binding.fieldpickaddress.text.toString()
+        println("address: $selectedAddress")
+
+        selectAdditonalMessage =  binding.additionalMessage.text.toString()
+
+        publicPostViewModel.applicationContext = requireContext()
+        val userName = tokenManager.getUserName().toString()
+
+        val creatPost = CreatePost(
+            CreatData(
+                selectAdditonalMessage,
+                selectedBalcony,
+                selectedBathroom,
+                selectedBeadroom,
+                com.algostack.nir.services.model.BillsX(selectedElectricity,selectedGass,"",selectedWater),
+                selectedDiningroom,
+                selectedDrawingroom,
+                selectedImage,
+                false,
+                false,
+                selectedNagotiablity,
+                false,
+                false,
+                selectedKitchen,
+                0,
+                selectedAddress,
+                selectedRent,
+                selectedRentType,
+                tokenManager.getUserId()!!,
+                userName,
+                phoneNumber,
+                false
+
+                ))
+
+
+        publicPostViewModel.createPost(creatPost)
+
+
+
+
+        bindObserver()
+    }
+
+    private fun bindObserverforImageUpload() {
+        imageUploadViewModel.uploadImageResponseLiveData.observe(viewLifecycleOwner) {
+
+            binding.progressBar.isVisible = false
+
+            when (it) {
+                is NetworkResult.Success -> {
+                    if (it.data != null ) {
+                        Toast.makeText(requireContext(), "Post Created", Toast.LENGTH_SHORT).show()
+
+                        for (i in it.data.fileNames.indices) {
+                            if (i == 0) {
+                                selectedImage = it.data.fileNames[i]
+                            } else {
+                                selectedImage = selectedImage + "," + it.data.fileNames[i]
+                            }
+                        }
+
+
+                        createFinalCallPost()
+
+
+                    }
+                }
+
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
@@ -625,6 +690,43 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                 binding.imagepicker1.setImageURI(imageUri)
             }
         }
+    }
+
+
+
+    fun getRealPathFromURI(uri: Uri, context: Context): String? {
+        val returnCursor = context.contentResolver.query(uri, null, null, null, null)
+        val nameIndex =  returnCursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        val sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE)
+        returnCursor.moveToFirst()
+        val name = returnCursor.getString(nameIndex)
+        val size = returnCursor.getLong(sizeIndex).toString()
+        val file = File(context.filesDir, name)
+        try {
+            val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
+            val outputStream = FileOutputStream(file)
+            var read = 0
+            val maxBufferSize = 1 * 1024 * 1024
+            val bytesAvailable: Int = inputStream?.available() ?: 0
+            //int bufferSize = 1024;
+            val bufferSize = Math.min(bytesAvailable, maxBufferSize)
+            val buffers = ByteArray(bufferSize)
+            while (inputStream?.read(buffers).also {
+                    if (it != null) {
+                        read = it
+                    }
+                } != -1) {
+                outputStream.write(buffers, 0, read)
+            }
+            Log.e("File Size", "Size " + file.length())
+            inputStream?.close()
+            outputStream.close()
+            Log.e("File Path", "Path " + file.path)
+
+        } catch (e: java.lang.Exception) {
+            Log.e("Exception", e.message!!)
+        }
+        return file.path
     }
 
 

@@ -86,7 +86,7 @@ class PostDetails : Fragment() {
                 imagArray.forEach {
                     newImageArray.add(ImageItem(UUID.randomUUID().toString(), it))
                 }
-                binding.txtDescription.text = it!!.additionalMessage
+                binding.txtDescription.text = it.additionalMessage
                 binding.location.text = it!!.location
                 binding.numOfBadroom.text = it!!.bedRoom.toString()
                 binding.numOfBbathroom.text = it!!.bathRoom.toString()

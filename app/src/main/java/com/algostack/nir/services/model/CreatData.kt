@@ -20,5 +20,8 @@ data class CreatData(
     val price: Int,
     val type: String,
     val userId: String,
-    val userName: String
+    val userName: String,
+    val phoneNumber: String,
+    val isAds: Boolean
+
 )
