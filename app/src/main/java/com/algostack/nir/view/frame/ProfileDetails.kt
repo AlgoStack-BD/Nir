@@ -99,6 +99,9 @@ class ProfileDetails : Fragment() {
 
 
 
+
+
+
         Glide
             .with(requireContext())
             .load(tokenManager.getUserImage())
@@ -161,13 +164,12 @@ class ProfileDetails : Fragment() {
             override fun handleOnBackPressed() {
                 // Handle the back button event
                 if (isEnabled) {
-                    val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-                    val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-                    navBar?.isVisible = true
-                    flotBar?.isVisible = true
 
-                    isEnabled = false
-                    requireActivity().onBackPressed()
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
+                    fragmentTransaction.remove(this@ProfileDetails)
+
                 }
 
 

@@ -104,4 +104,9 @@
         android:name="com.algostack.nir.view.frame.Search_Result"
         android:label="fragment_search__result"
         tools:layout="@layout/fragment_search__result" />
+    <fragment
+        android:id="@+id/editeProfile"
+        android:name="com.algostack.nir.view.frame.EditeProfile"
+        android:label="fragment_edite_profile"
+        tools:layout="@layout/fragment_edite_profile" />
 </navigation>

@@ -86,15 +86,15 @@ class PostDetails : Fragment() {
                 imagArray.forEach {
                     newImageArray.add(ImageItem(UUID.randomUUID().toString(), it))
                 }
-                binding.txtDescription.text = it!!.additionalMessage
-                binding.location.text = it!!.location
-                binding.numOfBadroom.text = it!!.bedRoom.toString()
-                binding.numOfBbathroom.text = it!!.bathRoom.toString()
-                binding.numOfKitchen.text = it!!.kitchen.toString()
-                binding.numOfDinigroom.text = it!!.diningRoom.toString()
-                binding.numOfDrawing.text = it!!.drawingRoom.toString()
-                binding.numOfBelcony.text = it!!.balcony.toString()
-                binding.rentPriceAmmount.text = "${it!!.price.toString()} ৳"
+                binding.txtDescription.text = it.additionalMessage
+                binding.location.text = it.location
+                binding.numOfBadroom.text = it.bedRoom.toString()
+                binding.numOfBbathroom.text = it.bathRoom.toString()
+                binding.numOfKitchen.text = it.kitchen.toString()
+                binding.numOfDinigroom.text = it.diningRoom.toString()
+                binding.numOfDrawing.text = it.drawingRoom.toString()
+                binding.numOfBelcony.text = it.balcony.toString()
+                binding.rentPriceAmmount.text = "${it.price.toString()} ৳"
                 binding.electricityBillChekboox.isChecked = it!!.bills.electricBill
                 binding.checkbocgass.isChecked = it!!.bills.gasBill
                 if(it!!.isNegotiable){

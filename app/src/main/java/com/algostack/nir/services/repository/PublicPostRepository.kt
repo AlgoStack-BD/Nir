@@ -18,6 +18,7 @@ import com.algostack.nir.utils.NetworkUtils.Companion.isInternetConnected
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,26 +38,45 @@ class PublicPostRepository @Inject constructor(
 
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
-    private val _uploadImageResponseLiveData = MutableLiveData<NetworkResult<UploadImageResponse>> ()
+
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = _publicPostResponseLiveData
 
     val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
         get() = _createPostResponseLiveData
 
-    val uploadImageResponseLiveData : LiveData<NetworkResult<UploadImageResponse>>
-        get() = _uploadImageResponseLiveData
+
 
 
 
     suspend fun publicPost(context: Context){
 
        // i want if room db not null then show data from room db and if room db is null then show data from api
-        if (nirLocalDB.getPublicPostDao().getPublicPostData() != null){
-            _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(nirLocalDB.getPublicPostDao().getPublicPostData()!!,200)))
-        }
+//        if (nirLocalDB.getPublicPostDao().getPublicPostData() != null){
+//            _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(nirLocalDB.getPublicPostDao().getPublicPostData()!!,200)))
+//
+//            try {
+//                val response = publicPostApi.getPublicPost()
+//
+//                if (response.isSuccessful && response.body() != null){
+//                    nirLocalDB.getPublicPostDao().deleteAllPublicPostData()
+//
+//                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
+//
+//                }
+//
+//
+//                handleNetworkResponse(response)
+//            }catch (e: Exception){
+//                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
+//
+//            }catch (e: TimeoutException){
+//                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+//            }
+//
+//        }
 
-        else if(NetworkUtils.isInternetConnected((context))){
+        if(NetworkUtils.isInternetConnected((context))){
             _publicPostResponseLiveData.postValue(NetworkResult.Loading())
 
 
@@ -139,31 +159,7 @@ class PublicPostRepository @Inject constructor(
 
     }
 
-    suspend fun uploadImage(listImage: ArrayList<Uri>) {
-        listImage.forEach{
-            println("CheckUri2: = $it")
-        }
-        _createPostResponseLiveData.postValue(NetworkResult.Loading())
 
-        try {
-
-            val images = listImage.map { imageUri->
-                val file = imageUri.path?.let { File(it) }
-                val requestBody = file!!.asRequestBody("image/*".toMediaTypeOrNull())
-                MultipartBody.Part.createFormData("files",file.name,requestBody)
-            }
-
-            val response = publicPostApi.uploadImage(images)
-             println("Chekabd: "+ response.body())
-            if (response.isSuccessful && response.body() != null) {
-                _uploadImageResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
-            }
-        } catch (e: Exception) {
-            _uploadImageResponseLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: TimeoutException) {
-            _uploadImageResponseLiveData.postValue(NetworkResult.Error("Time Out"))
-        }
-    }
 
 
 

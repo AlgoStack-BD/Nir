@@ -27,13 +27,17 @@
     <string name="cityName">Dhaka</string>
     <string name="priceRange">Price Range ( BDT )</string>
     <string name="search_articles_hint">Search Location</string>
+    <string name="inputtext">Enter Number</string>
     <string name="sylhet">Sylhet</string>
     <string name="dhaka">Dhaka</string>
     <string name="chittagong">Chittagong</string>
     <string name="naraynganj">Narayana City</string>
+    <string name="adittional">Description</string>
+    <string name="phoneNumber">Phone Number</string>
 
 
     <string-array name="rent_type">
+        <item> </item>
         <item>Family</item>
         <item>Bachelor</item>
         <item>Sublet</item>
@@ -46,6 +50,10 @@
     <string name="DetailsHeadding">House Name</string>
     <string name="any">Any</string>
     <string name="_0">0</string>
+    <string name="number_of_drawing_room">Number of Drawing Room</string>
+    <string name="number_of_bead_room">Number of Bead Room</string>
+    <string name="number_of_kitchen_room">Number of Kitchen Room</string>
+    <string name="number_of_balcony_room">Number of Balcony Room</string>
 
     <string-array name="rangeSlider">
         <item>0</item>

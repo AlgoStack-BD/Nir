@@ -61,7 +61,7 @@ class ProfileMenu : Fragment() {
         binding.profileName.text = tokenManager.getUserName()
 
         binding.profileCard.setOnClickListener {
-            replaceFragment(ProfileDetails())
+            replaceFragment(ProfileDetails(),ProfileDetails::class.java.simpleName)
         }
 
         binding.signoutCard.setOnClickListener {
@@ -75,16 +75,10 @@ class ProfileMenu : Fragment() {
 
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment, flag: String){
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-        val navBar = activity?.findViewById<BottomAppBar>(R.id.bottomAppBar)
-        val flotBar = activity?.findViewById<FloatingActionButton>(R.id.fab)
-        navBar?.isVisible = false
-        flotBar?.isVisible = false
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment,flag).addToBackStack(flag).commit()
     }
 
 }

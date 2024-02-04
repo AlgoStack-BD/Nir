@@ -240,7 +240,7 @@
                         android:id="@+id/imageView156"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/locationpicker"
+                        android:src="@drawable/category"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -251,7 +251,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/ralewaybold"
-                        android:text="@string/city"
+                        android:text="@string/type"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp"
                         app:layout_constraintStart_toEndOf="@+id/imageView156"

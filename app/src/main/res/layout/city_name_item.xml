@@ -14,8 +14,10 @@
         android:layout_marginBottom="10dp"
         android:padding="5dp"
         android:text="@string/dhaka"
+        android:textAlignment="center"
+        android:fontFamily="@font/ralewaybold"
         android:textColor="@color/colorSecendaryBlack"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="28dp" />
 

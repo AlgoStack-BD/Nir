@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
@@ -236,10 +237,6 @@ class Filter : Fragment() {
 
         val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
 
-
-
-
-
         recyclerView = view.findViewById(R.id.bottomrecyclerView)
         cityAdapter = CityAdapter(cityArrayList){
             binding.locationText.text = it.cityName
@@ -465,7 +462,7 @@ class Filter : Fragment() {
                 }
 
 
-
+                else -> {}
             }
 
 
