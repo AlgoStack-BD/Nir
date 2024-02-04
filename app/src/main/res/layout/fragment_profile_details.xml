@@ -30,17 +30,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <ImageView
-        android:id="@+id/imageView10"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/editeProfilebtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/profileedit"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="19dp"
         app:layout_constraintBottom_toBottomOf="@+id/profileimg"
         app:layout_constraintEnd_toEndOf="@+id/profileimg"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/profileimg"
         app:layout_constraintTop_toTopOf="@+id/profileimg"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.81"
+        >
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/editprofileicon"
+            />
+
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/userName"

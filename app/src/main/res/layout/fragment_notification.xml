@@ -47,7 +47,70 @@
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifNoDataAvilable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.23000002">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lotti"
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/notification" />
+
+        <TextView
+            android:id="@+id/alertText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/ralewayextrabold"
+            android:gravity="center"
+            android:text="Are you wating for something to happen?"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/lotti"
+            app:layout_constraintStart_toStartOf="@+id/lotti"
+            app:layout_constraintTop_toBottomOf="@+id/lotti" />
+
+        <TextView
+            android:id="@+id/alertText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="We will notify you when something exciting and new happens!"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/alertText"
+            app:layout_constraintStart_toStartOf="@+id/alertText"
+            app:layout_constraintTop_toBottomOf="@+id/alertText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRV"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"

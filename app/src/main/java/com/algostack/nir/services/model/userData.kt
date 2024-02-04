@@ -3,7 +3,7 @@ package com.algostack.nir.services.model
 data class userData (
 
     val email: String,
-    val image: List<String>,
+    val image: String,
     val isAdmin: Boolean,
     val isVerified: Boolean,
     val location: String,

@@ -1,18 +1,12 @@
 package com.algostack.nir.view.Auth
 
-import android.app.AlertDialog
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
-import android.service.autofill.UserData
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.addCallback
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -137,7 +131,7 @@ class SignUp : Fragment() {
         val password = binding?.regmainpassword?.text.toString()
 
 
-        return UserRequest(userData(email, emptyList(),false,false,"",name,password,"",0,0))
+        return UserRequest(userData(email, "",false,false,"",name,password,"",0,0))
     }
 
     private fun validateUserInput() : Pair<Boolean,String>{
@@ -170,7 +164,7 @@ class SignUp : Fragment() {
                 is NetworkResult.Success -> {
                     if (it.data != null && it.data.status == 200 && it.data.jwt != null) {
                         val email = binding?.regemail?.text.toString()
-                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email,it.data.data._id)
+                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email,it.data.data._id,it.data.data.phone)
                         println("ChekToken: ${tokenManager.getToken()}")
                         authViewModel.VerificationRequest(VerificationRequest(email))
                         val bundle = Bundle()

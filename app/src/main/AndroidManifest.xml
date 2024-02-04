@@ -26,11 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nir"
         tools:targetApi="31">
-        <activity
-            android:name=".view.main.InternalNavigation"
-            android:exported="false" />
+
         <activity
             android:name=".view.main.Frame"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".view.main.MainActivity"

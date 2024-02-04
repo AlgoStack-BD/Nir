@@ -73,6 +73,18 @@ class ProfileDetails : Fragment() {
         val selectedColour = ContextCompat.getColor(requireContext(), R.color.white)
         val defaultColour = ContextCompat.getColor(requireContext(), R.color.colorSecendaryBlack)
 
+
+
+       binding.editeProfilebtn.setOnClickListener {
+           val fragmentManager = parentFragmentManager
+           val fragmentTransaction = fragmentManager.beginTransaction()
+           fragmentTransaction.replace(R.id.fragmentConthainerView4,EditeProfile(),EditeProfile::class.java.simpleName)
+
+           fragmentTransaction.addToBackStack(EditeProfile::class.java.simpleName)
+           fragmentTransaction.commit()
+         }
+
+
         binding.profileMyList.setOnClickListener {
 
 
