@@ -13,19 +13,25 @@ import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.UserResponse
 import com.algostack.nir.services.model.UserSigninRequest
+import com.algostack.nir.services.model.UserUpdateRequest
 import com.algostack.nir.services.model.VerificationRequest
 import com.algostack.nir.services.model.VerificationResponse
 import com.algostack.nir.services.model.VerifyOTPResponse
 import com.algostack.nir.services.model.VerifyRequest
+import com.algostack.nir.services.model.userUpdateRequestResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.Constants
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okio.IOException
 import org.json.JSONObject
 import retrofit2.Response
+import java.io.File
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
@@ -42,6 +48,9 @@ class userRepository @Inject constructor(
     private val _verifyResponseLiveData = MutableLiveData<NetworkResult<VerificationResponse>>()
     private val _VerifyOtpMessageLiveData = MutableLiveData<NetworkResult<VerifyOTPResponse>>()
 
+    private val _userUpdateResponseLiveData = MutableLiveData<NetworkResult<userUpdateRequestResponse>>()
+
+
     val verificationResponse: LiveData<NetworkResult<VerificationResponse>>
         get() = _verifyResponseLiveData
 
@@ -50,6 +59,10 @@ class userRepository @Inject constructor(
 
     val verifyOtpMessageLiveData: LiveData<NetworkResult<VerifyOTPResponse>>
         get() = _VerifyOtpMessageLiveData
+
+
+    val requestResponseLiveData: LiveData<NetworkResult<userUpdateRequestResponse>>
+        get() = _userUpdateResponseLiveData
 
     suspend fun registerUser(userRequest: UserRequest , context: Context) {
 
@@ -162,6 +175,32 @@ class userRepository @Inject constructor(
         }
     }
 
+
+
+    suspend fun updateUserInfo(id:String, userUpdateRequest: UserUpdateRequest) {
+
+        _userUpdateResponseLiveData.postValue(NetworkResult.Loading())
+
+
+        try {
+
+
+
+            val response = userApi.updateUserInfo(id, userUpdateRequest)
+
+            Log.d(Constants.TAG, response.body().toString())
+
+            if (response.isSuccessful && response.body() != null) {
+                _userUpdateResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+            }
+        } catch (e: Exception) {
+            _userUpdateResponseLiveData.postValue(NetworkResult.Error(e.message))
+        } catch (e: TimeoutException) {
+            _userUpdateResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+        }
+    }
+
+
     private suspend fun handleNetworkResponseU(response: Response<UserResponse>){
         if (response.isSuccessful && response.body() != null){
 
@@ -198,6 +237,9 @@ class userRepository @Inject constructor(
             _VerifyOtpMessageLiveData.postValue(NetworkResult.Error("Something went wrong"))
         }
     }
+
+
+
 
 
 }

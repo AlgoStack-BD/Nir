@@ -24,13 +24,26 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentEditeProfileBinding
+import com.algostack.nir.services.model.BillsX
 import com.algostack.nir.services.model.Cityes
+import com.algostack.nir.services.model.CreatData
+import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.UpdateUserData
+import com.algostack.nir.services.model.UserRequest
+import com.algostack.nir.services.model.UserUpdateRequest
+import com.algostack.nir.services.model.userData
+import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.viewmodel.AuthViewModel
+import com.algostack.nir.viewmodel.FilterViewModel
+import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,6 +77,10 @@ class EditeProfile : Fragment() {
     private lateinit var fileImage : File
     private var listImage: MutableList<File> = ArrayList()
     private val imageUris = ArrayList<Uri>()
+    var selectedImage = ""
+
+    private val updateViewmodel by viewModels<AuthViewModel> ()
+    private val imageUploadViewModel by viewModels<ImageUploadViewModel> ()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,26 +127,144 @@ class EditeProfile : Fragment() {
 
             }
 
-
-
-
-
         }
 
 
+        binding.updateProfile.setOnClickListener {
+
+            Log.d("CheckFile", "")
 
 
+            if (imageUris.size >= 0) {
+
+                for (i in 0 until imageUris.size) {
+                    // val file = File(imageUris[i].path!!)
+                    // Log.d("CheckFile", "onViewCreated: ${file.name}")
+                    val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
+                    Log.d("CheckFile", "onViewCreated: ${file}")
+                    listImage.add(file)
+                }
+                imageUploadViewModel.addMultipleImages(listImage)
+
+
+            }
+
+
+            bindObserverforImageUpload()
+
+
+
+    }
+
+
+    }
+
+
+    fun createFinalCallPost() {
+
+
+
+        val userName = binding.editUserName.text.toString()
+        val userPhone = binding.editUserPhone.text.toString()
+
+        if (userName.isEmpty()  || userPhone.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+        } else {
+            println("tokenManager.getUserId()!!: ${tokenManager.getUserId()}")
+           updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage)))
+        }
+
+        bindObserver()
+    }
+
+
+
+
+    private fun bindObserverforImageUpload() {
+        imageUploadViewModel.uploadImageResponseLiveData.observe(viewLifecycleOwner) {
+
+            binding.progressBar.isVisible = false
+
+            when (it) {
+                is NetworkResult.Success -> {
+                    if (it.data != null ) {
+                        Toast.makeText(requireContext(), "Post Created", Toast.LENGTH_SHORT).show()
+
+                        for (i in it.data.fileNames.indices) {
+                            if (i == 0) {
+                                selectedImage = it.data.fileNames[i]
+                            } else {
+                                selectedImage = selectedImage + "," + it.data.fileNames[i]
+                            }
+                        }
+
+                        println("selectedImage: $selectedImage")
+
+
+                        createFinalCallPost()
+
+
+                    }
+                }
+
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
+    private fun bindObserver() {
+        updateViewmodel.userUpdateResponseLiveData.observe(viewLifecycleOwner) {
+
+            binding.progressBar.isVisible = false
+
+            when (it) {
+                is NetworkResult.Success -> {
+                    if (it.data != null && it.data.status == 200) {
+                        Toast.makeText(requireContext(), "Update Successful", Toast.LENGTH_SHORT).show()
+
+                       tokenManager.updateToken(binding.editUserName.text.toString(),binding.editUserPhone.text.toString(),selectedImage)
+
+                    }
+                }
+
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun openGalleryForImage() {
 
 
             // For latast versions API LEVEL 19+
-            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            intent.type = "image/*"
-            startActivityForResult(intent, REQUEST_OPEN_GALLERY)
+//            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+//            intent.addCategory(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            startActivityForResult(intent, REQUEST_OPEN_GALLERY)
+
+
+        val intent = Intent().apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            action = Intent.ACTION_GET_CONTENT
+        }
+        startActivityForResult(
+            Intent.createChooser(intent, "Select Picture"),
+            REQUEST_OPEN_GALLERY
+        )
 
 
     }
@@ -147,20 +282,6 @@ class EditeProfile : Fragment() {
 
     // Permission for camera and gallery
     private fun checkPermission(): Boolean {
-//        val readPermission = ContextCompat.checkSelfPermission(
-//            requireContext(),
-//            Manifest.permission.READ_EXTERNAL_STORAGE
-//        ) == PackageManager.PERMISSION_GRANTED
-//
-//
-//        val writePermission = ContextCompat.checkSelfPermission(
-//            requireContext(),
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE
-//        ) == PackageManager.PERMISSION_GRANTED
-//
-//
-//        return readPermission && writePermission
-
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             //Android is 11 (R) or above

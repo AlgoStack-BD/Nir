@@ -9,7 +9,7 @@ data class userData (
     val location: String,
     val name: String,
     val password: String,
-    val phone: Any,
+    val phone: String,
     val rentSuccess: Int,
     val totoalPost: Int
 

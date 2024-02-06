@@ -11,14 +11,17 @@ import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.UserResponse
 import com.algostack.nir.services.model.UserSigninRequest
+import com.algostack.nir.services.model.UserUpdateRequest
 import com.algostack.nir.services.model.VerificationRequest
 import com.algostack.nir.services.model.VerificationResponse
 import com.algostack.nir.services.model.VerifyOTPResponse
 import com.algostack.nir.services.model.VerifyRequest
+import com.algostack.nir.services.model.userUpdateRequestResponse
 import com.algostack.nir.services.repository.userRepository
 import com.algostack.nir.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,6 +37,9 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
 
     val VerifyResponseLiveData : LiveData<NetworkResult<VerificationResponse>>
         get() = userRepository.verificationResponse
+
+    val userUpdateResponseLiveData : LiveData<NetworkResult<userUpdateRequestResponse>>
+        get() = userRepository.requestResponseLiveData
 
     var applicationContext: Context? = null
 
@@ -78,7 +84,6 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
 
 
 
-
 //        val validEmailRegex = Regex("^(?=.*[@])(?=\\S+$).{6,}\$")
 //        val validEmailDomains = listOf("gmail.com", "yahoo.com")
         var result = Pair(true,"")
@@ -93,4 +98,11 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
         return result
     }
 
+
+
+    fun updateUserInfo(id:String, updateRequest: UserUpdateRequest){
+        viewModelScope.launch {
+            applicationContext?.let { userRepository.updateUserInfo(id,updateRequest) }
+        }
+    }
 }

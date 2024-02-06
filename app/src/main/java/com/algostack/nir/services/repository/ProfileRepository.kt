@@ -3,10 +3,16 @@ package com.algostack.nir.services.repository
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.ProfileApi
+import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.PublicPostResponse
+import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
@@ -44,4 +50,7 @@ class ProfileRepository @Inject constructor(
             }
         }
     }
+
+
+
 }

@@ -30,6 +30,17 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
         editor.apply()
     }
 
+// update user name , phone , and image
+    fun updateToken(
+        userName: String, number: String,userImage: String
+){
+        val editor = prefs.edit()
+        editor.putString(USER_NAME, userName)
+        editor.putString(USER_NUMER, number)
+    editor.putString(USER_IMAGE, userImage)
+        editor.apply()
+    }
+
     fun  getUserId() : String? {
         return prefs.getString(USER_ID, null)
     }
