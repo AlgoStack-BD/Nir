@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.algostack.nir.R
+import com.algostack.nir.databinding.EditlayoutItemBinding
 import com.algostack.nir.databinding.NearpostBinding
 import com.algostack.nir.databinding.PublicPostBinding
 import com.algostack.nir.services.model.PublicPostData
@@ -17,7 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnPostViewHolder {
-        val binding = NearpostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = EditlayoutItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return UserOwnPostViewHolder(binding)
     }
 
@@ -26,7 +27,7 @@ class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPo
         holder.bind(item)
 
     }
-    inner class UserOwnPostViewHolder(private val binding: NearpostBinding) : ViewHolder(binding.root) {
+    inner class UserOwnPostViewHolder(private val binding: EditlayoutItemBinding ) : ViewHolder(binding.root) {
 
         fun bind(item: PublicPostData){
             binding.rahimHOus.text = item.userName

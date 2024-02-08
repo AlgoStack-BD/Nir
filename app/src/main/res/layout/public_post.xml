@@ -117,8 +117,8 @@
 
         <ImageView
             android:id="@+id/bathroompublic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/bathroom"
             app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroomText"
@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="@font/ralewayregular"
-            android:text="Bedroom"
+            android:text="@string/bathroom"
             app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBathroom"
             app:layout_constraintStart_toEndOf="@+id/numOfPublicBathroom"
             app:layout_constraintTop_toTopOf="@+id/numOfPublicBathroom" />

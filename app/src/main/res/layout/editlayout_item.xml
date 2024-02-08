@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardPreventCornerOverlap="true"
+    app:cardCornerRadius="20dp"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+        <ImageView
+            android:id="@+id/cardImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/home_image"
+            android:scaleType="centerCrop"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+
+            <RelativeLayout
+                android:id="@+id/threedotmenu"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="135dp"
+                android:layout_marginTop="10dp"
+
+                >
+
+                 <androidx.appcompat.widget.Toolbar
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:id="@+id/threedotmenug"
+                     app:menu="@menu/threedotmenu" />                    />
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/rahim_h_ous"
+                    android:layout_width="104dp"
+                    android:layout_height="19dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="105dp"
+                    android:text="Rahim House"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/ralewaysemibold"
+                    android:textSize="15dp"
+                    android:gravity="top"
+                    />
+
+
+                <TextView
+                    android:id="@+id/sylhet_jind"
+                    android:layout_width="192dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:text="Sylhet, jinda Bazar, Bangladesh"
+                    android:textSize="15dp"
+                    android:textColor="#D4D4D4"
+                    android:fontFamily="@font/ralewaysemibold"
+                    android:gravity="top"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+
+
+
+</com.google.android.material.card.MaterialCardView>
