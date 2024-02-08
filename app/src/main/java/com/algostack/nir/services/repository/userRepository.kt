@@ -177,28 +177,28 @@ class userRepository @Inject constructor(
 
 
 
-    suspend fun updateUserInfo(id:String, userUpdateRequest: UserUpdateRequest) {
-
+    suspend fun updateUserInfo(_id: String, userUpdateRequest: UserUpdateRequest) {
+        println("Testapicall1: $_id")
+        println("Testapicall2: $userUpdateRequest")
         _userUpdateResponseLiveData.postValue(NetworkResult.Loading())
 
-
         try {
-
-
-
-            val response = userApi.updateUserInfo(id, userUpdateRequest)
-
-            Log.d(Constants.TAG, response.body().toString())
+            val response = userApi.updateUserInfo(_id, userUpdateRequest)
 
             if (response.isSuccessful && response.body() != null) {
                 _userUpdateResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+            } else {
+                val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                _userUpdateResponseLiveData.postValue(NetworkResult.Error(errorMessage))
             }
+        } catch (e: IOException) {
+            _userUpdateResponseLiveData.postValue(NetworkResult.Error("Network error: ${e.message}"))
         } catch (e: Exception) {
-            _userUpdateResponseLiveData.postValue(NetworkResult.Error(e.message))
-        } catch (e: TimeoutException) {
-            _userUpdateResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            _userUpdateResponseLiveData.postValue(NetworkResult.Error("Error: ${e.message}"))
+            println("TestapicallErrror: ${e.message}")
         }
     }
+
 
 
     private suspend fun handleNetworkResponseU(response: Response<UserResponse>){

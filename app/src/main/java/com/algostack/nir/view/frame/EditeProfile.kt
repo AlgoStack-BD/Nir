@@ -93,17 +93,18 @@ class EditeProfile : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         Glide
             .with(requireContext())
-            .load(tokenManager.getUserImage())
+            .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
             .centerCrop()
-            .placeholder(R.drawable.profile)
+            .placeholder(R.drawable.profileedit)
             .into(binding.profileimg)
+
+        println("tokenManager.getUserImage(): ${tokenManager.getUserImage()}")
 
         binding.editUserName.setText(tokenManager.getUserName())
         binding.editUserEmail.setText(tokenManager.getUserEmail())
@@ -154,7 +155,7 @@ class EditeProfile : Fragment() {
 
 
 
-    }
+        }
 
 
     }
@@ -171,7 +172,7 @@ class EditeProfile : Fragment() {
             Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
         } else {
             println("tokenManager.getUserId()!!: ${tokenManager.getUserId()}")
-           updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage)))
+            updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage)))
         }
 
         bindObserver()
@@ -229,7 +230,7 @@ class EditeProfile : Fragment() {
                     if (it.data != null && it.data.status == 200) {
                         Toast.makeText(requireContext(), "Update Successful", Toast.LENGTH_SHORT).show()
 
-                       tokenManager.updateToken(binding.editUserName.text.toString(),binding.editUserPhone.text.toString(),selectedImage)
+                        tokenManager.updateToken(binding.editUserName.text.toString(),binding.editUserPhone.text.toString(),selectedImage)
 
                     }
                 }
@@ -248,7 +249,7 @@ class EditeProfile : Fragment() {
     private fun openGalleryForImage() {
 
 
-            // For latast versions API LEVEL 19+
+        // For latast versions API LEVEL 19+
 //            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
 //            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
 //            intent.addCategory(Intent.ACTION_PICK)
@@ -341,7 +342,7 @@ class EditeProfile : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_OPEN_GALLERY) {
-         if (data?.data != null) {
+            if (data?.data != null) {
                 val imageUri: Uri = data.data!!
                 imageUris.add(imageUri)
                 // Do something with the image (save it to some directory or whatever you need to do with it here)

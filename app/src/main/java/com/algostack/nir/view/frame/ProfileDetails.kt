@@ -116,7 +116,7 @@ class ProfileDetails : Fragment() {
 
         Glide
             .with(requireContext())
-            .load(tokenManager.getUserImage())
+            .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
             .centerCrop()
             .placeholder(R.drawable.profile)
             .into(binding.profileimg)

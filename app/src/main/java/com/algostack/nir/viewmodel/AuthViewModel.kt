@@ -101,8 +101,9 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
 
 
     fun updateUserInfo(id:String, updateRequest: UserUpdateRequest){
+        println("updateUserInfo called: $id, $updateRequest")
         viewModelScope.launch {
-            applicationContext?.let { userRepository.updateUserInfo(id,updateRequest) }
+           userRepository.updateUserInfo(id,updateRequest)
         }
     }
 }

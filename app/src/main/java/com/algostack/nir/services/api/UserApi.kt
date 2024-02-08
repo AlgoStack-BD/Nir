@@ -26,9 +26,9 @@ interface UserApi {
     suspend fun signin(@Body userSigninRequest: UserSigninRequest) : Response<UserResponse>
 
 
-    @PUT("/update-user/{_id}")
+    @PUT("/update-user/{id}")
     suspend fun updateUserInfo(
-        @Path("_id") id: String,
+        @Path("id") _id: String,
         @Body updateRequest: UserUpdateRequest
 
     ): Response<userUpdateRequestResponse>
