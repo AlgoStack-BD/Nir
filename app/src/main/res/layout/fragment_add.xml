@@ -920,7 +920,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/twolvethDevider" />
 
             <TextView
-                android:id="@+id/PhoneNumbertext"
+                android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -928,7 +928,7 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/ralewaysemibold"
                 android:gravity="top"
-                android:text="@string/phoneNumber"
+                android:text="@string/title"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/numbertext"
@@ -939,7 +939,7 @@
 
 
             <EditText
-                android:id="@+id/phonoNumberFiled"
+                android:id="@+id/titleTextFiled"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginStart="20dp"
@@ -953,9 +953,9 @@
                 android:scrollbars="horizontal"
                 android:maxLines="10"
                 android:hint="Phone Number"
-                app:layout_constraintEnd_toEndOf="@+id/PhoneNumbertext"
-                app:layout_constraintStart_toStartOf="@+id/PhoneNumbertext"
-                app:layout_constraintTop_toBottomOf="@+id/PhoneNumbertext" />
+                app:layout_constraintEnd_toEndOf="@+id/titleText"
+                app:layout_constraintStart_toStartOf="@+id/titleText"
+                app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
 
 
@@ -967,12 +967,12 @@
                 android:layout_height="55dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/coustomrectengular"
+                android:background="@drawable/coustomrectengular" 
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phonoNumberFiled">
+                app:layout_constraintTop_toBottomOf="@+id/titleTextFiled">
 
                 <TextView
                     android:layout_width="wrap_content"
