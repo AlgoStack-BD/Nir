@@ -5,7 +5,9 @@ import android.content.LocusId
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.algostack.nir.services.model.DeletePostResponseData
 import com.algostack.nir.services.model.PublicPostResponse
+import com.algostack.nir.services.model.deletePostResponse
 import com.algostack.nir.services.repository.ProfileRepository
 import com.algostack.nir.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +21,9 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
         get() = profileRepository.profileInfoResponseLiveData
 
 
+    val deletePostResponseLiveData : LiveData<NetworkResult<deletePostResponse>>
+        get() = profileRepository.deletePostResponseLiveData
+
 
     var applicationContext: Context?= null
     fun singleUserPost(userId: String){
@@ -31,4 +36,16 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
             }
         }
     }
+
+    fun deletePost(id: String){
+        viewModelScope.launch {
+
+            profileRepository.deletePost(id)
+
+
+
+        }
+    }
+
+
 }

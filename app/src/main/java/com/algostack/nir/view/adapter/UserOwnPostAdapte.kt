@@ -1,7 +1,10 @@
 package com.algostack.nir.view.adapter
 
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -15,7 +18,7 @@ import com.algostack.nir.services.model.SingleUserResponseData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
+class UserOwnPostAdapte (private val onDetailsCliked: (_id: String) -> Unit): ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnPostViewHolder {
         val binding = EditlayoutItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -46,10 +49,40 @@ class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPo
                 .error(R.drawable.demo_home_photo)
                 .into(binding.cardImage)
 
+
+            binding.threedotmenulayout.setOnClickListener {
+
+             PopupMenu(itemView.context, it).apply {
+                    setOnMenuItemClickListener { it ->
+                        when (it.itemId) {
+                            R.id.editpost -> {
+                                Toast.makeText(itemView.context, "Edit", Toast.LENGTH_SHORT).show()
+                                true
+                            }
+                            R.id.deletepost -> {
+                                Toast.makeText(itemView.context, "Delete", Toast.LENGTH_SHORT).show()
+
+                                onDetailsCliked(item._id)
+
+
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                    inflate(R.menu.threedotmenu)
+                    show()
+                }
+            }
+
         }
 
 
     }
+
+
+
+
     class comparatorDiffutil : DiffUtil.ItemCallback<PublicPostData>(){
         override fun areItemsTheSame(oldItem: PublicPostData, newItem: PublicPostData): Boolean {
             return oldItem._id == newItem._id
@@ -61,4 +94,9 @@ class UserOwnPostAdapte : ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPo
     }
 
 
+
+
+
+
 }
+

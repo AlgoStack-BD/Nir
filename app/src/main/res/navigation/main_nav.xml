@@ -92,7 +92,7 @@
         android:id="@+id/selectCity"
         android:name="com.algostack.nir.view.frame.SelectCity"
         android:label="fragment_select_city"
-        tools:layout="@layout/fragment_select_city" >
+        tools:layout="@layout/select_city_bottom_view" >
         <action
             android:id="@+id/action_selectCity_to_filter"
             app:destination="@id/filter"

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileDetailsBinding
+import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
@@ -26,6 +27,7 @@ import com.algostack.nir.viewmodel.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -51,7 +53,7 @@ class ProfileDetails : Fragment() {
 
         _binding = FragmentProfileDetailsBinding.inflate(inflater, container, false)
 
-        userOwnPostAdapte = UserOwnPostAdapte()
+        userOwnPostAdapte = UserOwnPostAdapte(this::onDetailsCliked)
         setupBackPress()
         return binding.root
     }
@@ -169,6 +171,42 @@ class ProfileDetails : Fragment() {
                 }
             }
         })
+    }
+
+
+
+    private fun onDetailsCliked(_id: String) {
+
+        profileViewModel.deletePost(_id)
+
+        profileViewModel.deletePostResponseLiveData.observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is NetworkResult.Success -> {
+                    if (result.data!!.status == 200) {
+                        val userId = tokenManager.getUserId()!!
+                        profileViewModel.applicationContext = requireContext()
+                        profileViewModel.singleUserPost(userId)
+                    } else if (result.data.status == 500) {
+                        result.message?.let { it1 ->
+                            AlertDaialog.showCustomAlertDialogBox(
+                                requireContext(),
+                                it1
+                            )
+                        }
+                    }
+                }
+                is NetworkResult.Error -> {
+                    AlertDaialog.showCustomAlertDialogBox(
+                        requireContext(),
+                        result.message ?: "Something went wrong"
+                    )
+                }
+                is NetworkResult.Loading -> {
+                    //   binding?.logprogressBar?.isVisible = true
+                }
+            }
+        })
+
     }
 
     private fun setupBackPress() {

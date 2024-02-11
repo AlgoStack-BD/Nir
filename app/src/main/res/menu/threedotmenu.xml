@@ -2,13 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Edit"
-        android:id="@+id/editpostmenu"
-        android:icon="@drawable/threedotmenu"
-        app:showAsAction="always"
-        >
 
-        <menu>
+
             <item android:title="Edit"
                 android:id="@+id/editpost"
 
@@ -16,9 +11,6 @@
             <item android:title="Delete"
                 android:id="@+id/deletepost"
                 />
-        </menu>
-
-    </item>
 
 
 

@@ -109,6 +109,7 @@ class add : Fragment() {
     var selectedImage = ""
     var selectAdditonalMessage = ""
     var phoneNumber = ""
+    var title = ""
 
 
 
@@ -342,7 +343,7 @@ binding.regContinue.setOnClickListener {
         binding.bathroomspinner.setText("0")
         binding.kitchenspinner.setText("0")
         binding.balconyspinner.setText("0")
-        binding.phonoNumberFiled.text.clear()
+        binding.titleTextFiled.text.clear()
 
 
 

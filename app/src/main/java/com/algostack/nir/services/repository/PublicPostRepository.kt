@@ -8,6 +8,7 @@ import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
+import com.algostack.nir.services.model.DeletePostResponseData
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
@@ -39,11 +40,14 @@ class PublicPostRepository @Inject constructor(
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
 
+
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = _publicPostResponseLiveData
 
     val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
         get() = _createPostResponseLiveData
+
+
 
 
 
@@ -138,6 +142,8 @@ class PublicPostRepository @Inject constructor(
             }
         }
     }
+
+
 
 
 

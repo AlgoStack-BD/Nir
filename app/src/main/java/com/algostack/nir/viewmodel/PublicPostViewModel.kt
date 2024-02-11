@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
+import com.algostack.nir.services.model.DeletePostResponseData
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
@@ -33,6 +34,7 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
 
 
 
+
     var applicationContext: Context ?= null
 
 
@@ -53,6 +55,9 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
             }
         }
     }
+
+
+
 
 
 
