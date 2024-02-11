@@ -1,5 +1,6 @@
 package com.algostack.nir.view.frame
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class PostDetails : Fragment() {
     private var detailsData: PublicPostData? = null
 
     private var chekDestinationPage = ""
+    var callToAction = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,13 +54,26 @@ class PostDetails : Fragment() {
 
         setInialData()
 
-        Glide
-            .with(requireContext())
-            .load(tokenManager.getUserImage())
-            .centerCrop()
-            .placeholder(R.drawable.profile)
-            .into(binding.userProfile)
-        binding.ownerName.text = tokenManager.getUserName()
+
+
+        binding.actionCall.setOnClickListener {
+            // open phone call intent for call
+
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data = android.net.Uri.parse("tel:$callToAction")
+            startActivity(dialIntent)
+
+
+        }
+
+        binding.actionMassage.setOnClickListener {
+            // open message intent for  message given number
+            val sendIntent = Intent(Intent.ACTION_VIEW)
+            sendIntent.data = android.net.Uri.parse("sms:$callToAction")
+            startActivity(sendIntent)
+
+
+        }
 
         val imageAdapter = ImageDetailsSmallViewAdapter()
          binding.imageRV.adapter = imageAdapter
@@ -78,8 +93,18 @@ class PostDetails : Fragment() {
         if (jsonDetails != null) {
             detailsData = Gson().fromJson(jsonDetails, PublicPostData::class.java)
 
+            Glide
+                .with(requireContext())
+                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${detailsData?.userImage}")
+                .centerCrop()
+                .placeholder(R.drawable.profile)
+                .into(binding.userProfile)
+            binding.ownerName.text = detailsData?.userName
+
+            callToAction = detailsData?.phoneNumber.toString()
+
             detailsData.let { it ->
-                binding.txtOwnerName.text = it?.userName
+                binding.txtOwnerName.text = it?.title
 
                 // println("ChekLink: "+it!!.img)
                 val imagArray: List<String> = it!!.img.split(",")    // split the string

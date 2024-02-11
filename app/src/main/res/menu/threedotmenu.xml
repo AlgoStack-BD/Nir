@@ -4,12 +4,17 @@
 
 
 
-            <item android:title="Edit"
+            <item android:title="Sold"
                 android:id="@+id/editpost"
-
                 />
+
+
             <item android:title="Delete"
                 android:id="@+id/deletepost"
+                />
+
+              <item android:title="Bost your post"
+                android:id="@+id/bostpost"
                 />
 
 

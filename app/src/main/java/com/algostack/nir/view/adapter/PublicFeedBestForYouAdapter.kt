@@ -39,7 +39,7 @@ class PublicFeedBestForYouAdapter (private val onDetailsCliked: (PublicPostData)
 
 
         fun bind(item: PublicPostData){
-            binding.publicTitle.text = item.userName
+            binding.publicTitle.text = item.title
             binding.publicRentPrice.text = item.price.toString()
             binding.numOfPublicBadroom.text = item.bedRoom.toString()
             binding.numOfPublicBathroom.text = item.bathRoom.toString()

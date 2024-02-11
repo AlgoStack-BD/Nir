@@ -54,6 +54,7 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
+import kotlin.concurrent.timerTask
 
 
 @AndroidEntryPoint
@@ -110,6 +111,7 @@ class add : Fragment() {
     var selectAdditonalMessage = ""
     var phoneNumber = ""
     var title = ""
+
 
 
 
@@ -290,8 +292,16 @@ binding.regContinue.setOnClickListener {
 
         selectAdditonalMessage =  binding.additionalMessage.text.toString()
 
+        selectedRent = binding.rentpriceinputfield.text.toString().toIntOrNull() ?: 0
+
+        val housename = binding.titleTextFiled.text.toString()
+
+        title = "$selectedBeadroom BeadRoom $selectedBathroom BathRoom $selectedRentType Flat for Rent at $housename"
+
         publicPostViewModel.applicationContext = requireContext()
         val userName = tokenManager.getUserName().toString()
+
+
 
         val creatPost = CreatePost(
             CreatData(
@@ -314,9 +324,11 @@ binding.regContinue.setOnClickListener {
                 selectedRent,
                 selectedRentType,
                 tokenManager.getUserId()!!,
-                userName,
-                phoneNumber,
-                false
+                tokenManager.getUserName().toString(),
+                tokenManager.getUserNumber().toString(),
+                false,
+                title,
+                tokenManager.getUserImage().toString()
 
                 ))
 

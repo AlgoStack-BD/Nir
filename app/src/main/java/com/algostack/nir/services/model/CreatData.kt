@@ -22,6 +22,8 @@ data class CreatData(
     val userId: String,
     val userName: String,
     val phoneNumber: String,
-    val isAds: Boolean
+    val isAds: Boolean,
+    val title: String,
+    val userImage: String
 
 )
