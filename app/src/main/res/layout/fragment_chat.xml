@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
     tools:context=".view.frame.Chat">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifNoDataAvilable"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lotti"
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="144dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/waitingmessage" />
+
+        <TextView
+            android:id="@+id/alertText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ralewayextrabold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/look_out_for_exciting_messages_from_your_desired_matches"
+            android:gravity="center"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/lotti"
+            app:layout_constraintStart_toStartOf="@+id/lotti"
+            app:layout_constraintTop_toBottomOf="@+id/lotti" />
+
+        <TextView
+            android:id="@+id/alertText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ralewayregular"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="@string/currently_you_have_no_avilable_messages"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/alertText"
+            app:layout_constraintStart_toStartOf="@+id/alertText"
+            app:layout_constraintTop_toBottomOf="@+id/alertText" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

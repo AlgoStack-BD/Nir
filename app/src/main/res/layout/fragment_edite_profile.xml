@@ -1,14 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
     tools:context=".view.frame.EditeProfile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/edit_profile"
+        android:fontFamily="@font/ralewayextrabold"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileimg"
+        android:layout_width="133dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/editeProfimgilebtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="19dp"
+        android:background="@drawable/profileedit"
+        app:layout_constraintBottom_toBottomOf="@+id/profileimg"
+        app:layout_constraintEnd_toEndOf="@+id/profileimg"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/profileimg"
+        app:layout_constraintTop_toTopOf="@+id/profileimg"
+        app:layout_constraintVertical_bias="0.81"
+        >
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/imgplus"
+            />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="19dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileimg">
+
+        <EditText
+            android:id="@+id/editUserName"
+            android:layout_width="300dp"
+            android:paddingLeft="10dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@drawable/normal_rectangular"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="Guest Name"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="18dp" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/profileedit" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="19dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+        <EditText
+            android:id="@+id/editUserPhone"
+            android:layout_width="300dp"
+            android:paddingStart="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/normal_rectangular"
+            android:layout_gravity="left"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="Guest Phone Number"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="18dp" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/calledit" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView4"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="19dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
+
+        <EditText
+
+            android:id="@+id/editUserEmail"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/normal_rectangular"
+            android:layout_gravity="left"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="Guest email"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="18dp" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/emailedit" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+
+        android:id="@+id/updateProfile"
+        android:layout_width="335dp"
+        android:layout_height="55dp"
+
+        android:layout_marginTop="100dp"
+
+        android:background="@drawable/coustomrectengular"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
+        app:layout_constraintVertical_bias="0.52">
+
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ralewaybold"
+            android:text="Save"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progress_bar"
+            style="@style/SpinKitView.Large.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/white" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

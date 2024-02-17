@@ -9,7 +9,7 @@ import com.algostack.nir.services.model.userResponseData
 
 @Database(
     entities = [PublicPostData::class],
-    version = 2
+    version = 4
 )
 @TypeConverters(Converter::class)
 abstract class NirLocalDB : RoomDatabase() {

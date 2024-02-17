@@ -31,7 +31,7 @@ class PublicFeedNearByPostAdapter : ListAdapter<PublicPostData, PublicFeedNearBy
     inner class NearForYouViewHolder(private val binding: NearpostBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: PublicPostData){
-            binding.rahimHOus.text = item.userName
+            binding.rahimHOus.text = item.title
             binding.sylhetJind.text = item.location
             val fistOneImg: String
 

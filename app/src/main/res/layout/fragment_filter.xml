@@ -164,6 +164,7 @@
                         android:gravity="center"
                         android:hint="@string/_0"
                         android:text=""
+                        android:inputType="number"
                         app:layout_constraintStart_toStartOf="@+id/RentHedding"
                         app:layout_constraintTop_toBottomOf="@+id/RentHedding" />
 
@@ -190,6 +191,7 @@
                         android:gravity="center"
                         android:hint="@string/any"
                         android:text=""
+                        android:inputType="number"
                         app:layout_constraintStart_toEndOf="@+id/filetTo"
                         app:layout_constraintTop_toTopOf="@+id/startRange" />
 
