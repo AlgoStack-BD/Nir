@@ -30,7 +30,6 @@ interface UserApi {
     suspend fun updateUserInfo(
         @Path("id") _id: String,
         @Body updateRequest: UserUpdateRequest
-
     ): Response<userUpdateRequestResponse>
 
 
