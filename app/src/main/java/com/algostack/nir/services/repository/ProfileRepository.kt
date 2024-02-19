@@ -7,6 +7,7 @@ import com.algostack.nir.services.api.ProfileApi
 import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.DeletePostResponseData
+import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.deletePostResponse
@@ -28,11 +29,14 @@ class ProfileRepository @Inject constructor(
     private val _profileInfoResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private val _deletePostResponseLiveData = MutableLiveData<NetworkResult<deletePostResponse>> ()
 
+
     val profileInfoResponseLiveData : MutableLiveData<NetworkResult<PublicPostResponse>>
         get() = _profileInfoResponseLiveData
 
     val deletePostResponseLiveData : LiveData<NetworkResult<deletePostResponse>>
         get() = _deletePostResponseLiveData
+
+
 
     suspend fun singleUserPost(context: Context,userID: String) {
         println("functioncalled")

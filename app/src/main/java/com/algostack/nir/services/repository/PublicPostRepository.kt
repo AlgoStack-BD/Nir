@@ -9,6 +9,8 @@ import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
 import com.algostack.nir.services.model.DeletePostResponseData
+import com.algostack.nir.services.model.FavouriteRequest
+import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
@@ -16,6 +18,7 @@ import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
 import com.algostack.nir.utils.NetworkUtils.Companion.isInternetConnected
+import com.algostack.nir.view.frame.Favorite
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -39,6 +42,7 @@ class PublicPostRepository @Inject constructor(
 
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
+    private val _userFavouretResponse = MutableLiveData<NetworkResult<FavouriteResponse>> ()
 
 
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
@@ -121,6 +125,8 @@ class PublicPostRepository @Inject constructor(
 
     }
 
+
+
     suspend fun createPost(context: Context,createPost: CreatePost) {
 
         if (isInternetConnected((context))) {
@@ -142,9 +148,6 @@ class PublicPostRepository @Inject constructor(
             }
         }
     }
-
-
-
 
 
 

@@ -18,7 +18,7 @@ import com.algostack.nir.services.model.SingleUserResponseData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class UserOwnPostAdapte (private val onDetailsCliked: (_id: String) -> Unit): ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
+class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) -> Unit): ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnPostViewHolder {
         val binding = EditlayoutItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -62,7 +62,7 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String) -> Unit): Li
                             R.id.deletepost -> {
                                 Toast.makeText(itemView.context, "Delete", Toast.LENGTH_SHORT).show()
 
-                                onDetailsCliked(item._id)
+                                onDetailsCliked(item._id,"delete")
 
 
                                 true

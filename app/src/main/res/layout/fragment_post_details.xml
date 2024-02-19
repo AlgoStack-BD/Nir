@@ -87,20 +87,41 @@
             app:layout_constraintTop_toBottomOf="@+id/loactionLayer" />
 
 
-
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:fontFamily="@font/ralewayregular"
             android:text="@string/Description"
             android:textColor="@color/colorSecendaryBlack"
             android:textSize="21dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/housetype" />
+
+        <ImageView
+            android:id="@+id/fvrt"
+            android:visibility="visible"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:src="@drawable/fvrt"
+            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+        <ImageView
+            android:id="@+id/fvrtDone"
+            android:visibility="gone"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:src="@drawable/fvrtdone"
+            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
 
         <TextView
             android:id="@+id/txtDescription"

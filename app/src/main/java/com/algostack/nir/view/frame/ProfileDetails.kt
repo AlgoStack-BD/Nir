@@ -5,29 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileDetailsBinding
-import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.view.adapter.UserOwnFavouriteListAdapter
 import com.algostack.nir.view.adapter.UserOwnPostAdapte
 import com.algostack.nir.view.adapter.VerticalSpace
+import com.algostack.nir.viewmodel.FavouriteViewModel
 import com.algostack.nir.viewmodel.ProfileViewModel
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,8 +37,11 @@ class ProfileDetails : Fragment() {
     lateinit var tokenManager: TokenManager
 
     private lateinit var userOwnPostAdapte: UserOwnPostAdapte
+    private lateinit var userFavouritePostAdapte: UserOwnFavouriteListAdapter
 
     private val profileViewModel by viewModels<ProfileViewModel>()
+
+    private val favouriteViewModel by viewModels<FavouriteViewModel>()
     val bestForYouRecSpace = VerticalSpace()
 
 
@@ -54,6 +53,7 @@ class ProfileDetails : Fragment() {
         _binding = FragmentProfileDetailsBinding.inflate(inflater, container, false)
 
         userOwnPostAdapte = UserOwnPostAdapte(this::onDetailsCliked)
+        userFavouritePostAdapte = UserOwnFavouriteListAdapter(this::onDetailsCliked)
         setupBackPress()
         return binding.root
     }
@@ -65,6 +65,9 @@ class ProfileDetails : Fragment() {
         val userId = tokenManager.getUserId()!!
         profileViewModel.applicationContext = requireContext()
         profileViewModel.singleUserPost(userId)
+
+        favouriteViewModel.applicationContext = requireContext()
+        favouriteViewModel.getUserFavourite(userId)
 
 
 
@@ -131,7 +134,13 @@ class ProfileDetails : Fragment() {
         binding.mylistRV.addItemDecoration(bestForYouRecSpace)
         binding.mylistRV.adapter = userOwnPostAdapte
 
+        binding.favlisRV.layoutManager =
+            GridLayoutManager(requireContext(),2)
+        binding.favlisRV.addItemDecoration(bestForYouRecSpace)
+        binding.favlisRV.adapter = userFavouritePostAdapte
+
         bindOverserver()
+        bindFavObserver()
 
     }
 
@@ -173,20 +182,19 @@ class ProfileDetails : Fragment() {
         })
     }
 
-
-
-    private fun onDetailsCliked(_id: String) {
-
-        profileViewModel.deletePost(_id)
-
-        profileViewModel.deletePostResponseLiveData.observe(viewLifecycleOwner, Observer { result ->
+    private fun bindFavObserver() {
+        favouriteViewModel.userFavouritePost.observe(viewLifecycleOwner, Observer { result ->
+            //   binding?.logprogressBar?.isVisible = false
             when (result) {
+
                 is NetworkResult.Success -> {
                     if (result.data!!.status == 200) {
-                        val userId = tokenManager.getUserId()!!
-                        profileViewModel.applicationContext = requireContext()
-                        profileViewModel.singleUserPost(userId)
+
+                        userFavouritePostAdapte.submitList(result.data.data)
+
+
                     } else if (result.data.status == 500) {
+
                         result.message?.let { it1 ->
                             AlertDaialog.showCustomAlertDialogBox(
                                 requireContext(),
@@ -195,17 +203,95 @@ class ProfileDetails : Fragment() {
                         }
                     }
                 }
+
                 is NetworkResult.Error -> {
                     AlertDaialog.showCustomAlertDialogBox(
                         requireContext(),
                         result.message ?: "Something went wrong"
                     )
+
+
                 }
+
                 is NetworkResult.Loading -> {
                     //   binding?.logprogressBar?.isVisible = true
                 }
             }
         })
+    }
+
+
+
+    private fun onDetailsCliked(_id: String, from: String) {
+
+
+        if (from == "delete") {
+            profileViewModel.deletePost(_id)
+
+            profileViewModel.deletePostResponseLiveData.observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        if (result.data!!.status == 200) {
+                            val userId = tokenManager.getUserId()!!
+                            profileViewModel.applicationContext = requireContext()
+                            profileViewModel.singleUserPost(userId)
+                        } else if (result.data.status == 500) {
+                            result.message?.let { it1 ->
+                                AlertDaialog.showCustomAlertDialogBox(
+                                    requireContext(),
+                                    it1
+                                )
+                            }
+                        }
+                    }
+                    is NetworkResult.Error -> {
+                        AlertDaialog.showCustomAlertDialogBox(
+                            requireContext(),
+                            result.message ?: "Something went wrong"
+                        )
+                    }
+                    is NetworkResult.Loading -> {
+                        //   binding?.logprogressBar?.isVisible = true
+                    }
+                }
+            })
+        } else if (from == "removefavourite") {
+            val removefavorite = RemoveFavouriteItem(
+                _id
+            )
+
+            favouriteViewModel.applicationContext = requireContext()
+            favouriteViewModel.updateFavorite(tokenManager.getUserId()!!, removefavorite)
+
+            favouriteViewModel.favouritePost.observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        if (result.data!!.status == 200) {
+                            val userId = tokenManager.getUserId()!!
+                            favouriteViewModel.applicationContext = requireContext()
+                            favouriteViewModel.getUserFavourite(userId)
+                        } else if (result.data.status == 500) {
+                            result.message?.let { it1 ->
+                                AlertDaialog.showCustomAlertDialogBox(
+                                    requireContext(),
+                                    it1
+                                )
+                            }
+                        }
+                    }
+                    is NetworkResult.Error -> {
+                        AlertDaialog.showCustomAlertDialogBox(
+                            requireContext(),
+                            result.message ?: "Something went wrong"
+                        )
+                    }
+                    is NetworkResult.Loading -> {
+                        //   binding?.logprogressBar?.isVisible = true
+                    }
+                }
+            })
+        }
+
 
     }
 

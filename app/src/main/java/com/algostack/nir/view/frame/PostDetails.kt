@@ -8,13 +8,22 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentPostDetailsBinding
+import com.algostack.nir.services.model.DataXX
+import com.algostack.nir.services.model.DataXXX
+import com.algostack.nir.services.model.FavouriteRequest
+import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.PublicPostData
+import com.algostack.nir.services.model.RemoveFavouriteItem
+import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
+import com.algostack.nir.viewmodel.FavouriteViewModel
+import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,6 +47,7 @@ class PostDetails : Fragment() {
     private var chekDestinationPage = ""
     var callToAction = ""
 
+    private val favouriteViewModelrite by viewModels<FavouriteViewModel> ()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +65,9 @@ class PostDetails : Fragment() {
         setInialData()
 
 
+
+        favouriteViewModelrite.applicationContext = requireContext()
+        favouriteViewModelrite.getSpecificFavourite(tokenManager.getUserId()!!, detailsData!!._id)
 
         binding.actionCall.setOnClickListener {
             // open phone call intent for call
@@ -75,19 +88,95 @@ class PostDetails : Fragment() {
 
         }
 
+
+        binding.fvrt.setOnClickListener{
+
+
+            val favorite = FavouriteRequest(
+                DataXX(
+
+                    detailsData!!._id,
+                    tokenManager.getUserId()!!
+                )
+            )
+
+            println("checkFavorite: ${favorite}")
+
+            favouriteViewModelrite.applicationContext = requireContext()
+
+            favouriteViewModelrite.createFavorite(favorite)
+
+            FbindOvserver()
+
+        }
+
+        binding.fvrtDone.setOnClickListener{
+
+            favouriteViewModelrite.applicationContext = requireContext()
+            favouriteViewModelrite.updateFavorite(tokenManager.getUserId()!!, RemoveFavouriteItem(detailsData!!._id))
+            FbindOvserver()
+
+        }
+
+
         val imageAdapter = ImageDetailsSmallViewAdapter()
          binding.imageRV.adapter = imageAdapter
         imageAdapter.submitList(newImageArray)
 
 
+        bindOvserver()
+    }
+
+    private fun bindOvserver() {
+        favouriteViewModelrite.specificFavouritePost.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
+
+                }
+
+                is NetworkResult.Success -> {
+
+                    if (it.data!!.data) {
+                        binding.fvrt.isVisible = false
+                        binding.fvrtDone.isVisible = true
+                    } else {
+                        binding.fvrt.isVisible = true
+                        binding.fvrtDone.isVisible = false
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    println("CheckError: ${it}")
+                }
+            }
+        }
+    }
+
+    private fun FbindOvserver() {
+        favouriteViewModelrite.favouritePost.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
+
+                }
+
+                is NetworkResult.Success -> {
+                    favouriteViewModelrite.applicationContext = requireContext()
+                    favouriteViewModelrite.getSpecificFavourite(tokenManager.getUserId()!!, detailsData!!._id)
+                }
+
+                is NetworkResult.Error -> {
+                    println("CheckError: ${it}")
+                }
+            }
+        }
     }
 
     private fun setInialData() {
+
         val destinationPage = arguments?.getString("DestinationPage")
         if (destinationPage != null) {
             chekDestinationPage = destinationPage
         }
-
 
         val jsonDetails = arguments?.getString("details")
         if (jsonDetails != null) {

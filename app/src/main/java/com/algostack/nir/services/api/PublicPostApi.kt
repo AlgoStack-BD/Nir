@@ -3,9 +3,12 @@ package com.algostack.nir.services.api
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
 import com.algostack.nir.services.model.DeletePostResponseData
+import com.algostack.nir.services.model.FavouriteRequest
+import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
+import com.algostack.nir.view.frame.Favorite
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,11 +28,10 @@ interface PublicPostApi {
     @POST ("/create-post")
     suspend fun createPost(@Body createPost: CreatePost) : Response<CreatePostResponse>
 
+
     @Multipart
     @POST("/upload")
     suspend fun uploadImage(@Part files: List<MultipartBody.Part>): Response<UploadImageResponse>
-
-
 
 
 }
