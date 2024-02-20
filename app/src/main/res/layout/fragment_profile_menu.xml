@@ -61,7 +61,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/favoritesCard"
+        android:id="@+id/intoriroai"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
@@ -83,7 +83,7 @@
                 android:id="@+id/favIcon"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:src="@drawable/favoriteicon"
+                android:src="@drawable/intoriorai"
                 android:scaleType="centerInside"
                 />
 
@@ -93,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/ralewaysemibold"
-                android:text="Favorites"
+                android:text="Intorior Ai"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
@@ -114,7 +114,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favoritesCard">
+        app:layout_constraintTop_toBottomOf="@+id/intoriroai">
 
         <LinearLayout
             android:layout_width="match_parent"

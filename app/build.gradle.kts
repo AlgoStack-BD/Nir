@@ -135,6 +135,8 @@ dependencies {
     implementation ("com.google.android.material:material:1.11.0")
 
 
+    // google gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
 
 
 

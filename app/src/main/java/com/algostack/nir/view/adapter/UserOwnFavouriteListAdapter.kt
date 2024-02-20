@@ -33,7 +33,7 @@ class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,fro
             binding.sylhetJind.text = item.location
             val fistOneImg: String
 
-            if(item.img.contains(',')){
+            if(item.img!!.contains(',')){
                 fistOneImg = item.img.substringBefore(',')
             }else fistOneImg = item.img
 
@@ -48,7 +48,7 @@ class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,fro
 
 
             binding.removeFavourite.setOnClickListener {
-                onDetailsCliked(item._id,"removefavourite")
+                item._id?.let { it1 -> onDetailsCliked(it1,"removefavourite") }
             }
 
 

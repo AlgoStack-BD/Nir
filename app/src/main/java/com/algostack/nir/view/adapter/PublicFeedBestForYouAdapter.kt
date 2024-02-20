@@ -46,7 +46,7 @@ class PublicFeedBestForYouAdapter (private val onDetailsCliked: (PublicPostData)
 
             val fistOneImg: String
 
-            if(item.img.contains(',')){
+            if(item.img!!.contains(',')){
                  fistOneImg = item.img.substringBefore(',')
 
             }else fistOneImg = item.img

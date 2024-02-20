@@ -196,7 +196,7 @@ class PostDetails : Fragment() {
                 binding.txtOwnerName.text = it?.title
 
                 // println("ChekLink: "+it!!.img)
-                val imagArray: List<String> = it!!.img.split(",")    // split the string
+                val imagArray: List<String> = it!!.img!!.split(",")    // split the string
                 imagArray.forEach {
                     newImageArray.add(ImageItem(UUID.randomUUID().toString(), it))
                 }
