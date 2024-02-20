@@ -109,4 +109,9 @@
         android:name="com.algostack.nir.view.frame.EditeProfile"
         android:label="fragment_edite_profile"
         tools:layout="@layout/fragment_edite_profile" />
+    <fragment
+        android:id="@+id/interiorAiwithGEMINI"
+        android:name="com.algostack.nir.view.frame.InteriorAiwithGEMINI"
+        android:label="fragment_interior_aiwith_g_e_m_i_n_i"
+        tools:layout="@layout/fragment_interior_aiwith_g_e_m_i_n_i" />
 </navigation>

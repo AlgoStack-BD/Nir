@@ -37,7 +37,7 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
             binding.sylhetJind.text = item.location
             val fistOneImg: String
 
-            if(item.img.contains(',')){
+            if(item.img!!.contains(',')){
                 fistOneImg = item.img.substringBefore(',')
             }else fistOneImg = item.img
 
@@ -62,7 +62,7 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
                             R.id.deletepost -> {
                                 Toast.makeText(itemView.context, "Delete", Toast.LENGTH_SHORT).show()
 
-                                onDetailsCliked(item._id,"delete")
+                                item._id?.let { it1 -> onDetailsCliked(it1,"delete") }
 
 
                                 true

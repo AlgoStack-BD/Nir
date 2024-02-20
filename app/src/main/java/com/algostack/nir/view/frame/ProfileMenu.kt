@@ -64,6 +64,11 @@ class ProfileMenu : Fragment() {
             replaceFragment(ProfileDetails(),ProfileDetails::class.java.simpleName)
         }
 
+        binding.intoriroai.setOnClickListener {
+            replaceFragment(InteriorAiwithGEMINI(),InteriorAiwithGEMINI::class.java.simpleName)
+        }
+
+
         binding.signoutCard.setOnClickListener {
 
             val intent = Intent(activity, MainActivity::class.java)

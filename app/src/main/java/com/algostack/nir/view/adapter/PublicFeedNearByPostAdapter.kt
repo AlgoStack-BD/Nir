@@ -35,7 +35,7 @@ class PublicFeedNearByPostAdapter : ListAdapter<PublicPostData, PublicFeedNearBy
             binding.sylhetJind.text = item.location
             val fistOneImg: String
 
-            if(item.img.contains(',')){
+            if(item.img!!.contains(',')){
                 fistOneImg = item.img.substringBefore(',')
             }else fistOneImg = item.img
 
