@@ -136,7 +136,8 @@ dependencies {
 
 
     // google gemini
-    implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.0")
+
 
 
 

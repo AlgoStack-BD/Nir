@@ -28,6 +28,12 @@ class MessagingAdapter : RecyclerView.Adapter<MessagingAdapter.MessageViewHolder
                 SEND_ID -> {
                     binding.tvMessage.apply {
                         text = message.message
+
+                        visibility = View.VISIBLE
+                    }
+
+                    binding.intorioraiphoto.apply {
+                        setImageURI(message.img)
                         visibility = View.VISIBLE
                     }
                     binding.tvBotMessage.visibility = View.GONE
@@ -37,6 +43,7 @@ class MessagingAdapter : RecyclerView.Adapter<MessagingAdapter.MessageViewHolder
                         text = message.message
                         visibility = View.VISIBLE
                     }
+                  binding.intorioraiphoto.visibility = View.GONE
                     binding.tvMessage.visibility = View.GONE
                 }
             }

@@ -6,11 +6,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -29,7 +32,6 @@ import com.algostack.nir.utils.Constants.RECEIVE_ID
 import com.algostack.nir.utils.Constants.SEND_ID
 import com.algostack.nir.utils.Time
 import com.algostack.nir.view.adapter.MessagingAdapter
-import com.google.ai.client.generativeai.BuildConfig
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,6 +66,7 @@ class InteriorAiwithGEMINI : Fragment() {
     private lateinit var adapter: MessagingAdapter
     private val botList = listOf("GPT", "Bard", "Egal", "Iron")
    private val API_KEY = "AIzaSyAHvKjoJqQd2VB5NaYUh9Hb0nfw0U1dJdc"
+    private val MODEL_NAME = "gemini-pro-vision" // Adjust based on your Gemini project
     var bitmap: Bitmap? = null
     private var prompt = ""
 
@@ -157,20 +160,24 @@ class InteriorAiwithGEMINI : Fragment() {
         if (message.isNotEmpty()) {
 
             //Adds it to our local list
-            messagesList.add(Message(message, SEND_ID, timeStamp))
+            messagesList.add(Message(message, SEND_ID, imageUris!!))
             binding.etMessage.setText("")
+            // Set default image to second ImageView
+            binding.intorioraiphoto.setImageResource(R.drawable.addphoto)
 
-            adapter.insertMessage(Message(message, SEND_ID, timeStamp))
+            adapter.insertMessage(Message(message, SEND_ID, imageUris!!))
             binding.rvMessages.scrollToPosition(adapter.itemCount - 1)
 
 
             if (bitmap != null) {
-                botResponse()
+              println("prompt $prompt -> bitmap $bitmap")
+
+                sendImageAndTextPrompt(prompt, bitmap!!)
             }
 
         }
     }
-
+/*
     private fun botResponse() {
         val timeStamp = time.timeStamp()
 
@@ -194,8 +201,16 @@ class InteriorAiwithGEMINI : Fragment() {
                     text(prompt)
                 }
 
-                val response = generativeModel.generateContent(inputContent)
-                print( "response"+response.text)
+               // val response = generativeModel.generateContent(inputContent)
+                val response = try {
+                    generativeModel.generateContent(inputContent)
+                } catch (e: Exception) {
+                    // Handle errors here
+                    println("Error generating response: $e")
+                    // Return a default response or display an error message
+                    null
+                }
+                print( "geminiresponse"+response?.text)
 
 
                 //val response = BotResponse.basicResponses(message)
@@ -213,15 +228,47 @@ class InteriorAiwithGEMINI : Fragment() {
             }
         }
     }
+*/
 
+    private fun sendImageAndTextPrompt(prompt: String, bitmap: Bitmap) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val generativeModel = GenerativeModel(
+                    modelName = MODEL_NAME,
+                    apiKey = API_KEY
+                )
+
+                val inputContent = content {
+                    image(bitmap)
+                    text(prompt)
+                }
+
+                val response = generativeModel.generateContent(inputContent)
+                val textResponse = response.text
+
+
+
+                // Add bot response to local list and adapter
+                textResponse?.let { Message(it, RECEIVE_ID, imageUris!! ) }
+                    ?.let { messagesList.add(it) }
+                textResponse?.let { Message(it, RECEIVE_ID, imageUris!!) }
+                    ?.let { adapter.insertMessage(it) }
+                binding.rvMessages.scrollToPosition(adapter.itemCount - 1)
+
+            } catch (e: Exception) {
+                Log.e("GeminiError", "Error sending image and text prompt: $e")
+                // Handle error gracefully (e.g., display a user-friendly message)
+            }
+        }
+    }
     private fun customBotMessage(message: String) {
 
         GlobalScope.launch {
             delay(1000)
             withContext(Dispatchers.Main) {
                 val timeStamp = time.timeStamp()
-                messagesList.add(Message(message, RECEIVE_ID, timeStamp))
-                adapter.insertMessage(Message(message, RECEIVE_ID, timeStamp))
+                messagesList.add(Message(message, RECEIVE_ID, Uri.EMPTY))
+                adapter.insertMessage(Message(message, RECEIVE_ID, Uri.EMPTY))
 
                 binding.rvMessages.scrollToPosition(adapter.itemCount - 1)
             }
@@ -311,7 +358,7 @@ class InteriorAiwithGEMINI : Fragment() {
             if (data?.data != null) {
                 val imageUri: Uri = data.data!!
                 imageUris = imageUri
-                 bitmap = uriToBitmap(imageUri)
+               uriToBitmap(imageUri)
                 // Do something with the image (save it to some directory or whatever you need to do with it here)
                 // Set image to first ImageView
                 binding.intorioraiphoto.setImageURI(imageUri)
@@ -320,17 +367,21 @@ class InteriorAiwithGEMINI : Fragment() {
     }
 
     //TODO takes URI of the image and returns bitmap
-    private fun uriToBitmap(selectedFileUri: Uri): Bitmap? {
+    private fun uriToBitmap(selectedFileUri: Uri) {
+
+
         try {
-            val parcelFileDescriptor = requireActivity().contentResolver.openFileDescriptor(selectedFileUri, "r")
-            val fileDescriptor: FileDescriptor = parcelFileDescriptor!!.fileDescriptor
-            val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
-            parcelFileDescriptor.close()
-            return image
-        } catch (e: IOException) {
-            e.printStackTrace()
+            val stream = requireActivity().contentResolver.openInputStream(selectedFileUri)
+            if (stream != null) {
+                val options = BitmapFactory.Options()
+                options.inSampleSize = 4 // Adjust downsampling as needed
+                bitmap = BitmapFactory.decodeStream(stream, null, options)
+                stream.close()
+            }
+        } catch (e: Exception) {
+            Log.e("ImageDecodeError", "Error decoding image:", e)
         }
-        return null
+
     }
     private fun setupBackPress() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
