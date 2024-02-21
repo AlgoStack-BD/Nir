@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/ralewaysemibold"
+        android:text="@string/book_you_visiting_date"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/spinerborder"
+        android:src="@drawable/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/visiting_date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/ralewayregular"
+        android:text="@string/select_date"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <LinearLayout
+
+        android:id="@+id/selectVisitingDateLayout"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/spinerborder"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/visiting_date_title">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewaybold"
+            android:gravity="center"
+            android:hint="Seletct"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/visitorsnumbertitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+    <TextView
+        android:id="@+id/visiting_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/ralewayregular"
+        android:text="@string/select_time"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/selectVisitingTimeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/cancel" />
+
+    <LinearLayout
+
+        android:id="@+id/selectVisitingTimeLayout"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/spinerborder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/visiting_time_title">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewaybold"
+            android:gravity="center"
+            android:hint="12:00 pm"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/visitorsnametitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/ralewayregular"
+        android:text="@string/your_name"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectVisitingDateLayout" />
+
+    <LinearLayout
+
+        android:id="@+id/visitiorsnameLayout"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/spinerborder"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/visitorsnametitle">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewaybold"
+            android:gravity="center"
+            android:hint="Type here"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/visitorsnumbertitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/ralewayregular"
+        android:text="@string/your_number"
+        android:textColor="@color/colorSecendaryBlack"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/visitorsnumberLayout"
+        app:layout_constraintTop_toBottomOf="@+id/selectVisitingTimeLayout" />
+
+    <LinearLayout
+
+        android:id="@+id/visitorsnumberLayout"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/spinerborder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/visiting_time_title"
+        app:layout_constraintTop_toBottomOf="@+id/visitorsnumbertitle">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewaybold"
+            android:gravity="center"
+            android:hint="Type here"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:id="@+id/confirmBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+
+        android:background="@drawable/customrentforrequestrectungular"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/visitorsnumberLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ralewaybold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/confirm"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progress_bar"
+            style="@style/SpinKitView.Large.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/white" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmBooking">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="powered by"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/nirsplash" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -19,13 +19,18 @@ import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
+import com.algostack.nir.services.model.RentRequestData
+import com.algostack.nir.services.model.RentRequestNotification
+import com.algostack.nir.utils.AlertDaialog.showBookingDialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
 import com.algostack.nir.viewmodel.FavouriteViewModel
+import com.algostack.nir.viewmodel.NotificationViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +53,7 @@ class PostDetails : Fragment() {
     var callToAction = ""
 
     private val favouriteViewModelrite by viewModels<FavouriteViewModel> ()
+    private val notificationViewModel by viewModels<NotificationViewModel> ()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -106,7 +112,26 @@ class PostDetails : Fragment() {
 
             favouriteViewModelrite.createFavorite(favorite)
 
+
+
             FbindOvserver()
+
+        }
+
+        binding.sentRequestforRent.setOnClickListener {
+//                  notificationViewModel.rentRequestNotification(
+//                      RentRequestNotification(
+//                          RentRequestData(
+//
+//                          )
+//                      )
+//                  )
+
+            showBookingDialog(requireContext())
+
+            println("CheckRentRequest: called")
+
+
 
         }
 
