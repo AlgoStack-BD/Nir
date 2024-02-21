@@ -8,6 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.algostack.nir.R
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import de.hdodenhof.circleimageview.CircleImageView
 
 object AlertDaialog {
 
@@ -63,25 +66,6 @@ object AlertDaialog {
     }
 
 
-    fun showBookingDialog(context: Context) {
-        println("showBookingDialog: done")
-        val view = LayoutInflater.from(context).inflate(R.layout.bookingsystem, null)
-        val builder = AlertDialog.Builder(context)
-        builder.setView(view)
 
-        val alert = builder.create()
-        alert.setCancelable(true)
-
-        val confirm = view.findViewById<LinearLayout>(R.id.confirmBooking)
-
-
-        confirm.setOnClickListener {
-           Toast.makeText(context, "Booking Confirmed", Toast.LENGTH_SHORT).show()
-            alert.dismiss()
-        }
-
-        alert.window?.setBackgroundDrawable(ColorDrawable(0))
-        alert.show()
-    }
 
 }

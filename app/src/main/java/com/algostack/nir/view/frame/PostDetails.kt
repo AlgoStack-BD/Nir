@@ -1,10 +1,17 @@
 package com.algostack.nir.view.frame
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,7 +28,6 @@ import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.services.model.RentRequestData
 import com.algostack.nir.services.model.RentRequestNotification
-import com.algostack.nir.utils.AlertDaialog.showBookingDialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
@@ -29,11 +35,13 @@ import com.algostack.nir.viewmodel.FavouriteViewModel
 import com.algostack.nir.viewmodel.NotificationViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.datepicker.MaterialDatePicker
+
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.UUID
 import javax.inject.Inject
 
@@ -119,13 +127,7 @@ class PostDetails : Fragment() {
         }
 
         binding.sentRequestforRent.setOnClickListener {
-//                  notificationViewModel.rentRequestNotification(
-//                      RentRequestNotification(
-//                          RentRequestData(
-//
-//                          )
-//                      )
-//                  )
+
 
             showBookingDialog(requireContext())
 
@@ -150,7 +152,10 @@ class PostDetails : Fragment() {
 
 
         bindOvserver()
+
     }
+
+
 
     private fun bindOvserver() {
         favouriteViewModelrite.specificFavouritePost.observe(viewLifecycleOwner) {
@@ -255,6 +260,119 @@ class PostDetails : Fragment() {
     }
 
 
+    // Booking Dialog
+    fun showBookingDialog(context: Context) {
+        println("showBookingDialog: done")
+        val view = LayoutInflater.from(context).inflate(R.layout.bookingsystem, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(view)
+
+        val alert = builder.create()
+        alert.setCancelable(true)
+
+        val confirm = view.findViewById<LinearLayout>(R.id.confirmBooking)
+        val cancel = view.findViewById<CircleImageView>(R.id.cancel)
+        val selectVisitigDate = view.findViewById<LinearLayout>(R.id.selectVisitingDateLayout)
+        val visitingDate = view.findViewById<TextView>(R.id.visiting_date)
+        val selectVisitingTime = view.findViewById<LinearLayout>(R.id.selectVisitingTimeLayout)
+        val visitingTime = view.findViewById<TextView>(R.id.visiting_time)
+        val visitorName = view.findViewById<EditText>(R.id.visitorsname)
+        val visitorsNumber = view.findViewById<EditText>(R.id.visitorsnumber)
+
+        selectVisitigDate.setOnClickListener {
+
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .setTitleText("Select date")
+                    .build()
+
+            datePicker.addOnPositiveButtonClickListener {
+                val date = datePicker.headerText
+                visitingDate.text = date
+
+
+            }
+
+            datePicker.show(childFragmentManager, "date_picker_tag")
+        }
+
+        selectVisitingTime.setOnClickListener {
+            val time = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(12)
+                .setMinute(10)
+                .setTitleText("Select Visiting Time")
+                .build()
+
+
+            time.addOnPositiveButtonClickListener{
+                val hour = time.hour
+                val minute = time.minute
+                // pick am / pm format
+                val amPm = if (hour >= 12) "PM" else "AM"
+
+                visitingTime.text = "$hour:$minute $amPm"
+            }
+
+
+            time.show(childFragmentManager, "time_picker_tag")
+        }
+
+
+        confirm.setOnClickListener {
+            Toast.makeText(context, "Booking Confirmed", Toast.LENGTH_SHORT).show()
+
+            notificationViewModel.rentRequestNotification(
+                RentRequestNotification(
+                    RentRequestData(
+                        visitorName.text.toString(),
+                        visitorsNumber.text.toString(),
+                        visitingDate.text.toString(),
+                        visitingTime.text.toString(),
+                        detailsData!!.userId!!,
+                        false,
+                        detailsData!!._id,
+                        detailsData!!.title!!,
+                        "Pending",
+                        tokenManager.getUserId()!!,
+                        false
+                    )
+                )
+            )
+            bindOvserverforRequestRent()
+            alert.dismiss()
+        }
+
+        cancel.setOnClickListener{
+            alert.dismiss()
+        }
+
+        alert.window?.setBackgroundDrawable(ColorDrawable(0))
+        alert.show()
+    }
+
+    private fun bindOvserverforRequestRent() {
+        notificationViewModel.rentForRequestResponse.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = false
+            when (it) {
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Success -> {
+                    println("CheckRentRequest: ${it}")
+                    Toast.makeText(requireContext(), "Rent Request Sent", Toast.LENGTH_SHORT).show()
+
+                }
+
+                is NetworkResult.Error -> {
+                    println("CheckError: ${it}")
+
+                }
+            }
+        }
+    }
     private fun setupBackPress() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

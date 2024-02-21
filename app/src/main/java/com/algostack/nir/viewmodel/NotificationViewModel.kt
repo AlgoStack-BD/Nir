@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.algostack.nir.services.model.CreatePostResponse
+import com.algostack.nir.services.model.NotificationResponse
 import com.algostack.nir.services.model.RentRequestNotification
 import com.algostack.nir.services.repository.NotificationRepository
 import com.algostack.nir.utils.NetworkResult
@@ -18,9 +19,19 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
   val rentForRequestResponse : LiveData<NetworkResult<CreatePostResponse>>
     get() = notificationRepository.rentForRequestResponse
 
+    val userNotifications : LiveData<NetworkResult<NotificationResponse>>
+        get() = notificationRepository.userNotifications
+
     fun rentRequestNotification(rentRequestNotification: RentRequestNotification) {
         viewModelScope.launch {
             notificationRepository.sendRentRequestNotification(rentRequestNotification)
+        }
+    }
+
+    fun getNotifications(userId: String) {
+        println("called userId = $userId")
+        viewModelScope.launch {
+            notificationRepository.getUserNotifications(userId)
         }
     }
 
