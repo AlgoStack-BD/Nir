@@ -410,7 +410,11 @@ class PostDetails : Fragment() {
                     if (chekDestinationPage == "Home"){
                         fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
                         fragmentTransaction.remove(this@PostDetails)
+                    }else if (chekDestinationPage == "Notification"){
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4,Notification())
+                        fragmentTransaction.remove(this@PostDetails)
                     }
+
                     else{
                         val bundle = Bundle()
                         bundle.putString("DestinationPage", "PostDetails")

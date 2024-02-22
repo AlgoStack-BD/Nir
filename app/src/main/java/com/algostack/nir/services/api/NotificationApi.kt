@@ -5,6 +5,7 @@ import com.algostack.nir.services.model.NotificatinUpdateRespne
 import com.algostack.nir.services.model.NotificationDeleteResponse
 import com.algostack.nir.services.model.NotificationResponse
 import com.algostack.nir.services.model.NotificationUpdateRequest
+import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.RentRequestNotification
 import retrofit2.Response
 import retrofit2.http.Body
@@ -29,9 +30,17 @@ interface NotificationApi {
         @Path("userId") id: String
     ): Response<NotificationResponse>
 
+    @GET("/single-notification/{id}")
+    suspend fun getSingleNotification(
+        @Path("id") id: String
+    ): Response<PublicPostResponse>
+
     // get all notifications
     @GET("/all-notifications")
     suspend fun getAllNotifications(): Response<NotificationResponse>
+
+
+
 
 
     // /delete-notification/65b936c2b8a49b08dfe34135

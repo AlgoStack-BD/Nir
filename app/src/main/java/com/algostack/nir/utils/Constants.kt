@@ -14,6 +14,7 @@ object Constants {
     const val USER_NUMER = "USER_NUMBER"
      const val SEND_ID = "SEND_ID"
      const val RECEIVE_ID = "RECEIVE_ID"
+    const  val NOTIFICATION_ID = 1
 
 
 }

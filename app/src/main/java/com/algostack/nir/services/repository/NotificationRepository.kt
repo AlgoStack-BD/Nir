@@ -7,6 +7,7 @@ import com.algostack.nir.services.model.NotificatinUpdateRespne
 import com.algostack.nir.services.model.NotificationDeleteResponse
 import com.algostack.nir.services.model.NotificationResponse
 import com.algostack.nir.services.model.NotificationUpdateRequest
+import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.RentRequestNotification
 import com.algostack.nir.utils.NetworkResult
 import javax.inject.Inject
@@ -19,6 +20,7 @@ class NotificationRepository @Inject constructor(
     private val _userNotifications = MutableLiveData<NetworkResult<NotificationResponse>> ()
     private val _deleteNotificationResponse = MutableLiveData<NetworkResult<NotificationDeleteResponse>> ()
     private val _updateNotificationResponse = MutableLiveData<NetworkResult<NotificatinUpdateRespne>> ()
+    private val _signlePostResponse = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     val rentForRequestResponse : MutableLiveData<NetworkResult<CreatePostResponse>>
         get() = _rentForRequestResponse
 
@@ -30,6 +32,9 @@ class NotificationRepository @Inject constructor(
 
     val updateNotificationResponse : MutableLiveData<NetworkResult<NotificatinUpdateRespne>>
         get() = _updateNotificationResponse
+
+    val signlePostResponse : MutableLiveData<NetworkResult<PublicPostResponse>>
+        get() = _signlePostResponse
 
     suspend fun sendRentRequestNotification(rentRequestNotification: RentRequestNotification) {
         _rentForRequestResponse.postValue(NetworkResult.Loading())
@@ -105,6 +110,24 @@ class NotificationRepository @Inject constructor(
             }
         }catch (e: Exception) {
             _updateNotificationResponse.postValue(NetworkResult.Error(e.message))
+        }
+    }
+
+
+    suspend fun getSingleNotification(postId: String) {
+        _signlePostResponse.postValue(NetworkResult.Loading())
+
+        try {
+            println("final call postId = $postId")
+            val response = notificationApi.getSingleNotification(postId)
+
+            println("singlePost: response = ${notificationApi.getSingleNotification(postId)}")
+
+            if (response.isSuccessful && response.body() != null) {
+                _signlePostResponse.postValue(NetworkResult.Success(response.body()!!))
+            }
+        }catch (e: Exception) {
+            _signlePostResponse.postValue(NetworkResult.Error(e.message))
         }
     }
 
