@@ -29,6 +29,10 @@ interface NotificationApi {
         @Path("userId") id: String
     ): Response<NotificationResponse>
 
+    // get all notifications
+    @GET("/all-notifications")
+    suspend fun getAllNotifications(): Response<NotificationResponse>
+
 
     // /delete-notification/65b936c2b8a49b08dfe34135
     @DELETE("/delete-notification/{notificationId}")

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -50,7 +51,7 @@ class Notification : Fragment() {
     ): View? {
 
         _binding = FragmentNotificationBinding.inflate(inflater,container,false)
-        notificationAdapter = NotificationAdapter(this::onDetailsClickekd, tokenManager.getUserId()!!)
+        notificationAdapter = NotificationAdapter(this::onDetailsClickekd)
         return binding.root
     }
 
@@ -59,7 +60,7 @@ class Notification : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         println("tptoken = ${tokenManager.getUserId()!!}")
-        notificationViewModel.getNotifications(tokenManager.getUserId()!!)
+        notificationViewModel.getallNotifications()
 
 
         binding.notificationRV.layoutManager = LinearLayoutManager(requireContext(),
@@ -156,7 +157,7 @@ class Notification : Fragment() {
 
 
                   println("Notification.updateNotificationResponse.observe: it = ${it.data!!.data.matchedCount}")
-                      notificationViewModel.getNotifications(tokenManager.getUserId()!!)
+                      notificationViewModel.getallNotifications()
                       bindObservers()
 
               }
@@ -177,7 +178,8 @@ class Notification : Fragment() {
 
                 is NetworkResult.Success -> {
 
-                    if (it.data!!.status == 200) {
+
+                    if (it.data!!.status == 200 ) {
                         Toast.makeText(requireContext(), "Notification Deleted ${it.data.data.deletedCount}", Toast.LENGTH_SHORT).show()
                         notificationViewModel.getNotifications(tokenManager.getUserId()!!)
                     }
@@ -199,19 +201,23 @@ class Notification : Fragment() {
 
                 is NetworkResult.Success -> {
 
-                    if (it.data!!.status == 200) {
-                        notificationAdapter.submitList(it.data.data.filter {
-                            it.status != "pending" && it.userId != tokenManager.getUserId()
-                                    ||
-                                    it.status != "pending" && it.userId == tokenManager.getUserId()
+                    if (it.data!!.status == 200 && it.data.data.isNotEmpty()  ) {
+                        notificationAdapter.submitList(
 
-                        })
+                            it.data.data.filter { notification ->
+                                notification.userId != tokenManager.getUserId() || (notification.status != "pending" && notification.userId == tokenManager.getUserId())
+                            }
 
+                        )
+
+                       // notificationAdapter.submitList(it.data.data)
+                    }else if (it.data.status == 500) {
+                        binding.ifNoDataAvilable.isVisible = true
                     }
                 }
 
                 is NetworkResult.Error -> {
-
+                   binding.ifNoDataAvilable.isVisible = true
                 }
             }
         }

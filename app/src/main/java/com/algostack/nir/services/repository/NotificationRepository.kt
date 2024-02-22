@@ -62,6 +62,22 @@ class NotificationRepository @Inject constructor(
         }
     }
 
+    suspend fun getallNotifications() {
+        _userNotifications.postValue(NetworkResult.Loading())
+
+        try {
+            val response = notificationApi.getAllNotifications()
+
+            println("NotificationRepository.getallNotifications: response = ${response.body()}")
+
+            if (response.isSuccessful && response.body() != null) {
+                _userNotifications.postValue(NetworkResult.Success(response.body()!!))
+            }
+        }catch (e: Exception) {
+            _userNotifications.postValue(NetworkResult.Error(e.message))
+        }
+    }
+
     suspend fun deleteNotification(notificationId: String) {
         _deleteNotificationResponse.postValue(NetworkResult.Loading())
 

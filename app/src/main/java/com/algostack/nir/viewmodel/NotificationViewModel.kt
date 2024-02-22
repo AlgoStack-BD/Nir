@@ -44,6 +44,12 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
         }
     }
 
+    fun getallNotifications() {
+        viewModelScope.launch {
+            notificationRepository.getallNotifications()
+        }
+    }
+
     fun deleteNotification(notificationId: String) {
         println("called notificationId = $notificationId")
         viewModelScope.launch {
