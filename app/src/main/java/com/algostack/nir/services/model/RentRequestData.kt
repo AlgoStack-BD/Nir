@@ -2,6 +2,7 @@ package com.algostack.nir.services.model
 
 data class RentRequestData(
     val clientName: String,
+    val clientImage: String ,
     val clientNumber: String,
     val meetingDate: String,
     val meetingTime: String,

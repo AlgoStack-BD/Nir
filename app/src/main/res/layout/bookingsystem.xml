@@ -174,6 +174,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/visitiorsnameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/visitiorsnameLayout">
+
+            <CheckBox
+                android:id="@+id/sameasme"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/ralewayregular"
+                android:text="@string/own"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="14sp" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/visitorsnumbertitle"
@@ -203,11 +227,11 @@
                 android:id="@+id/visitorsnumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/spinerborder"
                 android:fontFamily="@font/ralewaybold"
                 android:hint="Type here"
                 android:padding="5dp"
                 android:textAlignment="center"
-                android:background="@drawable/spinerborder"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="14sp"
 
@@ -216,13 +240,36 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/visitiorsnameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/visitorsnumberLayout">
+
+            <CheckBox
+                android:id="@+id/sameasme2"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/ralewayregular"
+                android:text="@string/own"
+                android:textColor="@color/colorSecendaryBlack"
+                android:textSize="14sp" />
+        </LinearLayout>
+
 
         <LinearLayout
 
             android:id="@+id/confirmBooking"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="65dp"
 
             android:background="@drawable/customrentforrequestrectungular"
             android:orientation="horizontal"
@@ -260,7 +307,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confirmBooking">

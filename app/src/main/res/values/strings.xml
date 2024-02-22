@@ -64,6 +64,7 @@
     <string name="your_name">Your Name</string>
     <string name="your_number">Your Number</string>
     <string name="confirm">Confirm</string>
+    <string name="own">Own</string>
 
     <string-array name="rangeSlider">
         <item>0</item>

@@ -2,17 +2,25 @@ package com.algostack.nir.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.algostack.nir.R
 import com.algostack.nir.databinding.NotificationItemBinding
 import com.algostack.nir.services.model.NotificationData
 import com.algostack.nir.services.model.NotificationResponseData
+import com.algostack.nir.utils.TokenManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import javax.inject.Inject
 
-class NotificationAdapter : ListAdapter<NotificationResponseData, NotificationAdapter.NotificationViewHolder>(
-    NotificationAdapter.ComparatorDiffUtil()
-){
+class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseData) -> Unit,accountUserID: String) : ListAdapter<NotificationResponseData, NotificationAdapter.NotificationViewHolder>(ComparatorDiffUtil()) {
+
+    val accountUserID = accountUserID
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val binding = NotificationItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            NotificationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NotificationViewHolder(binding)
     }
 
@@ -21,21 +29,80 @@ class NotificationAdapter : ListAdapter<NotificationResponseData, NotificationAd
         holder.bind(item)
     }
 
-    inner class NotificationViewHolder(private val binding: NotificationItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: NotificationResponseData){
-            binding.notificationTitle.text = item.postTitle
+    inner class NotificationViewHolder(private val binding: NotificationItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+
+        fun bind(item: NotificationResponseData) {
+
+
+
+            // if the user is the owner of the post then ignore this notification item
+//            if (accountUserID == item.userId && item.ownerRead) {
+//                binding.root.isVisible = false
+//                //remove this position from the list
+//
+//
+//                return
+//            }else {
+//                binding.root.isVisible = true
+//            }
+
+
+            if (item.ownerRead) {
+                binding.notificationItemLayout.setBackgroundColor (
+                    binding.root.context.resources.getColor(R.color.white)
+
+                )
+                binding.unseenSign.isVisible = false
+            } else {
+                binding.notificationItemLayout.setBackgroundColor(
+                    binding.root.context.resources.getColor(R.color.unreadcolor)
+                )
+            }
+
+            Glide.with(binding.root.context)
+                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${item.clientImage}")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.profileedit)
+                .error(R.drawable.profileedit)
+                .into(binding.notificationProfile)
+
+            binding.notificationTitle.text = item.clientName
+            binding.notificationContent.text =
+                "Want to visit your ${item.postTitle} flat on the ${item.meetingDate} at ${item.meetingTime}"
+
+            binding.root.setOnClickListener {
+                onDetailsClickekd(item)
+            }
         }
+
+
+
     }
 
-    class ComparatorDiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<NotificationResponseData>(){
-        override fun areItemsTheSame(oldItem: NotificationResponseData, newItem: NotificationResponseData): Boolean {
+    class ComparatorDiffUtil :
+        androidx.recyclerview.widget.DiffUtil.ItemCallback<NotificationResponseData>() {
+        override fun areItemsTheSame(
+            oldItem: NotificationResponseData,
+            newItem: NotificationResponseData
+        ): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: NotificationResponseData, newItem: NotificationResponseData): Boolean {
+        override fun areContentsTheSame(
+            oldItem: NotificationResponseData,
+            newItem: NotificationResponseData
+        ): Boolean {
             return oldItem == newItem
         }
     }
 
+    // remove item from the list
+    fun removeItem(position: Int) {
+        val list = currentList.toMutableList()
+        list.removeAt(position)
+        submitList(list)
+    }
 
 }

@@ -3,6 +3,7 @@ package com.algostack.nir.services.model
 data class NotificationResponseData(
     val _id: String,
     val clientName: String,
+    val clientImage: String,
     val clientNumber: String,
     val createdAt: String,
     val meetingDate: String,

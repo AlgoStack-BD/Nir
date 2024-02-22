@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -278,6 +279,8 @@ class PostDetails : Fragment() {
         val visitingTime = view.findViewById<TextView>(R.id.visiting_time)
         val visitorName = view.findViewById<EditText>(R.id.visitorsname)
         val visitorsNumber = view.findViewById<EditText>(R.id.visitorsnumber)
+        val nameSameAsMyProfile = view.findViewById<CheckBox>(R.id.sameasme)
+        val numberSameAsMyProfile = view.findViewById<CheckBox>(R.id.sameasme2)
 
         selectVisitigDate.setOnClickListener {
 
@@ -320,20 +323,43 @@ class PostDetails : Fragment() {
         }
 
 
+        nameSameAsMyProfile.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                visitorName.setText(tokenManager.getUserName())
+            } else {
+                visitorName.setText("")
+            }
+        }
+
+        numberSameAsMyProfile.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                visitorsNumber.setText(tokenManager.getUserNumber())
+            } else {
+                visitorsNumber.setText("")
+            }
+        }
+
+        val clientImage = if (tokenManager.getUserImage() != null) {
+           tokenManager.getUserImage()
+        } else {
+            ""
+        }
         confirm.setOnClickListener {
             Toast.makeText(context, "Booking Confirmed", Toast.LENGTH_SHORT).show()
 
             notificationViewModel.rentRequestNotification(
                 RentRequestNotification(
                     RentRequestData(
-                        visitorName.text.toString(),
-                        visitorsNumber.text.toString(),
+                        visitorName.text.toString() ?: "",
+                        clientImage!!,
+                        visitorsNumber.text.toString() ?: "",
                         visitingDate.text.toString(),
                         visitingTime.text.toString(),
                         detailsData!!.userId!!,
                         false,
                         detailsData!!._id,
-                        detailsData!!.title!!,
+                        //detailsData!!.title if null then use ""
+                        detailsData!!.title ?: "",
                         "Pending",
                         tokenManager.getUserId()!!,
                         false
