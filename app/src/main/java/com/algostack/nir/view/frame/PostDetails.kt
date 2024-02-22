@@ -360,9 +360,10 @@ class PostDetails : Fragment() {
                         detailsData!!._id,
                         //detailsData!!.title if null then use ""
                         detailsData!!.title ?: "",
-                        "Pending",
+                        "pending",
                         tokenManager.getUserId()!!,
-                        false
+                        false,
+                        detailsData!!.location ?: ""
                     )
                 )
             )

@@ -15,5 +15,6 @@ data class NotificationResponseData(
     val status: String,
     val updatedAt: String,
     val userId: String,
-    val userRead: Boolean
+    val userRead: Boolean,
+    val location: String
 )

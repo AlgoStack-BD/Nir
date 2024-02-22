@@ -3,9 +3,12 @@ package com.algostack.nir.view.frame
 import android.R
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -154,11 +157,12 @@ class Notification : Fragment() {
 
 
 
+
     }
 
   fun onDetailsClickekd(item: NotificationResponseData) {
 
-      if (item.userRead === false) {
+      if (!item.userRead) {
           notificationViewModel.updateNotification(
               item._id,
               NotificationUpdateRequest(NotificationData(true, item.status))
@@ -193,6 +197,13 @@ class Notification : Fragment() {
           val alert = builder.create()
           alert.setCancelable(true)
 
+          val map = view.findViewById<Button>(com.algostack.nir.R.id.gotodirection)
+
+
+
+          map.setOnClickListener {
+              directionFromCurrentMap(item.location)
+          }
 
 
           alert.window?.setBackgroundDrawable(ColorDrawable(0))
@@ -219,6 +230,16 @@ class Notification : Fragment() {
       }
     }
 
+
+    // direction map
+    private fun directionFromCurrentMap(destinationLatitude: String) {
+        // Create a Uri from an intent string. Open map using intent to show direction from current location (latitude, longitude) to specific location (latitude, longitude)
+//        val mapUri = Uri.parse("https://maps.google.com/maps?daddr=$destinationLatitude,$destinationLongitude")
+
+        val mapUri = Uri.parse("https://maps.google.com/maps?daddr=$destinationLatitude")
+        val intent = Intent(Intent.ACTION_VIEW, mapUri)
+        startActivity(intent)
+    }
     // Review scheduling function
 
     fun showSchedulegDialog(context: Context, dateS: String, timeS: String, titleS: String, postId: String, notificationId: String) {
@@ -324,23 +345,35 @@ class Notification : Fragment() {
         notificationViewModel.userNotifications.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Loading -> {
-
                 }
 
                 is NetworkResult.Success -> {
 
+
                     if (it.data!!.status == 200 && it.data.data.isNotEmpty()  ) {
+
+                        val filteredList = it.data.data.filter { notification ->
+                            notification.userId != tokenManager.getUserId() || (notification.userId == tokenManager.getUserId() && notification.status != "pending")
+                        }
                         notificationAdapter.submitList(
-
-                            it.data.data.filter { notification ->
-                                notification.userId != tokenManager.getUserId() || (notification.status != "pending" && notification.userId == tokenManager.getUserId())
-                            }
-
+                            filteredList
                         )
 
+
+                        notificationAdapter.submitList(filteredList)
+
+
+
+                        // check notifyadapter list is empty or not
+                        if (notificationAdapter.currentList.isEmpty()) {
+                            binding.ifNoDataAvilable.isVisible = true
+                        } else {
+                            binding.ifNoDataAvilable.isVisible = false
+                            binding.notificationRV.isVisible = true
+                        }
+
+
                        // notificationAdapter.submitList(it.data.data)
-                    }else if (it.data.status == 500) {
-                        binding.ifNoDataAvilable.isVisible = true
                     }
                 }
 

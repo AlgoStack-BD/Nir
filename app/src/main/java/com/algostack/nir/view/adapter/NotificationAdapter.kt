@@ -39,7 +39,7 @@ class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseD
 
 
 
-            if (item.ownerRead) {
+            if (item.userRead) {
                 binding.notificationItemLayout.setBackgroundColor (
                     binding.root.context.resources.getColor(R.color.white)
 

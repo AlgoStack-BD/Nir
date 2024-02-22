@@ -12,5 +12,6 @@ data class RentRequestData(
     val postTitle: String,
     val status: String,
     val userId: String,
-    val userRead: Boolean
+    val userRead: Boolean,
+    val location: String
 )
