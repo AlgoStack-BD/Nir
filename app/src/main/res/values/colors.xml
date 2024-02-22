@@ -5,6 +5,8 @@
     <color name="custom_dark">#161c25</color>
     <color name="facebook">#3B5998</color>
     <color name="google">#D12C1F</color>
+    <color name="delete">#FA5043</color>
+    <color name="unreadcolor">#EDE2E2</color>
     <color name="highlight_text_color">#2196F3</color>
     <color name="deepblue">#0D55DF</color>
     <color name="selected">#9ABDFF</color>

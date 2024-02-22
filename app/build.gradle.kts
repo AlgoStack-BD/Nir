@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -137,6 +138,9 @@ dependencies {
 
     // google gemini
     implementation("com.google.ai.client.generativeai:generativeai:0.2.0")
+    implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
+
+
 
 
 

@@ -2,6 +2,7 @@ package com.algostack.nir.services.network
 
 import com.algostack.nir.services.api.AuthIntercepter
 import com.algostack.nir.services.api.FavouriteAPI
+import com.algostack.nir.services.api.NotificationApi
 import com.algostack.nir.services.api.ProfileApi
 import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.api.UserApi
@@ -80,5 +81,13 @@ class NetworkModule {
         return retrofitBuilder
             .client(okHttpClient)
             .build().create(FavouriteAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNotificationApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient) : NotificationApi {
+        return retrofitBuilder
+            .client(okHttpClient)
+            .build().create(NotificationApi::class.java)
     }
 }

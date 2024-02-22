@@ -752,7 +752,7 @@
 
         <LinearLayout
 
-            android:id="@+id/regContinue"
+            android:id="@+id/sentRequestforRent"
             android:layout_width="335dp"
             android:layout_height="55dp"
             android:layout_marginTop="24dp"

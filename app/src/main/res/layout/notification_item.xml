@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:backgroundTint="#D9D9D9"
+    android:background="@color/unreadcolor"
+    android:id="@+id/notificationItemLayout"
+    android:padding="10dp"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:visibility="visible"
         android:id="@+id/notificationProfile"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -19,36 +22,50 @@
         android:id="@+id/notificationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ralewaysemibold"
         android:text="Saif Uddin Shrabon"
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/notificationProfile"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/notificationProfile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.18" />
 
     <TextView
-        android:id="@+id/notiificationContent"
-        android:layout_width="wrap_content"
+        android:id="@+id/notificationContent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="5dp"
         android:fontFamily="@font/ralewayregular"
-        android:text="WhoMI Vila ia large vila in this area"
+        android:text="Interest for your `2 bedroom 2 bathroom` flat. Please be ready for the meeting at 02 Feb 2021 at 10:00 AM"
         android:textColor="@color/colorSecendaryBlack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/unseenSign"
         app:layout_constraintStart_toEndOf="@+id/notificationProfile"
         app:layout_constraintTop_toBottomOf="@+id/notificationTitle"
         app:layout_constraintVertical_bias="0.51" />
 
+    <ImageView
+        android:id="@+id/unseenSign"
+        android:visibility="visible"
+        android:layout_width="15dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="9dp"
+        android:src="@drawable/unseensign"
+        app:layout_constraintBottom_toBottomOf="@+id/notificationTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/notificationTitle"
+        app:layout_constraintTop_toTopOf="@+id/notificationTitle" />
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="left"
-        app:constraint_referenced_ids="notificationTitle,notiificationContent"
+        app:constraint_referenced_ids="notificationTitle,notificationContent" />
         />
 
 

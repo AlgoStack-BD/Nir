@@ -58,6 +58,13 @@
     <string name="look_out_for_exciting_messages_from_your_desired_matches">Look out for exciting messages from your  desired matches!</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="title">House Name</string>
+    <string name="book_you_visiting_date">Book you visiting date</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_number">Your Number</string>
+    <string name="confirm">Confirm</string>
+    <string name="own">Own</string>
 
     <string-array name="rangeSlider">
         <item>0</item>
