@@ -1,9 +1,15 @@
 package com.algostack.nir.view.frame
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -14,16 +20,21 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileDetailsBinding
+import com.algostack.nir.services.model.PaymentRequest
+import com.algostack.nir.services.model.PaymentRequestData
 import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.view.adapter.CityAdapter
 import com.algostack.nir.view.adapter.UserOwnFavouriteListAdapter
 import com.algostack.nir.view.adapter.UserOwnPostAdapte
 import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.viewmodel.FavouriteViewModel
 import com.algostack.nir.viewmodel.ProfileViewModel
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -36,6 +47,8 @@ class ProfileDetails : Fragment() {
     @Inject
     lateinit var tokenManager: TokenManager
 
+
+    private  lateinit var dialog: BottomSheetDialog
     private lateinit var userOwnPostAdapte: UserOwnPostAdapte
     private lateinit var userFavouritePostAdapte: UserOwnFavouriteListAdapter
 
@@ -291,9 +304,122 @@ class ProfileDetails : Fragment() {
                 }
             })
         }
+        else if (from == "bostPost") {
+            showBottomSheetPaymentsyStemDialog(_id)
+        }
 
 
     }
+
+    // payment system function
+    private fun showBottomSheetPaymentsyStemDialog(postId : String) {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.paymentsystem, null)
+
+        dialog.setContentView(view)
+
+
+
+        // Set up BottomSheet behavior
+        val bottomSheetBehavior = BottomSheetBehavior.from(view.parent as View)
+//        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED // Close the BottomSheet initially
+
+
+        // Disable dragging the BottomSheet up
+       // bottomSheetBehavior.isDraggable = false
+
+
+
+        val payment = view.findViewById<WebView>(R.id.camwebView)
+
+
+
+        if (payment != null) {
+            payment.apply {
+
+                settings.javaScriptEnabled = true
+                settings.setSupportZoom(true)
+                settings.builtInZoomControls = true
+                settings.displayZoomControls = false
+                webViewClient = WebViewClient()
+                webChromeClient = WebChromeClient()
+
+                loadUrl("https://buy.stripe.com/test_5kAdSYetSbNhdVufYZ")
+
+            }
+                // GET CURRENT URL
+                payment.webViewClient = object : WebViewClient() {
+                    override fun onPageFinished(view: WebView?, url: String?) {
+                        super.onPageFinished(view, url)
+                        println("testurl: $url")
+
+
+
+                        if (url != "https://buy.stripe.com/test_5kAdSYetSbNhdVufYZ") {
+
+
+                        // if payment success
+                        val sessionid= url?.substringAfter("session_id=")
+                        println("testsessionid: $sessionid")
+                        if (sessionid != null){
+                            // dialog cancel
+                            dialog.cancel()
+
+                            // payment success
+                            paymentSuccess(sessionid,postId)
+                            println("paymentfuntest: $sessionid , $postId")
+                        }
+
+                    }
+                    }
+
+
+                }
+
+        } else {
+            Log.e("WebView", "Payment WebView is null")
+        }
+
+
+
+
+
+
+
+        dialog.show()
+    }
+
+    private fun paymentSuccess(sessionid: String, postId: String) {
+
+        val userId = tokenManager.getUserId()!!
+        profileViewModel.applicationContext = requireContext()
+        println("paymentfuntestinter: $sessionid , $userId , $postId")
+        profileViewModel.makePayment(PaymentRequest(PaymentRequestData(postId,sessionid,userId) ))
+
+        profileViewModel.paymentResponseLiveData.observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is NetworkResult.Success -> {
+                    println("checkthesuccessresponse: ${result.data}")
+                  if(result.data!!.status == 200){
+                      AlertDaialog.showCustomDoneDialogBox(
+                          requireContext(),
+                          "Payment Success"
+                      )
+                  }
+                }
+                is NetworkResult.Error -> {
+                    AlertDaialog.showCustomAlertDialogBox(
+                        requireContext(),
+                        result.message ?: "Something went wrong"
+                    )
+                }
+                is NetworkResult.Loading -> {
+                    //   binding?.logprogressBar?.isVisible = true
+                }
+            }
+        })
+    }
+
 
     private fun setupBackPress() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {

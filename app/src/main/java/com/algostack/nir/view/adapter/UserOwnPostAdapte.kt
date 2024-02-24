@@ -67,6 +67,12 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
 
                                 true
                             }
+                            R.id.bostpost -> {
+                                Toast.makeText(itemView.context, "Boost", Toast.LENGTH_SHORT).show()
+
+                                item._id.let { it1 -> onDetailsCliked(it1,"bostPost") }
+                                true
+                            }
                             else -> false
                         }
                     }
