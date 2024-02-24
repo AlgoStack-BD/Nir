@@ -42,7 +42,7 @@ class PublicPostRepository @Inject constructor(
 
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
-    private val _userFavouretResponse = MutableLiveData<NetworkResult<FavouriteResponse>> ()
+    private val _nearestPostResponeLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
 
 
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
@@ -50,6 +50,9 @@ class PublicPostRepository @Inject constructor(
 
     val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
         get() = _createPostResponseLiveData
+
+    val nearestPostResponeLiveData : LiveData<NetworkResult<PublicPostResponse>>
+        get() = _nearestPostResponeLiveData
 
 
 
@@ -60,29 +63,29 @@ class PublicPostRepository @Inject constructor(
     suspend fun publicPost(context: Context){
 
        // i want if room db not null then show data from room db and if room db is null then show data from api
-//        if (nirLocalDB.getPublicPostDao().getPublicPostData() != null){
-//            _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(nirLocalDB.getPublicPostDao().getPublicPostData()!!,200)))
-//
-//            try {
-//                val response = publicPostApi.getPublicPost()
-//
-//                if (response.isSuccessful && response.body() != null){
-//                    nirLocalDB.getPublicPostDao().deleteAllPublicPostData()
-//
-//                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
-//
-//                }
-//
-//
-//                handleNetworkResponse(response)
-//            }catch (e: Exception){
-//                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
-//
-//            }catch (e: TimeoutException){
-//                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
-//            }
-//
-//        }
+        if (nirLocalDB.getPublicPostDao().getPublicPostData() != null){
+            _publicPostResponseLiveData.postValue(NetworkResult.Success(PublicPostResponse(nirLocalDB.getPublicPostDao().getPublicPostData()!!,200)))
+
+            try {
+                val response = publicPostApi.getPublicPost()
+
+                if (response.isSuccessful && response.body() != null){
+                    nirLocalDB.getPublicPostDao().deleteAllPublicPostData()
+
+                    nirLocalDB.getPublicPostDao().insertPublicPost(response.body()!!.data)
+
+                }
+
+
+                handleNetworkResponse(response)
+            }catch (e: Exception){
+                _publicPostResponseLiveData.postValue(NetworkResult.Error(e.message))
+
+            }catch (e: TimeoutException){
+                _publicPostResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+
+        }
 
         if(NetworkUtils.isInternetConnected((context))){
             _publicPostResponseLiveData.postValue(NetworkResult.Loading())
@@ -125,6 +128,39 @@ class PublicPostRepository @Inject constructor(
 
     }
 
+    suspend fun publicnearestPost(context: Context,place : String){
+
+
+
+
+
+       if(NetworkUtils.isInternetConnected((context))){
+            _nearestPostResponeLiveData.postValue(NetworkResult.Loading())
+
+
+            try {
+                val response = publicPostApi.getNearestPost(place)
+
+                if(response.isSuccessful && response.body() != null){
+                    println("CheckResponse: ${response.body()}")
+
+                    _nearestPostResponeLiveData.postValue(NetworkResult.Success(response.body()!!))
+                }else if(response.errorBody() != null){
+                    val erroObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _nearestPostResponeLiveData.postValue(NetworkResult.Error(erroObj.getString("message")))
+                }else{
+                    _nearestPostResponeLiveData.postValue(NetworkResult.Error("Something went wrong"))
+                }
+
+            }catch (e: Exception){
+                _nearestPostResponeLiveData.postValue(NetworkResult.Error(e.message))
+
+            }catch (e: TimeoutException){
+                _nearestPostResponeLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }
+
+    }
 
 
     suspend fun createPost(context: Context,createPost: CreatePost) {

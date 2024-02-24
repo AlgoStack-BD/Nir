@@ -90,8 +90,10 @@
         app:layout_constraintGuide_end="20dp" />
 
 
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:focusableInTouchMode="true"
@@ -246,8 +248,26 @@
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/skeletonLayout2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/nointernet"
+                />
+
+
+
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nearfromyouRecyler"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="275dp"
                 android:layout_marginStart="20dp"
@@ -269,8 +289,25 @@
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/skeletonLayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/nointernet"
+                />
+
+
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bestForYouRecylerView"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"

@@ -21,11 +21,14 @@ import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.AlertDaialog.showCustomAlertDialogBox
 import com.algostack.nir.utils.NetworkResult
+import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.HorizontalSpace
 import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
 import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
 import com.algostack.nir.viewmodel.PublicPostViewModel
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.createSkeleton
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -43,12 +46,16 @@ class Home : Fragment() {
     @Inject
     lateinit var publicPostApi: PublicPostApi
 
+    @Inject
+    lateinit var tokenManager: TokenManager
+
     val bestForYouRecSpace = VerticalSpace()
     val nearRecSpace = HorizontalSpace()
 
 
     private lateinit var bestForYouAdapter: PublicFeedBestForYouAdapter
     private lateinit var nearByPostAdapter: PublicFeedNearByPostAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +93,13 @@ class Home : Fragment() {
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
         // Setup sticky header
+      //  publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
+
+        publicPostViewModel.nearestPost("Dhaka")
+        println("LocationToken: ${tokenManager.getUserLocation()!!}")
+
+
+
 
 
         binding.home.setOnClickListener {
@@ -185,9 +199,50 @@ class Home : Fragment() {
 
 
         bindOvservers()
+        bindOvserversNears()
 
 
 
+    }
+
+    private fun bindOvserversNears() {
+
+        publicPostViewModel.nearestPostResponeLiveData.observe(viewLifecycleOwner, Observer {result ->
+            //   binding?.logprogressBar?.isVisible = false
+            when(result){
+
+                is NetworkResult.Success -> {
+                    if(result.data!!.status == 200){
+
+                        binding.skeletonLayout2.isVisible = false
+                        binding.nearfromyouRecyler.isVisible = true
+                        println("CheckResponse: ${result.data}")
+                        val adsItems = result.data.data.filter { it.isAds && it.isApproved && !it.isSold }
+                        val otherItems = result.data.data.filter { !it.isAds && it.isApproved && !it.isSold }
+
+                        val nearestitem = adsItems + otherItems
+
+                        nearByPostAdapter.submitList(nearestitem)
+
+                    }else if(result.data.status == 500){
+
+                        result.message?.let { it1 -> showCustomAlertDialogBox(requireContext(),it1) }
+                    }
+                }
+                is NetworkResult.Error -> {
+
+                    binding.skeletonLayout2.isVisible = true
+                    binding.nearfromyouRecyler.isVisible = false
+                    showCustomAlertDialogBox(requireContext() , result.message ?: "Something went wrong")
+                }
+                is NetworkResult.Loading -> {
+                    //   binding?.logprogressBar?.isVisible = true
+
+                    binding.skeletonLayout2.isVisible = true
+                    binding.nearfromyouRecyler.isVisible = false
+                }
+    }
+        })
     }
 
     private fun bindOvservers() {
@@ -198,11 +253,25 @@ class Home : Fragment() {
            is NetworkResult.Success -> {
                if(result.data!!.status == 200){
 
-                   val bestForYouResult = result.data.data.filter { it.isApproved && !it.isSold }
+
+                   binding.skeletonLayout.isVisible = false
+                   binding.bestForYouRecylerView.isVisible = true
+//                   val bestForYouResult = result.data.data.filter {
+//                       it.isApproved && !it.isSold
+//
+//                   }
+
+                   val adsItems = result.data.data.filter { it.isAds && it.isApproved && !it.isSold }
+                   val otherItems = result.data.data.filter { !it.isAds && it.isApproved && !it.isSold }
+
+                   val bestForYouResult = adsItems + otherItems
+
+
+
 
                    Log.d("BestForYou",bestForYouResult.toString())
                    bestForYouAdapter.submitList(bestForYouResult)
-                   nearByPostAdapter.submitList(bestForYouResult)
+
 
 
                }else if(result.data.status == 500){
@@ -212,9 +281,15 @@ class Home : Fragment() {
            }
            is NetworkResult.Error -> {
                showCustomAlertDialogBox(requireContext() , result.message ?: "Something went wrong")
+
+               binding.skeletonLayout.isVisible = true
+               binding.bestForYouRecylerView.isVisible = false
            }
            is NetworkResult.Loading -> {
             //   binding?.logprogressBar?.isVisible = true
+
+               binding.skeletonLayout.isVisible = true
+               binding.bestForYouRecylerView.isVisible = false
            }
 
 

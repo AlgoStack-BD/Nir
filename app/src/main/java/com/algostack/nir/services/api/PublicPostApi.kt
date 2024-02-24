@@ -24,6 +24,9 @@ interface PublicPostApi {
     @GET("/all-posts")
     suspend fun getPublicPost() : Response<PublicPostResponse>
 
+    @GET("/nearest-posts/{place}")
+    suspend fun getNearestPost(@Path("place") place: String) : Response<PublicPostResponse>
+
 //    @GET("/single-user/:id")
 //    suspend fun getSingleUserPost() : Response<PublicPostResponse>
     @POST ("/create-post")
