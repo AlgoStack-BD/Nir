@@ -114,4 +114,14 @@
         android:name="com.algostack.nir.view.frame.InteriorAiwithGEMINI"
         android:label="fragment_interior_aiwith_g_e_m_i_n_i"
         tools:layout="@layout/fragment_interior_aiwith_g_e_m_i_n_i" />
+    <fragment
+        android:id="@+id/contactUs"
+        android:name="com.algostack.nir.view.frame.ContactUs"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/privacy_Policy"
+        android:name="com.algostack.nir.view.frame.Privacy_Policy"
+        android:label="fragment_privacy__policy"
+        tools:layout="@layout/fragment_privacy__policy" />
 </navigation>

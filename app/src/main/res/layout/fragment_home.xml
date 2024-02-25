@@ -252,13 +252,13 @@
                 android:id="@+id/skeletonLayout2"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="275dp"
+                android:layout_height="255dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="50dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/nointernet"
+                app:lottie_rawRes="@raw/neadfeedpostskeleton"
                 />
 
 
@@ -299,7 +299,7 @@
                 android:layout_marginBottom="50dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/nointernet"
+                app:lottie_rawRes="@raw/bestfeedpostskeleton"
                 />
 
 

@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.api.VerificationAPI
-import com.algostack.nir.services.db.LoginInfoDao
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.ForgetPasswordRequest
+import com.algostack.nir.services.model.SignupResponse
 import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.UserResponse
@@ -23,15 +23,9 @@ import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.Constants
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okio.IOException
 import org.json.JSONObject
 import retrofit2.Response
-import java.io.File
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
@@ -45,6 +39,7 @@ class userRepository @Inject constructor(
 
 
     private val _userResponseLiveData = MutableLiveData<NetworkResult<UserResponse>>()
+    private val _signupRespnseLiveData = MutableLiveData<NetworkResult<SignupResponse>>()
     private val _verifyResponseLiveData = MutableLiveData<NetworkResult<VerificationResponse>>()
     private val _VerifyOtpMessageLiveData = MutableLiveData<NetworkResult<VerifyOTPResponse>>()
 
@@ -64,18 +59,33 @@ class userRepository @Inject constructor(
     val requestResponseLiveData: LiveData<NetworkResult<userUpdateRequestResponse>>
         get() = _userUpdateResponseLiveData
 
+
+    val signupRespnseLiveData: LiveData<NetworkResult<SignupResponse>>
+        get() = _signupRespnseLiveData
+
     suspend fun registerUser(userRequest: UserRequest , context: Context) {
 
         if (NetworkUtils.isInternetConnected(context)) {
-            _userResponseLiveData.postValue(NetworkResult.Loading())
+            _signupRespnseLiveData.postValue(NetworkResult.Loading())
             try {
                 val response = userApi.signup(userRequest)
                 Log.d(Constants.TAG, response.body().toString())
-                handleNetworkResponseU(response)
+                if (response.isSuccessful && response.body() != null){
+
+
+
+
+                    _signupRespnseLiveData.postValue(NetworkResult.Success(response.body()!!))
+                }else if (response.errorBody() != null){
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _signupRespnseLiveData.postValue(NetworkResult.Error(errorObj.getString("message")))
+                }else{
+                    _signupRespnseLiveData.postValue(NetworkResult.Error("Something went wrong"))
+                }
             } catch (e: Exception) {
-                _userResponseLiveData.postValue(NetworkResult.Error(e.message))
+                _signupRespnseLiveData.postValue(NetworkResult.Error(e.message))
             }  catch (e: TimeoutException) {
-                _userResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+                _signupRespnseLiveData.postValue(NetworkResult.Error("Time Out"))
             }
         }else{
 

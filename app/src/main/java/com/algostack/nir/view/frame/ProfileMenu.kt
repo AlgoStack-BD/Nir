@@ -68,6 +68,13 @@ class ProfileMenu : Fragment() {
             replaceFragment(InteriorAiwithGEMINI(),InteriorAiwithGEMINI::class.java.simpleName)
         }
 
+        binding.privacyPolicyCard.setOnClickListener {
+            replaceFragment(Privacy_Policy(),Privacy_Policy::class.java.simpleName)
+        }
+        binding.contactUsCard.setOnClickListener {
+            replaceFragment(ContactUs(),ContactUs::class.java.simpleName)
+        }
+
 
         binding.signoutCard.setOnClickListener {
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.algostack.nir.services.model.ForgetPasswordRequest
+import com.algostack.nir.services.model.SignupResponse
 import com.algostack.nir.services.model.UpdateStatusRequest
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.UserResponse
@@ -21,7 +22,6 @@ import com.algostack.nir.services.repository.userRepository
 import com.algostack.nir.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,6 +40,9 @@ class AuthViewModel @Inject constructor(private val userRepository: userReposito
 
     val userUpdateResponseLiveData : LiveData<NetworkResult<userUpdateRequestResponse>>
         get() = userRepository.requestResponseLiveData
+
+    val signupResponseLiveData : LiveData<NetworkResult<SignupResponse>>
+        get() = userRepository.signupRespnseLiveData
 
     var applicationContext: Context? = null
 

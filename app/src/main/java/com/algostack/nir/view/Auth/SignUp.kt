@@ -158,13 +158,13 @@ class SignUp : Fragment() {
         return authViewModel.validateCredintials(UserRegRequest.data.name,UserRegRequest.data.email,UserRegRequest.data.password,confirmPassword,false)
     }
     private fun bindObservers(){
-        authViewModel.userResponeLiveData.observe(viewLifecycleOwner, Observer {
+        authViewModel.signupResponseLiveData.observe(viewLifecycleOwner, Observer {
            binding?.progressBar?.isVisible = false
             when(it){
                 is NetworkResult.Success -> {
-                    if (it.data != null && it.data.status == 200 && it.data.jwt != null) {
+                    if (it.data != null && it.data.status == 200) {
                         val email = binding?.regemail?.text.toString()
-                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email,it.data.data._id,it.data.data.phone,it.data.data.location)
+                        tokenManager.saveToken(it.data!!.jwt, it.data!!.responseData.name, it.data!!.responseData.image, it.data!!.responseData.email,it.data!!.responseData._id,it.data!!.responseData.phone,it.data.responseData.location)
                         println("ChekToken: ${tokenManager.getToken()}")
                         authViewModel.VerificationRequest(VerificationRequest(email))
                         val bundle = Bundle()
