@@ -11,7 +11,7 @@ import com.algostack.nir.services.model.PublicPostData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class PublicFeedNearByPostAdapter : ListAdapter<PublicPostData, PublicFeedNearByPostAdapter.NearForYouViewHolder>(ComparatorDiffUtil()) {
+class PublicFeedNearByPostAdapter  (private val onDetailsCliked: (PublicPostData) -> Unit ) : ListAdapter<PublicPostData, PublicFeedNearByPostAdapter.NearForYouViewHolder>(ComparatorDiffUtil()) {
 
 
 
@@ -47,6 +47,10 @@ class PublicFeedNearByPostAdapter : ListAdapter<PublicPostData, PublicFeedNearBy
                 .error(R.drawable.demo_home_photo)
                 .into(binding.cardImage)
 
+
+            binding.root.setOnClickListener{
+                onDetailsCliked(item)
+            }
         }
 
     }

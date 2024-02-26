@@ -414,6 +414,9 @@ class PostDetails : Fragment() {
                     }else if (chekDestinationPage == "Notification"){
                         fragmentTransaction.replace(R.id.fragmentConthainerView4,Notification())
                         fragmentTransaction.remove(this@PostDetails)
+                    }else if (chekDestinationPage == "ProfileDetails") {
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4, ProfileDetails())
+                        fragmentTransaction.remove(this@PostDetails)
                     }
 
                     else{

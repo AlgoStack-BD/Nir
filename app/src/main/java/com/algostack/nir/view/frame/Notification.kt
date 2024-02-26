@@ -350,6 +350,8 @@ class Notification : Fragment() {
                 is NetworkResult.Success -> {
 
 
+                    println("Notification.bindObservers: it2 = ${it.data!!.data}")
+
                     if (it.data!!.status == 200 && it.data.data.isNotEmpty()  ) {
 
                         val filteredList = it.data.data.filter { notification ->
@@ -360,7 +362,7 @@ class Notification : Fragment() {
                         )
 
 
-                        notificationAdapter.submitList(filteredList)
+                       // notificationAdapter.submitList(filteredList)
 
 
 
@@ -371,7 +373,6 @@ class Notification : Fragment() {
                             binding.ifNoDataAvilable.isVisible = false
                             binding.notificationRV.isVisible = true
                         }
-
 
                        // notificationAdapter.submitList(it.data.data)
                     }

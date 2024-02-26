@@ -30,7 +30,6 @@
         android:layout_width="133dp"
         android:layout_height="133dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/profileedit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />

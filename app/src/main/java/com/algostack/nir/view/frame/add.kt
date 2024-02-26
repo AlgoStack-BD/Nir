@@ -39,10 +39,12 @@ import com.algostack.nir.databinding.FragmentAddBinding
 import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.Numbers
 import com.algostack.nir.utils.FileCompressor
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.view.adapter.NumbersAdapter
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -88,8 +90,12 @@ class add : Fragment() {
     private val imageUris = ArrayList<Uri>()
     private  lateinit var dialog: BottomSheetDialog
     private lateinit var cityArrayList : ArrayList<Cityes>
+    private lateinit var numberArrayList : ArrayList<Numbers>
     private lateinit var cityAdapter : CityAdapter
+    private lateinit var numbersAdapter: NumbersAdapter
     private lateinit var recyclerView: RecyclerView
+
+
 
 
     var selectedRentType = ""
@@ -136,8 +142,12 @@ class add : Fragment() {
 
 
         cityArrayList = ArrayList()
-
+        numberArrayList = ArrayList()
         cityItemList()
+        cityItemListorginal()
+
+
+
 
         // photo picker
         binding.addphoto.setOnClickListener {
@@ -194,6 +204,7 @@ class add : Fragment() {
 
 
         binding.beadroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Beadroom")
         }
 
@@ -202,6 +213,7 @@ class add : Fragment() {
 
 
         binding.drawingroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Drawingroom")
         }
 
@@ -210,6 +222,7 @@ class add : Fragment() {
 
 
         binding.diningroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Diningroom")
         }
 
@@ -218,16 +231,23 @@ class add : Fragment() {
 
 
         binding.bathroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Bathroom")
         }
 
         binding.kitchenspinner.setOnClickListener {
+
             showBottomSheetDialog("Kitchen")
         }
 
 
         binding.balconyspinner.setOnClickListener {
+
             showBottomSheetDialog("Balcony")
+        }
+        binding.fieldpickaddress.setOnClickListener {
+
+            showBottomSheetDialog()
         }
 
 
@@ -337,7 +357,7 @@ binding.regContinue.setOnClickListener {
 
 
         // clear all fields
-        binding.fieldpickaddress.text.clear()
+      //  binding.fieldpickaddress.text.clear()
         binding.additionalMessage.text.clear()
         binding.rentpriceinputfield.text.clear()
         binding.imagepicker1.setImageResource(0)
@@ -421,6 +441,133 @@ binding.regContinue.setOnClickListener {
                 }
             }
         }
+    }
+
+    private fun showBottomSheetDialog() {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.select_city_bottom_view, null)
+
+        dialog.setContentView(view)
+
+        val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
+
+        recyclerView = view.findViewById(R.id.bottomrecyclerView)
+        cityAdapter = CityAdapter(cityArrayList){
+            binding.fieldpickaddress.text = it.cityName
+            //clear arraylist then reassign and clear the adapter
+            cityArrayList.clear()
+
+
+            dialog.dismiss()
+
+        }
+
+
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+
+
+        recyclerView.setHasFixedSize(true)
+
+        recyclerView.adapter = cityAdapter
+
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed
+                if (charSequence.isNullOrEmpty()) {
+                    //clear arraylist then reassign
+                    cityArrayList.clear()
+                    cityItemListorginal()
+                    recyclerView.adapter = cityAdapter
+
+                }else{
+                    cityAdapter.setFilter(charSequence.toString())
+                }
+                cityAdapter.setFilter(charSequence.toString())
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+        })
+
+
+        dialog.show()
+    }
+    // city funtion
+    private fun cityItemListorginal(){
+        cityArrayList.add(Cityes(1,"Habiganj"))
+        cityArrayList.add(Cityes(2,"Moulvibazar"))
+        cityArrayList.add(Cityes(3,"Sunamganj"))
+        cityArrayList.add(Cityes(4,"Dhaka"))
+        cityArrayList.add(Cityes(5,"Chittagong"))
+        cityArrayList.add(Cityes(6,"Sylhet"))
+        cityArrayList.add(Cityes(7,"Khulna"))
+        cityArrayList.add(Cityes(8,"Rajshahi"))
+        cityArrayList.add(Cityes(9,"Barisal"))
+        cityArrayList.add(Cityes(10,"Rangpur"))
+        cityArrayList.add(Cityes(11,"Comilla"))
+        cityArrayList.add(Cityes(12,"Narayanganj"))
+        cityArrayList.add(Cityes(13,"Gazipur"))
+        cityArrayList.add(Cityes(14,"Mymensingh"))
+        cityArrayList.add(Cityes(15,"Tangail"))
+        cityArrayList.add(Cityes(16,"Bogura"))
+        cityArrayList.add(Cityes(17,"Dinajpur"))
+        cityArrayList.add(Cityes(18,"Jessore"))
+        cityArrayList.add(Cityes(19,"Kustia"))
+        cityArrayList.add(Cityes(20,"Naogaon"))
+        cityArrayList.add(Cityes(21,"Savar"))
+        cityArrayList.add(Cityes(22,"Brahmanbaria"))
+        cityArrayList.add(Cityes(23,"Jamalpur"))
+        cityArrayList.add(Cityes(24,"Saidpur"))
+        cityArrayList.add(Cityes(25,"Sirajganj"))
+        cityArrayList.add(Cityes(26,"Pabna"))
+        cityArrayList.add(Cityes(27,"Natore"))
+        cityArrayList.add(Cityes(28,"Faridpur"))
+        cityArrayList.add(Cityes(29,"Pirojpur"))
+        cityArrayList.add(Cityes(30,"Bhola"))
+        cityArrayList.add(Cityes(31,"Jhalokati"))
+        cityArrayList.add(Cityes(32,"Patuakhali"))
+        cityArrayList.add(Cityes(33,"Barguna"))
+        cityArrayList.add(Cityes(34,"Chandpur"))
+        cityArrayList.add(Cityes(35,"Lakshmipur"))
+        cityArrayList.add(Cityes(36,"Noakhali"))
+        cityArrayList.add(Cityes(37,"Feni"))
+        cityArrayList.add(Cityes(38,"Bagerhat"))
+        cityArrayList.add(Cityes(39,"Chuadanga"))
+        cityArrayList.add(Cityes(40,"Jhenaidah"))
+        cityArrayList.add(Cityes(41,"Magura"))
+        cityArrayList.add(Cityes(42,"Meherpur"))
+        cityArrayList.add(Cityes(43,"Narail"))
+        cityArrayList.add(Cityes(44,"Satkhira"))
+        cityArrayList.add(Cityes(45,"Khagrachari"))
+        cityArrayList.add(Cityes(46,"Rangamati"))
+        cityArrayList.add(Cityes(47,"Bandarban"))
+        cityArrayList.add(Cityes(48,"Cox's Bazar"))
+        cityArrayList.add(Cityes(49,"Thakurgaon"))
+        cityArrayList.add(Cityes(50,"Panchagarh"))
+        cityArrayList.add(Cityes(51,"Tangail"))
+        cityArrayList.add(Cityes(52,"Shariatpur"))
+        cityArrayList.add(Cityes(53,"Madaripur"))
+        cityArrayList.add(Cityes(54,"Rajbari"))
+        cityArrayList.add(Cityes(55,"Gopalganj"))
+        cityArrayList.add(Cityes(56,"Kishoreganj"))
+        cityArrayList.add(Cityes(57,"Netrokona"))
+        cityArrayList.add(Cityes(58,"Sherpur"))
+        cityArrayList.add(Cityes(59,"Munshiganj"))
+        cityArrayList.add(Cityes(60,"Narsingdi"))
+        cityArrayList.add(Cityes(61,"Manikganj"))
+        cityArrayList.add(Cityes(62,"Potuakhali"))
+        cityArrayList.add(Cityes(63,"Nilphamari"))
+        cityArrayList.add(Cityes(64,"Gaibandha"))
+        cityArrayList.add(Cityes(65,"Lalmonirhat"))
+        cityArrayList.add(Cityes(66,"Kurigram"))
+        cityArrayList.add(Cityes(67,"Nawabganj"))
+
     }
 
 
@@ -647,26 +794,38 @@ private fun bitmapToFile(bitmap: Bitmap): File {
 
 
         recyclerView = view.findViewById(R.id.bottomrecyclerView)
-        cityAdapter = CityAdapter(cityArrayList){
+        numbersAdapter = NumbersAdapter(numberArrayList){
             //binding.locationText.text = it.cityName
             if(check == "Beadroom"){
                 binding.beadroomspinner.setText(it.cityName)
                 selectedBeadroom = it.cityName.toIntOrNull() ?: 0
+                //clear arraylist then reassign and clear the adapter
+                cityArrayList.clear()
+
             }else if(check == "Drawingroom"){
                 binding.drawingroomspinner.setText(it.cityName)
                 selectedDrawingroom = it.cityName.toIntOrNull() ?: 0
+                cityArrayList.clear()
             }else if(check == "Diningroom"){
                 binding.diningroomspinner.setText(it.cityName)
                 selectedDiningroom = it.cityName.toIntOrNull() ?: 0
+                cityArrayList.clear()
+
             }else if(check == "Bathroom"){
                 binding.bathroomspinner.setText(it.cityName)
                 selectedBathroom = it.cityName.toIntOrNull() ?: 0
+                cityArrayList.clear()
+
             }else if(check == "Kitchen"){
                 binding.kitchenspinner.setText(it.cityName)
                 selectedKitchen = it.cityName.toIntOrNull() ?: 0
+                cityArrayList.clear()
+
             }else if(check == "Balcony"){
                 binding.balconyspinner.setText(it.cityName)
                 selectedBalcony = it.cityName.toIntOrNull() ?: 0
+                cityArrayList.clear()
+
             }
             dialog.dismiss()
         }
@@ -674,7 +833,7 @@ private fun bitmapToFile(bitmap: Bitmap): File {
 
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = cityAdapter
+        recyclerView.adapter = numbersAdapter
 
 
 
@@ -682,23 +841,23 @@ private fun bitmapToFile(bitmap: Bitmap): File {
     }
 
     private fun cityItemList(){
-        cityArrayList.add(Cityes(1,"1"))
-        cityArrayList.add(Cityes(2,"2"))
-        cityArrayList.add(Cityes(3,"3"))
-        cityArrayList.add(Cityes(4,"4"))
-        cityArrayList.add(Cityes(5,"5"))
-        cityArrayList.add(Cityes(6,"6"))
-        cityArrayList.add(Cityes(7,"7"))
-        cityArrayList.add(Cityes(8,"8"))
-        cityArrayList.add(Cityes(9,"9"))
-        cityArrayList.add(Cityes(10,"10"))
-        cityArrayList.add(Cityes(11,"11"))
-        cityArrayList.add(Cityes(12,"12"))
-        cityArrayList.add(Cityes(13,"13"))
-        cityArrayList.add(Cityes(14,"14"))
-        cityArrayList.add(Cityes(15,"15"))
-        cityArrayList.add(Cityes(16,"16"))
-        cityArrayList.add(Cityes(17,"17"))
+        numberArrayList.add(Numbers(1,"1"))
+        numberArrayList.add(Numbers(2,"2"))
+        numberArrayList.add(Numbers(3,"3"))
+        numberArrayList.add(Numbers(4,"4"))
+        numberArrayList.add(Numbers(5,"5"))
+        numberArrayList.add(Numbers(6,"6"))
+        numberArrayList.add(Numbers(7,"7"))
+        numberArrayList.add(Numbers(8,"8"))
+        numberArrayList.add(Numbers(9,"9"))
+        numberArrayList.add(Numbers(10,"10"))
+        numberArrayList.add(Numbers(11,"11"))
+        numberArrayList.add(Numbers(12,"12"))
+        numberArrayList.add(Numbers(13,"13"))
+        numberArrayList.add(Numbers(14,"14"))
+        numberArrayList.add(Numbers(15,"15"))
+        numberArrayList.add(Numbers(16,"16"))
+        numberArrayList.add(Numbers(17,"17"))
 
 
 

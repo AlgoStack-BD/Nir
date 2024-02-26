@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="requestforrent">বাসা ভারার জন্য আবেদন</string>
+    <string name="type">বাসার ধরন</string>
+    <string name="family">পরিবার</string>
+    <string name="beadroom">শয়নকক্ষ</string>
+    <string name="drawingroom">বৈঠকখানা</string>
+    <string name="kitchen">রান্নাঘর</string>
+    <string name="bathroom">শৌচাগার</string>
+    <string name="balcony">বারান্দা</string>
+    <string name="dinigroom">খাবার কক্ষ</string>
+    <string name="bills">বিল</string>
+    <string name="gass">গ্যাস বিল</string>
+    <string name="water">পানির বিল</string>
+    <string name="electricity">কারেন্ট বিল</string>
+    <string name="rentprice">ভাড়া মূল্য</string>
+    <string name="houseaddress">বাসার ঠিকানা</string>
+    <string name="addphoto">ছবি যুক্ত করুন</string>
+    <string name="address">ঠিকানা</string>
+    <string name="addproperty">বাসা যোগ করুন</string>
+    <string name="nagotiable">আলোচনা সাপেক্ষ</string>
+    <string name="fixedPrice">নির্দিষ্ট মূল্য</string>
+</resources>

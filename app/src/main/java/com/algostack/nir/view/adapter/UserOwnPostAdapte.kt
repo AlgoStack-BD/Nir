@@ -18,7 +18,7 @@ import com.algostack.nir.services.model.SingleUserResponseData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) -> Unit): ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
+class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String,PublicPostData) -> Unit): ListAdapter<PublicPostData,UserOwnPostAdapte.UserOwnPostViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnPostViewHolder {
         val binding = EditlayoutItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -69,7 +69,7 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
                             R.id.deletepost -> {
                                 Toast.makeText(itemView.context, "Delete", Toast.LENGTH_SHORT).show()
 
-                                item._id?.let { it1 -> onDetailsCliked(it1,"delete") }
+                                item._id?.let { it1 -> onDetailsCliked(it1,"delete",item) }
 
 
                                 true
@@ -77,7 +77,7 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
                             R.id.bostpost -> {
                                 Toast.makeText(itemView.context, "Boost", Toast.LENGTH_SHORT).show()
 
-                                item._id.let { it1 -> onDetailsCliked(it1,"bostPost") }
+                                item._id.let { it1 -> onDetailsCliked(it1,"bostPost",item) }
                                 true
                             }
                             else -> false
@@ -86,6 +86,11 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
                     inflate(R.menu.threedotmenu)
                     show()
                 }
+            }
+
+
+            binding.root.setOnClickListener{
+                onDetailsCliked(item._id,"details",item)
             }
 
         }

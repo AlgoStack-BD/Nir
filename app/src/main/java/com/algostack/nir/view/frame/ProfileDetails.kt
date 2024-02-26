@@ -22,6 +22,7 @@ import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileDetailsBinding
 import com.algostack.nir.services.model.PaymentRequest
 import com.algostack.nir.services.model.PaymentRequestData
+import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
@@ -35,6 +36,7 @@ import com.algostack.nir.viewmodel.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -115,12 +117,7 @@ class ProfileDetails : Fragment() {
             binding.fvrtsection.setTextColor(defaultColour)
 
             // check if data is aviailable or not
-            if (userOwnPostAdapte.itemCount == 0){
-                binding.lotti.isVisible = true
-            }else{
-                binding.lotti.isVisible = false
-
-            }
+            binding.lotti.isVisible = userOwnPostAdapte.itemCount == 0
 
         }
 
@@ -135,12 +132,7 @@ class ProfileDetails : Fragment() {
             binding.fvrtsection.setTextColor(selectedColour)
 
             // check if data is aviailable or not
-            if (userFavouritePostAdapte.itemCount == 0){
-                binding.lotti.isVisible = true
-            }else{
-
-                binding.lotti.isVisible = false
-            }
+            binding.lotti.isVisible = userFavouritePostAdapte.itemCount == 0
         }
 
 
@@ -175,7 +167,7 @@ class ProfileDetails : Fragment() {
 
     private fun bindOverserver() {
         profileViewModel._userPostLiveData.observe(viewLifecycleOwner, Observer { result ->
-            //   binding?.logprogressBar?.isVisible = false
+
             when (result) {
 
                 is NetworkResult.Success -> {
@@ -183,9 +175,12 @@ class ProfileDetails : Fragment() {
 
                         if(result.data.data.isEmpty()) {
                             binding.lotti.isVisible = true
+                        }else{
+                            binding.lotti.isVisible = false
+                            userOwnPostAdapte.submitList(result.data.data)
                         }
 
-                        userOwnPostAdapte.submitList(result.data.data)
+
 
                         // check if data is aviailable or not
 
@@ -212,7 +207,7 @@ class ProfileDetails : Fragment() {
                 }
 
                 is NetworkResult.Loading -> {
-                    //   binding?.logprogressBar?.isVisible = true
+
                 }
             }
         })
@@ -220,13 +215,19 @@ class ProfileDetails : Fragment() {
 
     private fun bindFavObserver() {
         favouriteViewModel.userFavouritePost.observe(viewLifecycleOwner, Observer { result ->
-            //   binding?.logprogressBar?.isVisible = false
+
             when (result) {
 
                 is NetworkResult.Success -> {
                     if (result.data!!.status == 200) {
 
-                        userFavouritePostAdapte.submitList(result.data.data)
+                        if(result.data.data.isEmpty()) {
+                            binding.lotti.isVisible = true
+                        }else{
+                            binding.lotti.isVisible = false
+                            userFavouritePostAdapte.submitList(result.data.data)
+                        }
+
 
 
                     } else if (result.data.status == 500) {
@@ -250,7 +251,7 @@ class ProfileDetails : Fragment() {
                 }
 
                 is NetworkResult.Loading -> {
-                    //   binding?.logprogressBar?.isVisible = true
+
                 }
             }
         })
@@ -258,7 +259,7 @@ class ProfileDetails : Fragment() {
 
 
 
-    private fun onDetailsCliked(_id: String, from: String) {
+    private fun onDetailsCliked(_id: String, from: String,publicPostData: PublicPostData) {
 
 
         if (from == "delete") {
@@ -329,11 +330,29 @@ class ProfileDetails : Fragment() {
         }
         else if (from == "bostPost") {
             showBottomSheetPaymentsyStemDialog(_id)
+        }else if (from == "details") {
+            val bundle = Bundle()
+            bundle.putString("details", Gson().toJson(publicPostData))
+            bundle.putString("DestinationPage", "ProfileDetails")
+
+            replaceFragment(PostDetails(),bundle)
         }
 
 
-    }
+        println("testfrom: $from , $_id , $publicPostData")
 
+
+    }
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
+    }
     // payment system function
     private fun showBottomSheetPaymentsyStemDialog(postId : String) {
         dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)

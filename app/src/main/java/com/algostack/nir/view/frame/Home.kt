@@ -67,7 +67,7 @@ class Home : Fragment() {
 
 
         bestForYouAdapter = PublicFeedBestForYouAdapter(this::onDetailsCliked)
-        nearByPostAdapter = PublicFeedNearByPostAdapter()
+        nearByPostAdapter = PublicFeedNearByPostAdapter(this::onDetailsCliked)
 
 
         return binding.root

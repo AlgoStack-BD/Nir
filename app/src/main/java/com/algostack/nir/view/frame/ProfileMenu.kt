@@ -5,17 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentProfileMenuBinding
 import com.algostack.nir.services.db.NirLocalDB
+import com.algostack.nir.utils.LanguageManager
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.main.Frame
 import com.algostack.nir.view.main.MainActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,6 +34,8 @@ class ProfileMenu : Fragment() {
 
     @Inject
    lateinit var nirLocalDB: NirLocalDB
+
+    private  lateinit var dialog: BottomSheetDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,6 +79,9 @@ class ProfileMenu : Fragment() {
         binding.contactUsCard.setOnClickListener {
             replaceFragment(ContactUs(),ContactUs::class.java.simpleName)
         }
+        binding.languageCard.setOnClickListener {
+           showBottomSheetDialog()
+        }
 
 
         binding.signoutCard.setOnClickListener {
@@ -87,6 +95,39 @@ class ProfileMenu : Fragment() {
 
     }
 
+
+    private fun showBottomSheetDialog() {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.languagechange, null)
+
+        dialog.setContentView(view)
+
+        val eng = view.findViewById<RadioButton>(R.id.englishRadioButton)
+        val bng = view.findViewById<RadioButton>(R.id.banglaRadioButton)
+
+        bng.setOnClickListener {
+            val languageManager = LanguageManager(requireContext())
+            languageManager.updateLanguage(requireContext(),"bn")
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            activity?.startActivity(intent)
+        }
+
+        eng.setOnClickListener {
+            val languageManager = LanguageManager(requireContext())
+            languageManager.updateLanguage(requireContext(),"en")
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            activity?.startActivity(intent)
+        }
+
+
+
+
+
+
+        dialog.show()
+    }
     private fun replaceFragment(fragment: Fragment, flag: String){
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
