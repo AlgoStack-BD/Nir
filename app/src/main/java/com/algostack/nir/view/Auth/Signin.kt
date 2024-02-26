@@ -134,15 +134,29 @@ class Signin : Fragment() {
 
                     if (it.data != null && it.data.status == 200) {
 
-                        tokenManager.saveToken(it.data!!.jwt, it.data!!.data.name, it.data!!.data.image, it.data!!.data.email,it.data.data._id,it.data.data.phone,it.data.data.location)
+                      if(it.data.data.isBanned){
+                          showCustomAlertDialogBox(requireContext(), "Your account has been banned from this app")
+
+                      }else {
+
+                          tokenManager.saveToken(
+                              it.data!!.jwt,
+                              it.data!!.data.name,
+                              it.data!!.data.image,
+                              it.data!!.data.email,
+                              it.data.data._id,
+                              it.data.data.phone,
+                              it.data.data.location
+                          )
 
 
-                        val intent = Intent(activity, Frame::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        activity?.startActivity(intent)
-                        // current activity distroy
-                        activity?.finish()
-
+                          val intent = Intent(activity, Frame::class.java)
+                          intent.flags =
+                              Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                          activity?.startActivity(intent)
+                          // current activity distroy
+                          activity?.finish()
+                      }
 
                     } else if (it.data!!.status == 404){
 

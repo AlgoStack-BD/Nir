@@ -131,7 +131,7 @@ class SignUp : Fragment() {
         val password = binding?.regmainpassword?.text.toString()
 
 
-        return UserRequest(userData(email, "",false,false,"",name,password,"",0,0))
+        return UserRequest(userData(email, "",false,false,"",name,password,"",0,0,false))
     }
 
     private fun validateUserInput() : Pair<Boolean,String>{

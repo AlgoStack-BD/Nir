@@ -42,6 +42,13 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String) 
             }else fistOneImg = item.img
 
 
+            if (item.isApproved == false) {
+                binding.statustext.text = "Pending"
+                binding.approvaldot.setImageResource(R.drawable.pendingdot)
+            } else {
+                binding.statustext.text = "Approved"
+                binding.approvaldot.setImageResource(R.drawable.approveddot)
+            }
             Glide.with(itemView)
                 .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$fistOneImg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

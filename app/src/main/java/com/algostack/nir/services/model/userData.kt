@@ -11,6 +11,7 @@ data class userData (
     val password: String,
     val phone: String,
     val rentSuccess: Int,
-    val totoalPost: Int
+    val totoalPost: Int,
+    val isBanned: Boolean
 
 )

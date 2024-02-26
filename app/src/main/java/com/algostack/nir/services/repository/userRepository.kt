@@ -107,6 +107,8 @@ class userRepository @Inject constructor(
             try {
                 val response = userApi.signin(userSigninRequest)
 
+                println("Testapicall: ${response}")
+
                Log.d(Constants.TAG, response.body().toString())
 //
 //                if (response.isSuccessful && response.body() != null){
