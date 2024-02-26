@@ -42,6 +42,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView5"
+            android:visibility="gone"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
@@ -64,6 +65,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView6"
+            android:visibility="gone"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
@@ -76,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
 
             <ImageView
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/email" />
@@ -198,6 +201,7 @@
 
 
                 <TextView
+                    android:id="@+id/compoanyemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -329,10 +333,11 @@
 
 
                 <TextView
+                    android:id="@+id/developerMail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="algostackbd@gmail.com"
+                    android:text="shrabon06065@gmail.com"
                     android:textColor="@color/deepblue"
                     app:layout_constraintStart_toStartOf="@+id/textView28"
                     app:layout_constraintTop_toBottomOf="@+id/textView28" />

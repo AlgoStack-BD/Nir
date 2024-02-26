@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.ActivityFrameBinding
+import com.algostack.nir.view.frame.Category
 import com.algostack.nir.view.frame.Chat
 import com.algostack.nir.view.frame.Home
 import com.algostack.nir.view.frame.Notification
@@ -50,7 +51,7 @@ class Frame : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.nav_home2 -> replaceFragment(Home())
-                R.id.nav_chat -> replaceFragment(Chat())
+                R.id.nav_chat -> replaceFragment(Category())
                 R.id.nav_notification -> replaceFragment(Notification())
                 R.id.nav_profileMenu -> replaceFragment(ProfileMenu())
 

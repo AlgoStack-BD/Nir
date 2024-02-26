@@ -189,7 +189,9 @@ class EditeProfile : Fragment() {
             when (it) {
                 is NetworkResult.Success -> {
                     if (it.data != null ) {
-                        Toast.makeText(requireContext(), "Post Created", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Edit Succesfull", Toast.LENGTH_SHORT).show()
+                        listImage.clear()
+                        imageUris.clear()
 
                         for (i in it.data.fileNames.indices) {
                             if (i == 0) {
@@ -199,7 +201,7 @@ class EditeProfile : Fragment() {
                             }
                         }
 
-                        println("selectedImage: $selectedImage")
+
 
 
                         createFinalCallPost()

@@ -114,6 +114,14 @@ class ProfileDetails : Fragment() {
             binding.mylist.setTextColor(selectedColour)
             binding.fvrtsection.setTextColor(defaultColour)
 
+            // check if data is aviailable or not
+            if (userOwnPostAdapte.itemCount == 0){
+                binding.lotti.isVisible = true
+            }else{
+                binding.lotti.isVisible = false
+
+            }
+
         }
 
         binding.profilefvrt.setOnClickListener {
@@ -125,6 +133,14 @@ class ProfileDetails : Fragment() {
 
             binding.mylist.setTextColor(defaultColour)
             binding.fvrtsection.setTextColor(selectedColour)
+
+            // check if data is aviailable or not
+            if (userFavouritePostAdapte.itemCount == 0){
+                binding.lotti.isVisible = true
+            }else{
+
+                binding.lotti.isVisible = false
+            }
         }
 
 
@@ -165,7 +181,14 @@ class ProfileDetails : Fragment() {
                 is NetworkResult.Success -> {
                     if (result.data!!.status == 200) {
 
+                        if(result.data.data.isEmpty()) {
+                            binding.lotti.isVisible = true
+                        }
+
                         userOwnPostAdapte.submitList(result.data.data)
+
+                        // check if data is aviailable or not
+
 
 
                     } else if (result.data.status == 500) {
