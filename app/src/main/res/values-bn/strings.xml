@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name">Nir</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="requestforrent">বাসা ভারার জন্য আবেদন</string>
     <string name="type">বাসার ধরন</string>
     <string name="family">পরিবার</string>
@@ -21,4 +22,99 @@
     <string name="addproperty">বাসা যোগ করুন</string>
     <string name="nagotiable">আলোচনা সাপেক্ষ</string>
     <string name="fixedPrice">নির্দিষ্ট মূল্য</string>
+
+    <string name="filters">ফিল্টার</string>
+    <string name="search">ফিল্টার করা ফলাফল</string>
+    <string name="city">শহর</string>
+    <string name="cityName">ঢাকা</string>
+    <string name="priceRange">মূল্য পরিসীমা ( BDT )</string>
+    <string name="search_articles_hint">অবস্থান অনুসন্ধান</string>
+    <string name="inputtext">সংখ্যা দিন</string>
+    <string name="sylhet">সিলেট</string>
+    <string name="dhaka">ঢাকা</string>
+    <string name="chittagong">চট্টগ্রাম</string>
+    <string name="naraynganj">নারায়াগঞ্জ</string>
+    <string name="adittional">বর্ণনা</string>
+    <string name="phoneNumber">ফোন নম্বর</string>
+
+    <string name="Description">বর্ণনা</string>
+    <string name="dummy">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</string>
+
+    <string name="DetailsHeadding">বাড়ির নাম</string>
+    <string name="any">Any</string>
+    <string name="_0">0</string>
+    <string name="number_of_drawing_room">ড্রয়িং রুমের সংখ্যা</string>
+    <string name="number_of_bead_room">বেডরুমের সংখ্যা</string>
+    <string name="number_of_kitchen_room">রান্নাঘরের ঘরের সংখ্যা</string>
+    <string name="number_of_balcony_room">ব্যালকনি রুমের সংখ্যা</string>
+    <string name="currently_you_have_no_avilable_messages">বর্তমানে আপনার কাছে কোনো উপলভ্য বার্তা নেই.</string>
+    <string name="look_out_for_exciting_messages_from_your_desired_matches">আপনার পছন্দসই ম্যাচগুলি থেকে উত্তেজনাপূর্ণ বার্তাগুলির জন্য সন্ধান করুন!!</string>
+    <string name="edit_profile">ইডিট প্রফাইল</string>
+    <string name="title">বাড়ির নাম</string>
+    <string name="book_you_visiting_date">আপনি পরিদর্শন তারিখ বুক করুন</string>
+    <string name="select_date">তারিখ নির্বাচন করুন</string>
+    <string name="select_time">সময় নির্বাচন করুন</string>
+    <string name="your_name">আপনার নাম</string>
+    <string name="your_number">আপনার নাম্বার</string>
+    <string name="confirm">নিশ্চিত করুন</string>
+    <string name="own">নিজের</string>
+    <string name="select_language">ভাষা নির্বাচন কর</string>
+    <string name="en">ইংরেজি</string>
+    <string name="bn">বাংলা</string>
+    <string name="change_language">ভাষা পরিবর্তন</string>
+    <string name="interior_ai">ইন্টেরিয়র এ-আই </string>
+    <string name="contact_us">যোগাযোগ করুন</string>
+    <string name="privacy_policy">প্রাইভেসি পলিসি</string>
+    <string name="sign_out">সাইন আউট</string>
+    <string name="bachelor">ব্যাচেলর</string>
+    <string name="sublet">সাবলেট</string>
+    <string name="family_nbachelor">ফ্যামিলি\nব্যাচেলর</string>
+    <string name="hotel">হোটেল</string>
+    <string name="shop">দোকান</string>
+    <string name="number_of_dining_room">ডাইনিং রুমের সংখ্যা</string>
+    <string name="number_of_bath_room">বাথরুমের সংখ্যা</string>
+    <string name="enter_your_house_name">আপনার বাড়ির নাম লিখুন</string>
+
+    <string name="are_you_wating_for_something_to_happen">আপনি কি কোন কিছু জন্য অপেক্ষা করছেন?</string>
+    <string name="we_will_notify_you_when_something_exciting_and_new_happens">অপেক্ষা করুন কোন আপডেট আসলে আপনাকে জানানো হোবে!</string>
+    <string name="notification">নটিফিকেশন</string>
+    <string name="menu">মেনু</string>
+    <string name="profile">প্রোফাইল</string>
+    <string name="my_listings">মাই লিস্টিং</string>
+    <string name="favorite">ফেবারিট</string>
+    <string name="home">হোম</string>
+    <string name="category">ক্যাটাগরি</string>
+    <string name="delete">ডিলিট</string>
+    <string name="bost_your_post">বুস্ট করুন</string>
+    <string name="sold">বিক্রি হয়েছে</string>
+    <string name="search_properties">বাসা খোঁজন...</string>
+    <string name="appartment">অ্যাপার্টমেন্ট</string>
+    <string name="vila">ভিলা</string>
+    <string name="cottage">কটেজ</string>
+    <string name="near_for_you">নিয়ার ফর ইউ</string>
+    <string name="best_for_you">বেস্ট ফর ইউ</string>
+    <string name="we_will_send_you_an_one_time_password_on_your_email">আমরা আপনার ইমেলে আপনাকে একটি ওয়ান টাইম পাসওয়ার্ড পাঠাব</string>
+    <string name="otp_verification">ওটিপি ভেরিফিকেশন</string>
+    <string name="set_your_new_password">আপনার নতুন পাসওয়ার্ডটি দিন</string>
+    <string name="create_your_new_password_to_login">লগইন করতে আপনার নতুন পাসওয়ার্ড তৈরি করুন</string>
+    <string name="new_password">আপনার নতুন পাসওয়ার্ডটি দিন</string>
+    <string name="confirm_password">পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="continuebutton">পরের ধাপে যান</string>
+    <string name="successfully_n_registered">সফলভাবে\n নিবন্ধন করা হয়েছে</string>
+    <string name="congratulations_your_account_has_nbeen_registered_is_this_application">অভিনন্দন, আপনার আকাউন্টি \nসফলভাবে রেজিস্টার করা হয়েছে</string>
+    <string name="go_to_home">হোম মেনুতে যান</string>
+    <string name="email_address">ইমেল</string>
+    <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="log_in">লগ ইন</string>
+    <string name="sign_up">সাইন আপ</string>
+    <string name="please_check_your_internet_connection">ইন্টারনেট সংযোগ বিচ্ছিন্ন হয়েছে!</string>
+    <string name="ok">ওকে</string>
+    <string name="review_tour_request">রিভিউ টুর রিকুয়েস্ট</string>
+    <string name="date">তারিখ</string>
+    <string name="time">টাইম</string>
+    <string name="view_details">বিস্তারিত দেখুন</string>
+    <string name="decline_schedule">শিডিউল বাতিল</string>
+    <string name="accept_schedule">শিডিউল গ্রহণ</string>
+
+
 </resources>

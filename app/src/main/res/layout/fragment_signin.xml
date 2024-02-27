@@ -42,7 +42,7 @@
             android:layout_marginTop="45dp"
             android:background="@drawable/rectedittext"
             android:drawableStart="@drawable/email"
-            android:hint="Email Address"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -61,7 +61,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/rectedittext"
             android:drawableRight="@drawable/visibility_off"
-            android:hint="Enter Password"
+            android:hint="@string/new_password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/ralewaybold"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textColor="@color/colorSecendaryBlack"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="110dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="Continue"
+                android:text="@string/continuebutton"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
@@ -127,6 +127,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/or2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,6 +140,7 @@
             app:layout_constraintTop_toBottomOf="@+id/Continue" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/facebook"
             android:layout_width="335dp"
             android:layout_height="55dp"
@@ -170,6 +172,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/google"
             android:layout_width="335dp"
             android:layout_height="55dp"

@@ -35,7 +35,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/ralewayextrabold"
             android:gravity="center"
-            android:text="Please check your internet connection !"
+            android:text="@string/please_check_your_internet_connection"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="Ok"
+                android:text="@string/ok"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

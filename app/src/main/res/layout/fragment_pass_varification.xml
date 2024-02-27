@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:fontFamily="@font/ralewaybold"
-            android:text="OTP Verification"
+            android:text="@string/otp_verification"
 
             android:textSize="24dp"
             app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -48,7 +48,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/ralewayregular"
-            android:text="We will send you an One Time Password on your email"
+            android:text="@string/we_will_send_you_an_one_time_password_on_your_email"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="@+id/textView2"

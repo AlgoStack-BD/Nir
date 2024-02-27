@@ -49,7 +49,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="Ok"
+                android:text="@string/ok"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

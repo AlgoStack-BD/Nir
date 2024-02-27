@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/ralewaybold"
         android:padding="5dp"
-        android:text="Category"
+        android:text="@string/category"
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="24dp"
 
@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Family"
+                        android:text="@string/family"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />
@@ -115,7 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Bachelor"
+                        android:text="@string/bachelor"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />
@@ -156,7 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Sublet"
+                        android:text="@string/sublet"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />
@@ -210,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Family\nBachelor"
+                        android:text="@string/family_nbachelor"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />
@@ -251,7 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Hotel"
+                        android:text="@string/hotel"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />
@@ -292,7 +292,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Shop"
+                        android:text="@string/shop"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecendaryBlack"
                         android:textSize="18sp" />

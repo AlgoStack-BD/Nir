@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Profile"
+        android:text="@string/profile"
         android:fontFamily="@font/ralewayextrabold"
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="18dp"
@@ -107,7 +107,7 @@
                 android:paddingTop="13dp"
                 android:paddingEnd="25dp"
                 android:paddingBottom="13dp"
-                android:text="My Listings"
+                android:text="@string/my_listings"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -129,7 +129,7 @@
                 android:paddingTop="13dp"
                 android:paddingEnd="25dp"
                 android:paddingBottom="13dp"
-                android:text="Favorite"
+                android:text="@string/favorite"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="14dp" />
         </LinearLayout>

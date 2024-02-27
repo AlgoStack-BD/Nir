@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/ralewaybold"
         android:padding="5dp"
-        android:text="Menu"
+        android:text="@string/menu"
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/ralewaysemibold"
-                android:text="Interior Ai"
+                android:text="@string/interior_ai"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
@@ -136,7 +136,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/ralewaysemibold"
-                android:text="Contact Us"
+                android:text="@string/contact_us"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
@@ -221,7 +221,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/ralewaysemibold"
-                android:text="Privacy Policy"
+                android:text="@string/privacy_policy"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
@@ -263,7 +263,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/ralewaysemibold"
-                android:text="Sign Out"
+                android:text="@string/sign_out"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />

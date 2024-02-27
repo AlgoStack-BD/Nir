@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ralewaybold"
             android:padding="5dp"
-            android:text="Interio AI"
+            android:text="@string/interior_ai"
             android:textColor="@color/colorSecendaryBlack"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"

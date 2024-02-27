@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/ralewaybold"
         android:padding="5dp"
-        android:text="Review Tour Request"
+        android:text="@string/review_tour_request"
         android:textColor="@color/colorSecendaryBlack"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/ralewaybold"
-                    android:text="Date "
+                    android:text="@string/date"
                     android:textSize="18dp" />
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/ralewaybold"
-                    android:text="Time "
+                    android:text="@string/time"
                     android:textSize="18dp" />
 
                 <TextView
@@ -132,7 +132,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/spinerborder"
                 android:drawableRight="@drawable/arrow"
-                android:text="View Details" />
+                android:text="@string/view_details" />
 
 
         </LinearLayout>
@@ -151,7 +151,7 @@
         android:background="@drawable/spinerborder"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Decline Schedule"
+        android:text="@string/decline_schedule"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/acceptSchedule"
         app:layout_constraintHorizontal_bias="0.5"
@@ -168,7 +168,7 @@
         android:background="@drawable/spinerborder"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Accept Schedule"
+        android:text="@string/accept_schedule"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/declineSchedule"

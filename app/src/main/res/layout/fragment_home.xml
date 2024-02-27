@@ -51,7 +51,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/ralewayregular"
-            android:text="Search Properties..." />
+            android:text="@string/search_properties" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="35dp"
             android:fontFamily="@font/ralewaysemibold"
-            android:text="Sylhet"
+            android:text="@string/sylhet"
             android:textColor="@color/colorSecendaryBlack" />
 
         <ImageView
@@ -138,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                            android:layout_marginTop="5dp"
-                            android:text="Home"
+                            android:text="@string/home"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
                             android:textColor="@color/white"
@@ -158,7 +158,7 @@
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Appartment"
+                            android:text="@string/appartment"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
@@ -179,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Hotel"
+                            android:text="@string/hotel"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
@@ -200,7 +200,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Vila"
+                            android:text="@string/vila"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
@@ -221,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Cottage"
+                            android:text="@string/cottage"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ralewaysemibold"
                             android:textAlignment="center"
@@ -244,7 +244,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/ralewayextrabold"
-                android:text="Near For You"
+                android:text="@string/near_for_you"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
@@ -285,7 +285,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/ralewayextrabold"
-                android:text="Best For You"
+                android:text="@string/best_for_you"
                 android:textColor="@color/colorSecendaryBlack"
                 android:textSize="20dp" />
 
