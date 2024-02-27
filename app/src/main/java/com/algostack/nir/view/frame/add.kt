@@ -276,27 +276,32 @@ class add : Fragment() {
 
 
 
-binding.regContinue.setOnClickListener {
+ binding.regContinue.setOnClickListener {
+
+     if (tokenManager.getUserImage() == null) {
+         val bundle = Bundle()
+         bundle.putString("DestinationPage", "Home")
+         replaceFragment(NotLogIn(),bundle)
+        }else {
 
 
-
-    if (imageUris.size > 0) {
-        for (i in 0 until imageUris.size) {
-            // val file = File(imageUris[i].path!!)
-            // Log.d("CheckFile", "onViewCreated: ${file.name}")
-            val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
-            Log.d("CheckFile", "onViewCreated: ${file}")
-            listImage.add(file)
-        }
-        imageUploadViewModel.addMultipleImages(listImage)
-
-
-    }
+         if (imageUris.size > 0) {
+             for (i in 0 until imageUris.size) {
+                 // val file = File(imageUris[i].path!!)
+                 // Log.d("CheckFile", "onViewCreated: ${file.name}")
+                 val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
+                 Log.d("CheckFile", "onViewCreated: ${file}")
+                 listImage.add(file)
+             }
+             imageUploadViewModel.addMultipleImages(listImage)
 
 
-    bindObserverforImageUpload()
+         }
 
 
+         bindObserverforImageUpload()
+
+     }
 }
 
 
@@ -860,6 +865,17 @@ private fun bitmapToFile(bitmap: Bitmap): File {
         numberArrayList.add(Numbers(17,"17"))
 
 
+
+    }
+
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
 
     }
 

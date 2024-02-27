@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="@string/profile"
-        android:fontFamily="@font/ralewayextrabold"
+        android:fontFamily="@font/robotomedium"
         android:textColor="@color/colorSecendaryBlack"
-        android:textSize="18dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
         android:layout_width="133dp"
         android:layout_height="133dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/profileedit"
+        android:src="@drawable/testprofilemenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -60,8 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="6dp"
-        android:text="Saif Uddin"
-        android:textSize="18dp"
+        android:fontFamily="@font/robotomedium"
+        android:text="@string/guest_user"
+        android:textSize="18sp"
         android:textColor="@color/colorSecendaryBlack"
         app:layout_constraintEnd_toEndOf="@+id/profileimg"
         app:layout_constraintStart_toStartOf="@+id/profileimg"
@@ -72,9 +73,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/ralewaysemibold"
-        android:text="saif06065@gmail.com"
-        android:textSize="13dp"
+        android:fontFamily="@font/robotomedium"
+        android:text="guest@gmail.com"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/userName"
         app:layout_constraintStart_toStartOf="@+id/userName"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
@@ -93,7 +94,7 @@
 
         <LinearLayout
             android:id="@+id/profileMyList"
-            android:layout_width="132dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonclickedbackground"
             android:orientation="vertical">
@@ -102,14 +103,14 @@
                 android:id="@+id/mylist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ralewaysemibold"
+                android:fontFamily="@font/robotomedium"
                 android:paddingStart="30dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="25dp"
                 android:paddingBottom="13dp"
                 android:text="@string/my_listings"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,14 +125,14 @@
                 android:id="@+id/fvrtsection"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ralewaysemibold"
+                android:fontFamily="@font/robotomedium"
                 android:paddingStart="30dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="25dp"
                 android:paddingBottom="13dp"
                 android:text="@string/favorite"
                 android:textColor="@color/colorSecendaryBlack"
-                android:textSize="14dp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

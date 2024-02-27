@@ -22,9 +22,8 @@ class Privacy_Policy : Fragment() {
 
         _binding = FragmentPrivacyPolicyBinding.inflate(inflater,container,false)
 
-
           setupBackPress()
-        return binding?.root
+        return binding.root
 
     }
 
@@ -44,7 +43,7 @@ class Privacy_Policy : Fragment() {
 
                     val fragmentManager = parentFragmentManager
                     val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
+                    fragmentTransaction.replace(R.id.fragmentConthainerView4,ProfileMenu())
                     fragmentTransaction.remove(this@Privacy_Policy)
 
                 }

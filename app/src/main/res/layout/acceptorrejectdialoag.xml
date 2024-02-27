@@ -86,7 +86,6 @@
                     android:text="We checking if the home can be seen on the requested date and time" />
 
 
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/gotodirection"
                     android:layout_width="150dp"
@@ -94,10 +93,10 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
-                    android:padding="10dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/spinerborder"
                     android:drawableLeft="@drawable/location_mini_icon"
+                    android:padding="10dp"
                     android:text="Direction" />
             </LinearLayout>
 

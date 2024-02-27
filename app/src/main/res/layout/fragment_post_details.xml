@@ -7,7 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.frame.PostDetails">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:background="#FFFFFFFF"
         android:layout_height="match_parent">

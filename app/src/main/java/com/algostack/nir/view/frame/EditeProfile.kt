@@ -102,7 +102,7 @@ class EditeProfile : Fragment() {
             .with(requireContext())
             .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
             .centerCrop()
-            .placeholder(R.drawable.profileedit)
+            .placeholder(R.drawable.testprofilemenu)
             .into(binding.profileimg)
 
         println("tokenManager.getUserImage(): ${tokenManager.getUserImage()}")

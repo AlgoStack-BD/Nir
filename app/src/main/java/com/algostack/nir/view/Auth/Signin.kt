@@ -144,10 +144,12 @@ class Signin : Fragment() {
                               it.data!!.data.name,
                               it.data!!.data.image,
                               it.data!!.data.email,
-                              it.data.data._id,
-                              it.data.data.phone,
-                              it.data.data.location
+                              it.data!!.data._id,
+                              it.data!!.data.phone,
+                              it.data!!.data.location
                           )
+
+                          println("User Token : ${it.data.data}")
 
 
                           val intent = Intent(activity, Frame::class.java)

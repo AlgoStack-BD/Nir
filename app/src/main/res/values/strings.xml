@@ -121,6 +121,19 @@
     <string name="view_details">View Details</string>
     <string name="decline_schedule">Decline Schedule</string>
     <string name="accept_schedule">Accept Schedule</string>
+    <string name="oh_no_you_are_not_logged_in">Oh no! You are not logged in?</string>
+    <string name="notloginStrign">You need to be a registered  user to view the information. Please Login Now</string>
+    <string name="guest_user">Guest User</string>
+    <string name="h1">18sp</string>
+    <string name="h2">16sp</string>
+    <string name="b1">16sp</string>
+    <string name="b2">14sp</string>
+    <string name="save">Save</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_you_address">Enter you address</string>
+    <string name="enter_your_phone_number">Enter your Phone Number</string>
+    <string name="enter_you_naame">Enter you naame</string>
 
     <string-array name="rangeSlider">
         <item>0</item>

@@ -39,7 +39,7 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
         val editor = prefs.edit()
         editor.putString(USER_NAME, userName)
         editor.putString(USER_NUMER, number)
-    editor.putString(USER_IMAGE, userImage)
+        editor.putString(USER_IMAGE, userImage)
         editor.apply()
     }
 

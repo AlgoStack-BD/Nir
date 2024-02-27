@@ -115,6 +115,13 @@
     <string name="view_details">বিস্তারিত দেখুন</string>
     <string name="decline_schedule">শিডিউল বাতিল</string>
     <string name="accept_schedule">শিডিউল গ্রহণ</string>
+    <string name="oh_no_you_are_not_logged_in">ওহ না! আপনি লগইন নেই?</string>
+    <string name="notloginStrign">তথ্য দেখতে আপনাকে একজন নিবন্ধিত ব্যবহারকারী হতে হবে। এখনই লগইন করুন</string>
+    <string name="guest_user">গেস্ট ইউসার</string>
+    <string name="h1">18sp</string>
+    <string name="h2">16sp</string>
+    <string name="b1">16sp</string>
+    <string name="b2">14sp</string>
 
 
 </resources>

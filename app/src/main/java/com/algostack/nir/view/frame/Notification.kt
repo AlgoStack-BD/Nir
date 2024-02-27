@@ -80,8 +80,11 @@ class Notification : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        println("tptoken = ${tokenManager.getUserId()!!}")
-        notificationViewModel.getallNotifications()
+        if (tokenManager.getUserId() != null) {
+           // println("tptoken = ${tokenManager.getUserId()!!}")
+            notificationViewModel.getallNotifications()
+        }
+
 
 
         binding.notificationRV.layoutManager = LinearLayoutManager(requireContext(),
@@ -162,6 +165,14 @@ class Notification : Fragment() {
 
   fun onDetailsClickekd(item: NotificationResponseData) {
 
+      if (tokenManager.getUserId() == null) {
+          val bundle = Bundle()
+          bundle.putString("DestinationPage", "Notification")
+          replaceFragment(NotLogIn(),bundle)
+      }
+      else {
+
+
       if (!item.userRead) {
           notificationViewModel.updateNotification(
               item._id,
@@ -227,6 +238,7 @@ class Notification : Fragment() {
       }else
       {
           showSchedulegDialog(requireContext(),item.meetingDate, item.meetingTime, item.postTitle, item.postId, item._id )
+      }
       }
     }
 

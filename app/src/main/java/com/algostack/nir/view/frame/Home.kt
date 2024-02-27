@@ -93,10 +93,25 @@ class Home : Fragment() {
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
         // Setup sticky header
-      //  publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
+        if (tokenManager.getToken() != null){
+            if (tokenManager.getUserLocation() != null){
+                publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
+                binding.nearfromyouRecyler.isVisible = true
+                binding.textView7.isVisible = true
 
-        publicPostViewModel.nearestPost("Dhaka")
-        println("LocationToken: ${tokenManager.getUserLocation()!!}")
+            }else{
+                binding.textView7.isVisible = false
+                binding.nearfromyouRecyler.isVisible = false
+            }
+
+
+
+
+        }
+
+
+      //  publicPostViewModel.nearestPost("Dhaka")
+
 
 
 
@@ -230,13 +245,9 @@ class Home : Fragment() {
                     }
                 }
                 is NetworkResult.Error -> {
-
-                    binding.skeletonLayout2.isVisible = true
-                    binding.nearfromyouRecyler.isVisible = false
                     showCustomAlertDialogBox(requireContext() , result.message ?: "Something went wrong")
                 }
                 is NetworkResult.Loading -> {
-                    //   binding?.logprogressBar?.isVisible = true
 
                     binding.skeletonLayout2.isVisible = true
                     binding.nearfromyouRecyler.isVisible = false
@@ -305,11 +316,19 @@ class Home : Fragment() {
 
 
     private fun onDetailsCliked(publicPostData: PublicPostData) {
-        val bundle = Bundle()
-        bundle.putString("details", Gson().toJson(publicPostData))
-        bundle.putString("DestinationPage", "Home")
+        if (tokenManager.getToken() == null){
+            val bundle = Bundle()
 
-        replaceFragment(PostDetails(),bundle)
+            bundle.putString("DestinationPage", "Home")
+
+            replaceFragment(NotLogIn(),bundle)
+        }else {
+            val bundle = Bundle()
+            bundle.putString("details", Gson().toJson(publicPostData))
+            bundle.putString("DestinationPage", "Home")
+
+            replaceFragment(PostDetails(), bundle)
+        }
     }
 
 

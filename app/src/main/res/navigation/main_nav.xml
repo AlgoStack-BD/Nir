@@ -124,4 +124,9 @@
         android:name="com.algostack.nir.view.frame.category"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/notLogIn"
+        android:name="com.algostack.nir.view.frame.NotLogIn"
+        android:label="fragment_not_log_in"
+        tools:layout="@layout/fragment_not_log_in" />
 </navigation>

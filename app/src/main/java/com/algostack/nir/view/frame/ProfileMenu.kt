@@ -57,16 +57,32 @@ class ProfileMenu : Fragment() {
 //        }
 
 
-        Glide
-            .with(requireContext())
-            .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
-            .centerCrop()
-            .placeholder(R.drawable.profile)
-            .into(binding.profileImage)
-        binding.profileName.text = tokenManager.getUserName()
+
+        if(tokenManager.getToken() != null) {
+            Glide
+                .with(requireContext())
+                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
+                .centerCrop()
+                .placeholder(R.drawable.testprofilemenu)
+                .into(binding.profileImage)
+            binding.profileName.text = tokenManager.getUserName()
+
+
+        }else{
+            binding.signoutCard.isVisible = false
+        }
+
 
         binding.profileCard.setOnClickListener {
-            replaceFragment(ProfileDetails(),ProfileDetails::class.java.simpleName)
+            if (tokenManager.getUserImage() == null){
+                 val bundle = Bundle()
+                bundle.putString("DestinationPage", "Home")
+                replaceFragment(NotLogIn(),bundle)
+
+
+            }else {
+                replaceFragment(ProfileDetails(), ProfileDetails::class.java.simpleName)
+            }
         }
 
         binding.intoriroai.setOnClickListener {
@@ -80,16 +96,19 @@ class ProfileMenu : Fragment() {
             replaceFragment(ContactUs(),ContactUs::class.java.simpleName)
         }
         binding.languageCard.setOnClickListener {
+
            showBottomSheetDialog()
         }
 
 
         binding.signoutCard.setOnClickListener {
 
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            tokenManager.clearToken()
-            activity?.startActivity(intent)
+
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                tokenManager.clearToken()
+                activity?.startActivity(intent)
+
 
         }
 
@@ -132,6 +151,16 @@ class ProfileMenu : Fragment() {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment,flag).addToBackStack(flag).commit()
+    }
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
     }
 
 }
