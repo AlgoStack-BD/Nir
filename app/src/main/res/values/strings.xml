@@ -134,6 +134,16 @@
     <string name="enter_you_address">Enter you address</string>
     <string name="enter_your_phone_number">Enter your Phone Number</string>
     <string name="enter_you_naame">Enter you naame</string>
+    <string name="select_type">Select Type</string>
+    <string name="select_property_type">Select Property Type</string>
+    <string name="have_any_bills">Have any bills</string>
+    <string name="current_address">Current Address</string>
+    <string name="enter_your_desired_rent_price">Enter your desired rent price</string>
+    <string name="details_about_your_property">Details about your property</string>
+    <string name="details">Details</string>
+    <string name="browse_photo">Browse Photo</string>
+    <string name="browse_photos">Browse Photos</string>
+    <string name="add_photos">Add Photos</string>
 
     <string-array name="rangeSlider">
         <item>0</item>
