@@ -24,10 +24,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -39,15 +41,20 @@ import com.algostack.nir.databinding.FragmentAddBinding
 import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.Numbers
 import com.algostack.nir.utils.FileCompressor
+import com.algostack.nir.utils.LanguageManager
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
 import com.algostack.nir.view.adapter.NumbersAdapter
+import com.algostack.nir.view.main.MainActivity
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -55,6 +62,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.concurrent.timerTask
 
@@ -94,6 +102,7 @@ class add : Fragment() {
     private lateinit var cityAdapter : CityAdapter
     private lateinit var numbersAdapter: NumbersAdapter
     private lateinit var recyclerView: RecyclerView
+    val newImageArray = arrayListOf<ImageItem>()
 
 
 
@@ -142,8 +151,6 @@ class add : Fragment() {
 
 
         cityArrayList = ArrayList()
-        numberArrayList = ArrayList()
-        cityItemList()
         cityItemListorginal()
 
 
@@ -179,27 +186,11 @@ class add : Fragment() {
 
 
         // spiner for rent type
-        binding.renttypespinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.renttypespinner.setSelection(0)
-                }
 
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.renttypespinner.setSelection(position)
+        binding.renttypespinner.setOnClickListener {
+            showRentTypeBottomSheetDialog()
+        }
 
-
-                    selectedRentType = adapterView?.getItemAtPosition(position).toString()
-
-
-                }
-
-            }
 
 
 
@@ -312,7 +303,7 @@ class add : Fragment() {
 
     private fun createFinalCallPost() {
         // address
-        selectedAddress = binding.fieldpickaddress.text.toString()
+        selectedAddress = binding.addressTextFiled.text.toString()
         println("address: $selectedAddress")
 
         selectAdditonalMessage =  binding.additionalMessage.text.toString()
@@ -362,25 +353,25 @@ class add : Fragment() {
 
 
         // clear all fields
-      //  binding.fieldpickaddress.text.clear()
         binding.additionalMessage.text.clear()
         binding.rentpriceinputfield.text.clear()
-        binding.imagepicker1.setImageResource(0)
-        binding.imagepicker2.setImageResource(0)
-        binding.imagepicker3.setImageResource(0)
-        binding.imagepicker4.setImageResource(0)
         binding.checkboxelectricity.isChecked = false
         binding.checkboxwater.isChecked = false
         binding.checkbocgass.isChecked = false
         binding.negotiablecheckbox.isChecked = false
-        binding.renttypespinner.setSelection(0)
-        binding.beadroomspinner.setText("0")
-        binding.drawingroomspinner.setText("0")
-        binding.diningroomspinner.setText("0")
-        binding.bathroomspinner.setText("0")
-        binding.kitchenspinner.setText("0")
-        binding.balconyspinner.setText("0")
+        binding.bedroomTextFiled.text = "0"
+        binding.drawingroomTextFiled.text = "0"
+        binding.diningroomTextFiled.text = "0"
+        binding.bathroomTextFiled.text = "0"
+        binding.kitchenTextFiled.text = "0"
+        binding.balconyTextFiled.text = "0"
         binding.titleTextFiled.text.clear()
+        // clear image
+        imageUris.clear()
+        listImage.clear()
+        newImageArray.clear()
+        //clear image adapter
+        binding.imageRV.isVisible = false
 
 
 
@@ -458,9 +449,9 @@ class add : Fragment() {
 
         recyclerView = view.findViewById(R.id.bottomrecyclerView)
         cityAdapter = CityAdapter(cityArrayList){
-            binding.fieldpickaddress.text = it.cityName
+            binding.addressTextFiled.text = it.cityName
             //clear arraylist then reassign and clear the adapter
-            cityArrayList.clear()
+
 
 
             dialog.dismiss()
@@ -485,7 +476,6 @@ class add : Fragment() {
                 // Not needed
                 if (charSequence.isNullOrEmpty()) {
                     //clear arraylist then reassign
-                    cityArrayList.clear()
                     cityItemListorginal()
                     recyclerView.adapter = cityAdapter
 
@@ -499,6 +489,49 @@ class add : Fragment() {
 
             }
         })
+
+
+        dialog.show()
+    }
+
+    private fun showRentTypeBottomSheetDialog() {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.selectrenttype, null)
+
+        dialog.setContentView(view)
+
+        val bachelor = view.findViewById<RadioButton>(R.id.bachelorRadioButton)
+        val family = view.findViewById<RadioButton>(R.id.familyRadioButton)
+        val sublet = view.findViewById<RadioButton>(R.id.subletRadioButton)
+        val famandbachelor = view.findViewById<RadioButton>(R.id.familyRadioButton)
+
+        bachelor.setOnClickListener {
+             binding.rentType.text = "Bachelor"
+            selectedRentType = "Bachelor"
+            dialog.dismiss()
+        }
+
+        family.setOnClickListener {
+            binding.rentType.text = "Family"
+            selectedRentType = "Family"
+            dialog.dismiss()
+        }
+
+        sublet.setOnClickListener {
+            binding.rentType.text = "Sublet"
+            selectedRentType = "Sublet"
+            dialog.dismiss()
+        }
+
+        famandbachelor.setOnClickListener {
+            binding.rentType.text = "Family and Bachelor"
+            selectedRentType = "Family and Bachelor"
+            dialog.dismiss()
+        }
+
+
+
+
 
 
         dialog.show()
@@ -725,24 +758,33 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                      println("ChekImageuri: $imageUri")
                     imageUris.add(imageUri)
-
-                    when (i) {
-                        0 -> binding.imagepicker1.setImageURI(imageUri)
-                        1 -> binding.imagepicker2.setImageURI(imageUri)
-                        2 -> binding.imagepicker3.setImageURI(imageUri)
-                        3 -> binding.imagepicker4.setImageURI(imageUri)
-                    }
+                    newImageArray.add(ImageItem(UUID.randomUUID().toString(),imageUri.toString()))
+//                    when (i) {
+//                        0 -> binding.imagepicker1.setImageURI(imageUri)
+//                        1 -> binding.imagepicker2.setImageURI(imageUri)
+//                        2 -> binding.imagepicker3.setImageURI(imageUri)
+//                        3 -> binding.imagepicker4.setImageURI(imageUri)
+//
+//                    }
                 }
+
+                recylerviewInitalize()
             } else if (data?.data != null) {
                 val imageUri: Uri = data.data!!
                 imageUris.add(imageUri)
                 // Do something with the image (save it to some directory or whatever you need to do with it here)
                 // Set image to first ImageView
-                binding.imagepicker1.setImageURI(imageUri)
+             //   binding.imagepicker1.setImageURI(imageUri)
             }
         }
     }
 
+    private fun recylerviewInitalize() {
+        binding.imageRV.isVisible = true
+        val imageAdapter = ImageDetailsSmallViewAdapter()
+        binding.imageRV.adapter = imageAdapter
+        imageAdapter.submitList(newImageArray)
+    }
 
 
     fun getRealPathFromURI(uri: Uri, context: Context): String? {
@@ -788,85 +830,85 @@ private fun bitmapToFile(bitmap: Bitmap): File {
 
         dialog.setContentView(view)
 
-        val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
+        val searchEditText = view.findViewById<AppCompatEditText>(R.id.search_edit_text_bttom)
+        val one = view.findViewById<MaterialCardView>(R.id.num1)
+        val two = view.findViewById<MaterialCardView>(R.id.num2)
+        val three = view.findViewById<MaterialCardView>(R.id.num3)
+        val four = view.findViewById<MaterialCardView>(R.id.num4)
+        val five = view.findViewById<MaterialCardView>(R.id.num5)
+
+
 
         val save = view.findViewById<TextView>(R.id.saveText)
         save.setOnClickListener {
-            binding.beadroomspinner.setText(searchEditText.text.toString())
+            setTex(check,searchEditText.text.toString().toInt())
+            dialog.dismiss()
+        }
+
+        one.setOnClickListener {
+           setTex(check,1)
+
+            dialog.dismiss()
+        }
+
+        two.setOnClickListener {
+            setTex(check,2)
+            dialog.dismiss()
+        }
+
+        three.setOnClickListener {
+            setTex(check,3)
+            dialog.dismiss()
+        }
+
+        four.setOnClickListener {
+            setTex(check,4)
+            dialog.dismiss()
+        }
+
+        five.setOnClickListener {
+            setTex(check,5)
             dialog.dismiss()
         }
 
 
-
-        recyclerView = view.findViewById(R.id.bottomrecyclerView)
-        numbersAdapter = NumbersAdapter(numberArrayList){
-            //binding.locationText.text = it.cityName
-            if(check == "Beadroom"){
-                binding.beadroomspinner.setText(it.cityName)
-                selectedBeadroom = it.cityName.toIntOrNull() ?: 0
-                //clear arraylist then reassign and clear the adapter
-                cityArrayList.clear()
-
-            }else if(check == "Drawingroom"){
-                binding.drawingroomspinner.setText(it.cityName)
-                selectedDrawingroom = it.cityName.toIntOrNull() ?: 0
-                cityArrayList.clear()
-            }else if(check == "Diningroom"){
-                binding.diningroomspinner.setText(it.cityName)
-                selectedDiningroom = it.cityName.toIntOrNull() ?: 0
-                cityArrayList.clear()
-
-            }else if(check == "Bathroom"){
-                binding.bathroomspinner.setText(it.cityName)
-                selectedBathroom = it.cityName.toIntOrNull() ?: 0
-                cityArrayList.clear()
-
-            }else if(check == "Kitchen"){
-                binding.kitchenspinner.setText(it.cityName)
-                selectedKitchen = it.cityName.toIntOrNull() ?: 0
-                cityArrayList.clear()
-
-            }else if(check == "Balcony"){
-                binding.balconyspinner.setText(it.cityName)
-                selectedBalcony = it.cityName.toIntOrNull() ?: 0
-                cityArrayList.clear()
-
-            }
-            dialog.dismiss()
-        }
-
-
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = numbersAdapter
 
 
 
         dialog.show()
     }
 
-    private fun cityItemList(){
-        numberArrayList.add(Numbers(1,"1"))
-        numberArrayList.add(Numbers(2,"2"))
-        numberArrayList.add(Numbers(3,"3"))
-        numberArrayList.add(Numbers(4,"4"))
-        numberArrayList.add(Numbers(5,"5"))
-        numberArrayList.add(Numbers(6,"6"))
-        numberArrayList.add(Numbers(7,"7"))
-        numberArrayList.add(Numbers(8,"8"))
-        numberArrayList.add(Numbers(9,"9"))
-        numberArrayList.add(Numbers(10,"10"))
-        numberArrayList.add(Numbers(11,"11"))
-        numberArrayList.add(Numbers(12,"12"))
-        numberArrayList.add(Numbers(13,"13"))
-        numberArrayList.add(Numbers(14,"14"))
-        numberArrayList.add(Numbers(15,"15"))
-        numberArrayList.add(Numbers(16,"16"))
-        numberArrayList.add(Numbers(17,"17"))
+    private fun setTex(check: String, i: Int) {
+        when(check){
+            "Beadroom" -> {
+                binding.bedroomTextFiled.text = i.toString()
+                selectedBeadroom = i
 
-
-
+            }
+            "Drawingroom" -> {
+                binding.drawingroomTextFiled.text = i.toString()
+                selectedDrawingroom = i
+            }
+            "Diningroom" -> {
+                binding.diningroomTextFiled.text = i.toString()
+                selectedDiningroom = i
+            }
+            "Bathroom" -> {
+                binding.bathroomTextFiled.text = i.toString()
+                selectedBathroom = i
+            }
+            "Kitchen" -> {
+                binding.kitchenTextFiled.text = i.toString()
+                selectedKitchen = i
+            }
+            "Balcony" -> {
+                binding.balconyTextFiled.text = i.toString()
+                selectedBalcony = i
+            }
+        }
     }
+
+
 
     private fun replaceFragment(fragment: Fragment,bundle: Bundle){
         val fragmentManager = parentFragmentManager

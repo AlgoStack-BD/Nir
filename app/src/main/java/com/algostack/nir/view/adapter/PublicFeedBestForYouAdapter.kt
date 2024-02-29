@@ -55,6 +55,8 @@ class PublicFeedBestForYouAdapter (private val onDetailsCliked: (PublicPostData)
 
 
 
+
+
             Glide.with(itemView)
                 .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$fistOneImg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

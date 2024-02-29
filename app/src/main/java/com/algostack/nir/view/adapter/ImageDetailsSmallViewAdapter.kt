@@ -46,12 +46,28 @@ class ImageDetailsSmallViewAdapter : ListAdapter<ImageItem, ImageDetailsSmallVie
 
         fun bind(item: ImageItem){
 
-            Glide.with(itemView)
-                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${item.url}")
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.demo_home_photo)
-                .error(R.drawable.demo_home_photo)
-                .into(binding.imageView)
+
+            // item.url contain "content" this string then load local image else load from server
+            if(item.url.contains("content")){
+                Glide.with(itemView)
+                    .load(item.url)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(binding.imageView)
+            }else{
+
+                Glide.with(itemView)
+                    .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${item.url}")
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.demo_home_photo)
+                    .error(R.drawable.demo_home_photo)
+                    .into(binding.imageView)
+            }
+
+
+
+
+
         }
 
 
