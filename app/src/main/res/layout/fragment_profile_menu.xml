@@ -11,266 +11,381 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/ralewaybold"
+        android:fontFamily="@font/robotomedium"
         android:padding="5dp"
-        android:text="Menu"
+        android:text="@string/menu"
         android:textColor="@color/colorSecendaryBlack"
-        android:textSize="24dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:id="@+id/profileCard"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/testprofilemenu" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/profile" />
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/guest_user"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/profileName"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Saif Uddin Shrabon"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
 
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:id="@+id/intoriroai"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileCard">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/favIcon"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/intoriorai"
-                android:scaleType="centerInside"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#9DA0A3"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/favtext"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Interior Ai"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+                android:background="@color/profilemenucardcolor"
+                android:orientation="horizontal"
 
-        </LinearLayout>
+                >
 
-    </com.google.android.material.card.MaterialCardView>
+                <ImageView
+                    android:id="@+id/intorioraiphoto"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/intoriorai" />
+
+            </LinearLayout>
 
 
-    <com.google.android.material.card.MaterialCardView
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            android:id="@+id/intorioraititle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/interior_ai"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/arrow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/contactUsCard"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/intoriroai">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/cobtacticon"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/contactus"
-                android:scaleType="centerInside"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#9DA0A3"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/contact"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Contact Us"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+                android:background="@color/profilemenucardcolor"
+                android:orientation="horizontal"
 
-        </LinearLayout>
+                >
 
-    </com.google.android.material.card.MaterialCardView>
+                <ImageView
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/settingsCard"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/contactus" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/contact_us"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/languageCard"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactUsCard">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/settingicon"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/settings"
-                android:scaleType="centerInside"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#9DA0A3"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/settingsText"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Settings"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+                android:background="@color/profilemenucardcolor"
+                android:orientation="horizontal"
 
-        </LinearLayout>
+                >
 
-    </com.google.android.material.card.MaterialCardView>
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="9dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/languageicon" />
+
+            </LinearLayout>
 
 
-    <com.google.android.material.card.MaterialCardView
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/change_language"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/privacyPolicyCard"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsCard">
+        app:layout_constraintTop_toBottomOf="@+id/languageCard">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/privacyicon"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/privecypolicy"
-                android:scaleType="centerInside"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#9DA0A3"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/privacytext"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Privacy Policy"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+                android:background="@color/profilemenucardcolor"
+                android:orientation="horizontal"
 
-        </LinearLayout>
+                >
 
-    </com.google.android.material.card.MaterialCardView>
+                <ImageView
 
-    <com.google.android.material.card.MaterialCardView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/privecypolicy" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/signoutCard"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/privacyPolicyCard">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/signouticon"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/signout"
-                android:scaleType="centerInside"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#9DA0A3"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/signoutText"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/ralewaysemibold"
-                android:text="Sign Out"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="20dp" />
+                android:background="@color/profilemenucardcolor"
+                android:orientation="horizontal"
 
-        </LinearLayout>
+                >
 
-    </com.google.android.material.card.MaterialCardView>
+                <ImageView
+
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="14dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/signout" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewaysemibold"
+            android:padding="5dp"
+            android:text="@string/sign_out"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow" />
+
+    </LinearLayout>
+
 
 
 

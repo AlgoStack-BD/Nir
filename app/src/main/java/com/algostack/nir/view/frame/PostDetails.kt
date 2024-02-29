@@ -292,7 +292,22 @@ class PostDetails : Fragment() {
 
             datePicker.addOnPositiveButtonClickListener {
                 val date = datePicker.headerText
-                visitingDate.text = date
+
+                // if select date in today's date to previous date then show error
+                if (datePicker.selection!! < MaterialDatePicker.todayInUtcMilliseconds()) {
+                    Toast.makeText(context, "Please select a valid date", Toast.LENGTH_SHORT).show()
+                    // show error in a alert dialog
+                    AlertDialog.Builder(context)
+                        .setTitle("Invalid Date")
+                        .setMessage("Please select a valid date")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .show()
+
+                }else{
+                    visitingDate.text = date
+                }
 
 
             }
@@ -360,9 +375,10 @@ class PostDetails : Fragment() {
                         detailsData!!._id,
                         //detailsData!!.title if null then use ""
                         detailsData!!.title ?: "",
-                        "Pending",
+                        "pending",
                         tokenManager.getUserId()!!,
-                        false
+                        false,
+                        detailsData!!.location ?: ""
                     )
                 )
             )
@@ -410,7 +426,14 @@ class PostDetails : Fragment() {
                     if (chekDestinationPage == "Home"){
                         fragmentTransaction.replace(R.id.fragmentConthainerView4,Home())
                         fragmentTransaction.remove(this@PostDetails)
+                    }else if (chekDestinationPage == "Notification"){
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4,Notification())
+                        fragmentTransaction.remove(this@PostDetails)
+                    }else if (chekDestinationPage == "ProfileDetails") {
+                        fragmentTransaction.replace(R.id.fragmentConthainerView4, ProfileDetails())
+                        fragmentTransaction.remove(this@PostDetails)
                     }
+
                     else{
                         val bundle = Bundle()
                         bundle.putString("DestinationPage", "PostDetails")

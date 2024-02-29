@@ -4,16 +4,16 @@
 
 
 
-            <item android:title="Sold"
+            <item android:title="@string/sold"
                 android:id="@+id/editpost"
                 />
 
 
-            <item android:title="Delete"
+            <item android:title="@string/delete"
                 android:id="@+id/deletepost"
                 />
 
-              <item android:title="Bost your post"
+              <item android:title="@string/bost_your_post"
                 android:id="@+id/bostpost"
                 />
 

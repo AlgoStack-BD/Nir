@@ -21,803 +21,840 @@
             >
 
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/cancel"
-                app:layout_constraintEnd_toStartOf="@+id/textView10"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/ralewaybold"
                 android:padding="5dp"
                 android:text="@string/requestforrent"
                 android:textColor="@color/colorSecendaryBlack"
-                android:textSize="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-                app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
-                app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/threedotmenu"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
 
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="27dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/category"
-                app:layout_constraintBottom_toBottomOf="@+id/type"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/type"
-                app:layout_constraintVertical_bias="0.421" />
-
-            <TextView
-                android:id="@+id/type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/type"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-
-
-            <Spinner
-                android:id="@+id/renttypespinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:background="@drawable/spinerborder"
-                android:entries="@array/rent_type"
-                android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/type"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/type" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/materialDivider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/renttypespinner" />
-
-            <ImageView
-                android:id="@+id/iconbeadroom"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/beadroom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
-
-            <TextView
-                android:id="@+id/txtbeadroom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/beadroom"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconbeadroom"
-                app:layout_constraintStart_toEndOf="@+id/iconbeadroom"
-                app:layout_constraintTop_toTopOf="@+id/iconbeadroom"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/beadroomspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="@string/number_of_bead_room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtbeadroom"
-                app:layout_constraintStart_toStartOf="@+id/txtbeadroom"
-                app:layout_constraintTop_toBottomOf="@+id/txtbeadroom" />
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/seconddiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/beadroomspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/icondrwaingroom"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/drawingroom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seconddiveder" />
-
-            <TextView
-                android:id="@+id/txtdrawingroom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/drawingroom"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/icondrwaingroom"
-                app:layout_constraintStart_toEndOf="@+id/icondrwaingroom"
-                app:layout_constraintTop_toTopOf="@+id/icondrwaingroom"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/drawingroomspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="@string/number_of_drawing_room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtdrawingroom"
-                app:layout_constraintStart_toEndOf="@+id/icondrwaingroom"
-                app:layout_constraintTop_toBottomOf="@+id/txtdrawingroom" />
-
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/thirddiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/drawingroomspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/icondiningroom"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/diningroom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/thirddiveder" />
-
-            <TextView
-                android:id="@+id/txtdiningroom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/dinigroom"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/icondiningroom"
-                app:layout_constraintStart_toEndOf="@+id/icondiningroom"
-                app:layout_constraintTop_toTopOf="@+id/icondiningroom"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/diningroomspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="Number of Dining Room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtdiningroom"
-                app:layout_constraintStart_toStartOf="@+id/txtdiningroom"
-                app:layout_constraintTop_toBottomOf="@+id/txtdiningroom"/>
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/fourthdiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/diningroomspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/iconbathroom"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/bathroom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fourthdiveder" />
-
-            <TextView
-                android:id="@+id/txtbathroom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/bathroom"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconbathroom"
-                app:layout_constraintStart_toEndOf="@+id/iconbathroom"
-                app:layout_constraintTop_toTopOf="@+id/iconbathroom"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/bathroomspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="Number of Bath Room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtbathroom"
-                app:layout_constraintStart_toStartOf="@+id/txtbathroom"
-                app:layout_constraintTop_toBottomOf="@+id/txtbathroom"/>
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/fifthdiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bathroomspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/iconkitchen"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/kitchen"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fifthdiveder" />
-
-            <TextView
-                android:id="@+id/txtkitchen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/kitchen"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconkitchen"
-                app:layout_constraintStart_toEndOf="@+id/iconkitchen"
-                app:layout_constraintTop_toTopOf="@+id/iconkitchen"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/kitchenspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="@string/number_of_kitchen_room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtkitchen"
-                app:layout_constraintStart_toStartOf="@+id/txtkitchen"
-                app:layout_constraintTop_toBottomOf="@+id/txtkitchen"/>
-
-
-
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/sixthdiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kitchenspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/iconbalcony"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/balcony"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sixthdiveder" />
-
-            <TextView
-                android:id="@+id/txtbalcony"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/balcony"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconbalcony"
-                app:layout_constraintStart_toEndOf="@+id/iconbalcony"
-                app:layout_constraintTop_toTopOf="@+id/iconbalcony"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/balconyspinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="40dp"
-                android:hint="@string/number_of_balcony_room"
-                android:paddingLeft="10dp"
-                android:paddingTop="9dp"
-                android:textSize="16dp"
-                android:background="@drawable/spinerborder"
-                android:fontFamily="@font/ralewaysemibold"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorSecendaryBlack"
-                app:layout_constraintEnd_toEndOf="@+id/txtbalcony"
-                app:layout_constraintStart_toStartOf="@+id/txtbalcony"
-                app:layout_constraintTop_toBottomOf="@+id/txtbalcony"/>
-
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/seventhdiveder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/balconyspinner" />
-
-
-
-            <ImageView
-                android:id="@+id/iconbills"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/bills"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seventhdiveder" />
-
-            <TextView
-                android:id="@+id/txtbills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/bills"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconbills"
-                app:layout_constraintStart_toEndOf="@+id/iconbills"
-                app:layout_constraintTop_toTopOf="@+id/iconbills"
-                app:layout_constraintVertical_bias="0.0" />
-
-
             <LinearLayout
-                android:id="@+id/radioGroup"
+                android:id="@+id/selectPropertypeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/txtbills"
-                app:layout_constraintStart_toStartOf="@+id/txtbills"
-                app:layout_constraintTop_toBottomOf="@+id/txtbills">
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
 
-                <CheckBox
-                    android:id="@+id/checkbocgass"
-                    android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/gass"
-                />
-                <CheckBox
-                    android:id="@+id/checkboxelectricity"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/select_type"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/renttypespinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/electricity"
-                    />
-                <CheckBox
-                    android:id="@+id/checkboxwater"
-                    android:layout_width="match_parent"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rentType"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/profilemenucardcolor"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="@string/select_property_type"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/downarrow" />
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/selectbedLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectPropertypeLayout">
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/beadroom"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/beadroomspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/bedroomTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:text="@string/water"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/drawingroom"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/drawingroomspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/drawingroomTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
 
             </LinearLayout>
 
 
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/eightdevider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-            <ImageView
-                android:id="@+id/iconrentprice"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/rentprice"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eightdevider" />
-
-            <TextView
-                android:id="@+id/txtrentprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/rentprice"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconrentprice"
-                app:layout_constraintStart_toEndOf="@+id/iconrentprice"
-                app:layout_constraintTop_toTopOf="@+id/iconrentprice"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/rentpriceinputfield"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:hint="@string/rentprice"
-                android:paddingLeft="10dp"
-                android:background="@drawable/spinerborder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:scrollbars="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/txtrentprice"
-                app:layout_constraintStart_toStartOf="@+id/txtrentprice"
-                app:layout_constraintTop_toBottomOf="@+id/txtrentprice" />
-
-
-            <CheckBox
-                android:id="@+id/negotiablecheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                android:text="Nagotiable"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rentpriceinputfield" />
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/ninethdevider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/negotiablecheckbox" />
-
-
-            <ImageView
-                android:id="@+id/iconpicklocation"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/locationpicker"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ninethdevider" />
-
-            <TextView
-                android:id="@+id/txtaddres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/address"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconpicklocation"
-                app:layout_constraintStart_toEndOf="@+id/iconpicklocation"
-                app:layout_constraintTop_toTopOf="@+id/iconpicklocation"
-                app:layout_constraintVertical_bias="0.0" />
-
-
-
-            <EditText
-                android:id="@+id/fieldpickaddress"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/spinerborder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/houseaddress"
-                android:paddingLeft="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/txtaddres"
-                app:layout_constraintStart_toStartOf="@+id/txtaddres"
-                app:layout_constraintTop_toBottomOf="@+id/txtaddres" />
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/tenthdevider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fieldpickaddress" />
-
-
-            <ImageView
-                android:id="@+id/iconadphoto"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/addphoto"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tenthdevider" />
-
-            <TextView
-                android:id="@+id/txtaddphoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/addphoto"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iconadphoto"
-                app:layout_constraintStart_toEndOf="@+id/iconadphoto"
-                app:layout_constraintTop_toTopOf="@+id/iconadphoto"
-                app:layout_constraintVertical_bias="0.0" />
-
-
             <LinearLayout
-                android:id="@+id/linearlayout"
+                android:id="@+id/requestlayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iconadphoto">
+                app:layout_constraintTop_toBottomOf="@+id/selectbedLayout">
 
-                <ImageView
-                    android:id="@+id/addphoto"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/addphoto" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <HorizontalScrollView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/dinigroom"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/diningroomspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/diningroomTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/bathroom"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/bathroomspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/bathroomTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/kitchen"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/kitchenspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/kitchenTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/robotomedium"
+                        android:text="@string/balcony"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/balconyspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/profilemenucardcolor"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/balconyTextFiled"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:background="@color/profilemenucardcolor"
+                                android:fontFamily="@font/robotoregular"
+                                android:hint="0"
+                                android:padding="5dp"
+                                android:textColor="@color/colorSecendaryBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/downarrow" />
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestlayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestLayout4">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp">
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/have_any_bills"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardElevation="2dp">
+
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:foregroundGravity="center"
-                        android:gravity="center"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="horizontal"
+                        >
+
+                        <CheckBox
+                            android:id="@+id/checkbocgass"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/gass" />
+
+                        <CheckBox
+                            android:id="@+id/checkboxelectricity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/electricity" />
+
+                        <CheckBox
+                            android:id="@+id/checkboxwater"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/water" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/requestlayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/address"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fieldpickaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imagepicker1"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                             />
+                        <TextView
+                            android:id="@+id/addressTextFiled"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/profilemenucardcolor"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="@string/current_address"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp" />
 
                         <ImageView
-                            android:id="@+id/imagepicker2"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                           />
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/downarrow" />
 
-                        <ImageView
-                            android:id="@+id/imagepicker3"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                          />
 
-                        <ImageView
-                            android:id="@+id/imagepicker4"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                             />
+                    </LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/imagepicker5"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestlayout10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout6">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="House Name"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/titleTextFiled"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@color/profilemenucardcolor"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="Enter your house name"
+                            android:inputType="textMultiLine"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestlayout13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/rentprice"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/rentpriceinputfield"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@color/profilemenucardcolor"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="@string/enter_your_desired_rent_price"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp" />
+
+                        <CheckBox
+                            android:id="@+id/negotiablecheckbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:text="@string/nagotiable"
+                            />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestlayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout13">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/details"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/additionalMessage"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@color/profilemenucardcolor"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="@string/details_about_your_property"
+                            android:inputType="textMultiLine"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/requestlayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout8">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/add_photos"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/addphoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/profilemenucardcolor"
+                        android:orientation="vertical">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lotti"
+                            android:layout_width="match_parent"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/uploadphoto"
+                            android:layout_height="120dp"
                             />
 
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/robotomedium"
+                            android:layout_gravity="center"
+                            android:text="@string/browse_photos"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:layout_marginBottom="10dp"
+                            />
 
 
 
@@ -825,140 +862,21 @@
                     </LinearLayout>
 
 
-                </HorizontalScrollView>
+                </com.google.android.material.card.MaterialCardView>
 
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/imageRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                    />
 
             </LinearLayout>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/eleventhdevider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearlayout" />
-
-
-            <ImageView
-                android:id="@+id/additonalmsg"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/sms_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eleventhdevider" />
-
-            <TextView
-                android:id="@+id/addtionmstText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/adittional"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/additonalmsg"
-                app:layout_constraintStart_toEndOf="@+id/additonalmsg"
-                app:layout_constraintTop_toTopOf="@+id/additonalmsg"
-                app:layout_constraintVertical_bias="0.0" />
-
-
-
-            <EditText
-                android:id="@+id/additionalMessage"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:paddingLeft="10dp"
-                android:background="@drawable/spinerborder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:scrollbars="horizontal"
-                android:maxLines="10"
-                android:hint="@string/Description"
-                app:layout_constraintEnd_toEndOf="@+id/addtionmstText"
-                app:layout_constraintStart_toStartOf="@+id/addtionmstText"
-                app:layout_constraintTop_toBottomOf="@+id/addtionmstText" />
-
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/twolvethDevider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                app:dividerInsetEnd="16dp"
-                app:dividerInsetStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/additionalMessage" />
-
-
-            <ImageView
-                android:id="@+id/numbertext"
-                android:layout_width="27dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/twolvethDevider" />
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/ralewaysemibold"
-                android:gravity="top"
-                android:text="@string/title"
-                android:textColor="@color/colorSecendaryBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/numbertext"
-                app:layout_constraintStart_toEndOf="@+id/numbertext"
-                app:layout_constraintTop_toTopOf="@+id/numbertext"
-                app:layout_constraintVertical_bias="0.0" />
-
-
-
-            <EditText
-                android:id="@+id/titleTextFiled"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/spinerborder"
-                android:paddingLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:scrollbars="horizontal"
-                android:maxLines="10"
-                android:hint="Enter Your House Name"
-                app:layout_constraintEnd_toEndOf="@+id/titleText"
-                app:layout_constraintStart_toStartOf="@+id/titleText"
-                app:layout_constraintTop_toBottomOf="@+id/titleText" />
-
-
-
 
 
             <LinearLayout
@@ -966,21 +884,19 @@
                 android:layout_width="335dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/coustomrectengular" 
+                android:background="@drawable/coustomrectengular"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTextFiled">
+                app:layout_constraintTop_toBottomOf="@+id/requestlayout9">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="90dp"
                     android:layout_marginTop="5dp"
-                    android:padding="5dp"
                     android:fontFamily="@font/ralewaybold"
+                    android:padding="5dp"
                     android:text="@string/addproperty"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
@@ -999,6 +915,8 @@
             </LinearLayout>
 
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -1006,7 +924,7 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
 
 
 </ScrollView>

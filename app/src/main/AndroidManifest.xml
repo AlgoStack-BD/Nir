@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 
 
@@ -30,11 +31,11 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".view.main.Frame"
+            android:name=".view.main.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
-            android:name=".view.main.MainActivity"
+            android:name=".view.main.Frame"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +43,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".services.androidservices.NoficationForgroundService"/>
     </application>
 
 </manifest>

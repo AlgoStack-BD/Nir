@@ -24,10 +24,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -39,13 +41,20 @@ import com.algostack.nir.databinding.FragmentAddBinding
 import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
+import com.algostack.nir.services.model.ImageItem
+import com.algostack.nir.services.model.Numbers
 import com.algostack.nir.utils.FileCompressor
+import com.algostack.nir.utils.LanguageManager
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
+import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
+import com.algostack.nir.view.adapter.NumbersAdapter
+import com.algostack.nir.view.main.MainActivity
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -53,6 +62,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.concurrent.timerTask
 
@@ -88,8 +98,13 @@ class add : Fragment() {
     private val imageUris = ArrayList<Uri>()
     private  lateinit var dialog: BottomSheetDialog
     private lateinit var cityArrayList : ArrayList<Cityes>
+    private lateinit var numberArrayList : ArrayList<Numbers>
     private lateinit var cityAdapter : CityAdapter
+    private lateinit var numbersAdapter: NumbersAdapter
     private lateinit var recyclerView: RecyclerView
+    val newImageArray = arrayListOf<ImageItem>()
+
+
 
 
     var selectedRentType = ""
@@ -136,8 +151,10 @@ class add : Fragment() {
 
 
         cityArrayList = ArrayList()
+        cityItemListorginal()
 
-        cityItemList()
+
+
 
         // photo picker
         binding.addphoto.setOnClickListener {
@@ -169,31 +186,16 @@ class add : Fragment() {
 
 
         // spiner for rent type
-        binding.renttypespinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.renttypespinner.setSelection(0)
-                }
 
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    binding.renttypespinner.setSelection(position)
+        binding.renttypespinner.setOnClickListener {
+            showRentTypeBottomSheetDialog()
+        }
 
-
-                    selectedRentType = adapterView?.getItemAtPosition(position).toString()
-
-
-                }
-
-            }
 
 
 
         binding.beadroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Beadroom")
         }
 
@@ -202,6 +204,7 @@ class add : Fragment() {
 
 
         binding.drawingroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Drawingroom")
         }
 
@@ -210,6 +213,7 @@ class add : Fragment() {
 
 
         binding.diningroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Diningroom")
         }
 
@@ -218,16 +222,23 @@ class add : Fragment() {
 
 
         binding.bathroomspinner.setOnClickListener {
+
             showBottomSheetDialog("Bathroom")
         }
 
         binding.kitchenspinner.setOnClickListener {
+
             showBottomSheetDialog("Kitchen")
         }
 
 
         binding.balconyspinner.setOnClickListener {
+
             showBottomSheetDialog("Balcony")
+        }
+        binding.fieldpickaddress.setOnClickListener {
+
+            showBottomSheetDialog()
         }
 
 
@@ -256,27 +267,32 @@ class add : Fragment() {
 
 
 
-binding.regContinue.setOnClickListener {
+ binding.regContinue.setOnClickListener {
+
+     if (tokenManager.getUserImage() == null) {
+         val bundle = Bundle()
+         bundle.putString("DestinationPage", "Home")
+         replaceFragment(NotLogIn(),bundle)
+        }else {
 
 
-
-    if (imageUris.size > 0) {
-        for (i in 0 until imageUris.size) {
-            // val file = File(imageUris[i].path!!)
-            // Log.d("CheckFile", "onViewCreated: ${file.name}")
-            val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
-            Log.d("CheckFile", "onViewCreated: ${file}")
-            listImage.add(file)
-        }
-        imageUploadViewModel.addMultipleImages(listImage)
-
-
-    }
+         if (imageUris.size > 0) {
+             for (i in 0 until imageUris.size) {
+                 // val file = File(imageUris[i].path!!)
+                 // Log.d("CheckFile", "onViewCreated: ${file.name}")
+                 val file = File(getRealPathFromURI(imageUris[i], requireContext())!!)
+                 Log.d("CheckFile", "onViewCreated: ${file}")
+                 listImage.add(file)
+             }
+             imageUploadViewModel.addMultipleImages(listImage)
 
 
-    bindObserverforImageUpload()
+         }
 
 
+         bindObserverforImageUpload()
+
+     }
 }
 
 
@@ -287,7 +303,7 @@ binding.regContinue.setOnClickListener {
 
     private fun createFinalCallPost() {
         // address
-        selectedAddress = binding.fieldpickaddress.text.toString()
+        selectedAddress = binding.addressTextFiled.text.toString()
         println("address: $selectedAddress")
 
         selectAdditonalMessage =  binding.additionalMessage.text.toString()
@@ -337,25 +353,25 @@ binding.regContinue.setOnClickListener {
 
 
         // clear all fields
-        binding.fieldpickaddress.text.clear()
         binding.additionalMessage.text.clear()
         binding.rentpriceinputfield.text.clear()
-        binding.imagepicker1.setImageResource(0)
-        binding.imagepicker2.setImageResource(0)
-        binding.imagepicker3.setImageResource(0)
-        binding.imagepicker4.setImageResource(0)
         binding.checkboxelectricity.isChecked = false
         binding.checkboxwater.isChecked = false
         binding.checkbocgass.isChecked = false
         binding.negotiablecheckbox.isChecked = false
-        binding.renttypespinner.setSelection(0)
-        binding.beadroomspinner.setText("0")
-        binding.drawingroomspinner.setText("0")
-        binding.diningroomspinner.setText("0")
-        binding.bathroomspinner.setText("0")
-        binding.kitchenspinner.setText("0")
-        binding.balconyspinner.setText("0")
+        binding.bedroomTextFiled.text = "0"
+        binding.drawingroomTextFiled.text = "0"
+        binding.diningroomTextFiled.text = "0"
+        binding.bathroomTextFiled.text = "0"
+        binding.kitchenTextFiled.text = "0"
+        binding.balconyTextFiled.text = "0"
         binding.titleTextFiled.text.clear()
+        // clear image
+        imageUris.clear()
+        listImage.clear()
+        newImageArray.clear()
+        //clear image adapter
+        binding.imageRV.isVisible = false
 
 
 
@@ -421,6 +437,175 @@ binding.regContinue.setOnClickListener {
                 }
             }
         }
+    }
+
+    private fun showBottomSheetDialog() {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.select_city_bottom_view, null)
+
+        dialog.setContentView(view)
+
+        val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
+
+        recyclerView = view.findViewById(R.id.bottomrecyclerView)
+        cityAdapter = CityAdapter(cityArrayList){
+            binding.addressTextFiled.text = it.cityName
+            //clear arraylist then reassign and clear the adapter
+
+
+
+            dialog.dismiss()
+
+        }
+
+
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+
+
+        recyclerView.setHasFixedSize(true)
+
+        recyclerView.adapter = cityAdapter
+
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed
+                if (charSequence.isNullOrEmpty()) {
+                    //clear arraylist then reassign
+                    cityItemListorginal()
+                    recyclerView.adapter = cityAdapter
+
+                }else{
+                    cityAdapter.setFilter(charSequence.toString())
+                }
+                cityAdapter.setFilter(charSequence.toString())
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+        })
+
+
+        dialog.show()
+    }
+
+    private fun showRentTypeBottomSheetDialog() {
+        dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.selectrenttype, null)
+
+        dialog.setContentView(view)
+
+        val bachelor = view.findViewById<RadioButton>(R.id.bachelorRadioButton)
+        val family = view.findViewById<RadioButton>(R.id.familyRadioButton)
+        val sublet = view.findViewById<RadioButton>(R.id.subletRadioButton)
+        val famandbachelor = view.findViewById<RadioButton>(R.id.familyRadioButton)
+
+        bachelor.setOnClickListener {
+             binding.rentType.text = "Bachelor"
+            selectedRentType = "Bachelor"
+            dialog.dismiss()
+        }
+
+        family.setOnClickListener {
+            binding.rentType.text = "Family"
+            selectedRentType = "Family"
+            dialog.dismiss()
+        }
+
+        sublet.setOnClickListener {
+            binding.rentType.text = "Sublet"
+            selectedRentType = "Sublet"
+            dialog.dismiss()
+        }
+
+        famandbachelor.setOnClickListener {
+            binding.rentType.text = "Family and Bachelor"
+            selectedRentType = "Family and Bachelor"
+            dialog.dismiss()
+        }
+
+
+
+
+
+
+        dialog.show()
+    }
+    // city funtion
+    private fun cityItemListorginal(){
+        cityArrayList.add(Cityes(1,"Habiganj"))
+        cityArrayList.add(Cityes(2,"Moulvibazar"))
+        cityArrayList.add(Cityes(3,"Sunamganj"))
+        cityArrayList.add(Cityes(4,"Dhaka"))
+        cityArrayList.add(Cityes(5,"Chittagong"))
+        cityArrayList.add(Cityes(6,"Sylhet"))
+        cityArrayList.add(Cityes(7,"Khulna"))
+        cityArrayList.add(Cityes(8,"Rajshahi"))
+        cityArrayList.add(Cityes(9,"Barisal"))
+        cityArrayList.add(Cityes(10,"Rangpur"))
+        cityArrayList.add(Cityes(11,"Comilla"))
+        cityArrayList.add(Cityes(12,"Narayanganj"))
+        cityArrayList.add(Cityes(13,"Gazipur"))
+        cityArrayList.add(Cityes(14,"Mymensingh"))
+        cityArrayList.add(Cityes(15,"Tangail"))
+        cityArrayList.add(Cityes(16,"Bogura"))
+        cityArrayList.add(Cityes(17,"Dinajpur"))
+        cityArrayList.add(Cityes(18,"Jessore"))
+        cityArrayList.add(Cityes(19,"Kustia"))
+        cityArrayList.add(Cityes(20,"Naogaon"))
+        cityArrayList.add(Cityes(21,"Savar"))
+        cityArrayList.add(Cityes(22,"Brahmanbaria"))
+        cityArrayList.add(Cityes(23,"Jamalpur"))
+        cityArrayList.add(Cityes(24,"Saidpur"))
+        cityArrayList.add(Cityes(25,"Sirajganj"))
+        cityArrayList.add(Cityes(26,"Pabna"))
+        cityArrayList.add(Cityes(27,"Natore"))
+        cityArrayList.add(Cityes(28,"Faridpur"))
+        cityArrayList.add(Cityes(29,"Pirojpur"))
+        cityArrayList.add(Cityes(30,"Bhola"))
+        cityArrayList.add(Cityes(31,"Jhalokati"))
+        cityArrayList.add(Cityes(32,"Patuakhali"))
+        cityArrayList.add(Cityes(33,"Barguna"))
+        cityArrayList.add(Cityes(34,"Chandpur"))
+        cityArrayList.add(Cityes(35,"Lakshmipur"))
+        cityArrayList.add(Cityes(36,"Noakhali"))
+        cityArrayList.add(Cityes(37,"Feni"))
+        cityArrayList.add(Cityes(38,"Bagerhat"))
+        cityArrayList.add(Cityes(39,"Chuadanga"))
+        cityArrayList.add(Cityes(40,"Jhenaidah"))
+        cityArrayList.add(Cityes(41,"Magura"))
+        cityArrayList.add(Cityes(42,"Meherpur"))
+        cityArrayList.add(Cityes(43,"Narail"))
+        cityArrayList.add(Cityes(44,"Satkhira"))
+        cityArrayList.add(Cityes(45,"Khagrachari"))
+        cityArrayList.add(Cityes(46,"Rangamati"))
+        cityArrayList.add(Cityes(47,"Bandarban"))
+        cityArrayList.add(Cityes(48,"Cox's Bazar"))
+        cityArrayList.add(Cityes(49,"Thakurgaon"))
+        cityArrayList.add(Cityes(50,"Panchagarh"))
+        cityArrayList.add(Cityes(51,"Tangail"))
+        cityArrayList.add(Cityes(52,"Shariatpur"))
+        cityArrayList.add(Cityes(53,"Madaripur"))
+        cityArrayList.add(Cityes(54,"Rajbari"))
+        cityArrayList.add(Cityes(55,"Gopalganj"))
+        cityArrayList.add(Cityes(56,"Kishoreganj"))
+        cityArrayList.add(Cityes(57,"Netrokona"))
+        cityArrayList.add(Cityes(58,"Sherpur"))
+        cityArrayList.add(Cityes(59,"Munshiganj"))
+        cityArrayList.add(Cityes(60,"Narsingdi"))
+        cityArrayList.add(Cityes(61,"Manikganj"))
+        cityArrayList.add(Cityes(62,"Potuakhali"))
+        cityArrayList.add(Cityes(63,"Nilphamari"))
+        cityArrayList.add(Cityes(64,"Gaibandha"))
+        cityArrayList.add(Cityes(65,"Lalmonirhat"))
+        cityArrayList.add(Cityes(66,"Kurigram"))
+        cityArrayList.add(Cityes(67,"Nawabganj"))
+
     }
 
 
@@ -573,24 +758,33 @@ private fun bitmapToFile(bitmap: Bitmap): File {
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
                      println("ChekImageuri: $imageUri")
                     imageUris.add(imageUri)
-
-                    when (i) {
-                        0 -> binding.imagepicker1.setImageURI(imageUri)
-                        1 -> binding.imagepicker2.setImageURI(imageUri)
-                        2 -> binding.imagepicker3.setImageURI(imageUri)
-                        3 -> binding.imagepicker4.setImageURI(imageUri)
-                    }
+                    newImageArray.add(ImageItem(UUID.randomUUID().toString(),imageUri.toString()))
+//                    when (i) {
+//                        0 -> binding.imagepicker1.setImageURI(imageUri)
+//                        1 -> binding.imagepicker2.setImageURI(imageUri)
+//                        2 -> binding.imagepicker3.setImageURI(imageUri)
+//                        3 -> binding.imagepicker4.setImageURI(imageUri)
+//
+//                    }
                 }
+
+                recylerviewInitalize()
             } else if (data?.data != null) {
                 val imageUri: Uri = data.data!!
                 imageUris.add(imageUri)
                 // Do something with the image (save it to some directory or whatever you need to do with it here)
                 // Set image to first ImageView
-                binding.imagepicker1.setImageURI(imageUri)
+             //   binding.imagepicker1.setImageURI(imageUri)
             }
         }
     }
 
+    private fun recylerviewInitalize() {
+        binding.imageRV.isVisible = true
+        val imageAdapter = ImageDetailsSmallViewAdapter()
+        binding.imageRV.adapter = imageAdapter
+        imageAdapter.submitList(newImageArray)
+    }
 
 
     fun getRealPathFromURI(uri: Uri, context: Context): String? {
@@ -636,71 +830,94 @@ private fun bitmapToFile(bitmap: Bitmap): File {
 
         dialog.setContentView(view)
 
-        val searchEditText = view.findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.search_edit_text_bttom)
+        val searchEditText = view.findViewById<AppCompatEditText>(R.id.search_edit_text_bttom)
+        val one = view.findViewById<MaterialCardView>(R.id.num1)
+        val two = view.findViewById<MaterialCardView>(R.id.num2)
+        val three = view.findViewById<MaterialCardView>(R.id.num3)
+        val four = view.findViewById<MaterialCardView>(R.id.num4)
+        val five = view.findViewById<MaterialCardView>(R.id.num5)
+
+
 
         val save = view.findViewById<TextView>(R.id.saveText)
         save.setOnClickListener {
-            binding.beadroomspinner.setText(searchEditText.text.toString())
+            setTex(check,searchEditText.text.toString().toInt())
+            dialog.dismiss()
+        }
+
+        one.setOnClickListener {
+           setTex(check,1)
+
+            dialog.dismiss()
+        }
+
+        two.setOnClickListener {
+            setTex(check,2)
+            dialog.dismiss()
+        }
+
+        three.setOnClickListener {
+            setTex(check,3)
+            dialog.dismiss()
+        }
+
+        four.setOnClickListener {
+            setTex(check,4)
+            dialog.dismiss()
+        }
+
+        five.setOnClickListener {
+            setTex(check,5)
             dialog.dismiss()
         }
 
 
-
-        recyclerView = view.findViewById(R.id.bottomrecyclerView)
-        cityAdapter = CityAdapter(cityArrayList){
-            //binding.locationText.text = it.cityName
-            if(check == "Beadroom"){
-                binding.beadroomspinner.setText(it.cityName)
-                selectedBeadroom = it.cityName.toIntOrNull() ?: 0
-            }else if(check == "Drawingroom"){
-                binding.drawingroomspinner.setText(it.cityName)
-                selectedDrawingroom = it.cityName.toIntOrNull() ?: 0
-            }else if(check == "Diningroom"){
-                binding.diningroomspinner.setText(it.cityName)
-                selectedDiningroom = it.cityName.toIntOrNull() ?: 0
-            }else if(check == "Bathroom"){
-                binding.bathroomspinner.setText(it.cityName)
-                selectedBathroom = it.cityName.toIntOrNull() ?: 0
-            }else if(check == "Kitchen"){
-                binding.kitchenspinner.setText(it.cityName)
-                selectedKitchen = it.cityName.toIntOrNull() ?: 0
-            }else if(check == "Balcony"){
-                binding.balconyspinner.setText(it.cityName)
-                selectedBalcony = it.cityName.toIntOrNull() ?: 0
-            }
-            dialog.dismiss()
-        }
-
-
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = cityAdapter
 
 
 
         dialog.show()
     }
 
-    private fun cityItemList(){
-        cityArrayList.add(Cityes(1,"1"))
-        cityArrayList.add(Cityes(2,"2"))
-        cityArrayList.add(Cityes(3,"3"))
-        cityArrayList.add(Cityes(4,"4"))
-        cityArrayList.add(Cityes(5,"5"))
-        cityArrayList.add(Cityes(6,"6"))
-        cityArrayList.add(Cityes(7,"7"))
-        cityArrayList.add(Cityes(8,"8"))
-        cityArrayList.add(Cityes(9,"9"))
-        cityArrayList.add(Cityes(10,"10"))
-        cityArrayList.add(Cityes(11,"11"))
-        cityArrayList.add(Cityes(12,"12"))
-        cityArrayList.add(Cityes(13,"13"))
-        cityArrayList.add(Cityes(14,"14"))
-        cityArrayList.add(Cityes(15,"15"))
-        cityArrayList.add(Cityes(16,"16"))
-        cityArrayList.add(Cityes(17,"17"))
+    private fun setTex(check: String, i: Int) {
+        when(check){
+            "Beadroom" -> {
+                binding.bedroomTextFiled.text = i.toString()
+                selectedBeadroom = i
+
+            }
+            "Drawingroom" -> {
+                binding.drawingroomTextFiled.text = i.toString()
+                selectedDrawingroom = i
+            }
+            "Diningroom" -> {
+                binding.diningroomTextFiled.text = i.toString()
+                selectedDiningroom = i
+            }
+            "Bathroom" -> {
+                binding.bathroomTextFiled.text = i.toString()
+                selectedBathroom = i
+            }
+            "Kitchen" -> {
+                binding.kitchenTextFiled.text = i.toString()
+                selectedKitchen = i
+            }
+            "Balcony" -> {
+                binding.balconyTextFiled.text = i.toString()
+                selectedBalcony = i
+            }
+        }
+    }
 
 
+
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle){
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
+
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
 
     }
 

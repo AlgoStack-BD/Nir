@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.algostack.nir.services.model.DeletePostResponseData
+import com.algostack.nir.services.model.PaymentRequest
+import com.algostack.nir.services.model.PaymentRequestResponse
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.deletePostResponse
 import com.algostack.nir.services.repository.ProfileRepository
@@ -23,6 +25,9 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
 
     val deletePostResponseLiveData : LiveData<NetworkResult<deletePostResponse>>
         get() = profileRepository.deletePostResponseLiveData
+
+    val paymentResponseLiveData : LiveData<NetworkResult<PaymentRequestResponse>>
+        get() = profileRepository.paymentResponseLiveData
 
 
     var applicationContext: Context?= null
@@ -44,6 +49,13 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
 
 
 
+        }
+    }
+
+    fun makePayment(paymentRequest: PaymentRequest){
+        println("makePaymentviewmodel: $paymentRequest")
+        viewModelScope.launch {
+            profileRepository.makePayment(paymentRequest)
         }
     }
 

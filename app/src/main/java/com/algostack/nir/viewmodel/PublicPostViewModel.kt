@@ -33,6 +33,9 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
     val createPostResponseLiveData : LiveData<NetworkResult<CreatePostResponse>>
         get() = publicPostRepository.createPostResponseLiveData
 
+    val nearestPostResponeLiveData : LiveData<NetworkResult<PublicPostResponse>>
+        get() = publicPostRepository.nearestPostResponeLiveData
+
 
 
 
@@ -61,6 +64,13 @@ class PublicPostViewModel @Inject constructor(private val publicPostRepository: 
 
 
 
+    fun nearestPost(place: String){
+        viewModelScope.launch {
+            applicationContext?.let {
+                publicPostRepository.publicnearestPost(it,place)
+            }
+        }
+    }
 
 
 

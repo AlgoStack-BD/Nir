@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item android:title="Home"
+        <item android:title="@string/home"
             android:id="@+id/nav_home2"
             android:icon="@drawable/home_icon"
             />
-        <item android:title="Chat"
+        <item android:title="@string/category"
             android:id="@+id/nav_chat"
-            android:icon="@drawable/chat_icon"/>
+            android:icon="@drawable/category"/>
         <item android:id="@+id/placeholder"
                 android:title=""/>
-        <item android:title="Notification"
+        <item android:title="@string/notification"
             android:id="@+id/nav_notification"
             android:icon="@drawable/notification_icon"/>
-        <item android:title="Profile"
+        <item android:title="@string/profile"
             android:id="@+id/nav_profileMenu"
             android:icon="@drawable/profile_icon"/>
 

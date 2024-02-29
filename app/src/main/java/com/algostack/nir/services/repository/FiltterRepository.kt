@@ -44,13 +44,14 @@ class FiltterRepository @Inject constructor(
     }
 
 
-    suspend fun filterByBedRoom(bedRoom: Int){
-        Log.d("SearchResult", "filterShow: $bedRoom")
+    suspend fun filterByBedRoom(category: String){
+        Log.d("SearchResult", "filterShow: $category")
         withContext(Dispatchers.IO){
-            val list = nirLocalDB.getPublicPostDao().searchItemsByBedRoom(bedRoom)
-            Log.d("SearchResult", "filter: $list")
-            _FilterLiveData.postValue(NetworkResult.Success((PublicPostResponse(list,200))))
-            _FilterLiveData.postValue(NetworkResult.Error("No Data Found"))
+            val list = nirLocalDB.getPublicPostDao().searchItemsCategoryBedRoom(category)
+            if(list.isEmpty()){
+                _FilterLiveData.postValue(NetworkResult.Error("No Data Found"))
+            }else _FilterLiveData.postValue(NetworkResult.Success((PublicPostResponse(list,200))))
+
         }
     }
 

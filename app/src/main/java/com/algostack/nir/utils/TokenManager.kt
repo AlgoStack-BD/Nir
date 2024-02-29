@@ -18,7 +18,7 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
 
     fun saveToken(
         token: String, userName: String, userImage: String, userEmail: String, userId: String,
-        number: Any
+        number: Any,location: String
     ){
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
@@ -27,6 +27,8 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
         editor.putString(USER_EMAIL, userEmail)
         editor.putString(USER_ID, userId)
         editor.putString(USER_NUMER, number.toString())
+        editor.putString(Constants.USER_LOCATION, location)
+
         editor.apply()
     }
 
@@ -37,7 +39,7 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
         val editor = prefs.edit()
         editor.putString(USER_NAME, userName)
         editor.putString(USER_NUMER, number)
-    editor.putString(USER_IMAGE, userImage)
+        editor.putString(USER_IMAGE, userImage)
         editor.apply()
     }
 
@@ -62,6 +64,10 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
 
     fun getUserNumber(): String? {
         return prefs.getString(USER_NUMER, null)
+    }
+
+    fun getUserLocation(): String? {
+        return prefs.getString(Constants.USER_LOCATION, null)
     }
 
 

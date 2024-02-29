@@ -3,6 +3,7 @@ package com.algostack.nir.view.frame
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -101,7 +102,7 @@ class EditeProfile : Fragment() {
             .with(requireContext())
             .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${tokenManager.getUserImage()}")
             .centerCrop()
-            .placeholder(R.drawable.profileedit)
+            .placeholder(R.drawable.testprofilemenu)
             .into(binding.profileimg)
 
         println("tokenManager.getUserImage(): ${tokenManager.getUserImage()}")
@@ -123,7 +124,6 @@ class EditeProfile : Fragment() {
                 // startGalleryIntent()
             }else{
                 requestPermission()
-                println("checkPermission: ${checkPermission()}")
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
 
             }
@@ -133,10 +133,10 @@ class EditeProfile : Fragment() {
 
         binding.updateProfile.setOnClickListener {
 
-            Log.d("CheckFile", "")
 
 
-            if (imageUris.size >= 0) {
+
+            if (imageUris.size > 0) {
 
                 for (i in 0 until imageUris.size) {
                     // val file = File(imageUris[i].path!!)
@@ -146,12 +146,15 @@ class EditeProfile : Fragment() {
                     listImage.add(file)
                 }
                 imageUploadViewModel.addMultipleImages(listImage)
+                bindObserverforImageUpload()
 
 
+            }else{
+                createFinalCallPost()
             }
 
 
-            bindObserverforImageUpload()
+
 
 
 
@@ -165,12 +168,20 @@ class EditeProfile : Fragment() {
 
 
 
-        val userName = binding.editUserName.text.toString()
-        val userPhone = binding.editUserPhone.text.toString()
+        if(selectedImage.isEmpty()){
+            selectedImage = tokenManager.getUserImage()!!
+        }
+        var userName = binding.editUserName.text.toString()
+        var userPhone = binding.editUserPhone.text.toString()
 
-        if (userName.isEmpty()  || userPhone.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
-        } else {
+        if (userName.isEmpty()) {
+           // Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            userName = ""
+        }else if (userPhone.isEmpty()){
+           // Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            userPhone = ""
+        }
+        else {
             println("tokenManager.getUserId()!!: ${tokenManager.getUserId()}")
             updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage)))
         }
@@ -189,7 +200,9 @@ class EditeProfile : Fragment() {
             when (it) {
                 is NetworkResult.Success -> {
                     if (it.data != null ) {
-                        Toast.makeText(requireContext(), "Post Created", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Edit Succesfull", Toast.LENGTH_SHORT).show()
+                        listImage.clear()
+                        imageUris.clear()
 
                         for (i in it.data.fileNames.indices) {
                             if (i == 0) {
@@ -199,7 +212,7 @@ class EditeProfile : Fragment() {
                             }
                         }
 
-                        println("selectedImage: $selectedImage")
+
 
 
                         createFinalCallPost()
@@ -249,23 +262,25 @@ class EditeProfile : Fragment() {
     private fun openGalleryForImage() {
 
 
-        // For latast versions API LEVEL 19+
-//            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-//            intent.addCategory(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            startActivityForResult(intent, REQUEST_OPEN_GALLERY)
-
-
-        val intent = Intent().apply {
-            type = "image/*"
-            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            action = Intent.ACTION_GET_CONTENT
-        }
-        startActivityForResult(
-            Intent.createChooser(intent, "Select Picture"),
+       //  For latast versions API LEVEL 19+
+        var intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),
             REQUEST_OPEN_GALLERY
         )
+
+
+//        val intent = Intent().apply {
+//            type = "image/*"
+//            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+//            action = Intent.ACTION_GET_CONTENT
+//        }
+//        startActivityForResult(
+//            Intent.createChooser(intent, "Select Picture"),
+//            REQUEST_OPEN_GALLERY
+//        )
 
 
     }
@@ -337,17 +352,24 @@ class EditeProfile : Fragment() {
 
 
 
+    @Deprecated("Deprecated in Java")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_OPEN_GALLERY) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_OPEN_GALLERY) {
             if (data?.data != null) {
+
+
                 val imageUri: Uri = data.data!!
                 imageUris.add(imageUri)
+                println("imageUri: $imageUri")
+                println("imageUrisLink: ${imageUris.size}")
                 // Do something with the image (save it to some directory or whatever you need to do with it here)
                 // Set image to first ImageView
                 binding.profileimg.setImageURI(imageUri)
+
+
             }
         }
     }

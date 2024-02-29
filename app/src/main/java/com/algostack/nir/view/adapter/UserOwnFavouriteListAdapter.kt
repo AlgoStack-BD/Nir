@@ -14,7 +14,7 @@ import com.algostack.nir.services.model.PublicPostData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,from: String) -> Unit): ListAdapter<PublicPostData, UserOwnFavouriteListAdapter.UserOwnFavouriteListViewHolder>(comparatorDiffutil()) {
+class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,from: String,PublicPostData) -> Unit): ListAdapter<PublicPostData, UserOwnFavouriteListAdapter.UserOwnFavouriteListViewHolder>(comparatorDiffutil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserOwnFavouriteListViewHolder {
         val binding = FavouritelistitemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -23,7 +23,8 @@ class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,fro
 
     override fun onBindViewHolder(holder: UserOwnFavouriteListViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+      //  holder.bind(item)
+        item?.let { holder.bind(it) }
 
     }
     inner class UserOwnFavouriteListViewHolder(private val binding: FavouritelistitemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -48,10 +49,14 @@ class UserOwnFavouriteListAdapter (private val onDetailsCliked: (_id: String,fro
 
 
             binding.removeFavourite.setOnClickListener {
-                item._id?.let { it1 -> onDetailsCliked(it1,"removefavourite") }
+                item._id?.let { it1 -> onDetailsCliked(it1,"removefavourite",item) }
+
+                println("remove favourite clicked")
             }
 
-
+             binding.root.setOnClickListener {
+                 item._id?.let { it1 -> onDetailsCliked(it1,"details",item) }
+             }
         }
 
 

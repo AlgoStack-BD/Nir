@@ -26,9 +26,9 @@ class FilterViewModel @Inject constructor(
 
     }
 
-    fun filterByBedRoom(bedRoom: Int){
+    fun filterbyCategory(category: String){
         viewModelScope.launch {
-            filterRepository.filterByBedRoom(bedRoom)
+            filterRepository.filterByBedRoom(category)
         }
     }
 

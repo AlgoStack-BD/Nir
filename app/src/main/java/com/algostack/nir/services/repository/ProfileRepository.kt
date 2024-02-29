@@ -8,6 +8,8 @@ import com.algostack.nir.services.api.UserApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.DeletePostResponseData
 import com.algostack.nir.services.model.FavouriteResponse
+import com.algostack.nir.services.model.PaymentRequest
+import com.algostack.nir.services.model.PaymentRequestResponse
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UserRequest
 import com.algostack.nir.services.model.deletePostResponse
@@ -28,6 +30,7 @@ class ProfileRepository @Inject constructor(
 
     private val _profileInfoResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private val _deletePostResponseLiveData = MutableLiveData<NetworkResult<deletePostResponse>> ()
+    private val _paymentResponseLiveData = MutableLiveData<NetworkResult<PaymentRequestResponse>> ()
 
 
     val profileInfoResponseLiveData : MutableLiveData<NetworkResult<PublicPostResponse>>
@@ -36,6 +39,8 @@ class ProfileRepository @Inject constructor(
     val deletePostResponseLiveData : LiveData<NetworkResult<deletePostResponse>>
         get() = _deletePostResponseLiveData
 
+    val paymentResponseLiveData : LiveData<NetworkResult<PaymentRequestResponse>>
+        get() = _paymentResponseLiveData
 
 
     suspend fun singleUserPost(context: Context,userID: String) {
@@ -85,6 +90,27 @@ class ProfileRepository @Inject constructor(
 
     }
 
+
+    suspend fun makePayment(paymentRequest: PaymentRequest) {
+        _paymentResponseLiveData.postValue(NetworkResult.Loading())
+
+        try {
+            val response = profileApi.makePayment(paymentRequest)
+            println("testresponsepayment: ${response.body()}")
+
+            if (response.isSuccessful && response.body() != null) {
+
+                _paymentResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+
+            }
+        }catch (e: Exception) {
+            _paymentResponseLiveData.postValue(NetworkResult.Error(e.message))
+
+        }catch (e: TimeoutException) {
+            _paymentResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+        }
+
+    }
 
 
 }

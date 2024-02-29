@@ -141,7 +141,8 @@ dependencies {
     implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
 
 
-
+// skeleton
+    implementation ("com.faltenreich:skeletonlayout:5.0.0")
 
 
 

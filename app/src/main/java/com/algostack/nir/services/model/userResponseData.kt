@@ -20,6 +20,7 @@ data class userResponseData (
     val password: String,
     val phone: Any,
     val rentSuccess: Int,
-    val totoalPost: Int
+    val totoalPost: Int,
+    val isBanned: Boolean
 
 )

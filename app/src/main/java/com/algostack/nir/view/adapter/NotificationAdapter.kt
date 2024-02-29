@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import javax.inject.Inject
 
-class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseData) -> Unit,accountUserID: String) : ListAdapter<NotificationResponseData, NotificationAdapter.NotificationViewHolder>(ComparatorDiffUtil()) {
+class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseData) -> Unit) : ListAdapter<NotificationResponseData, NotificationAdapter.NotificationViewHolder>(ComparatorDiffUtil()) {
 
-    val accountUserID = accountUserID
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val binding =
@@ -37,19 +37,9 @@ class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseD
 
 
 
-            // if the user is the owner of the post then ignore this notification item
-//            if (accountUserID == item.userId && item.ownerRead) {
-//                binding.root.isVisible = false
-//                //remove this position from the list
-//
-//
-//                return
-//            }else {
-//                binding.root.isVisible = true
-//            }
 
 
-            if (item.ownerRead) {
+            if (item.userRead) {
                 binding.notificationItemLayout.setBackgroundColor (
                     binding.root.context.resources.getColor(R.color.white)
 
@@ -98,11 +88,5 @@ class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseD
         }
     }
 
-    // remove item from the list
-    fun removeItem(position: Int) {
-        val list = currentList.toMutableList()
-        list.removeAt(position)
-        submitList(list)
-    }
 
 }

@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="Log In"
+                android:text="@string/log_in"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
@@ -74,7 +74,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/ralewaybold"
-                android:text="SignUp"
+                android:text="@string/sign_up"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
