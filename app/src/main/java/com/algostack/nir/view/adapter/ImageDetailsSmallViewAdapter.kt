@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.R
 import com.algostack.nir.databinding.SmallImageItemLayoutBinding
 import com.algostack.nir.services.model.ImageItem
+import com.algostack.nir.services.model.PublicPostData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class ImageDetailsSmallViewAdapter : ListAdapter<ImageItem, ImageDetailsSmallViewAdapter.ImageDetailsSmallViewHolder>(Diffcallback())
+class ImageDetailsSmallViewAdapter (private val onDetailsCliked: (img: String,from:String) -> Unit ) : ListAdapter<ImageItem, ImageDetailsSmallViewAdapter.ImageDetailsSmallViewHolder>(Diffcallback())
 {
 
 
@@ -62,7 +63,15 @@ class ImageDetailsSmallViewAdapter : ListAdapter<ImageItem, ImageDetailsSmallVie
                     .placeholder(R.drawable.demo_home_photo)
                     .error(R.drawable.demo_home_photo)
                     .into(binding.imageView)
+
+
+                binding.root.setOnClickListener{
+                    onDetailsCliked(item.url,"details")
+                }
             }
+
+
+
 
 
 
