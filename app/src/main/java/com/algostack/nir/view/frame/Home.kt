@@ -27,10 +27,7 @@ import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
 import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
 import com.algostack.nir.viewmodel.PublicPostViewModel
-import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.createSkeleton
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

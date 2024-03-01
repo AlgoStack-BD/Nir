@@ -137,12 +137,13 @@ dependencies {
 
 
     // google gemini
-    implementation("com.google.ai.client.generativeai:generativeai:0.2.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.1")
     implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
 
 
-// skeleton
-    implementation ("com.faltenreich:skeletonlayout:5.0.0")
+
+
+
 
 
 

@@ -12,40 +12,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
             android:layout_width="100dp"
             android:layout_height="105dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/publicView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/demo_home_photo" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
+
+
 
         <TextView
             android:id="@+id/publicTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="10dp"
             android:fontFamily="@font/robotomedium"
             android:text="Happy House"
             android:textColor="@color/colorSecendaryBlack"
             android:textSize="16sp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toTopOf="@+id/cardView"
-            app:layout_constraintVertical_bias="0.00999999" />
+            app:layout_constraintTop_toTopOf="@+id/cardView" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier"
@@ -53,6 +53,73 @@
             android:layout_height="wrap_content"
             app:barrierDirection="left"
             app:constraint_referenced_ids="publicTitle" />
+
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="publicRentPrice" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="right"
+            app:constraint_referenced_ids="publicRentPrice" />
+
+
+        <ImageView
+            android:id="@+id/badromopublic"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/beadroom"
+            app:layout_constraintStart_toStartOf="@+id/publicTitle"
+            app:layout_constraintTop_toBottomOf="@+id/publicTitle" />
+
+        <ImageView
+            android:id="@+id/bathroompublic"
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/bathroom"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroom"
+            app:layout_constraintStart_toEndOf="@+id/numOfPublicBadroom"
+            app:layout_constraintTop_toTopOf="@+id/numOfPublicBadroom" />
+
+        <TextView
+            android:id="@+id/numOfPublicBadroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/robotomedium"
+            android:text="7"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/badromopublic"
+            app:layout_constraintStart_toEndOf="@+id/badromopublic"
+            app:layout_constraintTop_toTopOf="@+id/badromopublic" />
+
+
+        <TextView
+            android:id="@+id/numOfPublicBathroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/robotomedium"
+            android:text="7"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/bathroompublic"
+            app:layout_constraintStart_toEndOf="@+id/bathroompublic"
+            app:layout_constraintTop_toTopOf="@+id/bathroompublic" />
+
 
         <TextView
             android:id="@+id/rp"
@@ -63,117 +130,38 @@
             android:text="RP. "
             android:textColor="@color/deepblue"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.06"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/publicTitle" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left"
-            app:constraint_referenced_ids="publicRentPrice" />
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/badromopublic"
+            app:layout_constraintTop_toBottomOf="@+id/badromopublic" />
 
         <TextView
             android:id="@+id/publicRentPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/robotomedium"
             android:text="10000"
             android:textColor="@color/deepblue"
             android:textSize="16sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/rp"
             app:layout_constraintStart_toEndOf="@+id/rp"
             app:layout_constraintTop_toTopOf="@+id/rp" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="right"
-            app:constraint_referenced_ids="publicRentPrice" />
 
         <TextView
             android:id="@+id/tk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/robotomedium"
-            android:text="৳"
+            android:text="BDT"
             android:textColor="@color/deepblue"
             android:textSize="16dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/publicRentPrice"
             app:layout_constraintStart_toEndOf="@+id/publicRentPrice"
             app:layout_constraintTop_toTopOf="@+id/publicRentPrice" />
 
-        <ImageView
-            android:id="@+id/badromopublic"
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/beadroom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/rp" />
-
-        <ImageView
-            android:id="@+id/bathroompublic"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/bathroom"
-            app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroomText"
-            app:layout_constraintStart_toEndOf="@+id/numOfPublicBadroomText"
-            app:layout_constraintTop_toTopOf="@+id/numOfPublicBadroomText" />
-
-        <TextView
-            android:id="@+id/numOfPublicBadroom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/robotomedium"
-            android:text="7"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/badromopublic"
-            app:layout_constraintStart_toEndOf="@+id/badromopublic"
-            app:layout_constraintTop_toTopOf="@+id/badromopublic" />
-
-        <TextView
-            android:id="@+id/numOfPublicBadroomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/robotoregular"
-            android:text="@string/beadroom"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBadroom"
-            app:layout_constraintStart_toEndOf="@+id/numOfPublicBadroom"
-            app:layout_constraintTop_toTopOf="@+id/numOfPublicBadroom" />
-
-        <TextView
-            android:id="@+id/numOfPublicBathroom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/robotomedium"
-            android:text="7"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/bathroompublic"
-            app:layout_constraintStart_toEndOf="@+id/bathroompublic"
-            app:layout_constraintTop_toTopOf="@+id/bathroompublic" />
-
-        <TextView
-            android:id="@+id/numOfPublicBathroomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/robotoregular"
-            android:text="@string/bathroom"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/numOfPublicBathroom"
-            app:layout_constraintStart_toEndOf="@+id/numOfPublicBathroom"
-            app:layout_constraintTop_toTopOf="@+id/numOfPublicBathroom" />
 
 
 

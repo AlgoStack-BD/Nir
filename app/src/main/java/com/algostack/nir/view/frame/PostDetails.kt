@@ -239,18 +239,36 @@ class PostDetails : Fragment() {
                 binding.numOfDinigroom.text = it.diningRoom.toString()
                 binding.numOfDrawing.text = it.drawingRoom.toString()
                 binding.numOfBelcony.text = it.balcony.toString()
-                binding.rentPriceAmmount.text = "${it.price.toString()} ৳"
-                binding.electricityBillChekboox.isChecked = it!!.bills.electricBill
-                binding.checkbocgass.isChecked = it!!.bills.gasBill
+
+                if (it.bills.electricBill && it.bills.waterBill && it.bills.gasBill){
+                    binding.bills.text = "Electricity   |   Water   |   Gas"
+                }
+                else if (it.bills.electricBill && it.bills.waterBill){
+                    binding.bills.text = "Electricity   |   Water"
+                }
+                else if (it.bills.electricBill && it.bills.gasBill){
+                    binding.bills.text = "Electricity   |   Gas"
+                }
+                else if (it.bills.waterBill && it.bills.gasBill){
+                    binding.bills.text = "Water   |   Gas"
+                }
+               else if (it.bills.electricBill){
+                    binding.bills.text = "Electricity"
+                }else if (it.bills.waterBill){
+                    binding.bills.text = "Water"
+                }else if (it.bills.gasBill){
+                    binding.bills.text = "Gas"
+                }
+
+
                 if(it!!.isNegotiable){
-                    binding.isNagotiable.visibility = View.VISIBLE
-                    binding.fixed.visibility = View.GONE
-                    binding.isNagotiable.isChecked = true
+                    binding.isNagotiable.isVisible = true
+                    binding.rentprice.text = "${it.price.toString()} ৳"
                 }else
                 {
-                    binding.isNagotiable.visibility = View.GONE
-                    binding.fixed.visibility = View.VISIBLE
-                    binding.fixed.isChecked = true
+
+                    binding.isNagotiable.isVisible = false
+                    binding.rentprice.text = "${it.price.toString()} ৳"
                 }
 
 

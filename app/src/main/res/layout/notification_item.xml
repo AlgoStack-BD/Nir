@@ -3,70 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/unreadcolor"
     android:id="@+id/notificationItemLayout"
     android:padding="10dp"
     android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:visibility="visible"
-        android:id="@+id/notificationProfile"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/notificationTitle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/ralewaysemibold"
-        android:text="Saif Uddin Shrabon"
-        android:textColor="@color/colorSecendaryBlack"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/notificationProfile"
-        app:layout_constraintStart_toEndOf="@+id/notificationProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
-
-    <TextView
-        android:id="@+id/notificationContent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="5dp"
-        android:fontFamily="@font/ralewayregular"
-        android:text="Interest for your `2 bedroom 2 bathroom` flat. Please be ready for the meeting at 02 Feb 2021 at 10:00 AM"
-        android:textColor="@color/colorSecendaryBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/unseenSign"
-        app:layout_constraintStart_toEndOf="@+id/notificationProfile"
-        app:layout_constraintTop_toBottomOf="@+id/notificationTitle"
-        app:layout_constraintVertical_bias="0.51" />
-
-    <ImageView
-        android:id="@+id/unseenSign"
-        android:visibility="visible"
-        android:layout_width="15dp"
-        android:layout_height="10dp"
-        android:layout_marginBottom="9dp"
-        android:src="@drawable/unseensign"
-        app:layout_constraintBottom_toBottomOf="@+id/notificationTitle"
+        android:padding="8dp"
+        android:backgroundTint="@color/unreadcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/notificationTitle"
-        app:layout_constraintTop_toTopOf="@+id/notificationTitle" />
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        app:constraint_referenced_ids="notificationTitle,notificationContent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/notificationProfile"
+            android:layout_width="40dp"
+
+            android:layout_height="40dp"
+            android:src="@drawable/profile"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/notificationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/robotomedium"
+            android:text="Saif Uddin Shrabon"
+            android:textColor="@color/colorSecendaryBlack"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/notificationProfile"
+            app:layout_constraintStart_toEndOf="@+id/notificationProfile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.18" />
+
+        <TextView
+            android:id="@+id/notificationContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="Interest for your `2 bedroom 2 bathroom` flat. Please be ready for the meeting at 02 Feb 2021 at 10:00 AM"
+           android:textSize="12sp"
+            android:textColor="@color/colorSecendaryBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/unseenSign"
+            app:layout_constraintStart_toEndOf="@+id/notificationProfile"
+            app:layout_constraintTop_toBottomOf="@+id/notificationTitle"
+            app:layout_constraintVertical_bias="0.51" />
+
+        <ImageView
+            android:id="@+id/unseenSign"
+            android:layout_width="15dp"
+            android:layout_height="10dp"
+            android:layout_marginBottom="9dp"
+            android:src="@drawable/unseensign"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/notificationTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/notificationTitle"
+            app:layout_constraintTop_toTopOf="@+id/notificationTitle" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="notificationTitle,notificationContent" />
         />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        app:dividerColor="#B6B5B5"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        tools:layout_editor_absoluteX="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

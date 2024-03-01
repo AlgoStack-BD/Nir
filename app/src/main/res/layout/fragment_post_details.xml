@@ -15,50 +15,147 @@
         android:background="#FFFFFFFF"
         android:layout_height="match_parent">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/imageRV"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+            android:layout_height="270dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="visible"
+                android:id="@+id/imageRV"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/home_image"
+                android:scaleType="fitXY"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"/>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="15dp"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="end"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+
+                    <ImageView
+
+                        android:id="@+id/fvrt"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/favorutieselectedicon"
+                        />
+
+                    <ImageView
+                        android:id="@+id/fvrtDone"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/favouriteselectedicon"
+                        />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        </FrameLayout>
 
 
         <TextView
             android:id="@+id/txtOwnerName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/ralewaysemibold"
             android:padding="5dp"
             android:text="@string/DetailsHeadding"
-            android:textAlignment="center"
             android:textColor="@color/colorSecendaryBlack"
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout18"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRV" />
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+
+
+        <LinearLayout
+
+            android:id="@+id/linearLayout18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="9dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/txtOwnerName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtOwnerName">
+
+            <TextView
+                android:id="@+id/rentprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/robotomedium"
+                android:padding="2dp"
+                android:text="$ 2000"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/isNagotiable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
+                android:padding="2dp"
+                android:text="/ Nagotiable"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/loactionLayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="4dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtOwnerName">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:src="@drawable/locationpicker" />
 
             <TextView
@@ -74,27 +171,29 @@
 
         </LinearLayout>
 
+
+
         <TextView
             android:id="@+id/housetype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:padding="3dp"
-            android:fontFamily="@font/ralewayregular"
-            android:text="family"
-            android:textColor="@color/colorSecendaryBlack"
-            android:textSize="21dp"
+            android:fontFamily="@font/ralewaysemibold"
+            android:text="Family"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/loactionLayer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loactionLayer" />
+            app:layout_constraintTop_toTopOf="@+id/loactionLayer" />
 
 
         <TextView
             android:id="@+id/textView14"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/ralewayregular"
             android:text="@string/Description"
             android:textColor="@color/colorSecendaryBlack"
@@ -102,48 +201,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/housetype" />
 
-        <ImageView
-            android:id="@+id/fvrt"
-            android:visibility="visible"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:src="@drawable/fvrt"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.92"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toTopOf="@+id/textView14" />
-
-        <ImageView
-            android:id="@+id/fvrtDone"
-            android:visibility="gone"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:src="@drawable/fvrtdone"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.92"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toTopOf="@+id/textView14" />
-
-        <TextView
-            android:id="@+id/txtDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/ralewayregular"
-            android:lineSpacingExtra="4sp"
-            android:maxLines="4"
-            android:paddingBottom="5dp"
-            android:text="The cozy four-room house exudes warmth with its inviting living room, spacious kitchen, comfortable bedrooms
-              See More"
-            android:translationY="-1.96sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <LinearLayout
             android:id="@+id/linearLayout6"
@@ -154,9 +211,10 @@
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:padding="5dp"
+            android:background="@drawable/profilecustomibackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDescription">
+            app:layout_constraintTop_toBottomOf="@+id/loactionLayer">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userProfile"
@@ -240,515 +298,586 @@
 
 
         <LinearLayout
-            android:id="@+id/section1"
+            android:id="@+id/carditem1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-            <RelativeLayout
-                android:id="@+id/linearLayout7"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
-               >
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/beadroom" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/beadroomspinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:id="@+id/numOfPublicBadroomText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/beadroom"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/beadroom"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfBadroom"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfBadroom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView17"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/imageView9"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/beadroom"
+                            android:textSize="14sp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/numOfBadroom"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <TextView
-                        android:id="@+id/numOfBadroom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/numOfPublicBadroomText"
-                        app:layout_constraintStart_toStartOf="@+id/numOfPublicBadroomText"
-                        app:layout_constraintTop_toBottomOf="@+id/numOfPublicBadroomText" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                />
+                </com.google.android.material.card.MaterialCardView>
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/linearLayout8"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:padding="5dp"
-              >
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/diningroom" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/g"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:id="@+id/dinigroomText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/dinigroom"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/diningroom"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfDinigroom"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/numOfDinigroom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/dinigroomText"
-                        app:layout_constraintStart_toStartOf="@+id/dinigroomText"
-                        app:layout_constraintTop_toBottomOf="@+id/dinigroomText" />
+                        <TextView
+                            android:id="@+id/numOfDinigroom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView1"
+                            app:layout_constraintStart_toEndOf="@+id/imageView10"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/section2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section1">
-
-            <RelativeLayout
-                android:id="@+id/linearLayout9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp"
-
-             >
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/drawingroom" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
-
-                    <TextView
-                        android:id="@+id/numOfdrowingroomText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/drawingroom"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/dinigroom"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/numOfDinigroom"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <TextView
-                        android:id="@+id/numOfDrawing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/numOfdrowingroomText"
-                        app:layout_constraintStart_toStartOf="@+id/numOfdrowingroomText"
-                        app:layout_constraintTop_toBottomOf="@+id/numOfdrowingroomText" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/linearLayout10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp"
-                >
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/bathroom" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
-
-                    <TextView
-                        android:id="@+id/bathroomText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/bathroom"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <TextView
-                        android:id="@+id/numOfBbathroom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/bathroomText"
-                        app:layout_constraintStart_toStartOf="@+id/bathroomText"
-                        app:layout_constraintTop_toBottomOf="@+id/bathroomText" />
+                </com.google.android.material.card.MaterialCardView>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/section3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section2">
-
-            <RelativeLayout
-                android:id="@+id/linearLayout11"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp"
-
-                >
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/balcony" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
-
-                    <TextView
-                        android:id="@+id/belconyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/balcony"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/numOfBelcony"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/belconyText"
-                        app:layout_constraintStart_toStartOf="@+id/belconyText"
-                        app:layout_constraintTop_toBottomOf="@+id/belconyText" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/linearLayout12"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/kitchen" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
-
-                    <TextView
-                        android:id="@+id/kitchenText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/kitchen"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/numOfKitchen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7"
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/kitchenText"
-                        app:layout_constraintStart_toStartOf="@+id/kitchenText"
-                        app:layout_constraintTop_toBottomOf="@+id/kitchenText" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/section4"
+            android:id="@+id/carditem2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section3">
+            app:layout_constraintTop_toBottomOf="@+id/carditem1">
 
-            <RelativeLayout
-                android:id="@+id/linearLayout13"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                >
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/electricity" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/beadroomr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/drwaingimg"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/drawingroom"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfDrawing"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfDrawing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView18"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/drwaingimg"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/drawingroom"
+                            android:textSize="14sp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/numOfDrawing"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <CheckBox
-                        android:id="@+id/electricityBillChekboox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/electricity"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                />
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/linearLayout14"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:padding="5dp">
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/gassbill" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bathlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp">
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/bathimg"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/bathroom"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfBbathroom"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfBbathroom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfBbathroomtext"
+                            app:layout_constraintStart_toEndOf="@+id/bathimg"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfBbathroomtext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/bathroom"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/numOfBbathroom"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <CheckBox
-                        android:id="@+id/checkbocgass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/gass"
-                        android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/section5"
+            android:id="@+id/carditem3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section4">
+            app:layout_constraintTop_toBottomOf="@+id/carditem2">
 
-            <RelativeLayout
-                android:id="@+id/linearLayout15"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                >
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/bills" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/balconyimgcard"
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/balconyimg"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/balcony"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfBelcony"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfBelcony"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfBelconytext"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/balconyimg"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfBelconytext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/balcony"
+                            android:textSize="14sp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/numOfBelcony"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card25"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/kitchenimg"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/kitchen"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfKitchen"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfKitchen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="0"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/numOfKitchentext"
+                            app:layout_constraintStart_toEndOf="@+id/kitchenimg"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/numOfKitchentext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotomedium"
+                            android:text="@string/kitchen"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/numOfKitchen"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/carditem4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carditem3">
+
+            <LinearLayout
+                android:id="@+id/billslayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp">
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/robotomedium"
+                    android:text="@string/bills"
+                    android:textSize="14sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/billscard"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/detailscard"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/bills"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/robotoregular"
+                            android:hint="Electricity   |    Water   |   Gass"
+                            android:padding="5dp"
+                            android:textColor="@color/colorSecendaryBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/detailslayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carditem4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/robotomedium"
+                android:text="@string/details"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/detailscard"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/rentPriceText"
+                        android:id="@+id/txtDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/rentprice"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/robotoregular"
+                        android:hint="details"
+                        android:padding="5dp"
                         android:textColor="@color/colorSecendaryBlack"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.05"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/rentPriceAmmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="7৳ "
-                        android:textColor="@color/colorSecendary"
-                        app:layout_constraintEnd_toEndOf="@+id/rentPriceText"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rentPriceText" />
-
-                    <CheckBox
-                        android:id="@+id/isNagotiable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/nagotiable"
-                        android:textColor="@color/colorSecendaryBlack"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/rentPriceAmmount"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rentPriceText" />
-
-                    <CheckBox
-                        android:id="@+id/fixed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/ralewaysemibold"
-                        android:text="@string/fixedPrice"
-                        android:textColor="@color/colorSecendaryBlack"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="@+id/rentPriceAmmount"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rentPriceText" />
+                </LinearLayout>
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                />
-
-            </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
@@ -759,36 +888,35 @@
             android:layout_width="335dp"
             android:layout_height="55dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/customrentforrequestrectungular"
-
             android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section5"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/detailslayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="80dp"
-                android:fontFamily="@font/ralewaybold"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotomedium"
                 android:text="@string/requestforrent"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
-            <com.github.ybq.android.spinkit.SpinKitView
+            <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/progress_bar"
-                android:visibility="gone"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 style="@style/SpinKitView.Large.Wave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:SpinKit_Color="@color/white"
                 android:layout_marginStart="2dp"
-                />
+                android:visibility="gone"
+                app:SpinKit_Color="@color/white" />
 
 
         </LinearLayout>
