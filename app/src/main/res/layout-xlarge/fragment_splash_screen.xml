@@ -26,7 +26,7 @@
             android:layout_width="350dp"
             android:layout_height="111dp"
             android:layout_marginTop="32dp"
-            android:src="@drawable/nirsplash"
+            android:src="@drawable/nirfinallogo"
             app:layout_constraintEnd_toEndOf="@+id/splashhomelogo"
             app:layout_constraintStart_toStartOf="@+id/splashhomelogo"
             app:layout_constraintTop_toBottomOf="@+id/splashhomelogo" />

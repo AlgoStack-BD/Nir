@@ -315,7 +315,7 @@ class add : Fragment() {
 
         val housename = binding.titleTextFiled.text.toString()
 
-        title = "$selectedBeadroom BeadRoom $selectedBathroom BathRoom $selectedRentType Flat for Rent at $housename"
+        title = "$selectedBeadroom Bead $selectedBathroom Bath $selectedRentType Flat for Rent at $housename"
 
         publicPostViewModel.applicationContext = requireContext()
         val userName = tokenManager.getUserName().toString()
@@ -369,6 +369,7 @@ class add : Fragment() {
         binding.kitchenTextFiled.text = "0"
         binding.balconyTextFiled.text = "0"
         binding.titleTextFiled.text.clear()
+       selectedRentType = ""
         // clear image
         imageUris.clear()
         listImage.clear()
