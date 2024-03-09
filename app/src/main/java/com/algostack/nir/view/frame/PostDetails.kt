@@ -206,6 +206,8 @@ class PostDetails : Fragment() {
                 is NetworkResult.Error -> {
                     println("CheckError: ${it}")
                 }
+
+                else -> {}
             }
         }
     }
@@ -225,6 +227,8 @@ class PostDetails : Fragment() {
                 is NetworkResult.Error -> {
                     println("CheckError: ${it}")
                 }
+
+                else -> {}
             }
         }
     }
@@ -457,6 +461,8 @@ class PostDetails : Fragment() {
                     println("CheckError: ${it}")
 
                 }
+
+                else -> {}
             }
         }
     }

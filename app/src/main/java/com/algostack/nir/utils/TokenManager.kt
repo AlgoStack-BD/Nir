@@ -34,12 +34,13 @@ class TokenManager @Inject constructor (@ApplicationContext context : Context) {
 
 // update user name , phone , and image
     fun updateToken(
-        userName: String, number: String,userImage: String
+        userName: String, number: String,userImage: String, location: String
 ){
         val editor = prefs.edit()
         editor.putString(USER_NAME, userName)
         editor.putString(USER_NUMER, number)
         editor.putString(USER_IMAGE, userImage)
+        editor.putString(Constants.USER_LOCATION, location )
         editor.apply()
     }
 

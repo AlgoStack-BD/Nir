@@ -22,7 +22,7 @@ interface PublicPostDao {
             "(price = :fixedPrice) OR " +
             "(bedRoom = :bedRoom) OR " +
             "(bathRoom = :bathRoom) OR " +
-            "(type = :propertyType) OR " +
+            "(type LIKE '%' || :propertyType || '%') OR " +
             "(location LIKE '%' || :propertyLocation || '%')")
     fun searchItems(
         minPrice: Int,
@@ -38,7 +38,7 @@ interface PublicPostDao {
     @Query("SELECT * FROM PublicPostData WHERE bedRoom = :bedRoom")
     fun searchItemsByBedRoom(bedRoom: Int): List<PublicPostData>
 
-    @Query("SELECT * FROM PublicPostData WHERE type = :category")
+    @Query("SELECT * FROM PublicPostData WHERE type LIKE '%' || :category || '%'")
     fun searchItemsCategoryBedRoom(category: String): List<PublicPostData>
 
     @Delete

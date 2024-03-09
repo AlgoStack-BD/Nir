@@ -79,6 +79,7 @@ class EditeProfile : Fragment() {
     private var listImage: MutableList<File> = ArrayList()
     private val imageUris = ArrayList<Uri>()
     var selectedImage = ""
+    var selectedLocation = ""
 
     private val updateViewmodel by viewModels<AuthViewModel> ()
     private val imageUploadViewModel by viewModels<ImageUploadViewModel> ()
@@ -110,6 +111,9 @@ class EditeProfile : Fragment() {
         binding.editUserName.setText(tokenManager.getUserName())
         binding.editUserEmail.setText(tokenManager.getUserEmail())
         binding.editUserPhone.setText(tokenManager.getUserNumber())
+        binding.editaddress.setText(tokenManager.getUserLocation())
+
+
 
 
 
@@ -173,6 +177,7 @@ class EditeProfile : Fragment() {
         }
         var userName = binding.editUserName.text.toString()
         var userPhone = binding.editUserPhone.text.toString()
+        var location = binding.editaddress.text.toString()
 
         if (userName.isEmpty()) {
            // Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
@@ -181,9 +186,14 @@ class EditeProfile : Fragment() {
            // Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
             userPhone = ""
         }
+        else if (location.isEmpty()){
+           // Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            location = ""
+        }
         else {
             println("tokenManager.getUserId()!!: ${tokenManager.getUserId()}")
-            updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage)))
+            selectedLocation = location
+            updateViewmodel.updateUserInfo(tokenManager.getUserId()!!, UserUpdateRequest(UpdateUserData(userName, userPhone,selectedImage,location)))
         }
 
         bindObserver()
@@ -243,7 +253,7 @@ class EditeProfile : Fragment() {
                     if (it.data != null && it.data.status == 200) {
                         Toast.makeText(requireContext(), "Update Successful", Toast.LENGTH_SHORT).show()
 
-                        tokenManager.updateToken(binding.editUserName.text.toString(),binding.editUserPhone.text.toString(),selectedImage)
+                        tokenManager.updateToken(binding.editUserName.text.toString(),binding.editUserPhone.text.toString(),selectedImage,selectedLocation)
 
                     }
                 }

@@ -129,4 +129,19 @@
         android:name="com.algostack.nir.view.frame.NotLogIn"
         android:label="fragment_not_log_in"
         tools:layout="@layout/fragment_not_log_in" />
+    <fragment
+        android:id="@+id/myListings"
+        android:name="com.algostack.nir.view.frame.MyListings"
+        android:label="fragment_my_listings"
+        tools:layout="@layout/fragment_my_listings" />
+    <fragment
+        android:id="@+id/favouriteItem"
+        android:name="com.algostack.nir.view.frame.FavouriteItem"
+        android:label="fragment_favourite_item"
+        tools:layout="@layout/fragment_favourite_item" />
+    <fragment
+        android:id="@+id/soldItemListing"
+        android:name="com.algostack.nir.view.frame.SoldItemListing"
+        android:label="fragment_sold_item_listing"
+        tools:layout="@layout/fragment_sold_item_listing" />
 </navigation>

@@ -90,8 +90,12 @@ class Home : Fragment() {
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
         // Setup sticky header
-        if (tokenManager.getToken() != null){
-            if (tokenManager.getUserLocation() != null){
+
+        if (tokenManager.getToken() != null ){
+
+
+
+            if (tokenManager.getUserLocation() != null && tokenManager.getUserLocation() != ""){
                 publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
                 binding.nearfromyouRecyler.isVisible = true
                 binding.textView7.isVisible = true
@@ -100,9 +104,6 @@ class Home : Fragment() {
                 binding.textView7.isVisible = false
                 binding.nearfromyouRecyler.isVisible = false
             }
-
-
-
 
         }
 
@@ -242,7 +243,7 @@ class Home : Fragment() {
                     }
                 }
                 is NetworkResult.Error -> {
-                    showCustomAlertDialogBox(requireContext() , result.message ?: "Something went wrong")
+                   // showCustomAlertDialogBox(requireContext() , result.message ?: "Something went wrong")
                 }
                 is NetworkResult.Loading -> {
 

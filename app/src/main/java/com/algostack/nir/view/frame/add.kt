@@ -307,7 +307,7 @@ class add : Fragment() {
     private fun createFinalCallPost() {
         // address
         selectedAddress = binding.addressTextFiled.text.toString()
-        println("address: $selectedAddress")
+
 
         selectAdditonalMessage =  binding.additionalMessage.text.toString()
 
@@ -370,6 +370,8 @@ class add : Fragment() {
         binding.balconyTextFiled.text = "0"
         binding.titleTextFiled.text.clear()
        selectedRentType = ""
+        binding.rentType.text = "Selelct Property Type"
+
         // clear image
         imageUris.clear()
         listImage.clear()
@@ -507,7 +509,7 @@ class add : Fragment() {
         val bachelor = view.findViewById<RadioButton>(R.id.bachelorRadioButton)
         val family = view.findViewById<RadioButton>(R.id.familyRadioButton)
         val sublet = view.findViewById<RadioButton>(R.id.subletRadioButton)
-        val famandbachelor = view.findViewById<RadioButton>(R.id.familyRadioButton)
+        val famandbachelor = view.findViewById<RadioButton>(R.id.famandbanRadidoButton)
 
         bachelor.setOnClickListener {
              binding.rentType.text = "Bachelor"
