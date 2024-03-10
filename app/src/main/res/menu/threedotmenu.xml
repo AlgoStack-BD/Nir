@@ -13,8 +13,8 @@
                 android:id="@+id/deletepost"
                 />
 
-              <item android:title="@string/bost_your_post"
-                android:id="@+id/bostpost"
+              <item android:title="@string/edit"
+                android:id="@+id/editpost"
                 />
 
 

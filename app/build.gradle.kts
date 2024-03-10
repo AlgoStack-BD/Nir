@@ -114,7 +114,9 @@ dependencies {
 
     //glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+
+
     // circle
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
@@ -137,12 +139,16 @@ dependencies {
 
 
     // google gemini
-    implementation("com.google.ai.client.generativeai:generativeai:0.2.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.1")
     implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
+    // photo viewer
+    implementation ("com.github.chrisbanes:PhotoView:2.3.0")
 
 
-// skeleton
-    implementation ("com.faltenreich:skeletonlayout:5.0.0")
+
+
+
+
 
 
 

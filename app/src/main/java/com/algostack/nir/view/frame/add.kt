@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -53,6 +54,8 @@ import com.algostack.nir.view.adapter.NumbersAdapter
 import com.algostack.nir.view.main.MainActivity
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
+import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
@@ -304,7 +307,7 @@ class add : Fragment() {
     private fun createFinalCallPost() {
         // address
         selectedAddress = binding.addressTextFiled.text.toString()
-        println("address: $selectedAddress")
+
 
         selectAdditonalMessage =  binding.additionalMessage.text.toString()
 
@@ -312,7 +315,7 @@ class add : Fragment() {
 
         val housename = binding.titleTextFiled.text.toString()
 
-        title = "$selectedBeadroom BeadRoom $selectedBathroom BathRoom $selectedRentType Flat for Rent at $housename"
+        title = "$selectedBeadroom Bead $selectedBathroom Bath $selectedRentType Flat for Rent at $housename"
 
         publicPostViewModel.applicationContext = requireContext()
         val userName = tokenManager.getUserName().toString()
@@ -366,6 +369,9 @@ class add : Fragment() {
         binding.kitchenTextFiled.text = "0"
         binding.balconyTextFiled.text = "0"
         binding.titleTextFiled.text.clear()
+       selectedRentType = ""
+        binding.rentType.text = "Selelct Property Type"
+
         // clear image
         imageUris.clear()
         listImage.clear()
@@ -503,7 +509,7 @@ class add : Fragment() {
         val bachelor = view.findViewById<RadioButton>(R.id.bachelorRadioButton)
         val family = view.findViewById<RadioButton>(R.id.familyRadioButton)
         val sublet = view.findViewById<RadioButton>(R.id.subletRadioButton)
-        val famandbachelor = view.findViewById<RadioButton>(R.id.familyRadioButton)
+        val famandbachelor = view.findViewById<RadioButton>(R.id.famandbanRadidoButton)
 
         bachelor.setOnClickListener {
              binding.rentType.text = "Bachelor"
@@ -781,9 +787,34 @@ private fun bitmapToFile(bitmap: Bitmap): File {
 
     private fun recylerviewInitalize() {
         binding.imageRV.isVisible = true
-        val imageAdapter = ImageDetailsSmallViewAdapter()
+        val imageAdapter = ImageDetailsSmallViewAdapter(this::onDetailsCliked)
         binding.imageRV.adapter = imageAdapter
         imageAdapter.submitList(newImageArray)
+    }
+
+    private fun onDetailsCliked(_id: String, from: String) {
+
+        // show my custom photviewe dialog
+        val view = LayoutInflater.from(context).inflate(R.layout.photoviewer, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(view)
+
+        val alert = builder.create()
+        alert.setCancelable(true)
+        val photoView  = view.findViewById<PhotoView>(R.id.photo_view)
+
+        // load image from server
+        Glide
+            .with(requireContext())
+            .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$_id")
+            .centerCrop()
+            .placeholder(R.drawable.demo_home_photo)
+            .into(photoView)
+
+
+        alert.window?.setBackgroundDrawable(ColorDrawable(0))
+        alert.show()
+
     }
 
 

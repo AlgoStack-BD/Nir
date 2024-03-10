@@ -29,6 +29,7 @@ import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.services.model.RentRequestData
 import com.algostack.nir.services.model.RentRequestNotification
+import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
@@ -36,6 +37,7 @@ import com.algostack.nir.viewmodel.FavouriteViewModel
 import com.algostack.nir.viewmodel.NotificationViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.datepicker.MaterialDatePicker
 
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -147,12 +149,37 @@ class PostDetails : Fragment() {
         }
 
 
-        val imageAdapter = ImageDetailsSmallViewAdapter()
+        val imageAdapter = ImageDetailsSmallViewAdapter(this::onDetailsCliked)
          binding.imageRV.adapter = imageAdapter
         imageAdapter.submitList(newImageArray)
 
 
         bindOvserver()
+
+    }
+
+    private fun onDetailsCliked(_id: String, from: String) {
+
+        // show my custom photviewe dialog
+        val view = LayoutInflater.from(context).inflate(R.layout.photoviewer, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(view)
+
+        val alert = builder.create()
+        alert.setCancelable(true)
+        val photoView  = view.findViewById<PhotoView>(R.id.photo_view)
+
+        // load image from server
+        Glide
+            .with(requireContext())
+            .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$_id")
+            .centerCrop()
+            .placeholder(R.drawable.demo_home_photo)
+            .into(photoView)
+
+
+        alert.window?.setBackgroundDrawable(ColorDrawable(0))
+        alert.show()
 
     }
 
@@ -179,6 +206,8 @@ class PostDetails : Fragment() {
                 is NetworkResult.Error -> {
                     println("CheckError: ${it}")
                 }
+
+                else -> {}
             }
         }
     }
@@ -198,6 +227,8 @@ class PostDetails : Fragment() {
                 is NetworkResult.Error -> {
                     println("CheckError: ${it}")
                 }
+
+                else -> {}
             }
         }
     }
@@ -239,18 +270,36 @@ class PostDetails : Fragment() {
                 binding.numOfDinigroom.text = it.diningRoom.toString()
                 binding.numOfDrawing.text = it.drawingRoom.toString()
                 binding.numOfBelcony.text = it.balcony.toString()
-                binding.rentPriceAmmount.text = "${it.price.toString()} ৳"
-                binding.electricityBillChekboox.isChecked = it!!.bills.electricBill
-                binding.checkbocgass.isChecked = it!!.bills.gasBill
+
+                if (it.bills.electricBill && it.bills.waterBill && it.bills.gasBill){
+                    binding.bills.text = "Electricity   |   Water   |   Gas"
+                }
+                else if (it.bills.electricBill && it.bills.waterBill){
+                    binding.bills.text = "Electricity   |   Water"
+                }
+                else if (it.bills.electricBill && it.bills.gasBill){
+                    binding.bills.text = "Electricity   |   Gas"
+                }
+                else if (it.bills.waterBill && it.bills.gasBill){
+                    binding.bills.text = "Water   |   Gas"
+                }
+               else if (it.bills.electricBill){
+                    binding.bills.text = "Electricity"
+                }else if (it.bills.waterBill){
+                    binding.bills.text = "Water"
+                }else if (it.bills.gasBill){
+                    binding.bills.text = "Gas"
+                }
+
+
                 if(it!!.isNegotiable){
-                    binding.isNagotiable.visibility = View.VISIBLE
-                    binding.fixed.visibility = View.GONE
-                    binding.isNagotiable.isChecked = true
+                    binding.isNagotiable.isVisible = true
+                    binding.rentprice.text = "${it.price.toString()} ৳"
                 }else
                 {
-                    binding.isNagotiable.visibility = View.GONE
-                    binding.fixed.visibility = View.VISIBLE
-                    binding.fixed.isChecked = true
+
+                    binding.isNagotiable.isVisible = false
+                    binding.rentprice.text = "${it.price.toString()} ৳"
                 }
 
 
@@ -412,6 +461,8 @@ class PostDetails : Fragment() {
                     println("CheckError: ${it}")
 
                 }
+
+                else -> {}
             }
         }
     }

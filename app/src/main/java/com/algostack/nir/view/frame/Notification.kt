@@ -1,6 +1,6 @@
 package com.algostack.nir.view.frame
 
-import android.R
+
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -8,15 +8,11 @@ import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -27,24 +23,16 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.databinding.FragmentNotificationBinding
-import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.NotificationData
 import com.algostack.nir.services.model.NotificationResponseData
 import com.algostack.nir.services.model.NotificationUpdateRequest
-import com.algostack.nir.services.model.RentRequestData
-import com.algostack.nir.services.model.RentRequestNotification
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.NotificationAdapter
 import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.viewmodel.NotificationViewModel
-import com.algostack.nir.viewmodel.PublicPostViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import javax.inject.Inject
 

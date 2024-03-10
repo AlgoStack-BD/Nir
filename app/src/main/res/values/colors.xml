@@ -17,5 +17,6 @@
     <color name="colorSecendaryBlack">#FF000000</color>
     <color name="colorSecendaryWite">#f5f6f8</color>
     <color name="profilemenucardcolor">#E4E6E6</color>
+    <color name="detailscard">#EBECF1</color>
 
 </resources>

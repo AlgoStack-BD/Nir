@@ -145,6 +145,7 @@
     <string name="browse_photos">Browse Photos</string>
     <string name="add_photos">Add Photos</string>
     <string name="family_bachelor"><![CDATA[Family & Bachelor]]></string>
+    <string name="edit">Edit</string>
 
     <string-array name="rangeSlider">
         <item>0</item>

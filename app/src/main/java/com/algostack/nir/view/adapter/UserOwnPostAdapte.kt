@@ -74,10 +74,10 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String,P
 
                                 true
                             }
-                            R.id.bostpost -> {
+                            R.id.editpost -> {
                                 Toast.makeText(itemView.context, "Boost", Toast.LENGTH_SHORT).show()
 
-                                item._id.let { it1 -> onDetailsCliked(it1,"bostPost",item) }
+                                item._id.let { it1 -> onDetailsCliked(it1,"EditPost",item) }
                                 true
                             }
                             else -> false
