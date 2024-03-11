@@ -1,35 +1,21 @@
 package com.algostack.nir.services.repository
 
 import android.content.Context
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algostack.nir.services.api.PublicPostApi
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
-import com.algostack.nir.services.model.DeletePostResponseData
-import com.algostack.nir.services.model.FavouriteRequest
-import com.algostack.nir.services.model.FavouriteResponse
-import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
-import com.algostack.nir.services.model.UploadImageResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
 import com.algostack.nir.utils.NetworkUtils.Companion.isInternetConnected
-import com.algostack.nir.view.frame.Favorite
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import retrofit2.Response
-import java.io.File
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,16 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.nir.R
@@ -26,24 +22,20 @@ import com.algostack.nir.services.model.Cityes
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
+import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
-import com.algostack.nir.view.adapter.HorizontalSpace
 import com.algostack.nir.view.adapter.PublicFeedBestForYouAdapter
-import com.algostack.nir.view.adapter.PublicFeedNearByPostAdapter
 import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.viewmodel.FilterViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.slider.Slider
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.log
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -73,6 +65,8 @@ class Filter : Fragment() {
 
     val bestForYouRecSpace = VerticalSpace()
 
+    @Inject
+    lateinit var tokenManager: TokenManager
 
 
     private lateinit var bestForYouAdapter: PublicFeedBestForYouAdapter
@@ -474,10 +468,23 @@ class Filter : Fragment() {
 
 
     private fun onDetailsCliked(publicPostData: PublicPostData) {
-        val bundle = Bundle()
-        bundle.putString("details", Gson().toJson(publicPostData))
+        if (tokenManager.getToken() == null){
+            val bundle = Bundle()
 
-        replaceFragment(PostDetails(),bundle,PostDetails::class.java.simpleName)
+            bundle.putString("DestinationPage", "Filter")
+
+            val parentFragmentManager = parentFragmentManager
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentConthainerView4, NotLogIn())
+                .addToBackStack(null)
+                .commit()
+        }else{
+            val bundle = Bundle()
+            bundle.putString("details", Gson().toJson(publicPostData))
+
+            replaceFragment(PostDetails(),bundle,PostDetails::class.java.simpleName)
+        }
+
     }
 
     private fun replaceFragment(fragment: Fragment,bundle: Bundle,flag: String? = null){

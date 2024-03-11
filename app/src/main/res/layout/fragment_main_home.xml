@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.frame.MainHome">
+    tools:context=".view.main_frame.MainHome">
 
     <TextView
         android:id="@+id/textView7"
@@ -23,6 +23,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="275dp"
         app:layout_constraintEnd_toEndOf="parent"

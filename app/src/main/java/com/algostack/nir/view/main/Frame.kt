@@ -3,20 +3,16 @@ package com.algostack.nir.view.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.ActivityFrameBinding
-import com.algostack.nir.view.frame.Category
-import com.algostack.nir.view.frame.Chat
-import com.algostack.nir.view.frame.Home
-import com.algostack.nir.view.frame.Notification
-import com.algostack.nir.view.frame.ProfileMenu
-import com.algostack.nir.view.frame.add
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.algostack.nir.view.main_frame.Category
+import com.algostack.nir.view.main_frame.Home
+import com.algostack.nir.view.main_frame.Notification
+import com.algostack.nir.view.main_frame.ProfileMenu
+import com.algostack.nir.view.main_frame.add
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

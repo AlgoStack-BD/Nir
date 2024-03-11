@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -57,29 +57,28 @@ class MainHome : Fragment() {
 
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
-        // Setup sticky header
+
 
         if (tokenManager.getToken() != null ){
 
-
-
             if (tokenManager.getUserLocation() != null && tokenManager.getUserLocation() != ""){
                 publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
-                binding.nearfromyouRecyler.isVisible = true
+                binding.linearLayout2.isVisible = true
                 binding.textView7.isVisible = true
 
             }else{
                 binding.textView7.isVisible = false
-                binding.nearfromyouRecyler.isVisible = false
+                binding.linearLayout2.isVisible = false
             }
 
         }else{
-            binding.textView7.isVisible = false
-            binding.nearfromyouRecyler.isVisible = false
+
+            binding.textView7.visibility = View.GONE
+            binding.linearLayout2.visibility = View.GONE
         }
 
 
-      nearByPostRecylerviewIntialize()
+        nearByPostRecylerviewIntialize()
         bestForYouRecylerviewIntialize()
 
         bindOvservers()
@@ -206,6 +205,8 @@ class MainHome : Fragment() {
 
     }
 
+
+    // On details clicked function
     private fun onDetailsCliked(publicPostData: PublicPostData) {
 
         println("PublicPostDataCheck: $publicPostData")
@@ -226,8 +227,8 @@ class MainHome : Fragment() {
     }
 
 
+    // Replace Fragment function
     private fun replaceFragment(fragment: Fragment,bundle: Bundle) {
-
 
         val parentFragmentManager = requireParentFragment().parentFragmentManager
         fragment.arguments = bundle

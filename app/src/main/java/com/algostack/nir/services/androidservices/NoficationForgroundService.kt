@@ -12,10 +12,8 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.algostack.nir.R
 import com.algostack.nir.utils.Constants.NOTIFICATION_ID
-import com.algostack.nir.view.frame.Notification
-import com.algostack.nir.viewmodel.NotificationViewModel
+import com.algostack.nir.view.main_frame.Notification
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
