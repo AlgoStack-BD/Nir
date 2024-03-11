@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,62 +10,61 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.algostack.nir.R
 
-import com.algostack.nir.databinding.FragmentFavouriteItemBinding
+import com.algostack.nir.R
+import com.algostack.nir.databinding.FragmentMyListingsBinding
 import com.algostack.nir.services.model.PublicPostData
-import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
-import com.algostack.nir.view.adapter.UserOwnFavouriteListAdapter
+import com.algostack.nir.view.adapter.UserOwnPostAdapte
 import com.algostack.nir.view.adapter.VerticalSpace
-import com.algostack.nir.viewmodel.FavouriteViewModel
+import com.algostack.nir.viewmodel.ProfileViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavouriteItem : Fragment() {
+class MyListings : Fragment() {
 
 
-    private var _binding : FragmentFavouriteItemBinding ?= null
+    private var _binding : FragmentMyListingsBinding?= null
     private  val binding get() = _binding!!
-
-    private val favouriteViewModel by viewModels<FavouriteViewModel>()
+    private lateinit var userOwnPostAdapte: UserOwnPostAdapte
+    private val profileViewModel by viewModels<ProfileViewModel>()
     val bestForYouRecSpace = VerticalSpace()
-    private lateinit var userFavouritePostAdapte: UserOwnFavouriteListAdapter
+
     @Inject
     lateinit var tokenManager: TokenManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentMyListingsBinding.inflate(inflater,container,false)
+        userOwnPostAdapte = UserOwnPostAdapte(this::onDetailsCliked)
 
-            _binding = FragmentFavouriteItemBinding.inflate(inflater,container,false)
-           userFavouritePostAdapte = UserOwnFavouriteListAdapter(this::onDetailsCliked)
-            return binding.root
+        return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         println("testuserID: ${tokenManager.getUserId()}")
         val userId = tokenManager.getUserId()!!
-        favouriteViewModel.applicationContext = requireContext()
-        favouriteViewModel.getUserFavourite(userId)
+        profileViewModel.applicationContext = requireContext()
+        profileViewModel.singleUserPost(userId)
 
-        binding.favlisRV.layoutManager =
+
+        binding.mylistRV.layoutManager =
             GridLayoutManager(requireContext(),2)
-        binding.favlisRV.addItemDecoration(bestForYouRecSpace)
-        binding.favlisRV.adapter = userFavouritePostAdapte
-
-        bindObserver()
+        binding.mylistRV.addItemDecoration(bestForYouRecSpace)
+        binding.mylistRV.adapter = userOwnPostAdapte
+        bindOverserver()
     }
 
 
-    private fun bindObserver() {
-        favouriteViewModel.userFavouritePost.observe(viewLifecycleOwner, Observer { result ->
+    private fun bindOverserver() {
+        profileViewModel._userPostLiveData.observe(viewLifecycleOwner, Observer { result ->
 
             when (result) {
 
@@ -76,8 +75,12 @@ class FavouriteItem : Fragment() {
                             binding.lotti.isVisible = true
                         }else{
                             binding.lotti.isVisible = false
-                            userFavouritePostAdapte.submitList(result.data.data)
+                            userOwnPostAdapte.submitList(result.data.data)
                         }
+
+
+
+                        // check if data is aviailable or not
 
 
 
@@ -111,21 +114,16 @@ class FavouriteItem : Fragment() {
     private fun onDetailsCliked(_id: String, from: String,publicPostData: PublicPostData) {
 
 
-      if (from == "removefavourite") {
-            val removefavorite = RemoveFavouriteItem(
-                _id
-            )
+        if (from == "delete") {
+            profileViewModel.deletePost(_id)
 
-            favouriteViewModel.applicationContext = requireContext()
-            favouriteViewModel.updateFavorite(tokenManager.getUserId()!!, removefavorite)
-
-            favouriteViewModel.favouritePost.observe(viewLifecycleOwner, Observer { result ->
+            profileViewModel.deletePostResponseLiveData.observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is NetworkResult.Success -> {
                         if (result.data!!.status == 200) {
                             val userId = tokenManager.getUserId()!!
-                            favouriteViewModel.applicationContext = requireContext()
-                            favouriteViewModel.getUserFavourite(userId)
+                            profileViewModel.applicationContext = requireContext()
+                            profileViewModel.singleUserPost(userId)
                         } else if (result.data.status == 500) {
                             result.message?.let { it1 ->
                                 AlertDaialog.showCustomAlertDialogBox(
@@ -147,7 +145,9 @@ class FavouriteItem : Fragment() {
                 }
             })
         }
-       else if (from == "details") {
+        else if (from == "EditPost") {
+            Toast.makeText(requireContext(),"Edit", Toast.LENGTH_SHORT).show()
+        }else if (from == "details") {
             val bundle = Bundle()
             bundle.putString("details", Gson().toJson(publicPostData))
             bundle.putString("DestinationPage", "ProfileDetails")
@@ -160,6 +160,7 @@ class FavouriteItem : Fragment() {
 
 
     }
+
     private fun replaceFragment(fragment: Fragment,bundle: Bundle){
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

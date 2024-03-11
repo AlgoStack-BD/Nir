@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentCategoryBinding
-import com.algostack.nir.databinding.FragmentContactUsBinding
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult

@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

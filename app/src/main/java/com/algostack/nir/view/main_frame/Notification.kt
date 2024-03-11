@@ -1,4 +1,4 @@
-package com.algostack.nir.view.frame
+package com.algostack.nir.view.main_frame
 
 
 import android.app.AlertDialog
