@@ -144,4 +144,24 @@
         android:name="com.algostack.nir.view.frame.SoldItemListing"
         android:label="fragment_sold_item_listing"
         tools:layout="@layout/fragment_sold_item_listing" />
+    <fragment
+        android:id="@+id/mainHome"
+        android:name="com.algostack.nir.view.frame.MainHome"
+        android:label="fragment_main_home"
+        tools:layout="@layout/fragment_main_home" />
+    <fragment
+        android:id="@+id/vila"
+        android:name="com.algostack.nir.view.frame.Vila"
+        android:label="fragment_vila"
+        tools:layout="@layout/fragment_vila" />
+    <fragment
+        android:id="@+id/appartment"
+        android:name="com.algostack.nir.view.frame.Appartment"
+        android:label="fragment_appartment"
+        tools:layout="@layout/fragment_appartment" />
+    <fragment
+        android:id="@+id/cottage"
+        android:name="com.algostack.nir.view.frame.Cottage"
+        android:label="fragment_cottage"
+        tools:layout="@layout/fragment_cottage" />
 </navigation>

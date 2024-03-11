@@ -729,6 +729,7 @@
                             android:fontFamily="@font/robotoregular"
                             android:hint="@string/enter_your_desired_rent_price"
                             android:padding="5dp"
+                            android:inputType="number"
                             android:textColor="@color/colorSecendaryBlack"
                             android:textSize="16sp" />
 
