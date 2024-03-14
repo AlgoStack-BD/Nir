@@ -415,19 +415,22 @@ class PostDetails : Fragment() {
                 RentRequestNotification(
                     RentRequestData(
                         visitorName.text.toString() ?: "",
-                        clientImage!!,
                         visitorsNumber.text.toString() ?: "",
+                        clientImage!!,
+                        tokenManager.getUserId()!!, // from
                         visitingDate.text.toString(),
                         visitingTime.text.toString(),
-                        detailsData!!.userId!!,
                         false,
                         detailsData!!._id,
-                        //detailsData!!.title if null then use ""
                         detailsData!!.title ?: "",
-                        "pending",
-                        tokenManager.getUserId()!!,
+                      "pending",
+                        "receiver",
+                        "receiver",
+                        detailsData!!.userId!!, // to
                         false,
-                        detailsData!!.location ?: ""
+                        detailsData!!.location ?: "",
+                        false,
+                        true
                     )
                 )
             )

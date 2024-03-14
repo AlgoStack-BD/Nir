@@ -146,6 +146,8 @@
     <string name="add_photos">Add Photos</string>
     <string name="family_bachelor"><![CDATA[Family & Bachelor]]></string>
     <string name="edit">Edit</string>
+    <string name="booking_cancel">Booking Cancel</string>
+    <string name="property_owner_has_rejected_your_request_to_view_the_property">Property owner has rejected your request to view the property</string>
 
     <string-array name="rangeSlider">
         <item>0</item>

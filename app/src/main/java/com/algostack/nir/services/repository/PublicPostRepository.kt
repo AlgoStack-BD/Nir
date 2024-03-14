@@ -14,6 +14,8 @@ import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
+import com.algostack.nir.services.model.userPostSoldFieldUpdate
+import com.algostack.nir.services.model.userUpdateRequestResponse
 import com.algostack.nir.utils.AlertDaialog.noInternetConnectionAlertBox
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.NetworkUtils
@@ -43,6 +45,7 @@ class PublicPostRepository @Inject constructor(
     private val _publicPostResponseLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
     private  val _createPostResponseLiveData = MutableLiveData<NetworkResult<CreatePostResponse>> ()
     private val _nearestPostResponeLiveData = MutableLiveData<NetworkResult<PublicPostResponse>> ()
+    private val _postSoldFieldUpdateResponseLiveData = MutableLiveData<NetworkResult<userUpdateRequestResponse>> ()
 
 
     val publicPostResponseLiveData : LiveData<NetworkResult<PublicPostResponse>>
@@ -53,6 +56,9 @@ class PublicPostRepository @Inject constructor(
 
     val nearestPostResponeLiveData : LiveData<NetworkResult<PublicPostResponse>>
         get() = _nearestPostResponeLiveData
+
+    val postSoldFieldUpdateResponseLiveData : LiveData<NetworkResult<userUpdateRequestResponse>>
+        get() = _postSoldFieldUpdateResponseLiveData
 
 
 
@@ -187,12 +193,36 @@ class PublicPostRepository @Inject constructor(
 
 
 
+    suspend fun postSoldFiledUpdate(context: Context,postId: String,userPostSoldFieldUpdate : userPostSoldFieldUpdate){
+
+        if (isInternetConnected((context))) {
+            _postSoldFieldUpdateResponseLiveData.postValue(NetworkResult.Loading())
+
+            try {
+                val response = publicPostApi.updateSoldFiled(postId,userPostSoldFieldUpdate)
+
+                println("CheckResponsesoldfield: ${response}")
+
+                if (response.isSuccessful && response.body() != null) {
+
+                    _postSoldFieldUpdateResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+
+                }
+            }catch (e: Exception) {
+                _postSoldFieldUpdateResponseLiveData.postValue(NetworkResult.Error(e.message))
+
+            }catch (e: TimeoutException) {
+                _postSoldFieldUpdateResponseLiveData.postValue(NetworkResult.Error("Time Out"))
+            }
+        }
+    }
+
 
 
     private fun handleNetworkResponse(response: Response<PublicPostResponse>) {
 
         if(response.isSuccessful && response.body() != null){
-            println("CheckResponse: ${response.body()}")
+
 
             _publicPostResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
         }else if(response.errorBody() != null){

@@ -39,7 +39,7 @@ class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseD
 
 
 
-            if (item.userRead) {
+            if (item.toRead) {
                 binding.notificationItemLayout.setBackgroundColor (
                     binding.root.context.resources.getColor(R.color.white)
 
@@ -52,7 +52,7 @@ class NotificationAdapter (private val onDetailsClickekd: (NotificationResponseD
             }
 
             Glide.with(binding.root.context)
-                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${item.clientImage}")
+                .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/${item.clientimg}")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.profileedit)
                 .error(R.drawable.profileedit)

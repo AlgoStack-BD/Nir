@@ -41,12 +41,24 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
         }
     }
 
-    fun getNotifications(userId: String) {
-        println("called userId = $userId")
+    fun getFromNotifications(userId: String) {
         viewModelScope.launch {
-            notificationRepository.getUserNotifications(userId)
+            notificationRepository.getFromNotifications(userId)
         }
     }
+
+    fun getToNotifications(userId: String) {
+        viewModelScope.launch {
+            notificationRepository.getToNotifications(userId)
+        }
+    }
+
+
+
+
+
+
+
 
     fun getallNotifications() {
         viewModelScope.launch {

@@ -15,12 +15,15 @@ import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentMyListingsBinding
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
+import com.algostack.nir.services.model.userPostSoldFieldUpdate
+import com.algostack.nir.services.model.userPostSoldFieldUpdateData
 import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.UserOwnPostAdapte
 import com.algostack.nir.view.adapter.VerticalSpace
 import com.algostack.nir.viewmodel.ProfileViewModel
+import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +36,7 @@ class MyListings : Fragment() {
     private  val binding get() = _binding!!
     private lateinit var userOwnPostAdapte: UserOwnPostAdapte
     private val profileViewModel by viewModels<ProfileViewModel>()
+    private val publicPostViewModel by viewModels<PublicPostViewModel>()
     val bestForYouRecSpace = VerticalSpace()
 
     @Inject
@@ -148,7 +152,44 @@ class MyListings : Fragment() {
         }
         else if (from == "EditPost") {
             Toast.makeText(requireContext(),"Edit", Toast.LENGTH_SHORT).show()
-        }else if (from == "details") {
+        }else if (from == "Sold"){
+
+            publicPostViewModel.applicationContext = requireContext()
+
+            publicPostViewModel.postSoldFieldUpdate(_id, userPostSoldFieldUpdate(
+                userPostSoldFieldUpdateData(true)
+            ))
+
+            publicPostViewModel.soldFiledUpdate.observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        if (result.data!!.status == 200) {
+                            val userId = tokenManager.getUserId()!!
+                            profileViewModel.applicationContext = requireContext()
+                            profileViewModel.singleUserPost(userId)
+                        } else if (result.data.status == 500) {
+                            result.message?.let { it1 ->
+                                AlertDaialog.showCustomAlertDialogBox(
+                                    requireContext(),
+                                    it1
+                                )
+                            }
+                        }
+                    }
+                    is NetworkResult.Error -> {
+                        AlertDaialog.showCustomAlertDialogBox(
+                            requireContext(),
+                            result.message ?: "Something went wrong"
+                        )
+                    }
+                    is NetworkResult.Loading -> {
+                        //   binding?.logprogressBar?.isVisible = true
+                    }
+                }
+            })
+
+        }
+        else if (from == "details") {
             val bundle = Bundle()
             bundle.putString("details", Gson().toJson(publicPostData))
             bundle.putString("DestinationPage", "ProfileDetails")
@@ -162,14 +203,17 @@ class MyListings : Fragment() {
 
     }
 
-    private fun replaceFragment(fragment: Fragment,bundle: Bundle){
-        val fragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragment.arguments = bundle
-        fragmentTransaction.replace(R.id.fragmentConthainerView4,fragment)
 
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+    private fun replaceFragment(fragment: Fragment,bundle: Bundle) {
+
+
+        val parentFragmentManager = requireParentFragment().parentFragmentManager
+        fragment.arguments = bundle
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentConthainerView4, fragment)
+            .addToBackStack(null)
+            .commit()
+
 
     }
 

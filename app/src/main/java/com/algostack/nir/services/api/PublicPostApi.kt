@@ -1,18 +1,14 @@
 package com.algostack.nir.services.api
-
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.CreatePostResponse
-import com.algostack.nir.services.model.DeletePostResponseData
-import com.algostack.nir.services.model.FavouriteRequest
 import com.algostack.nir.services.model.FavouriteResponse
-import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.PublicPostResponse
 import com.algostack.nir.services.model.UploadImageResponse
-import com.algostack.nir.view.frame.Favorite
+import com.algostack.nir.services.model.userPostSoldFieldUpdate
+import com.algostack.nir.services.model.userUpdateRequestResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -32,8 +28,11 @@ interface PublicPostApi {
     @POST ("/create-post")
     suspend fun createPost(@Body createPost: CreatePost) : Response<CreatePostResponse>
 
-
-
+    @PUT("/update-post/{id}")
+    suspend fun updateSoldFiled(
+        @Path("id") _id: String,
+        @Body userPostSoldFieldUpdate : userPostSoldFieldUpdate
+    ) : Response<userUpdateRequestResponse>
 
     @Multipart
     @POST("/upload")

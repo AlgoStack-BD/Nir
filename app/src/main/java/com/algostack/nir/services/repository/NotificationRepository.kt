@@ -50,14 +50,11 @@ class NotificationRepository @Inject constructor(
         }
     }
 
-
-    suspend fun getUserNotifications(userId: String) {
+    suspend fun getFromNotifications(userId: String) {
         _userNotifications.postValue(NetworkResult.Loading())
 
         try {
-            val response = notificationApi.getUserNotifications(userId)
-
-            println("NotificationRepository.getUserNotifications: response = ${response.body()}")
+            val response = notificationApi.getFromNotifications(userId)
 
             if (response.isSuccessful && response.body() != null) {
                 _userNotifications.postValue(NetworkResult.Success(response.body()!!))
@@ -66,6 +63,25 @@ class NotificationRepository @Inject constructor(
             _userNotifications.postValue(NetworkResult.Error(e.message))
         }
     }
+
+    suspend fun getToNotifications(userId: String) {
+        _userNotifications.postValue(NetworkResult.Loading())
+
+        try {
+            val response = notificationApi.getToNotifications(userId)
+
+            if (response.isSuccessful && response.body() != null) {
+                _userNotifications.postValue(NetworkResult.Success(response.body()!!))
+            }
+        }catch (e: Exception) {
+            _userNotifications.postValue(NetworkResult.Error(e.message))
+        }
+    }
+
+
+
+
+
 
     suspend fun getallNotifications() {
         _userNotifications.postValue(NetworkResult.Loading())

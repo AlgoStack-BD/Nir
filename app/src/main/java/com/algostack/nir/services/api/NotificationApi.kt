@@ -24,9 +24,16 @@ interface NotificationApi {
 
 
 
+
+
     // /user-notifications/656f1d253449d567288c1a22
-    @GET("/user-notifications/{userId}")
-    suspend fun getUserNotifications(
+    @GET("/to-notifications/{userId}")
+    suspend fun getToNotifications(
+        @Path("userId") id: String
+    ): Response<NotificationResponse>
+
+    @GET("/from-notifications/{userId}")
+    suspend fun getFromNotifications(
         @Path("userId") id: String
     ): Response<NotificationResponse>
 
