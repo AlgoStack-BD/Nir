@@ -1,4 +1,4 @@
-# Nir House Rental Software
+# Nir House Rental Service
 
 Welcome to Nir, your go-to solution for house renting! Nir is a comprehensive rental software designed to make the process of finding and managing rental properties hassle-free. With a sleek mobile application, user-friendly website, and efficient admin site, Nir streamlines the rental experience for both tenants and landlords.
 
