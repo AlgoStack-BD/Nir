@@ -53,6 +53,8 @@ class Notification : Fragment() {
 
     val bestForYouRecSpace = VerticalSpace()
     private lateinit var notificationAdapter: NotificationAdapter
+   var notificationFrom = mutableListOf<NotificationResponseData>()
+    var notificationTo = mutableListOf<NotificationResponseData>()
 
      private val notificationViewModel by viewModels<NotificationViewModel>()
 
@@ -148,6 +150,7 @@ class Notification : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding.notificationRV)
 
         bindObservers()
+        bindObserversto()
 
 
 
@@ -163,47 +166,35 @@ class Notification : Fragment() {
       }
       else {
 
-          if (item.to == tokenManager.getUserId()){
+
+     if (item.from == tokenManager.getUserId()) {
+
+         if (!item.toRead) {
+             notificationViewModel.updateNotification(
+                 item._id,
+                 NotificationUpdateRequest(NotificationData(true,item.toRead, item.status,"sender"))
+             )
+             notificationViewModel.updateNotificationResponse.observe(viewLifecycleOwner) {
+                 when (it) {
+                     is NetworkResult.Loading -> {
+
+                     }
+
+                     is NetworkResult.Success -> {
 
 
+                     }
 
-              showSchedulegDialog(requireContext(),item.meetingDate, item.meetingTime, item.postTitle, item.postId, item._id)
+                     is NetworkResult.Error -> {
 
+                     }
+                 }
+             }
 
-              if (!item.toRead) {
-                  notificationViewModel.updateNotification(
-                      item._id,
-                      NotificationUpdateRequest(NotificationData(true, item.status,"sender"))
-                  )
-                  notificationViewModel.updateNotificationResponse.observe(viewLifecycleOwner) {
-                      when (it) {
-                          is NetworkResult.Loading -> {
-
-                          }
-
-                          is NetworkResult.Success -> {
+         }
 
 
-
-
-                          }
-
-                          is NetworkResult.Error -> {
-
-                          }
-                      }
-                  }
-
-              }
-
-
-
-          }
-      else if (item.from == tokenManager.getUserId()) {
-
-          println("item.from = ${item.from}  | checkbothmail |tokenManager.getUserId() = ${tokenManager.getUserId()}")
-
-              if (item.status == "accepted") {
+         if (item.status == "accepted") {
                   val view = LayoutInflater.from(context).inflate(R.layout.acceptorrejectdialoag, null)
                   val builder = AlertDialog.Builder(context)
                   builder.setView(view)
@@ -253,7 +244,9 @@ class Notification : Fragment() {
                   alert.show()
               }
 
-          }
+          }else{
+              showSchedulegDialog(requireContext(), item.meetingDate, item.meetingTime, item.postTitle, item.postId, item._id)
+            }
 
       }
     }
@@ -271,59 +264,39 @@ class Notification : Fragment() {
 
     fun showSchedulegDialog(context: Context, dateS: String, timeS: String, titleS: String, postId: String, notificationId: String) {
         println("showBookingDialog: done")
-        val view = LayoutInflater.from(context).inflate(com.algostack.nir.R.layout.reviewtourrequest, null)
+        val view = LayoutInflater.from(context).inflate(R.layout.reviewtourrequest, null)
         val builder = AlertDialog.Builder(context)
         builder.setView(view)
 
         val alert = builder.create()
         alert.setCancelable(true)
 
-        val date = view.findViewById<TextView>(com.algostack.nir.R.id.tourRequestDate)
-        val time = view.findViewById<TextView>(com.algostack.nir.R.id.tourRequestTimeValue)
-        val title = view.findViewById<TextView>(com.algostack.nir.R.id.tourRequestTitle)
-        val button = view.findViewById<TextView>(com.algostack.nir.R.id.viewDetails)
-        val decline = view.findViewById<TextView>(com.algostack.nir.R.id.declineSchedule)
-        val accept = view.findViewById<TextView>(com.algostack.nir.R.id.acceptSchedule)
+        val date = view.findViewById<TextView>(R.id.tourRequestDate)
+        val time = view.findViewById<TextView>(R.id.tourRequestTimeValue)
+        val title = view.findViewById<TextView>(R.id.tourRequestTitle)
+        val detailsbutton = view.findViewById<TextView>(R.id.viewDetails)
+        val decline = view.findViewById<TextView>(R.id.declineSchedule)
+        val accept = view.findViewById<TextView>(R.id.acceptSchedule)
+
 
         date.setText(dateS)
         time.setText(timeS)
         title.setText(titleS)
 
-         button.setOnClickListener {
-             println("postId = $postId")
+        detailsbutton.setOnClickListener {
+
              notificationViewModel.getSingleNotification(postId)
-             notificationViewModel.signlePostResponse.observe(viewLifecycleOwner) {
-                 when (it) {
-                     is NetworkResult.Loading -> {
-
-                     }
-
-                     is NetworkResult.Success -> {
-                         Toast.makeText(requireContext(), "Notification post${it.data!!.data}", Toast.LENGTH_SHORT).show()
-                         val data = it.data!!.data
-                         /// json bundle and send to the next fragment
-                            val gson = Gson()
-                            val json = gson.toJson(data)
-                            val bundle = Bundle()
-                            bundle.putString("details", json)
-                            bundle.putString("DestinationPage", "Notification")
-                            replaceFragment(PostDetails(),bundle)
-                     }
-
-                     is NetworkResult.Error -> {
-
-                     }
-                 }
-             }
+            singleNotificatioonBindOvserver()
 
         }
 
         decline.setOnClickListener {
-            notificationViewModel.updateNotification(notificationId, NotificationUpdateRequest(NotificationData(false, "rejected", "sender")))
+
+            notificationViewModel.updateNotification(notificationId, NotificationUpdateRequest(NotificationData(false, false,"rejected", "sender")))
             alert.dismiss()
         }
         accept.setOnClickListener {
-            notificationViewModel.updateNotification(notificationId, NotificationUpdateRequest(NotificationData(false, "accepted", "sender")))
+            notificationViewModel.updateNotification(notificationId, NotificationUpdateRequest(NotificationData(false,false, "accepted", "sender")))
             alert.dismiss()
 
         }
@@ -331,6 +304,8 @@ class Notification : Fragment() {
         alert.window?.setBackgroundDrawable(ColorDrawable(0))
         alert.show()
     }
+
+
 
 
     // navigate fragment function
@@ -381,9 +356,9 @@ class Notification : Fragment() {
                     if (it.data!!.status == 200 && it.data.data.isNotEmpty()  ) {
 
 
-                        notificationAdapter.submitList(
-                            it.data.data
-                        )
+                        notificationFrom.addAll(it.data.data)
+
+                        notificationAdapter.submitList(notificationTo+notificationFrom)
 
 
                         // check notifyadapter list is empty or not
@@ -403,7 +378,80 @@ class Notification : Fragment() {
                 }
             }
         }
+
+
+
     }
+
+
+    private fun bindObserversto() {
+
+        notificationViewModel.userNotificationsTo.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
+                }
+
+                is NetworkResult.Success -> {
+
+
+                    println("Notification.bindObservers: it2 = ${it.data!!.data}")
+
+                    if (it.data!!.status == 200 && it.data.data.isNotEmpty()  ) {
+
+
+                        notificationTo.addAll(it.data.data)
+
+                        notificationAdapter.submitList(notificationTo+notificationFrom)
+
+                        // check notifyadapter list is empty or not
+                        if (notificationAdapter.currentList.isEmpty()) {
+                            binding.ifNoDataAvilable.isVisible = true
+                        } else {
+                            binding.ifNoDataAvilable.isVisible = false
+                            binding.notificationRV.isVisible = true
+                        }
+
+                        // notificationAdapter.submitList(it.data.data)
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    binding.ifNoDataAvilable.isVisible = true
+                }
+            }
+        }
+
+    }
+
+
+    private fun singleNotificatioonBindOvserver() {
+        notificationViewModel.signlePostResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
+
+                }
+
+                is NetworkResult.Success -> {
+                    Toast.makeText(requireContext(), "Notification post${it.data!!.data}", Toast.LENGTH_SHORT).show()
+                    val data = it.data!!.data
+                    /// json bundle and send to the next fragment
+                    val gson = Gson()
+                    val json = gson.toJson(data)
+                    val bundle = Bundle()
+                    bundle.putString("details", json)
+                    bundle.putString("DestinationPage", "Notification")
+                    replaceFragment(PostDetails(),bundle)
+                }
+
+                is NetworkResult.Error -> {
+
+                }
+            }
+        }
+    }
+
+
+
 
 
 }

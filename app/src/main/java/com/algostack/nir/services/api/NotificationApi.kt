@@ -37,9 +37,9 @@ interface NotificationApi {
         @Path("userId") id: String
     ): Response<NotificationResponse>
 
-    @GET("/single-notification/{id}")
+    @GET("/single-notification/{userId}")
     suspend fun getSingleNotification(
-        @Path("id") id: String
+        @Path("userId") id: String
     ): Response<PublicPostResponse>
 
     // get all notifications

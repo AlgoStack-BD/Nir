@@ -26,6 +26,9 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
     val userNotifications : LiveData<NetworkResult<NotificationResponse>>
         get() = notificationRepository.userNotifications
 
+    val userNotificationsTo : LiveData<NetworkResult<NotificationResponse>>
+        get() = notificationRepository.userNotificationsTo
+
     val deleteNotificationResponse : LiveData<NetworkResult<NotificationDeleteResponse>>
         get() = notificationRepository.deleteNotificationResponse
 

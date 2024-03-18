@@ -18,6 +18,7 @@ class NotificationRepository @Inject constructor(
 
     private val _rentForRequestResponse = MutableLiveData<NetworkResult<CreatePostResponse>> ()
     private val _userNotifications = MutableLiveData<NetworkResult<NotificationResponse>> ()
+    private val _userNotificationsTo = MutableLiveData<NetworkResult<NotificationResponse>> ()
     private val _deleteNotificationResponse = MutableLiveData<NetworkResult<NotificationDeleteResponse>> ()
     private val _updateNotificationResponse = MutableLiveData<NetworkResult<NotificatinUpdateRespne>> ()
     private val _signlePostResponse = MutableLiveData<NetworkResult<PublicPostResponse>> ()
@@ -35,6 +36,9 @@ class NotificationRepository @Inject constructor(
 
     val signlePostResponse : MutableLiveData<NetworkResult<PublicPostResponse>>
         get() = _signlePostResponse
+
+    val userNotificationsTo : MutableLiveData<NetworkResult<NotificationResponse>>
+        get() = _userNotificationsTo
 
     suspend fun sendRentRequestNotification(rentRequestNotification: RentRequestNotification) {
         _rentForRequestResponse.postValue(NetworkResult.Loading())
@@ -65,16 +69,16 @@ class NotificationRepository @Inject constructor(
     }
 
     suspend fun getToNotifications(userId: String) {
-        _userNotifications.postValue(NetworkResult.Loading())
+        _userNotificationsTo.postValue(NetworkResult.Loading())
 
         try {
             val response = notificationApi.getToNotifications(userId)
 
             if (response.isSuccessful && response.body() != null) {
-                _userNotifications.postValue(NetworkResult.Success(response.body()!!))
+                _userNotificationsTo.postValue(NetworkResult.Success(response.body()!!))
             }
         }catch (e: Exception) {
-            _userNotifications.postValue(NetworkResult.Error(e.message))
+            _userNotificationsTo.postValue(NetworkResult.Error(e.message))
         }
     }
 
@@ -136,8 +140,7 @@ class NotificationRepository @Inject constructor(
         try {
             println("final call postId = $postId")
             val response = notificationApi.getSingleNotification(postId)
-
-            println("singlePost: response = ${notificationApi.getSingleNotification(postId)}")
+            println("final call response = ${response.body()}")
 
             if (response.isSuccessful && response.body() != null) {
                 _signlePostResponse.postValue(NetworkResult.Success(response.body()!!))
