@@ -1,4 +1,4 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
+import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentFavoriteBinding
 
 

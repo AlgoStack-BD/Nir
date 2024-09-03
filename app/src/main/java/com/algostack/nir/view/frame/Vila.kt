@@ -1,18 +1,18 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.algostack.nir.databinding.FragmentCottageBinding
+import com.algostack.nir.R
+import com.algostack.nir.databinding.FragmentVilaBinding
 
 
-class Cottage : Fragment() {
+class Vila : Fragment() {
 
 
-
-    private var _binding : FragmentCottageBinding?= null
+    private var _binding : FragmentVilaBinding?= null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,9 +20,9 @@ class Cottage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-            _binding = FragmentCottageBinding.inflate(inflater,container,false)
+                _binding = FragmentVilaBinding.inflate(inflater,container,false)
 
-            return binding.root
+                return binding.root
     }
 
 

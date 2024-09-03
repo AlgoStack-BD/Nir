@@ -24,15 +24,22 @@ interface NotificationApi {
 
 
 
+
+
     // /user-notifications/656f1d253449d567288c1a22
-    @GET("/user-notifications/{userId}")
-    suspend fun getUserNotifications(
+    @GET("/to-notifications/{userId}")
+    suspend fun getToNotifications(
         @Path("userId") id: String
     ): Response<NotificationResponse>
 
-    @GET("/single-notification/{id}")
+    @GET("/from-notifications/{userId}")
+    suspend fun getFromNotifications(
+        @Path("userId") id: String
+    ): Response<NotificationResponse>
+
+    @GET("/single-notification/{userId}")
     suspend fun getSingleNotification(
-        @Path("id") id: String
+        @Path("userId") id: String
     ): Response<PublicPostResponse>
 
     // get all notifications

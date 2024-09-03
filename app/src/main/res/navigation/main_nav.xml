@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home2"
-        android:name="com.algostack.nir.view.main_frame.Home"
+        android:name="com.algostack.nir.view.frame.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,32 +19,32 @@
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
-        android:name="com.algostack.nir.view.main_frame.Favorite"
+        android:name="com.algostack.nir.view.frame.Favorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/nav_add2"
-        android:name="com.algostack.nir.view.main_frame.add"
+        android:name="com.algostack.nir.view.frame.add"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/settings"
-        android:name="com.algostack.nir.view.main_frame.Settings"
+        android:name="com.algostack.nir.view.frame.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.algostack.nir.view.main_frame.Chat"
+        android:name="com.algostack.nir.view.frame.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.algostack.nir.view.main_frame.Notification"
+        android:name="com.algostack.nir.view.frame.Notification"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/nav_profileMenu"
-        android:name="com.algostack.nir.view.main_frame.ProfileMenu"
+        android:name="com.algostack.nir.view.frame.ProfileMenu"
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileDetails"
-        android:name="com.algostack.nir.view.main_frame.ProfileDetails"
+        android:name="com.algostack.nir.view.frame.ProfileDetails"
         android:label="fragment_profile_details"
         tools:layout="@layout/fragment_profile_details" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/postDetails"
-        android:name="com.algostack.nir.view.main_frame.PostDetails"
+        android:name="com.algostack.nir.view.frame.PostDetails"
         android:label="fragment_post_details"
         tools:layout="@layout/fragment_post_details" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/filter"
-        android:name="com.algostack.nir.view.main_frame.Filter"
+        android:name="com.algostack.nir.view.frame.Filter"
         android:label="fragment_filter"
         tools:layout="@layout/fragment_filter" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectCity"
-        android:name="com.algostack.nir.view.main_frame.SelectCity"
+        android:name="com.algostack.nir.view.frame.SelectCity"
         android:label="fragment_select_city"
         tools:layout="@layout/select_city_bottom_view" >
         <action
@@ -101,67 +101,67 @@
     </fragment>
     <fragment
         android:id="@+id/editeProfile"
-        android:name="com.algostack.nir.view.main_frame.EditeProfile"
+        android:name="com.algostack.nir.view.frame.EditeProfile"
         android:label="fragment_edite_profile"
         tools:layout="@layout/fragment_edite_profile" />
     <fragment
         android:id="@+id/interiorAiwithGEMINI"
-        android:name="com.algostack.nir.view.main_frame.InteriorAiwithGEMINI"
+        android:name="com.algostack.nir.view.frame.InteriorAiwithGEMINI"
         android:label="fragment_interior_aiwith_g_e_m_i_n_i"
         tools:layout="@layout/fragment_interior_aiwith_g_e_m_i_n_i" />
     <fragment
         android:id="@+id/contactUs"
-        android:name="com.algostack.nir.view.main_frame.ContactUs"
+        android:name="com.algostack.nir.view.frame.ContactUs"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/privacy_Policy"
-        android:name="com.algostack.nir.view.main_frame.Privacy_Policy"
+        android:name="com.algostack.nir.view.frame.Privacy_Policy"
         android:label="fragment_privacy__policy"
         tools:layout="@layout/fragment_privacy__policy" />
     <fragment
         android:id="@+id/category"
-        android:name="com.algostack.nir.view.main_frame.category"
+        android:name="com.algostack.nir.view.frame.category"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/notLogIn"
-        android:name="com.algostack.nir.view.main_frame.NotLogIn"
+        android:name="com.algostack.nir.view.frame.NotLogIn"
         android:label="fragment_not_log_in"
         tools:layout="@layout/fragment_not_log_in" />
     <fragment
         android:id="@+id/myListings"
-        android:name="com.algostack.nir.view.main_frame.MyListings"
+        android:name="com.algostack.nir.view.frame.MyListings"
         android:label="fragment_my_listings"
         tools:layout="@layout/fragment_my_listings" />
     <fragment
         android:id="@+id/favouriteItem"
-        android:name="com.algostack.nir.view.main_frame.FavouriteItem"
+        android:name="com.algostack.nir.view.frame.FavouriteItem"
         android:label="fragment_favourite_item"
         tools:layout="@layout/fragment_favourite_item" />
     <fragment
         android:id="@+id/soldItemListing"
-        android:name="com.algostack.nir.view.main_frame.SoldItemListing"
+        android:name="com.algostack.nir.view.frame.SoldItemListing"
         android:label="fragment_sold_item_listing"
         tools:layout="@layout/fragment_sold_item_listing" />
     <fragment
         android:id="@+id/mainHome"
-        android:name="com.algostack.nir.view.main_frame.MainHome"
+        android:name="com.algostack.nir.view.frame.MainHome"
         android:label="fragment_main_home"
         tools:layout="@layout/fragment_main_home" />
     <fragment
         android:id="@+id/vila"
-        android:name="com.algostack.nir.view.main_frame.Vila"
+        android:name="com.algostack.nir.view.frame.Vila"
         android:label="fragment_vila"
         tools:layout="@layout/fragment_vila" />
     <fragment
         android:id="@+id/appartment"
-        android:name="com.algostack.nir.view.main_frame.Appartment"
+        android:name="com.algostack.nir.view.frame.Appartment"
         android:label="fragment_appartment"
         tools:layout="@layout/fragment_appartment" />
     <fragment
         android:id="@+id/cottage"
-        android:name="com.algostack.nir.view.main_frame.Cottage"
+        android:name="com.algostack.nir.view.frame.Cottage"
         android:label="fragment_cottage"
         tools:layout="@layout/fragment_cottage" />
 </navigation>

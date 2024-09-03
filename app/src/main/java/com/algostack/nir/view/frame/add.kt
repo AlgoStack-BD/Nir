@@ -1,4 +1,4 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -22,9 +23,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
@@ -40,11 +44,14 @@ import com.algostack.nir.services.model.CreatData
 import com.algostack.nir.services.model.CreatePost
 import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.Numbers
+import com.algostack.nir.utils.FileCompressor
+import com.algostack.nir.utils.LanguageManager
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.CityAdapter
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
 import com.algostack.nir.view.adapter.NumbersAdapter
+import com.algostack.nir.view.main.MainActivity
 import com.algostack.nir.viewmodel.ImageUploadViewModel
 import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
@@ -60,6 +67,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.UUID
 import javax.inject.Inject
+import kotlin.concurrent.timerTask
 
 
 @AndroidEntryPoint

@@ -53,6 +53,8 @@
             app:layout_constraintTop_toBottomOf="@+id/title">
 
             <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/acceptlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
@@ -98,6 +100,47 @@
                     android:drawableLeft="@drawable/location_mini_icon"
                     android:padding="10dp"
                     android:text="Direction" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rejectlayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/rejecticon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/rejecticon" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ralewaysemibold"
+                    android:text="@string/booking_cancel"
+                    android:textColor="@color/colorSecendaryBlack"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ralewaysemibold"
+                   android:text="@string/property_owner_has_rejected_your_request_to_view_the_property"
+
+                    />
+
+
+
             </LinearLayout>
 
 

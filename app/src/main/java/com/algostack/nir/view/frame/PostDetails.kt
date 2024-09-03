@@ -1,4 +1,4 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.app.AlertDialog
 import android.content.Context
@@ -17,20 +17,25 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.algostack.nir.R
 import com.algostack.nir.databinding.FragmentPostDetailsBinding
 import com.algostack.nir.services.model.DataXX
+import com.algostack.nir.services.model.DataXXX
 import com.algostack.nir.services.model.FavouriteRequest
+import com.algostack.nir.services.model.FavouriteResponse
 import com.algostack.nir.services.model.ImageItem
 import com.algostack.nir.services.model.PublicPostData
 import com.algostack.nir.services.model.RemoveFavouriteItem
 import com.algostack.nir.services.model.RentRequestData
 import com.algostack.nir.services.model.RentRequestNotification
+import com.algostack.nir.utils.AlertDaialog
 import com.algostack.nir.utils.NetworkResult
 import com.algostack.nir.utils.TokenManager
 import com.algostack.nir.view.adapter.ImageDetailsSmallViewAdapter
 import com.algostack.nir.viewmodel.FavouriteViewModel
 import com.algostack.nir.viewmodel.NotificationViewModel
+import com.algostack.nir.viewmodel.PublicPostViewModel
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -79,9 +84,7 @@ class PostDetails : Fragment() {
 
 
         favouriteViewModelrite.applicationContext = requireContext()
-            favouriteViewModelrite.getSpecificFavourite(tokenManager.getUserId()!!, detailsData!!._id)
-
-
+        favouriteViewModelrite.getSpecificFavourite(tokenManager.getUserId()!!, detailsData!!._id)
 
         binding.actionCall.setOnClickListener {
             // open phone call intent for call
@@ -412,19 +415,22 @@ class PostDetails : Fragment() {
                 RentRequestNotification(
                     RentRequestData(
                         visitorName.text.toString() ?: "",
-                        clientImage!!,
                         visitorsNumber.text.toString() ?: "",
+                        clientImage!!,
+                        tokenManager.getUserId()!!, // from
                         visitingDate.text.toString(),
                         visitingTime.text.toString(),
-                        detailsData!!.userId!!,
                         false,
                         detailsData!!._id,
-                        //detailsData!!.title if null then use ""
                         detailsData!!.title ?: "",
-                        "pending",
-                        tokenManager.getUserId()!!,
+                      "pending",
+                        "receiver",
+                        "receiver",
+                        detailsData!!.userId!!, // to
                         false,
-                        detailsData!!.location ?: ""
+                        detailsData!!.location ?: "",
+                        false,
+                        true
                     )
                 )
             )

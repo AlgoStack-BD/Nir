@@ -125,8 +125,7 @@ dependencies {
     implementation ("com.github.ybq:Android-SpinKit:1.4.0")
     implementation ("com.airbnb.android:lottie:6.0.1")
 
-    // reed more
-    implementation ("com.borjabravo:readmoretextview:2.1.0")
+
 
 
   //option

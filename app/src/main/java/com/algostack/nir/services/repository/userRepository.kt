@@ -190,8 +190,7 @@ class userRepository @Inject constructor(
 
 
     suspend fun updateUserInfo(_id: String, userUpdateRequest: UserUpdateRequest) {
-        println("Testapicall1: $_id")
-        println("Testapicall2: $userUpdateRequest")
+
         _userUpdateResponseLiveData.postValue(NetworkResult.Loading())
 
         try {

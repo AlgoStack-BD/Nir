@@ -42,13 +42,15 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String,P
             }else fistOneImg = item.img
 
 
-            if (item.isApproved == false) {
+            if (!item.isApproved) {
                 binding.statustext.text = "Pending"
                 binding.approvaldot.setImageResource(R.drawable.pendingdot)
             } else {
                 binding.statustext.text = "Approved"
                 binding.approvaldot.setImageResource(R.drawable.approveddot)
             }
+
+
             Glide.with(itemView)
                 .load("https://nir-house-renting-service-65vv8.ondigitalocean.app/uploads/$fistOneImg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -62,8 +64,9 @@ class UserOwnPostAdapte (private val onDetailsCliked: (_id: String,from:String,P
              PopupMenu(itemView.context, it).apply {
                     setOnMenuItemClickListener { it ->
                         when (it.itemId) {
-                            R.id.editpost -> {
-                                Toast.makeText(itemView.context, "Edit", Toast.LENGTH_SHORT).show()
+                            R.id.sold -> {
+
+                                item._id.let { it1 -> onDetailsCliked(it1,"Sold",item) }
                                 true
                             }
                             R.id.deletepost -> {

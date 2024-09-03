@@ -1,10 +1,13 @@
 package com.algostack.nir.view.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.algostack.nir.view.main_frame.FavouriteItem
-import com.algostack.nir.view.main_frame.MyListings
-import com.algostack.nir.view.main_frame.SoldItemListing
+import com.algostack.nir.view.frame.FavouriteItem
+import com.algostack.nir.view.frame.MyListings
+import com.algostack.nir.view.frame.SoldItemListing
 
 class ProfileViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment){
 

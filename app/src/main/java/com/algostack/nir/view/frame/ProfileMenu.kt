@@ -1,4 +1,4 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +14,12 @@ import com.algostack.nir.databinding.FragmentProfileMenuBinding
 import com.algostack.nir.services.db.NirLocalDB
 import com.algostack.nir.utils.LanguageManager
 import com.algostack.nir.utils.TokenManager
+import com.algostack.nir.view.main.Frame
 import com.algostack.nir.view.main.MainActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

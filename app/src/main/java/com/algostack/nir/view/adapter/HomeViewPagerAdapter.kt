@@ -2,10 +2,14 @@ package com.algostack.nir.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.algostack.nir.view.main_frame.Appartment
-import com.algostack.nir.view.main_frame.Cottage
-import com.algostack.nir.view.main_frame.MainHome
-import com.algostack.nir.view.main_frame.Vila
+import com.algostack.nir.view.frame.Appartment
+import com.algostack.nir.view.frame.Category
+import com.algostack.nir.view.frame.Cottage
+import com.algostack.nir.view.frame.FavouriteItem
+import com.algostack.nir.view.frame.MainHome
+import com.algostack.nir.view.frame.MyListings
+import com.algostack.nir.view.frame.SoldItemListing
+import com.algostack.nir.view.frame.Vila
 
 class HomeViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment){
 

@@ -1,4 +1,4 @@
-package com.algostack.nir.view.main_frame
+package com.algostack.nir.view.frame
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -57,24 +57,26 @@ class MainHome : Fragment() {
 
         publicPostViewModel.applicationContext = requireContext()
         publicPostViewModel.publicPost()
-
+        // Setup sticky header
 
         if (tokenManager.getToken() != null ){
 
+
+
             if (tokenManager.getUserLocation() != null && tokenManager.getUserLocation() != ""){
+                println("UserLocation: ${tokenManager.getUserLocation()}")
                 publicPostViewModel.nearestPost(tokenManager.getUserLocation()!!)
-                binding.linearLayout2.isVisible = true
+                binding.nearfromyouRecyler.isVisible = true
                 binding.textView7.isVisible = true
 
             }else{
                 binding.textView7.isVisible = false
-                binding.linearLayout2.isVisible = false
+                binding.nearfromyouRecyler.isVisible = false
             }
 
         }else{
-
-            binding.textView7.visibility = View.GONE
-            binding.linearLayout2.visibility = View.GONE
+            binding.textView7.isVisible = false
+            binding.nearfromyouRecyler.isVisible = false
         }
 
 
@@ -119,6 +121,13 @@ class MainHome : Fragment() {
                         val otherItems = result.data.data.filter { !it.isAds && it.isApproved && !it.isSold }
 
                         val nearestitem = adsItems + otherItems
+
+                        if (nearestitem.isEmpty()){
+                            binding.textView7.isVisible = false
+                            binding.linearLayout2.isVisible = false
+                        }
+
+                        println("nearestitem: $nearestitem")
 
                         nearByPostAdapter.submitList(nearestitem)
 
@@ -205,8 +214,6 @@ class MainHome : Fragment() {
 
     }
 
-
-    // On details clicked function
     private fun onDetailsCliked(publicPostData: PublicPostData) {
 
         println("PublicPostDataCheck: $publicPostData")
@@ -227,8 +234,8 @@ class MainHome : Fragment() {
     }
 
 
-    // Replace Fragment function
     private fun replaceFragment(fragment: Fragment,bundle: Bundle) {
+
 
         val parentFragmentManager = requireParentFragment().parentFragmentManager
         fragment.arguments = bundle

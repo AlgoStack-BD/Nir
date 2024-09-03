@@ -5,7 +5,7 @@
 
 
             <item android:title="@string/sold"
-                android:id="@+id/editpost"
+                android:id="@+id/sold"
                 />
 
 
